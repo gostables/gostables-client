@@ -1,3 +1,4 @@
+import "./App.css";
 import { Route, Routes } from "react-router";
 import Exchange from "./components/exchange";
 import Landing from "./components/landing";

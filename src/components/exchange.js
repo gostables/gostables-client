@@ -56,14 +56,22 @@ const Exchange = () => {
           <li className="list-group-item d-flex justify-content-between">
             <div>
               USDD
-              <img src={usddImg} style={{ width: 18, paddingLeft: 4 }}></img>
+              <img
+                src={usddImg}
+                alt="$"
+                style={{ width: 18, paddingLeft: 4 }}
+              ></img>
             </div>
             <div>{vaultUSDDBalance}</div>
           </li>
           <li className="list-group-item d-flex justify-content-between">
             <div>
               USDJ
-              <img src={usdjImg} style={{ width: 18, paddingLeft: 4 }}></img>
+              <img
+                src={usdjImg}
+                alt="$"
+                style={{ width: 18, paddingLeft: 4 }}
+              ></img>
             </div>
             <div>{vaultUSDJBalance}</div>
           </li>

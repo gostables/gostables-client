@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import { usdjContract } from "../contracts/usdContract";
-import walletPublisher from "../publishers/wallet";
-import WalletDetails from "../components/walletDetails";
 
 const MockUSDJ = () => {
   const [usdjMockC, setUsdjMockC] = useState(null);

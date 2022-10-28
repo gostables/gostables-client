@@ -28,7 +28,7 @@ const Navbar = () => {
           </NavLink>
         </div>
 
-        <ul className="nav nav-pills">
+        <ul className="nav">
           <li className="nav-item">
             <NavLink to="/exchange" className="nav-link">
               Swap
