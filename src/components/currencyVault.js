@@ -8,13 +8,16 @@ const CurrencyVault = () => {
   const redeemJSX = () => {
     return <div class="card-body">Redeem</div>;
   };
+
+  const active = "active";
+
   return (
     <div class="card">
       <div class="card-body">
         <ul class="nav justify-content-center">
           <li class="nav-item">
             <a
-              class={`nav-link ${display ? "active" : ""}`}
+              class={`nav-link ${display ? active : ""}`}
               href="#"
               onClick={() => setDisplay(true)}
             >
@@ -22,7 +25,11 @@ const CurrencyVault = () => {
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" onClick={() => setDisplay(false)}>
+            <a
+              class={`nav-link ${display ? "" : active}`}
+              href="#"
+              onClick={() => setDisplay(false)}
+            >
               Redeem
             </a>
           </li>

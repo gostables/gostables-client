@@ -76,7 +76,7 @@
   --bs-border-radius-xl: 1rem;
   --bs-border-radius-2xl: 2rem;
   --bs-border-radius-pill: 50rem;
-  --bs-link-color: #78c2ad;
+  --bs-link-color: #78c2ad!important;
   --bs-link-hover-color: #609b8a;
   --bs-code-color: #e83e8c;
   --bs-highlight-bg: #fff5e1;
@@ -2891,10 +2891,10 @@ textarea.form-control-lg {
 
 .btn-primary {
   --bs-btn-color: #fff;
-  --bs-btn-bg: #01948d;
+  --bs-btn-bg: #01948d!important;
   --bs-btn-border-color: #78c2ad;
   --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: #0a847e;
+  --bs-btn-hover-bg: #0a847e!important;
   --bs-btn-hover-border-color: #609b8a;
   --bs-btn-focus-shadow-rgb: 140, 203, 185;
   --bs-btn-active-color: #fff;
@@ -4205,7 +4205,7 @@ textarea.form-control-lg {
   --bs-card-inner-border-radius: calc(0.4rem - 1px);
   --bs-card-cap-padding-y: 0.5rem;
   --bs-card-cap-padding-x: 1rem;
-  --bs-card-cap-bg: #01948d;
+  --bs-card-cap-bg: #01948d!important;
   --bs-card-cap-color: ;
   --bs-card-height: ;
   --bs-card-color: ;
