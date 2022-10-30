@@ -14,7 +14,7 @@ const WalletDetails = () => {
   });
 
   const [gStableCoinName, setgStableCoinName] = useState("");
-  const [gStableCoinSymbol, setgStableCoinSymbol] = useState("");
+  const [, setgStableCoinSymbol] = useState("");
 
   useEffect(() => {
     walletPublisher.attach(setWalletDetails);

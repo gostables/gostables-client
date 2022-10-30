@@ -8,7 +8,7 @@ const GStableAdmin = () => {
     address: "",
     clients: [],
   });
-  const [gStableContract, setgStableContract] = useState({});
+  const [, setgStableContract] = useState({});
   useEffect(() => {
     let timer = setInterval(() => {
       initSwapContract();

@@ -1,5 +1,3 @@
-import WalletDetails from "./walletDetails";
-
 import SwapExchange from "./swapExchange";
 
 const SwapPage = () => {

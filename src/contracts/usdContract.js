@@ -56,7 +56,7 @@ class USDContract {
     this.check();
     if (!spender) throw new Error(`Spender : ${spender}`);
     if (amount < 0) throw new Error(`Amount : ${amount}`);
-    let success = await this.contract
+    await this.contract
       .approve(spender, this.web3.utils.toWei(String(amount), "ether"))
       .send({
         feeLimit: 100_000_000,
@@ -69,7 +69,3 @@ class USDContract {
 const usddContract_ = new USDContract(USDDAddress, StableCoinType.USDD);
 
 export const usddContract = async () => await usddContract_.init();
-
-const usdjContract_ = new USDContract(USDJAddress, StableCoinType.USDJ);
-
-export const usdjContract = async () => await usdjContract_.init();

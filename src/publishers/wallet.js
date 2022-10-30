@@ -1,17 +1,6 @@
 import { ttdd } from "../contracts/gStableContract ";
-import { ttddSwap } from "../contracts/swapContract";
-import { usddContract, usdjContract } from "../contracts/usdContract";
+import { usddContract } from "../contracts/usdContract";
 import getWalletDetails from "../utils/tronWeb";
-
-let walletDetails = {
-  status: -1,
-  name: "none",
-  address: "none",
-  network: "none",
-  link: "false",
-  usddBalance: "",
-  ttddBalance: "",
-};
 
 class WalletPublisher {
   observers = [];

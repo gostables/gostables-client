@@ -1,9 +1,3 @@
-import { useEffect, useState } from "react";
-import { ttddVault as ttddVault_ } from "../contracts/vaultContract";
-import vaultPublisher from "../publishers/vault";
-import SetConversionRatio from "../admin/setConversionRatio";
-import SetSwapFeesFactor from "../admin/setSwapFeesFactor";
-
 const VaultAdmin = () => {
   // const [ttddContract, setTTDDContract] = useState();
   // const [stableCoinList, setStableCoinList] = useState([]);

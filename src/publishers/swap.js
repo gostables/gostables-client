@@ -1,6 +1,5 @@
-import { TTDDVaultAddress } from "../contracts/address";
 import { ttddSwap as ttddSwap_ } from "../contracts/swapContract";
-import { usddContract, usdjContract } from "../contracts/usdContract";
+import { usddContract } from "../contracts/usdContract";
 import { getCurrency } from "../utils/currencies";
 
 export let swapDetails = {

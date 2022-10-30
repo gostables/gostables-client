@@ -1,9 +1,4 @@
-import { vaultDetails } from "../publishers/vault";
-import {
-  getStableCoin,
-  getStableCoinValues,
-  StableCoinType,
-} from "../utils/stableCoins";
+import { getStableCoin } from "../utils/stableCoins";
 import { TTDDVaultAddress } from "./address";
 import SmartContractBase from "./smartContractBase";
 
