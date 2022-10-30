@@ -3,14 +3,14 @@ import { useState } from "react";
 const SetSwapFeesFactor = (props) => {
   const [sff, setSFF] = useState("");
 
-  const { ttddContract } = props;
+  const { swapContract } = props;
 
   const set = async () => {
     setSFF("");
     try {
       console.log(`SetSwapFeesFactor : ${sff}`);
       if (sff) {
-        await ttddContract.SetSwapFeesFactor(sff);
+        await swapContract.setSwapFeesFactor(sff);
       }
     } catch (error) {
       console.error(error);
@@ -25,9 +25,6 @@ const SetSwapFeesFactor = (props) => {
 
   return (
     <>
-      <div className="row">
-        <div className="col py-3">Set Swap Fees Factor</div>
-      </div>
       <form className="row g-3 d-flex justify-content-between">
         <div className="col-sm-5">
           <input

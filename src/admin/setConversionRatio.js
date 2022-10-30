@@ -1,16 +1,17 @@
 import { useState } from "react";
+import { ttddSwap } from "../contracts/swapContract";
 
 const SetConversionRatio = (props) => {
   const [cr, setCR] = useState("");
 
-  const { ttddContract } = props;
-
   const set = async () => {
+    let swapContract = await ttddSwap();
+
     setCR("");
     try {
       console.log(`SetConversionRatio : ${cr}`);
       if (cr) {
-        await ttddContract.setConversion(cr);
+        await swapContract.setConversion(cr);
       }
     } catch (error) {
       console.error(error);
@@ -25,9 +26,6 @@ const SetConversionRatio = (props) => {
 
   return (
     <>
-      <div className="row">
-        <div className="col py-3">Set Conversion Ratio</div>
-      </div>
       <form className="row g-3 d-flex justify-content-between">
         <div className="col-sm-5">
           <input

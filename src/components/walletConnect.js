@@ -27,10 +27,10 @@ const WalletConnect = () => {
     case 1:
       return (
         <>
-          <div className={`${className} text-success`}>
+          <div className={`${className} text-success text-xs`}>
             {getMaskedAddress(walletDetails.address)}
           </div>
-          <div className={`${className} text-dark small fw-light`}>
+          <div className={`${className} text-dark small fw-light text-xs`}>
             {getNetworkName(walletDetails.network)}
           </div>
         </>

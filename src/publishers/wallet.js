@@ -1,5 +1,6 @@
+import { ttdd } from "../contracts/gStableContract ";
+import { ttddSwap } from "../contracts/swapContract";
 import { usddContract, usdjContract } from "../contracts/usdContract";
-import { ttddVault } from "../contracts/vaultContract";
 import getWalletDetails from "../utils/tronWeb";
 
 let walletDetails = {
@@ -9,7 +10,6 @@ let walletDetails = {
   network: "none",
   link: "false",
   usddBalance: "",
-  usdjBalance: "",
   ttddBalance: "",
 };
 
@@ -18,7 +18,7 @@ class WalletPublisher {
   walletDetails = {};
   usdd = null;
   usdj = null;
-  vault = null;
+  gStable = null;
   timer = null;
   constructor() {
     this.init();
@@ -28,8 +28,7 @@ class WalletPublisher {
     this.walletDetails = await getWalletDetails();
     console.log(this.walletDetails);
     this.usdd = await usddContract();
-    this.usdj = await usdjContract();
-    this.vault = await ttddVault();
+    this.gStable = await ttdd();
     this.timer = setInterval(async () => {
       try {
         // Continuous polling as per https://github.com/ibnzUK/Tron-Wallet-React-Integration/blob/main/src/App.js
@@ -37,24 +36,19 @@ class WalletPublisher {
       } catch (error) {
         console.error(error);
       }
-      let usddBal, usdjBal, ttddBal;
+      let usddBal, ttddBal;
       try {
         if (this.usdd) {
           usddBal = await this.usdd.balanceOf(this.walletDetails.address);
+          console.log("usddBal", usddBal);
         }
       } catch (error) {
         console.error(error);
       }
       try {
-        if (this.usdd) {
-          usdjBal = await this.usdj.balanceOf(this.walletDetails.address);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-      try {
-        if (this.vault) {
-          ttddBal = await this.vault.balanceOf(this.walletDetails.address);
+        if (this.gStable) {
+          ttddBal = await this.gStable.balanceOf(this.walletDetails.address);
+          console.log("ttddBal", ttddBal);
         }
       } catch (error) {
         console.error(error);
@@ -62,7 +56,6 @@ class WalletPublisher {
       this.walletDetails = {
         ...this.walletDetails,
         usddBalance: usddBal,
-        usdjBalance: usdjBal,
         ttddBalance: ttddBal,
       };
       this.notify();

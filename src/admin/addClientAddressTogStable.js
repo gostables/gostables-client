@@ -1,27 +1,19 @@
 import { useState } from "react";
+import { ttdd } from "../contracts/gStableContract ";
 
-const AddStableCoinToVault = (props) => {
-  const [id, setId] = useState("");
+const AddClientAddressTogStable = (props) => {
   const [address, setAddress] = useState("");
 
-  const { ttddContract } = props;
-
   const add = async () => {
-    setId("");
+    let gStableContract = await ttdd();
     setAddress("");
     try {
-      console.log(`addNewStableCoin : ${id} ${address}`);
-      if (id && address) {
-        await ttddContract.addNewStableCoin(id, address);
+      console.log(`setClient : ${address}`);
+      if (address) {
+        await gStableContract.setClient(address);
       }
     } catch (error) {
       console.error(error);
-    }
-  };
-
-  const updateId = (e) => {
-    if (e.target.value) {
-      setId(e.target.value);
     }
   };
   const updateAddress = (e) => {
@@ -32,18 +24,9 @@ const AddStableCoinToVault = (props) => {
   return (
     <>
       <div className="row">
-        <div className="col py-3">Add StableCoin To Vault</div>
+        <div className="col py-3">Whitelist New Address </div>
       </div>
       <form className="row g-3 d-flex justify-content-between">
-        <div className="col">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Unique Id"
-            value={id}
-            onChange={updateId}
-          />
-        </div>
         <div className="col-sm-7">
           <input
             type="text"
@@ -70,4 +53,4 @@ const AddStableCoinToVault = (props) => {
   );
 };
 
-export default AddStableCoinToVault;
+export default AddClientAddressTogStable;

@@ -1,70 +1,103 @@
 import { useEffect, useState } from "react";
-import { TTDDVaultAddress } from "../contracts/address";
-import { usddContract, usdjContract } from "../contracts/usdContract";
-import { ttddVault } from "../contracts/vaultContract";
+import { ttdd } from "../contracts/gStableContract ";
 import walletPublisher from "../publishers/wallet";
-import { getNetworkName } from "../utils/const";
+import usddImg from "../usdd.png";
+import ttddImg from "../ttdd.png";
+import { ThreeDots } from "react-loader-spinner";
 
 const WalletDetails = () => {
   const [walletDetails, setWalletDetails] = useState({
     address: "",
     network: "",
     usddBalance: "",
-    usdjBalance: "",
     ttddBalance: "",
   });
+
+  const [gStableCoinName, setgStableCoinName] = useState("");
+  const [gStableCoinSymbol, setgStableCoinSymbol] = useState("");
+
   useEffect(() => {
     walletPublisher.attach(setWalletDetails);
     return () => {
       walletPublisher.detach(setWalletDetails);
     };
   }, []);
+
   useEffect(() => {
     init();
+
     return () => {
-      console.log("unmounting Wallet...");
+      console.log("unmounting WalletDetails");
     };
   }, []);
-
   const init = async () => {
-    // let usdd = await usddContract();
-    // let usdj = await usdjContract();
-    // let ttdd = await ttddVault();
-    // setWalletDetails({
-    //   usddBalance: await usdd.balanceOf(TTDDVaultAddress),
-    //   usdjBalance: await usdj.balanceOf(TTDDVaultAddress),
-    //   ttddBalance: await ttdd.balanceOf(TTDDVaultAddress),
-    // });
+    //gStable Data
+    let gStableContract = await ttdd();
+    let { name: gStableCoinName, symbol: gStableCoinSymbol } =
+      await gStableContract.getNameSymbol();
+    setgStableCoinName(gStableCoinName);
+    setgStableCoinSymbol(gStableCoinSymbol);
   };
   return (
-    <div className="card">
+    <div class="card z-index-0 fadeIn3 fadeInBottom">
+      <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+        <div class="bg-gradient-info shadow-info border-radius-lg py-3 pe-1">
+          <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">
+            Wallet
+          </h4>
+        </div>
+      </div>
       <div className="card-body">
-        <h5 className="card-title">Wallet</h5>
-        <ul className="list-group list-group-flush">
-          <li className="list-group-item d-flex justify-content-start">
-            {walletDetails.address}
-          </li>
-          <li className="list-group-item d-flex justify-content-start">
-            {getNetworkName(walletDetails.network)}
-          </li>
-        </ul>
-        <p className="list-group-item d-flex justify-content-center h5">
-          Balances
-        </p>
-        <ul className="list-group list-group-flush">
-          <li className="list-group-item d-flex justify-content-between">
-            <div>USDD</div>
-            <div>{walletDetails.usddBalance}</div>
-          </li>
-          <li className="list-group-item d-flex justify-content-between">
-            <div>USDJ</div>
-            <div>{walletDetails.usdjBalance}</div>
-          </li>
-          <li className="list-group-item d-flex justify-content-between">
-            <div>TTDD</div>
-            <div>{walletDetails.ttddBalance}</div>
-          </li>
-        </ul>
+        {walletDetails.address ? (
+          <ul className="list-group list-group-flush">
+            <li className="list-group-item d-flex justify-content-between">
+              <div>
+                <span>USDD </span>
+                <span className="px-2">
+                  <img
+                    src={usddImg}
+                    alt="USDD"
+                    width="16"
+                    height="16"
+                    className="rounded-circle flex-shrink-0"
+                  />
+                </span>
+              </div>
+              <div>{walletDetails.usddBalance}</div>
+            </li>
+
+            <li className="list-group-item d-flex justify-content-between">
+              <div>
+                <span>{gStableCoinName}</span>
+                <span className="px-2">
+                  <img
+                    src={ttddImg}
+                    alt="USDD"
+                    width="16"
+                    height="16"
+                    className="rounded-circle flex-shrink-0"
+                  />
+                </span>
+              </div>
+              <div>{walletDetails.ttddBalance}</div>
+            </li>
+          </ul>
+        ) : (
+          <>
+            <div className="mt-2 w-100 d-flex justify-content-center">
+              <ThreeDots
+                height="32"
+                width="32"
+                radius="9"
+                color="#4fa94d"
+                ariaLabel="three-dots-loading"
+                wrapperStyle={{}}
+                wrapperClassName=""
+                visible={true}
+              />
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

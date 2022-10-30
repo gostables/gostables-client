@@ -1,11 +1,19 @@
-export const CurrencyType = {
-  TTDD: { type: "TTDD", value: "TTDD", label: "TTDD", icon: "ttdd.png" },
+export const Currency = {
+  TTDD: {
+    value: "TTDD",
+    label: "gTTDD",
+    icon: "ttdd.png",
+    swapAddress: "TBRGNBkWVVXpVjGvmi7LhBhmj6rCvdCsgU",
+    swapMarketAddress: "TDLbLFD68VBqeTjsmneroJazrUSgSXf8f9",
+    swapStableAddress: "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU",
+    gStableAddress: "TXfUYdQeLZ6VtqTaEYQkRifbGZBXF9Xb71",
+  },
 };
 
-export const getCurrencyValues = () => {
-  return Object.values(CurrencyType);
+export const getCurrencies = () => {
+  return Object.values(Currency);
 };
 
-export const getCurrency = (stableCoinType) => {
-  return CurrencyType[stableCoinType];
+export const getCurrency = (currValue) => {
+  return Currency[currValue];
 };

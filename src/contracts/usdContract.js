@@ -45,6 +45,13 @@ class USDContract {
     return bal;
   };
 
+  getNameSymbol = async () => {
+    this.check();
+    const name = await this.contract.name().call();
+
+    return name;
+  };
+
   approve = async (spender, amount) => {
     this.check();
     if (!spender) throw new Error(`Spender : ${spender}`);

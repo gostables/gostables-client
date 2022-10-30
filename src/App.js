@@ -1,27 +1,42 @@
 import "./App.css";
 import { Route, Routes } from "react-router";
-import Exchange from "./components/exchange";
 import Landing from "./components/landing";
 import Navbar from "./components/navbar";
 import AdminFaucets from "./admin/faucets";
-import VaultAdmin from "./admin/vaultAdmin";
-import CurrencyVault from "./components/currencyVault";
+import VaultAdmin from "./del/vaultAdmin";
+import SwapPage from "./components/swapPage";
+import WalletPage from "./components/walletPage";
+import AdminPage from "./admin/adminPage";
+import CurrencyVaultPage from "./components/currencyVaultPage";
 const App = () => {
   return (
     <>
       <Navbar></Navbar>
       <Routes>
         <Route
-          path="/exchange"
+          path="/swap"
           // @ts-ignore
           exact
-          element={<Exchange />}
+          element={<SwapPage />}
+        />
+        <Route
+          path="/wallet"
+          // @ts-ignore
+          exact
+          element={<WalletPage />}
+        />
+
+        <Route
+          path="/admin"
+          // @ts-ignore
+          exact
+          element={<AdminPage />}
         />
         <Route
           path="/vault"
           // @ts-ignore
           exact
-          element={<CurrencyVault />}
+          element={<CurrencyVaultPage />}
         />
         <Route
           path="/faucets"

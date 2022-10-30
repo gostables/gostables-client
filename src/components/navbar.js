@@ -30,7 +30,17 @@ const Navbar = () => {
 
         <ul className="nav">
           <li className="nav-item">
-            <NavLink to="/exchange" className="nav-link">
+            <NavLink to="/admin" className="nav-link">
+              Admin
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink to="/wallet" className="nav-link">
+              Wallet
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink to="/swap" className="nav-link">
               Swap
             </NavLink>
           </li>

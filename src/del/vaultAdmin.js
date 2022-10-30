@@ -1,44 +1,43 @@
 import { useEffect, useState } from "react";
 import { ttddVault as ttddVault_ } from "../contracts/vaultContract";
 import vaultPublisher from "../publishers/vault";
-import AddStableCoinToVault from "./addStableCoinToVault";
-import SetConversionRatio from "./setConversionRatio";
-import SetSwapFeesFactor from "./setSwapFeesFactor";
+import SetConversionRatio from "../admin/setConversionRatio";
+import SetSwapFeesFactor from "../admin/setSwapFeesFactor";
 
 const VaultAdmin = () => {
-  const [ttddContract, setTTDDContract] = useState();
-  const [stableCoinList, setStableCoinList] = useState([]);
-  const [conversionRatio, setConversionRatio] = useState();
-  const [swapFeesFactor, setSwapFeesFactor] = useState();
+  // const [ttddContract, setTTDDContract] = useState();
+  // const [stableCoinList, setStableCoinList] = useState([]);
+  // const [conversionRatio, setConversionRatio] = useState();
+  // const [swapFeesFactor, setSwapFeesFactor] = useState();
 
-  useEffect(() => {
-    setTTDDVaultContract();
-    return () => {
-      console.log("unmounting VaultAdmin");
-    };
-  }, []);
+  // useEffect(() => {
+  //   setTTDDVaultContract();
+  //   return () => {
+  //     console.log("unmounting VaultAdmin");
+  //   };
+  // }, []);
 
-  const setTTDDVaultContract = async () => {
-    let ttddVault = await ttddVault_();
-    let stableCoinList = await ttddVault.stableCoinsSupported();
-    let conversionRatio_ = await ttddVault.getConversion();
-    setTTDDContract(ttddVault);
-    setStableCoinList(stableCoinList);
-    setConversionRatio(conversionRatio_);
-  };
+  // const setTTDDVaultContract = async () => {
+  //   let ttddVault = await ttddVault_();
+  //   let stableCoinList = await ttddVault.stableCoinsSupported();
+  //   let conversionRatio_ = await ttddVault.getConversion();
+  //   setTTDDContract(ttddVault);
+  //   setStableCoinList(stableCoinList);
+  //   setConversionRatio(conversionRatio_);
+  // };
 
-  useEffect(() => {
-    vaultPublisher.attach(setVaultDetails);
-    return () => {
-      vaultPublisher.detach(setVaultDetails);
-    };
-  }, []);
+  // useEffect(() => {
+  //   vaultPublisher.attach(setVaultDetails);
+  //   return () => {
+  //     vaultPublisher.detach(setVaultDetails);
+  //   };
+  // }, []);
 
-  const setVaultDetails = async (vaultDetails) => {
-    // console.log("updating vault data ...", vaultDetails);
-    setStableCoinList(vaultDetails.stableCoinsSupported);
-    setConversionRatio(vaultDetails.conversionRatio);
-  };
+  // const setVaultDetails = async (vaultDetails) => {
+  //   // console.log("updating vault data ...", vaultDetails);
+  //   setStableCoinList(vaultDetails.stableCoinsSupported);
+  //   setConversionRatio(vaultDetails.conversionRatio);
+  // };
 
   return (
     <div className="container my-3">
@@ -55,7 +54,7 @@ const VaultAdmin = () => {
                   <div className="small">Id</div>
                   <div className="small">Address</div>
                 </li>
-                {stableCoinList.map((sc) => (
+                {/* {stableCoinList.map((sc) => (
                   <li
                     className="list-group-item  d-flex justify-content-between"
                     key={sc.id}
@@ -65,23 +64,20 @@ const VaultAdmin = () => {
                       {window.tronWeb.address.fromHex(sc.address)}
                     </div>
                   </li>
-                ))}
+                ))} */}
               </ul>
-              <AddStableCoinToVault
-                ttddContract={ttddContract}
-              ></AddStableCoinToVault>
               <hr />
               <h6 className="card-title text-center">Conversion Ratio</h6>
-              <p>1 USD ≈ {conversionRatio} TTDD</p>
+              {/* <p>1 USD ≈ {conversionRatio} TTDD</p>
               <SetConversionRatio
                 ttddContract={ttddContract}
-              ></SetConversionRatio>
+              ></SetConversionRatio> */}
               <hr />
               <h6 className="card-title text-center">Protocol Fees</h6>
-              <p>Swap Fees Factor</p>
+              {/* <p>Swap Fees Factor</p>
               <SetSwapFeesFactor
                 ttddContract={ttddContract}
-              ></SetSwapFeesFactor>
+              ></SetSwapFeesFactor> */}
             </div>
           </div>
         </div>
