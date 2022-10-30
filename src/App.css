@@ -2891,10 +2891,10 @@ textarea.form-control-lg {
 
 .btn-primary {
   --bs-btn-color: #fff;
-  --bs-btn-bg: #78c2ad;
+  --bs-btn-bg: #01948d;
   --bs-btn-border-color: #78c2ad;
   --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: #66a593;
+  --bs-btn-hover-bg: #0a847e;
   --bs-btn-hover-border-color: #609b8a;
   --bs-btn-focus-shadow-rgb: 140, 203, 185;
   --bs-btn-active-color: #fff;
@@ -4205,7 +4205,7 @@ textarea.form-control-lg {
   --bs-card-inner-border-radius: calc(0.4rem - 1px);
   --bs-card-cap-padding-y: 0.5rem;
   --bs-card-cap-padding-x: 1rem;
-  --bs-card-cap-bg: rgba(0, 0, 0, 0.03);
+  --bs-card-cap-bg: #01948d;
   --bs-card-cap-color: ;
   --bs-card-height: ;
   --bs-card-color: ;
@@ -4222,6 +4222,8 @@ textarea.form-control-lg {
   background-clip: border-box;
   border: var(--bs-card-border-width) solid var(--bs-card-border-color);
   border-radius: var(--bs-card-border-radius);
+  margin-bottom: 2rem;
+
 }
 .card > hr {
   margin-right: 0;
@@ -4275,6 +4277,7 @@ textarea.form-control-lg {
   color: var(--bs-card-cap-color);
   background-color: var(--bs-card-cap-bg);
   border-bottom: var(--bs-card-border-width) solid var(--bs-card-border-color);
+  margin-top: -1rem;
 }
 .card-header:first-child {
   border-radius: var(--bs-card-inner-border-radius) var(--bs-card-inner-border-radius) 0 0;
@@ -7869,7 +7872,8 @@ textarea.form-control-lg {
 }
 
 .pt-5 {
-  padding-top: 3rem !important;
+  padding-top: 2rem !important;
+  padding-bottom: 1rem!important;
 }
 
 .pe-0 {
