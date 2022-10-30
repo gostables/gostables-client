@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 const MockUSDJ = () => {
   return (
     <div className="card">
