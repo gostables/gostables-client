@@ -7,6 +7,7 @@ import ttddImg from "../ttdd.png";
 import { ttddSwap as ttddSwap_ } from "../contracts/swapContract";
 import { ThreeDots } from "react-loader-spinner";
 
+
 const SwapExchange = () => {
   const [direction, setDirection] = useState(true);
   const [address, setAddress] = useState();
@@ -24,9 +25,11 @@ const SwapExchange = () => {
     };
   }, []);
 
+
   const setWalletDetails = (walletDetails) => {
     setAddress(walletDetails.address);
   };
+
 
   useEffect(() => {
     ttddSwapPublisher.attach(setSwapDetails);
@@ -82,16 +85,16 @@ const SwapExchange = () => {
           <input
             type="text"
             class="form-control"
-            id="floatingInputGroup1"
-            placeholder="Value in Currency"
+            id="floatingInputGroup2"
+            placeholder="Value in gStable"
             onChange={updateTokenValue}
           />
-          <label for="floatingInputGroup1">Value in Currency</label>
+          <label for="floatingInputGroup2">Value in gStable</label>
         </div>
         <span class="input-group-text">
           <img
             src={ttddImg}
-            alt="Currency"
+            alt="gStable"
             width="32"
             height="32"
             class="rounded-circle flex-shrink-0"
@@ -125,7 +128,7 @@ const SwapExchange = () => {
           </h4>
           {conversionRatio ? (
             <div className="h6 text-white font-weight-bolder text-center mt-2 mb-0">
-              Current Conversion Ratio : 1 USD ≈ {conversionRatio} TTDD
+              Exchange Rate : 1 USD ≈ {conversionRatio} gTTD
             </div>
           ) : (
             <></>
@@ -133,11 +136,11 @@ const SwapExchange = () => {
         </div>
       </div>
       {address ? (
-        <div className="card-body">
-          <p>You Swap</p>
+        <div className="card-body mt-20">
+          <p className="text-left">You Swap</p>
+          <p className="text-right">Balance: XXX</p>
           {direction ? stableCoinJSX("You Swap") : tokenJSX("You Swap")}
-
-          <div className="d-flex justify-content-center pt-5">
+          <div className="d-flex justify-content-center pt-x">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -153,7 +156,8 @@ const SwapExchange = () => {
               />
             </svg>
           </div>
-          <p>For</p>
+          <p className="text-left">For</p>
+          <p className="text-right">Balance: YYY</p>
           {direction ? tokenJSX("For") : stableCoinJSX("For")}
 
           <div className="d-grid gap-2 mt-4">
@@ -161,8 +165,8 @@ const SwapExchange = () => {
               Swap
             </button>
             {swapFeesFactor ? (
-              <div class="text-xs">
-                You will be charged {swapFeesFactor * 100}% of every swap.{" "}
+              <div class="text-xs text-center mt-20">
+                Protocol Fee: {swapFeesFactor * 100}%{" "}
               </div>
             ) : (
               <></>

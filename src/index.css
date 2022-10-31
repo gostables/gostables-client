@@ -10,3 +10,13 @@ body {
 .bg {
   background-color: #e6fbea !important;
 }
+
+.text-left{float: left;}
+.text-right{float: right;}
+
+.pt-x {
+  padding-top: 2rem!important;
+  padding-bottom: 2rem!important;
+}
+
+.mt-20{margin-top: 20px;}
