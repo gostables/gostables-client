@@ -7,6 +7,7 @@ export const Currency = {
     swapMarketAddress: "TDLbLFD68VBqeTjsmneroJazrUSgSXf8f9",
     swapStableAddress: "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU",
     gStableAddress: "TXfUYdQeLZ6VtqTaEYQkRifbGZBXF9Xb71",
+    vaultAddress: "THwPd7EbZKvLbC52aZB795xZm2Jcr392iP",
   },
 };
 

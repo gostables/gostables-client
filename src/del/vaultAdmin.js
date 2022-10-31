@@ -1,4 +1,4 @@
-const VaultAdmin = () => {
+const VaultAdmin_ = () => {
   // const [ttddContract, setTTDDContract] = useState();
   // const [stableCoinList, setStableCoinList] = useState([]);
   // const [conversionRatio, setConversionRatio] = useState();
@@ -81,4 +81,4 @@ const VaultAdmin = () => {
   );
 };
 
-export default VaultAdmin;
+export default VaultAdmin_;

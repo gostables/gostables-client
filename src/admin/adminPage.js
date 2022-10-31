@@ -1,7 +1,9 @@
+import CurrencyVault from "../components/currencyVault";
 import SwapExchange from "../components/swapExchange";
 import WalletDetails from "../components/walletDetails";
 import GStableAdmin from "./gStableAdmin";
 import SwapAdmin from "./swapAdmin";
+import VaultAdmin from "./vaultAdmin";
 
 const AdminPage = () => {
   return (
@@ -15,12 +17,18 @@ const AdminPage = () => {
             <div className="col">
               <GStableAdmin></GStableAdmin>
             </div>
+            <div className="col">
+              <VaultAdmin></VaultAdmin>
+            </div>
           </div>
         </div>
         <div className="col-sm-6">
           <div className="row>">
             <div className="col pb-6">
               <SwapExchange></SwapExchange>
+            </div>
+            <div className="col pb-3">
+              <CurrencyVault></CurrencyVault>
             </div>
             <div className="col pb-3">
               <WalletDetails></WalletDetails>

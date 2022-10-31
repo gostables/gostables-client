@@ -11,6 +11,7 @@ const WalletDetails = () => {
     network: "",
     usddBalance: "",
     ttddBalance: "",
+    vaultBalance: "",
   });
 
   const [gStableCoinName, setgStableCoinName] = useState("");
@@ -38,6 +39,32 @@ const WalletDetails = () => {
     setgStableCoinName(gStableCoinName);
     setgStableCoinSymbol(gStableCoinSymbol);
   };
+
+  const depositsJSX = () => {
+    return walletDetails.vaultBalance.balance > 0 ? (
+      <>
+        <p className="h6 card-title my-3">Vault Deposits</p>
+
+        <div className="text-sm-start fw-bold">
+          {walletDetails.vaultBalance.balance}{" "}
+          <span className="mx-2">USDD</span>
+          <span className="px-2">
+            <img
+              src={usddImg}
+              alt="USDD"
+              width="16"
+              height="16"
+              className="rounded-circle flex-shrink-0"
+            />
+          </span>
+          till {walletDetails.vaultBalance.lock.toLocaleString()}
+        </div>
+      </>
+    ) : (
+      <></>
+    );
+  };
+
   return (
     <div class="card z-index-0 fadeIn3 fadeInBottom">
       <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
@@ -49,39 +76,43 @@ const WalletDetails = () => {
       </div>
       <div className="card-body">
         {walletDetails.address ? (
-          <ul className="list-group list-group-flush">
-            <li className="list-group-item d-flex justify-content-between">
-              <div>
-                <span>USDD </span>
-                <span className="px-2">
-                  <img
-                    src={usddImg}
-                    alt="USDD"
-                    width="16"
-                    height="16"
-                    className="rounded-circle flex-shrink-0"
-                  />
-                </span>
-              </div>
-              <div>{walletDetails.usddBalance}</div>
-            </li>
+          <>
+            <p className="h6 card-title my-3">Balances</p>
+            <ul className="list-group list-group-flush">
+              <li className="list-group-item d-flex justify-content-between">
+                <div>
+                  <span>USDD </span>
+                  <span className="px-2">
+                    <img
+                      src={usddImg}
+                      alt="USDD"
+                      width="16"
+                      height="16"
+                      className="rounded-circle flex-shrink-0"
+                    />
+                  </span>
+                </div>
+                <div>{walletDetails.usddBalance}</div>
+              </li>
 
-            <li className="list-group-item d-flex justify-content-between">
-              <div>
-                <span>{gStableCoinName}</span>
-                <span className="px-2">
-                  <img
-                    src={ttddImg}
-                    alt="USDD"
-                    width="16"
-                    height="16"
-                    className="rounded-circle flex-shrink-0"
-                  />
-                </span>
-              </div>
-              <div>{walletDetails.ttddBalance}</div>
-            </li>
-          </ul>
+              <li className="list-group-item d-flex justify-content-between">
+                <div>
+                  <span>{gStableCoinName}</span>
+                  <span className="px-2">
+                    <img
+                      src={ttddImg}
+                      alt="USDD"
+                      width="16"
+                      height="16"
+                      className="rounded-circle flex-shrink-0"
+                    />
+                  </span>
+                </div>
+                <div>{walletDetails.ttddBalance}</div>
+              </li>
+            </ul>
+            {depositsJSX()}
+          </>
         ) : (
           <>
             <div className="mt-2 w-100 d-flex justify-content-center">

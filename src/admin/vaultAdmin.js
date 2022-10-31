@@ -1,74 +1,66 @@
 import { useEffect, useState } from "react";
-import { ttdd } from "../contracts/gStableContract ";
 import { ttddMarket } from "../contracts/marketContract";
-import { ttddSwap } from "../contracts/swapContract";
 import { usddContract } from "../contracts/usdContract";
 import { getCurrency } from "../utils/currencies";
 import SetConversionRatio from "./setConversionRatio";
 import SetSwapFeesFactor from "./setSwapFeesFactor";
+import { ttddVault } from "../contracts/vaultContract";
+import SetLockInterval from "./setLockInterval";
 
-const SwapAdmin = () => {
+const VaultAdmin = () => {
   const [details, setDetails] = useState({
     status: false,
     address: "",
-    conversion: "",
+    interval: "",
     stableCoinAddress: "",
-    accumulatedSwapFees: 0,
-    swapFeesFactor: 0,
     marketAddress: "",
     marketCoinBalance: 0,
   });
-  const [swapContract, setSwapContract] = useState({});
+  const [vaultContract, setVaultContract] = useState({});
   useEffect(() => {
     let timer = setInterval(() => {
-      initSwapContract();
+      initVaultContract();
     }, 5 * 1000);
 
     return () => {
       clearInterval(timer);
-      console.log("unmounting swapAdmin");
+      console.log("unmounting VaultAdmin");
     };
   }, []);
 
-  const initSwapContract = async () => {
-    let swapContract = await ttddSwap();
+  const initVaultContract = async () => {
+    let vaultContract = await ttddVault();
 
-    let swapDetails = await swapContract.getDetails();
+    let vaultDetails = await vaultContract.getDetails();
     //Market coin data
     let marketContract = await ttddMarket();
     let marketCoinBalance = await marketContract.balanceOf(
-      swapContract.address
+      vaultContract.address
     );
     let { name: marketCoinName, symbol: marketCoinSymbol } =
       await marketContract.getNameSymbol();
-    //gStable Data
-    let gStableContract = await ttdd();
-    let { name: gStableCoinName, symbol: gStableCoinSymbol } =
-      await gStableContract.getNameSymbol();
 
     // usdd data
     let usdd = await usddContract();
     let ttddCurr = getCurrency("TTDD");
-    let usddBalance = await usdd.balanceOf(ttddCurr.swapAddress);
+    let usddBalance = await usdd.balanceOf(ttddCurr.vaultAddress);
 
-    swapDetails = {
-      ...swapDetails,
+    vaultDetails = {
+      ...vaultDetails,
       marketCoinBalance,
       marketCoinName,
       marketCoinSymbol,
-      gStableCoinName,
-      gStableCoinSymbol,
       usddBalance,
     };
-    setDetails(swapDetails);
-
-    setSwapContract(swapContract);
+    console.log(vaultDetails);
+    setDetails(vaultDetails);
+    setVaultContract(vaultContract);
   };
 
   return (
     <div className="card">
       <div className="card-body">
-        <h5 className="card-title text-center">Swap Admin</h5>
+        <h5 className="card-title text-center">Vault Admin</h5>
         <p>{window.tronWeb.address.fromHex(details.address)} </p>
         <hr />
         <h6 className="card-title">Balances</h6>
@@ -84,19 +76,13 @@ const SwapAdmin = () => {
         </p>
         <p>Market : {window.tronWeb.address.fromHex(details.marketAddress)} </p>
         <hr />
-        <h6 className="card-title">Conversion Ratio</h6>
-        <p>
-          1 USD ≈ {details.conversion} {details.gStableCoinName}
-        </p>
-        <SetConversionRatio swapContract={swapContract}></SetConversionRatio>
+        <h6 className="card-title">Lock Interval</h6>
+        <p>Lock Interval : {details.interval}</p>
+        <SetLockInterval vaultContract={vaultContract}></SetLockInterval>
         <hr />
-        <h6 className="card-title">Protocol Fees</h6>
-        <p>Swap Fees Factor : {details.swapFeesFactor}</p>
-        <p>Accumulated Swap Fees : {details.accumulatedSwapFees}</p>
-        <SetSwapFeesFactor swapContract={swapContract}></SetSwapFeesFactor>
       </div>
     </div>
   );
 };
 
-export default SwapAdmin;
+export default VaultAdmin;
