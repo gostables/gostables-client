@@ -13,12 +13,12 @@ const App = () => {
     <>
       <Navbar></Navbar>
       <Routes>
-        <Route
+        {/* <Route
           path="/swap"
           // @ts-ignore
           exact
           element={<SwapPage />}
-        />
+        /> */}
         <Route
           path="/wallet"
           // @ts-ignore
@@ -55,7 +55,7 @@ const App = () => {
         <Route
           path="*"
           // @ts-ignore
-          element={<Landing />}
+          element={<SwapPage />}
         />
       </Routes>
     </>

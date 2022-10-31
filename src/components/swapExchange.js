@@ -162,7 +162,7 @@ const SwapExchange = () => {
             </button>
             {swapFeesFactor ? (
               <div class="text-xs">
-                You will be charged {swapFeesFactor}% of every swap.{" "}
+                You will be charged {swapFeesFactor * 100}% of every swap.{" "}
               </div>
             ) : (
               <></>
