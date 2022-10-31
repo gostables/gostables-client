@@ -5,7 +5,7 @@ import WalletConnect from "./walletConnect";
 const Navbar = () => {
   return (
     <div className="container">
-      <header className="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <header className="d-flex flex-wrap justify-content-center py-x mb-4 border-bottom">
         <div
           href="/"
           className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none"
@@ -47,11 +47,11 @@ const Navbar = () => {
           </li>
           <li className="nav-item">
             <NavLink to="/vault" className="nav-link">
-              Vault
+              Vaults
             </NavLink>
           </li>
 
-          <li className="nav-item">
+          <li className="nav-item web3-connect">
             <WalletConnect></WalletConnect>
           </li>
         </ul>

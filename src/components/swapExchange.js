@@ -68,7 +68,7 @@ const SwapExchange = () => {
             width="32"
             height="32"
             class="rounded-circle flex-shrink-0"
-          />
+          />&nbsp; USDD
         </span>
       </div>
     );
@@ -98,7 +98,7 @@ const SwapExchange = () => {
             width="32"
             height="32"
             class="rounded-circle flex-shrink-0"
-          />
+          /> &nbsp; gTTD
         </span>
       </div>
     );
