@@ -47,7 +47,9 @@ const WalletDetails = () => {
   };
 
   const depositsJSX = () => {
-    return walletDetails.isSupportedNetwork &&
+    return walletDetails &&
+      walletDetails.isSupportedNetwork &&
+      walletDetails.vaultBalance &&
       walletDetails.vaultBalance.balance > 0 ? (
       <>
         <p className="h6 card-title my-3">Vault Deposits</p>

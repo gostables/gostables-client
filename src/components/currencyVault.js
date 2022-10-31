@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import usddImg from "../usdd.png";
-import ttddImg from "../ttdd.png";
+import gttdImg from "../ttdd.png";
 import { ttddVault } from "../contracts/vaultContract";
 import walletPublisher from "../publishers/wallet";
 import { usddContract } from "../contracts/usdContract";
@@ -168,11 +168,11 @@ const CurrencyVault = () => {
   const active = "active";
 
   return (
-    <div className="card z-index-0 fadeIn3 fadeInBottom">
-      <div className="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-        <div className="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-          <h4 className="text-white font-weight-bolder text-center mt-2 mb-0">
-            Vault
+    <div class="card z-index-0 fadeIn3 fadeInBottom">
+      <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+        <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
+          <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">
+            Vaults
           </h4>
         </div>
       </div>
