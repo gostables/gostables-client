@@ -4,6 +4,7 @@ import ttddImg from "../ttdd.png";
 import { ttddVault } from "../contracts/vaultContract";
 import walletPublisher from "../publishers/wallet";
 import { usddContract } from "../contracts/usdContract";
+import { ThreeDots } from "react-loader-spinner";
 
 const CurrencyVault = () => {
   const [display, setDisplay] = useState(true);
@@ -23,6 +24,8 @@ const CurrencyVault = () => {
   }, []);
 
   const [walletData, setWalletData] = useState({
+    status: 1,
+    isSupportedNetwork: false,
     usddBalance: "",
     ttddBalance: "",
     vaultBalance: { balance: "", lock: new Date() },
@@ -37,6 +40,8 @@ const CurrencyVault = () => {
 
   const setWalletDetails = (walletDetails) => {
     setWalletData({
+      status: walletDetails.status,
+      isSupportedNetwork: walletDetails.isSupportedNetwork,
       usddBalance: walletDetails.usddBalance,
       ttddBalance: walletDetails.ttddBalance,
       vaultBalance: walletDetails.vaultBalance,
@@ -44,13 +49,17 @@ const CurrencyVault = () => {
   };
 
   const initVaultContract = async () => {
-    let vaultContract = await ttddVault();
+    try {
+      let vaultContract = await ttddVault();
 
-    let vaultDetails = await vaultContract.getDetails();
+      let vaultDetails = await vaultContract.getDetails();
 
-    console.log(vaultDetails);
-    setVaultDetails(vaultDetails);
-    setVaultContract(vaultContract);
+      console.log(vaultDetails);
+      setVaultDetails(vaultDetails);
+      setVaultContract(vaultContract);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const updateUSDDValue = (e) => {
@@ -85,10 +94,10 @@ const CurrencyVault = () => {
 
   const displayJSX = () => {
     return (
-      <div class="card-body">
-        {walletData.vaultBalance.balance > 0 ? (
+      <div className="card-body">
+        {walletData.vaultBalance && walletData.vaultBalance.balance > 0 ? (
           <>
-            <div class="alert alert-success">
+            <div className="alert alert-success">
               <strong>Current Deposit :</strong>{" "}
               <div className="my-2">
                 {walletData.vaultBalance.balance}{" "}
@@ -110,11 +119,11 @@ const CurrencyVault = () => {
           <></>
         )}
 
-        <div class="input-group mb-2" key={1}>
-          <div class="form-floating">
+        <div className="input-group mb-2" key={1}>
+          <div className="form-floating">
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="floatingInputGroup1"
               placeholder="Value in USDD"
               onChange={updateUSDDValue}
@@ -122,17 +131,17 @@ const CurrencyVault = () => {
             />
             <label for="floatingInputGroup1">Value in USDD</label>
           </div>
-          <span class="input-group-text">
+          <span className="input-group-text">
             <img
               src={usddImg}
               alt="USDD"
               width="32"
               height="32"
-              class="rounded-circle flex-shrink-0"
+              className="rounded-circle flex-shrink-0"
             />
           </span>
           <button
-            class="btn btn-outline-primary"
+            className="btn btn-outline-primary"
             type="button"
             id="button-deposit"
             onClick={callVault}
@@ -140,12 +149,12 @@ const CurrencyVault = () => {
             {display ? "Deposit" : "Redeem"}
           </button>
         </div>
-        {/* <a class="p-1 rounded small" href="#simple-list-item-1">
+        {/* <a className="p-1 rounded small" href="#simple-list-item-1">
           Set Max
         </a> */}
 
         {display && vaultDetails.interval ? (
-          <div class="text-xs mt-3">
+          <div className="text-xs mt-3">
             Your deposit will be locked for the next {vaultDetails.interval}{" "}
             hrs.
           </div>
@@ -159,37 +168,54 @@ const CurrencyVault = () => {
   const active = "active";
 
   return (
-    <div class="card z-index-0 fadeIn3 fadeInBottom">
-      <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-        <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-          <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">
+    <div className="card z-index-0 fadeIn3 fadeInBottom">
+      <div className="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+        <div className="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
+          <h4 className="text-white font-weight-bolder text-center mt-2 mb-0">
             Vault
           </h4>
         </div>
       </div>
-      <div class="card-body">
-        <ul class="nav justify-content-center">
-          <li class="nav-item">
-            <a
-              class={`nav-link ${display ? active : ""}`}
-              href="#"
-              onClick={() => setDisplay(true)}
-            >
-              Deposit
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              class={`nav-link ${display ? "" : active}`}
-              href="#"
-              onClick={() => setDisplay(false)}
-            >
-              Redeem
-            </a>
-          </li>
-        </ul>
-      </div>
-      {displayJSX()}
+      {walletData.isSupportedNetwork ? (
+        <div className="card-body">
+          <ul className="nav justify-content-center">
+            <li className="nav-item">
+              <a
+                className={`nav-link ${display ? active : ""}`}
+                href="#"
+                onClick={() => setDisplay(true)}
+              >
+                Deposit
+              </a>
+            </li>
+            <li className="nav-item">
+              <a
+                className={`nav-link ${display ? "" : active}`}
+                href="#"
+                onClick={() => setDisplay(false)}
+              >
+                Redeem
+              </a>
+            </li>
+          </ul>
+          {displayJSX()}
+        </div>
+      ) : (
+        <>
+          <div className="mt-2 w-100 d-flex justify-content-center">
+            <ThreeDots
+              height="32"
+              width="32"
+              radius="9"
+              color="#4fa94d"
+              ariaLabel="three-dots-loading"
+              wrapperStyle={{}}
+              wrapperClassName=""
+              visible={true}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 };

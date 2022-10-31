@@ -18,7 +18,11 @@ class SwapPublisher {
   usdd = null;
   timer = null;
   constructor(currency) {
-    this.init();
+    try {
+      this.init();
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   init = async () => {
@@ -35,7 +39,6 @@ class SwapPublisher {
     } catch (error) {
       console.error(error);
     }
-
     // Continuous polling as per https://github.com/ibnzUK/Tron-Wallet-React-Integration/blob/main/src/App.js
     this.timer = setInterval(async () => {
       try {

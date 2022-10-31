@@ -7,11 +7,13 @@ import { ThreeDots } from "react-loader-spinner";
 
 const WalletDetails = () => {
   const [walletDetails, setWalletDetails] = useState({
+    status: 1,
+    isSupportedNetwork: false,
     address: "",
     network: "",
     usddBalance: "",
     ttddBalance: "",
-    vaultBalance: "",
+    vaultBalance: { balance: 0, lock: 0 },
   });
 
   const [gStableCoinName, setgStableCoinName] = useState("");
@@ -32,16 +34,21 @@ const WalletDetails = () => {
     };
   }, []);
   const init = async () => {
-    //gStable Data
-    let gStableContract = await ttdd();
-    let { name: gStableCoinName, symbol: gStableCoinSymbol } =
-      await gStableContract.getNameSymbol();
-    setgStableCoinName(gStableCoinName);
-    setgStableCoinSymbol(gStableCoinSymbol);
+    try {
+      //gStable Data
+      let gStableContract = await ttdd();
+      let { name: gStableCoinName, symbol: gStableCoinSymbol } =
+        await gStableContract.getNameSymbol();
+      setgStableCoinName(gStableCoinName);
+      setgStableCoinSymbol(gStableCoinSymbol);
+    } catch (error) {
+      console.error();
+    }
   };
 
   const depositsJSX = () => {
-    return walletDetails.vaultBalance.balance > 0 ? (
+    return walletDetails.isSupportedNetwork &&
+      walletDetails.vaultBalance.balance > 0 ? (
       <>
         <p className="h6 card-title my-3">Vault Deposits</p>
 
@@ -66,16 +73,16 @@ const WalletDetails = () => {
   };
 
   return (
-    <div class="card z-index-0 fadeIn3 fadeInBottom">
-      <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-        <div class="bg-gradient-info shadow-info border-radius-lg py-3 pe-1">
-          <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">
+    <div className="card z-index-0 fadeIn3 fadeInBottom">
+      <div className="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+        <div className="bg-gradient-info shadow-info border-radius-lg py-3 pe-1">
+          <h4 className="text-white font-weight-bolder text-center mt-2 mb-0">
             Wallet
           </h4>
         </div>
       </div>
       <div className="card-body">
-        {walletDetails.address ? (
+        {walletDetails.isSupportedNetwork ? (
           <>
             <p className="h6 card-title my-3">Balances</p>
             <ul className="list-group list-group-flush">
@@ -95,21 +102,25 @@ const WalletDetails = () => {
                 <div>{walletDetails.usddBalance}</div>
               </li>
 
-              <li className="list-group-item d-flex justify-content-between">
-                <div>
-                  <span>{gStableCoinName}</span>
-                  <span className="px-2">
-                    <img
-                      src={ttddImg}
-                      alt="USDD"
-                      width="16"
-                      height="16"
-                      className="rounded-circle flex-shrink-0"
-                    />
-                  </span>
-                </div>
-                <div>{walletDetails.ttddBalance}</div>
-              </li>
+              {gStableCoinName ? (
+                <li className="list-group-item d-flex justify-content-between">
+                  <div>
+                    <span>{gStableCoinName}</span>
+                    <span className="px-2">
+                      <img
+                        src={ttddImg}
+                        alt="USDD"
+                        width="16"
+                        height="16"
+                        className="rounded-circle flex-shrink-0"
+                      />
+                    </span>
+                  </div>
+                  <div>{walletDetails.ttddBalance}</div>
+                </li>
+              ) : (
+                <></>
+              )}
             </ul>
             {depositsJSX()}
           </>

@@ -29,32 +29,35 @@ const VaultAdmin = () => {
   }, []);
 
   const initVaultContract = async () => {
-    let vaultContract = await ttddVault();
+    try {
+      let vaultContract = await ttddVault();
 
-    let vaultDetails = await vaultContract.getDetails();
-    //Market coin data
-    let marketContract = await ttddMarket();
-    let marketCoinBalance = await marketContract.balanceOf(
-      vaultContract.address
-    );
-    let { name: marketCoinName, symbol: marketCoinSymbol } =
-      await marketContract.getNameSymbol();
+      let vaultDetails = await vaultContract.getDetails();
+      //Market coin data
+      let marketContract = await ttddMarket();
+      let marketCoinBalance = await marketContract.balanceOf(
+        vaultContract.address
+      );
+      let { name: marketCoinName, symbol: marketCoinSymbol } =
+        await marketContract.getNameSymbol();
 
-    // usdd data
-    let usdd = await usddContract();
-    let ttddCurr = getCurrency("TTDD");
-    let usddBalance = await usdd.balanceOf(ttddCurr.vaultAddress);
+      // usdd data
+      let usdd = await usddContract();
+      let ttddCurr = getCurrency("TTDD");
+      let usddBalance = await usdd.balanceOf(ttddCurr.vaultAddress);
 
-    vaultDetails = {
-      ...vaultDetails,
-      marketCoinBalance,
-      marketCoinName,
-      marketCoinSymbol,
-      usddBalance,
-    };
-    console.log(vaultDetails);
-    setDetails(vaultDetails);
-    setVaultContract(vaultContract);
+      vaultDetails = {
+        ...vaultDetails,
+        marketCoinBalance,
+        marketCoinName,
+        marketCoinSymbol,
+        usddBalance,
+      };
+      setDetails(vaultDetails);
+      setVaultContract(vaultContract);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

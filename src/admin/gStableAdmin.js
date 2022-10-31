@@ -11,7 +11,7 @@ const GStableAdmin = () => {
   const [, setgStableContract] = useState({});
   useEffect(() => {
     let timer = setInterval(() => {
-      initSwapContract();
+      initgStableContract();
     }, 5 * 1000);
 
     return () => {
@@ -20,14 +20,18 @@ const GStableAdmin = () => {
     };
   }, []);
 
-  const initSwapContract = async () => {
-    let gStableContract = await ttdd();
+  const initgStableContract = async () => {
+    try {
+      let gStableContract = await ttdd();
 
-    let gStableDetails = await gStableContract.getDetails();
-    console.log(gStableDetails);
-    setDetails(gStableDetails);
+      let gStableDetails = await gStableContract.getDetails();
+      console.log(gStableDetails);
+      setDetails(gStableDetails);
 
-    setgStableContract(gStableContract);
+      setgStableContract(gStableContract);
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <>
@@ -37,10 +41,10 @@ const GStableAdmin = () => {
           <p>{details.address}</p>
           <hr />
           <h6 className="card-title">Whitelisted Addresses</h6>
-          <ul class="list-group list-group-flush">
+          <ul className="list-group list-group-flush">
             {details.clients.map((cl) => {
               return (
-                <li class="list-group-item">
+                <li className="list-group-item">
                   {window.tronWeb.address.fromHex(cl)}
                 </li>
               );

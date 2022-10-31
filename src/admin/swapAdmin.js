@@ -31,38 +31,42 @@ const SwapAdmin = () => {
   }, []);
 
   const initSwapContract = async () => {
-    let swapContract = await ttddSwap();
+    try {
+      let swapContract = await ttddSwap();
 
-    let swapDetails = await swapContract.getDetails();
-    //Market coin data
-    let marketContract = await ttddMarket();
-    let marketCoinBalance = await marketContract.balanceOf(
-      swapContract.address
-    );
-    let { name: marketCoinName, symbol: marketCoinSymbol } =
-      await marketContract.getNameSymbol();
-    //gStable Data
-    let gStableContract = await ttdd();
-    let { name: gStableCoinName, symbol: gStableCoinSymbol } =
-      await gStableContract.getNameSymbol();
+      let swapDetails = await swapContract.getDetails();
+      //Market coin data
+      let marketContract = await ttddMarket();
+      let marketCoinBalance = await marketContract.balanceOf(
+        swapContract.address
+      );
+      let { name: marketCoinName, symbol: marketCoinSymbol } =
+        await marketContract.getNameSymbol();
+      //gStable Data
+      let gStableContract = await ttdd();
+      let { name: gStableCoinName, symbol: gStableCoinSymbol } =
+        await gStableContract.getNameSymbol();
 
-    // usdd data
-    let usdd = await usddContract();
-    let ttddCurr = getCurrency("TTDD");
-    let usddBalance = await usdd.balanceOf(ttddCurr.swapAddress);
+      // usdd data
+      let usdd = await usddContract();
+      let ttddCurr = getCurrency("TTDD");
+      let usddBalance = await usdd.balanceOf(ttddCurr.swapAddress);
 
-    swapDetails = {
-      ...swapDetails,
-      marketCoinBalance,
-      marketCoinName,
-      marketCoinSymbol,
-      gStableCoinName,
-      gStableCoinSymbol,
-      usddBalance,
-    };
-    setDetails(swapDetails);
+      swapDetails = {
+        ...swapDetails,
+        marketCoinBalance,
+        marketCoinName,
+        marketCoinSymbol,
+        gStableCoinName,
+        gStableCoinSymbol,
+        usddBalance,
+      };
+      setDetails(swapDetails);
 
-    setSwapContract(swapContract);
+      setSwapContract(swapContract);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

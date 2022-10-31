@@ -9,7 +9,7 @@ import { ThreeDots } from "react-loader-spinner";
 
 const SwapExchange = () => {
   const [direction, setDirection] = useState(true);
-  const [address, setAddress] = useState();
+  const [walletDetails, setWalletDetails] = useState();
 
   const [stableCoinValue, setStableCoinValue] = useState(0);
   const [tokenValue, setTokenValue] = useState(0);
@@ -18,14 +18,14 @@ const SwapExchange = () => {
   const [swapFeesFactor, setSwapFeesFactor] = useState();
 
   useEffect(() => {
-    walletPublisher.attach(setWalletDetails);
+    walletPublisher.attach(setWallet);
     return () => {
-      walletPublisher.detach(setWalletDetails);
+      walletPublisher.detach(setWallet);
     };
   }, []);
 
-  const setWalletDetails = (walletDetails) => {
-    setAddress(walletDetails.address);
+  const setWallet = (walletDetails) => {
+    setWalletDetails(walletDetails);
   };
 
   useEffect(() => {
@@ -47,24 +47,24 @@ const SwapExchange = () => {
 
   const stableCoinJSX = () => {
     return (
-      <div class="input-group mb-3" key={1}>
-        <div class="form-floating">
+      <div className="input-group mb-3" key={1}>
+        <div className="form-floating">
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="floatingInputGroup1"
             placeholder="Value in USDD"
             onChange={updateStableCoinValue}
           />
           <label for="floatingInputGroup1">Value in USDD</label>
         </div>
-        <span class="input-group-text">
+        <span className="input-group-text">
           <img
             src={usddImg}
             alt="USDD"
             width="32"
             height="32"
-            class="rounded-circle flex-shrink-0"
+            className="rounded-circle flex-shrink-0"
           />
         </span>
       </div>
@@ -77,24 +77,24 @@ const SwapExchange = () => {
   };
   const tokenJSX = (title) => {
     return (
-      <div class="input-group mb-3" key={2}>
-        <div class="form-floating">
+      <div className="input-group mb-3" key={2}>
+        <div className="form-floating">
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="floatingInputGroup1"
             placeholder="Value in Currency"
             onChange={updateTokenValue}
           />
           <label for="floatingInputGroup1">Value in Currency</label>
         </div>
-        <span class="input-group-text">
+        <span className="input-group-text">
           <img
             src={ttddImg}
             alt="Currency"
             width="32"
             height="32"
-            class="rounded-circle flex-shrink-0"
+            className="rounded-circle flex-shrink-0"
           />
         </span>
       </div>
@@ -117,13 +117,16 @@ const SwapExchange = () => {
   };
 
   return (
-    <div class="card z-index-0 fadeIn3 fadeInBottom">
-      <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-        <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-          <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">
+    <div className="card z-index-0 fadeIn3 fadeInBottom">
+      <div className="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+        <div className="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
+          <h4 className="text-white font-weight-bolder text-center mt-2 mb-0">
             Swap
           </h4>
-          {conversionRatio ? (
+
+          {walletDetails &&
+          walletDetails.isSupportedNetwork &&
+          conversionRatio ? (
             <div className="h6 text-white font-weight-bolder text-center mt-2 mb-0">
               Current Conversion Ratio : 1 USD ≈ {conversionRatio} TTDD
             </div>
@@ -132,7 +135,7 @@ const SwapExchange = () => {
           )}
         </div>
       </div>
-      {address ? (
+      {walletDetails && walletDetails.isSupportedNetwork ? (
         <div className="card-body">
           <p>You Swap</p>
           {direction ? stableCoinJSX("You Swap") : tokenJSX("You Swap")}
@@ -161,7 +164,7 @@ const SwapExchange = () => {
               Swap
             </button>
             {swapFeesFactor ? (
-              <div class="text-xs">
+              <div className="text-xs">
                 You will be charged {swapFeesFactor * 100}% of every swap.{" "}
               </div>
             ) : (

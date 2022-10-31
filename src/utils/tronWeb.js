@@ -1,3 +1,5 @@
+import { isSupportedNetwork } from "./network";
+
 //https://github.com/ibnzUK/Tron-Wallet-React-Integration/blob/main/src/App.js
 const getWalletDetails = async () => {
   if (window.tronWeb) {
@@ -9,6 +11,7 @@ const getWalletDetails = async () => {
         name: window.tronWeb.defaultAddress.name,
         address: window.tronWeb.defaultAddress.base58,
         network: window.tronWeb.fullNode.host,
+        isSupportedNetwork: isSupportedNetwork(window.tronWeb.fullNode.host),
         link: "true",
       };
     } else {
@@ -19,6 +22,7 @@ const getWalletDetails = async () => {
         address: "none",
         network: "none",
         link: "false",
+        isSupportedNetwork: isSupportedNetwork(window.tronWeb.fullNode.host),
       };
     }
   } else {
@@ -29,6 +33,7 @@ const getWalletDetails = async () => {
       address: null,
       network: null,
       link: null,
+      isSupportedNetwork: isSupportedNetwork(window.tronWeb.fullNode.host),
     };
   }
 };

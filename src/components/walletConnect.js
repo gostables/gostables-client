@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import walletPublisher from "../publishers/wallet";
-import { getNetworkName } from "../utils/const";
+import { getNetworkName } from "../utils/network";
 import { getMaskedAddress } from "../utils/shorten";
 
 const WalletConnect = () => {
