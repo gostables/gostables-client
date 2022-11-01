@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { ttdd } from "../contracts/gStableContract ";
+import { getCurrency } from "../utils/currencies";
 
 const AddClientAddressTogStable = (props) => {
   const [address, setAddress] = useState("");
 
   const add = async () => {
-    let gStableContract = await ttdd();
+    let currency = getCurrency(props.currencyKey);
+    let gStableContract = await currency.gStableContract();
     setAddress("");
     try {
       console.log(`setClient : ${address}`);

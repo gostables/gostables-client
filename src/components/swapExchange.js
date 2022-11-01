@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import ttddSwapPublisher from "../publishers/swap";
 import { usddContract } from "../contracts/usdContract";
 import walletPublisher from "../publishers/wallet";
 import usddImg from "../usdd.png";
-import ttddImg from "../ttdd.png";
-import { ttddSwap as ttddSwap_ } from "../contracts/swapContract";
 import { ThreeDots } from "react-loader-spinner";
+import { getCurrency } from "../utils/currencies";
+import { getSwapPublisherByCurrencyKey } from "../publishers/publishers";
 
-const SwapExchange = () => {
+const SwapExchange = (props) => {
   const [direction, setDirection] = useState(true);
   const [walletDetails, setWalletDetails] = useState();
 
@@ -29,9 +28,9 @@ const SwapExchange = () => {
   };
 
   useEffect(() => {
-    ttddSwapPublisher.attach(setSwapDetails);
+    getSwapPublisherByCurrencyKey(props.currencyKey).attach(setSwapDetails);
     return () => {
-      ttddSwapPublisher.detach(setSwapDetails);
+      getSwapPublisherByCurrencyKey(props.currencyKey).detach(setSwapDetails);
     };
   }, []);
 
@@ -91,30 +90,31 @@ const SwapExchange = () => {
         </div>
         <span className="input-group-text">
           <img
-            src={ttddImg}
+            src={getCurrency(props.currencyKey).icon}
             alt="gStable"
             width="32"
             height="32"
             className="rounded-circle flex-shrink-0"
           />{" "}
-          &nbsp; gTTD
+          &nbsp; {getCurrency(props.currencyKey).label}
         </span>
       </div>
     );
   };
 
   const swap = async () => {
-    let ttddSwap = await ttddSwap_();
+    let currency = getCurrency(props.currencyKey);
+    let swapContract = await currency.swapContract();
     let usd = await usddContract();
 
     if (direction) {
-      //swap USD for TTD
-      await usd.approve(ttddSwap.address, stableCoinValue);
+      //swap USD for currency
+      await usd.approve(currency.swapAddress, stableCoinValue);
       console.log("approved");
-      ttddSwap.deposit(stableCoinValue);
+      swapContract.deposit(stableCoinValue);
     } else {
-      //swap TTD for USD
-      ttddSwap.withdraw(tokenValue);
+      //swap currency for USD
+      swapContract.withdraw(tokenValue);
     }
   };
 
@@ -130,7 +130,8 @@ const SwapExchange = () => {
           walletDetails.isSupportedNetwork &&
           conversionRatio ? (
             <div className="h6 text-white font-weight-bolder text-center mt-2 mb-0">
-              Exchange Rate : 1 USD ≈ {conversionRatio} gTTD
+              Exchange Rate : 1 USD ≈ {conversionRatio}{" "}
+              {getCurrency(props.currencyKey).label}
             </div>
           ) : (
             <></>

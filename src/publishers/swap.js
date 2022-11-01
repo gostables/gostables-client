@@ -1,6 +1,4 @@
-import { ttddSwap as ttddSwap_ } from "../contracts/swapContract";
 import { usddContract } from "../contracts/usdContract";
-import { getCurrency } from "../utils/currencies";
 
 export let swapDetails = {
   status: false,
@@ -13,11 +11,13 @@ export let swapDetails = {
 };
 
 class SwapPublisher {
+  currency = null;
   observers = [];
   swapDetails = swapDetails;
   usdd = null;
   timer = null;
-  constructor(currency) {
+  constructor(_currency) {
+    this.currency = _currency;
     try {
       this.init();
     } catch (error) {
@@ -29,10 +29,14 @@ class SwapPublisher {
     try {
       this.usdd = await usddContract();
       try {
-        let ttddSwap = await ttddSwap_();
+        //dynamic read from smart contract
+        let swapContract = await this.currency.swapContract();
         this.swapDetails.stableCoinAddress =
-          await ttddSwap.getStableCoinAddress();
-        this.swapDetails.marketAddress = await ttddSwap.getMarketAddress();
+          await swapContract.getStableCoinAddress();
+        this.swapDetails.marketAddress = await swapContract.getMarketAddress();
+        // static read from currency "config" - see currencies.js
+        // this.swapDetails.stableCoinAddress = this.currency.swapStableAddress;
+        // this.swapDetails.marketAddress = this.currency.swapStableAddress;
       } catch (error) {
         console.error(error);
       }
@@ -41,24 +45,22 @@ class SwapPublisher {
     }
     // Continuous polling as per https://github.com/ibnzUK/Tron-Wallet-React-Integration/blob/main/src/App.js
     this.timer = setInterval(async () => {
+      let swapContract = await this.currency.swapContract();
       try {
-        let ttddSwap = await ttddSwap_();
-        this.swapDetails.conversionRatio = await ttddSwap.getConversion();
+        this.swapDetails.conversionRatio = await swapContract.getConversion();
       } catch (error) {
         console.error(error);
       }
       try {
-        let ttddSwap = await ttddSwap_();
-        this.swapDetails.swapFeesFactor = await ttddSwap.getSwapFeesFactor();
+        this.swapDetails.swapFeesFactor =
+          await swapContract.getSwapFeesFactor();
       } catch (error) {
         console.error(error);
       }
       try {
         if (this.usdd) {
-          let ttddCurr = getCurrency("TTDD");
-
           this.swapDetails.usddBalance = await this.usdd.balanceOf(
-            ttddCurr.swapAddress
+            this.currency.swapAddress
           );
         }
       } catch (error) {
@@ -82,6 +84,4 @@ class SwapPublisher {
   };
 }
 
-const ttddSwapPublisher = new SwapPublisher();
-
-export default ttddSwapPublisher;
+export default SwapPublisher;

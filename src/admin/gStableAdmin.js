@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { ttdd } from "../contracts/gStableContract ";
+import { getCurrency } from "../utils/currencies";
 import AddClientAddressTogStable from "./addClientAddressTogStable";
 
-const GStableAdmin = () => {
+const GStableAdmin = (props) => {
   const [details, setDetails] = useState({
     status: false,
     address: "",
@@ -22,10 +22,10 @@ const GStableAdmin = () => {
 
   const initgStableContract = async () => {
     try {
-      let gStableContract = await ttdd();
+      let currency = getCurrency(props.currencyKey);
+      let gStableContract = await currency.gStableContract();
 
       let gStableDetails = await gStableContract.getDetails();
-      console.log(gStableDetails);
       setDetails(gStableDetails);
 
       setgStableContract(gStableContract);
@@ -50,7 +50,7 @@ const GStableAdmin = () => {
               );
             })}
           </ul>
-          <AddClientAddressTogStable></AddClientAddressTogStable>
+          <AddClientAddressTogStable {...props}></AddClientAddressTogStable>
           <hr />
         </div>
       </div>

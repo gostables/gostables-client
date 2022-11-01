@@ -5,30 +5,36 @@ import GStableAdmin from "./gStableAdmin";
 import SwapAdmin from "./swapAdmin";
 import VaultAdmin from "./vaultAdmin";
 
-const AdminPage = () => {
+const AdminPage = (props) => {
   return (
     <div className="container my-3">
       <div className="row mt-5">
         <div className="col-sm-6">
           <div className="row>">
             <div className="col pb-3">
-              <SwapAdmin></SwapAdmin>
+              <SwapAdmin currencyKey={props.currencyKey}></SwapAdmin>
             </div>
             <div className="col">
-              <GStableAdmin></GStableAdmin>
+              <GStableAdmin currencyKey={props.currencyKey}></GStableAdmin>
             </div>
             <div className="col">
-              <VaultAdmin></VaultAdmin>
+              <VaultAdmin currencyKey={props.currencyKey}></VaultAdmin>
             </div>
           </div>
         </div>
         <div className="col-sm-6">
           <div className="row>">
             <div className="col pb-6">
-              <SwapExchange></SwapExchange>
+              <SwapExchange currencyKey={props.currencyKey}></SwapExchange>
             </div>
             <div className="col pb-3">
-              <CurrencyVault></CurrencyVault>
+              <div class="card">
+                <div class="card-body">
+                  <CurrencyVault
+                    currencyKey={props.currencyKey}
+                  ></CurrencyVault>
+                </div>
+              </div>
             </div>
             <div className="col pb-3">
               <WalletDetails></WalletDetails>

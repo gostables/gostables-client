@@ -1,11 +1,9 @@
-import { getCurrency } from "../utils/currencies";
 import SmartContractBase from "./smartContractBase";
 
 class gStableContract extends SmartContractBase {
   currency = null;
-  constructor(_currency) {
-    super(_currency.gStableAddress);
-    this.currency = _currency;
+  constructor(gStableAddress) {
+    super(gStableAddress);
   }
   init = async () => {
     try {
@@ -77,6 +75,4 @@ class gStableContract extends SmartContractBase {
   };
 }
 
-const ttdd_ = new gStableContract(getCurrency("TTDD"));
-
-export const ttdd = async () => await ttdd_.init();
+export default gStableContract;

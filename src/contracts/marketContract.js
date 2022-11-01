@@ -1,11 +1,10 @@
-import { getCurrency } from "../utils/currencies";
 import SmartContractBase from "./smartContractBase";
 
 class MarketContract extends SmartContractBase {
   currency = null;
-  constructor(_currency) {
-    super(_currency.swapMarketAddress);
-    this.currency = _currency;
+  constructor(swapMarketAddress) {
+    super(swapMarketAddress);
+    // this.currency = _currency;
   }
   init = async () => {
     try {
@@ -45,6 +44,4 @@ class MarketContract extends SmartContractBase {
   // GET end
 }
 
-const ttddMarket_ = new MarketContract(getCurrency("TTDD"));
-
-export const ttddMarket = async () => await ttddMarket_.init();
+export default MarketContract;

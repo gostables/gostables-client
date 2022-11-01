@@ -7,7 +7,7 @@ import { getCurrency } from "../utils/currencies";
 import SetConversionRatio from "./setConversionRatio";
 import SetSwapFeesFactor from "./setSwapFeesFactor";
 
-const SwapAdmin = () => {
+const SwapAdmin = (props) => {
   const [details, setDetails] = useState({
     status: false,
     address: "",
@@ -32,25 +32,25 @@ const SwapAdmin = () => {
 
   const initSwapContract = async () => {
     try {
-      let swapContract = await ttddSwap();
+      let currency = getCurrency(props.currencyKey);
+      let swapContract = await currency.swapContract();
 
       let swapDetails = await swapContract.getDetails();
       //Market coin data
-      let marketContract = await ttddMarket();
+      let marketContract = await currency.marketContract();
       let marketCoinBalance = await marketContract.balanceOf(
         swapContract.address
       );
       let { name: marketCoinName, symbol: marketCoinSymbol } =
         await marketContract.getNameSymbol();
       //gStable Data
-      let gStableContract = await ttdd();
+      let gStableContract = await currency.gStableContract();
       let { name: gStableCoinName, symbol: gStableCoinSymbol } =
         await gStableContract.getNameSymbol();
 
       // usdd data
       let usdd = await usddContract();
-      let ttddCurr = getCurrency("TTDD");
-      let usddBalance = await usdd.balanceOf(ttddCurr.swapAddress);
+      let usddBalance = await usdd.balanceOf(currency.swapAddress);
 
       swapDetails = {
         ...swapDetails,
@@ -92,7 +92,10 @@ const SwapAdmin = () => {
         <p>
           1 USD ≈ {details.conversion} {details.gStableCoinName}
         </p>
-        <SetConversionRatio swapContract={swapContract}></SetConversionRatio>
+        <SetConversionRatio
+          swapContract={swapContract}
+          {...props}
+        ></SetConversionRatio>
         <hr />
         <h6 className="card-title">Protocol Fees</h6>
         <p>Swap Fees Factor : {details.swapFeesFactor}</p>

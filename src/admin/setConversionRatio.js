@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { ttddSwap } from "../contracts/swapContract";
+import { getCurrency } from "../utils/currencies";
 
 const SetConversionRatio = (props) => {
   const [cr, setCR] = useState("");
 
   const set = async () => {
-    let swapContract = await ttddSwap();
+    let currency = getCurrency(props.currencyKey);
+    let swapContract = await currency.swapContract();
 
     setCR("");
     try {

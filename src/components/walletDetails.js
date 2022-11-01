@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { ttdd } from "../contracts/gStableContract ";
 import walletPublisher from "../publishers/wallet";
 import usddImg from "../usdd.png";
-import ttddImg from "../ttdd.png";
 import { ThreeDots } from "react-loader-spinner";
+import { getCurrencies } from "../utils/currencies";
 
 const WalletDetails = () => {
   const [walletDetails, setWalletDetails] = useState({
@@ -12,12 +11,10 @@ const WalletDetails = () => {
     address: "",
     network: "",
     usddBalance: "",
-    ttddBalance: "",
-    vaultBalance: { balance: 0, lock: 0 },
+    vaultBalances: [],
   });
 
-  const [gStableCoinName, setgStableCoinName] = useState("");
-  const [, setgStableCoinSymbol] = useState("");
+  const [gStableCoins, setgStableCoins] = useState([]);
 
   useEffect(() => {
     walletPublisher.attach(setWalletDetails);
@@ -36,41 +33,49 @@ const WalletDetails = () => {
   const init = async () => {
     try {
       //gStable Data
-      let gStableContract = await ttdd();
-      let { name: gStableCoinName, symbol: gStableCoinSymbol } =
-        await gStableContract.getNameSymbol();
-      setgStableCoinName(gStableCoinName);
-      setgStableCoinSymbol(gStableCoinSymbol);
+      let gStableCoins = [];
+      getCurrencies().map(async (currency) => {
+        let gStableContract = await currency.gStableContract();
+        let { name: gStableCoinName, symbol: gStableCoinSymbol } =
+          await gStableContract.getNameSymbol();
+        gStableCoins.push({
+          name: gStableCoinName,
+          symbol: gStableCoinSymbol,
+          icon: currency.icon,
+          currencyKey: currency.key,
+        });
+      });
+      setgStableCoins(gStableCoins);
     } catch (error) {
       console.error();
     }
   };
 
   const depositsJSX = () => {
-    return walletDetails &&
-      walletDetails.isSupportedNetwork &&
-      walletDetails.vaultBalance &&
-      walletDetails.vaultBalance.balance > 0 ? (
+    if (!walletDetails || !walletDetails.isSupportedNetwork) {
+      return <></>;
+    }
+    return (
       <>
         <p className="h6 card-title my-3">Vault Deposits</p>
-
-        <div className="text-sm-start fw-bold">
-          {walletDetails.vaultBalance.balance}{" "}
-          <span className="mx-2">USDD</span>
-          <span className="px-2">
-            <img
-              src={usddImg}
-              alt="USDD"
-              width="16"
-              height="16"
-              className="rounded-circle flex-shrink-0"
-            />
-          </span>
-          till {walletDetails.vaultBalance.lock.toLocaleString()}
-        </div>
+        {walletDetails.vaultBalances.map((vb) => (
+          <>
+            <div className="text-sm-start fw-bold">
+              {vb.balanceData.balance} <span className="mx-2">USDD</span>
+              <span className="px-2">
+                <img
+                  src={usddImg}
+                  alt="USDD"
+                  width="16"
+                  height="16"
+                  className="rounded-circle flex-shrink-0"
+                />
+              </span>
+              till {vb.balanceData.lock.toLocaleString()}
+            </div>
+          </>
+        ))}
       </>
-    ) : (
-      <></>
     );
   };
 
@@ -103,26 +108,35 @@ const WalletDetails = () => {
                 </div>
                 <div>{walletDetails.usddBalance}</div>
               </li>
+              {gStableCoins.map((gStableCoin) => {
+                let balances = walletDetails.gStableBalances.filter((gsb) => {
+                  return (
+                    gsb.currencyKey.localeCompare(gStableCoin.currencyKey) == 0
+                  );
+                });
 
-              {gStableCoinName ? (
-                <li className="list-group-item d-flex justify-content-between">
-                  <div>
-                    <span>{gStableCoinName}</span>
-                    <span className="px-2">
-                      <img
-                        src={ttddImg}
-                        alt="USDD"
-                        width="16"
-                        height="16"
-                        className="rounded-circle flex-shrink-0"
-                      />
-                    </span>
-                  </div>
-                  <div>{walletDetails.ttddBalance}</div>
-                </li>
-              ) : (
-                <></>
-              )}
+                let balance = "";
+                if (balances.length > 0) {
+                  balance = balances[0].balance;
+                }
+                return (
+                  <li className="list-group-item d-flex justify-content-between">
+                    <div>
+                      <span>{gStableCoin.name}</span>
+                      <span className="px-2">
+                        <img
+                          src={gStableCoin.icon}
+                          alt="USDD"
+                          width="16"
+                          height="16"
+                          className="rounded-circle flex-shrink-0"
+                        />
+                      </span>
+                    </div>
+                    <div>{balance}</div>
+                  </li>
+                );
+              })}
             </ul>
             {depositsJSX()}
           </>

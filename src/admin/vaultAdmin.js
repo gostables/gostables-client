@@ -2,12 +2,9 @@ import { useEffect, useState } from "react";
 import { ttddMarket } from "../contracts/marketContract";
 import { usddContract } from "../contracts/usdContract";
 import { getCurrency } from "../utils/currencies";
-import SetConversionRatio from "./setConversionRatio";
-import SetSwapFeesFactor from "./setSwapFeesFactor";
-import { ttddVault } from "../contracts/vaultContract";
 import SetLockInterval from "./setLockInterval";
 
-const VaultAdmin = () => {
+const VaultAdmin = (props) => {
   const [details, setDetails] = useState({
     status: false,
     address: "",
@@ -30,11 +27,12 @@ const VaultAdmin = () => {
 
   const initVaultContract = async () => {
     try {
-      let vaultContract = await ttddVault();
+      let currency = getCurrency(props.currencyKey);
+      let vaultContract = await currency.vaultContract();
 
       let vaultDetails = await vaultContract.getDetails();
       //Market coin data
-      let marketContract = await ttddMarket();
+      let marketContract = await currency.marketContract();
       let marketCoinBalance = await marketContract.balanceOf(
         vaultContract.address
       );
@@ -43,8 +41,7 @@ const VaultAdmin = () => {
 
       // usdd data
       let usdd = await usddContract();
-      let ttddCurr = getCurrency("TTDD");
-      let usddBalance = await usdd.balanceOf(ttddCurr.vaultAddress);
+      let usddBalance = await usdd.balanceOf(currency.vaultAddress);
 
       vaultDetails = {
         ...vaultDetails,
@@ -81,7 +78,10 @@ const VaultAdmin = () => {
         <hr />
         <h6 className="card-title">Lock Interval</h6>
         <p>Lock Interval : {details.interval}</p>
-        <SetLockInterval vaultContract={vaultContract}></SetLockInterval>
+        <SetLockInterval
+          vaultContract={vaultContract}
+          {...props}
+        ></SetLockInterval>
         <hr />
       </div>
     </div>

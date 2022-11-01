@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { ttddVault } from "../contracts/vaultContract";
+import { getCurrency } from "../utils/currencies";
 
 const SetLockInterval = (props) => {
   const [interval, setInterval] = useState("");
 
   const set = async () => {
-    let vaultContract = await ttddVault();
+    let currency = getCurrency(props.currencyKey);
+    let vaultContract = await currency.vaultContract();
 
     setInterval("");
     try {

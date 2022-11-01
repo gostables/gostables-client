@@ -63,4 +63,4 @@ const SelectCurrency = (props) => {
   );
 };
 
-export default SelectCurrency;
+// export default SelectCurrency;

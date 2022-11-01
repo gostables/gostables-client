@@ -13,12 +13,6 @@ const App = () => {
     <>
       <Navbar></Navbar>
       <Routes>
-        {/* <Route
-          path="/swap"
-          // @ts-ignore
-          exact
-          element={<SwapPage />}
-        /> */}
         <Route
           path="/wallet"
           // @ts-ignore
@@ -30,13 +24,13 @@ const App = () => {
           path="/admin"
           // @ts-ignore
           exact
-          element={<AdminPage />}
+          element={<AdminPage currencyKey={"TTDD"} />}
         />
         <Route
           path="/vault"
           // @ts-ignore
           exact
-          element={<CurrencyVaultPage />}
+          element={<CurrencyVaultPage currencyKey={"TTDD"} />}
         />
         <Route
           path="/faucets"
@@ -46,16 +40,9 @@ const App = () => {
         />
 
         <Route
-          path="/vaultadmin"
-          // @ts-ignore
-          exact
-          element={<VaultAdmin />}
-        />
-
-        <Route
           path="*"
           // @ts-ignore
-          element={<SwapPage />}
+          element={<SwapPage currencyKey={"TTDD"} />}
         />
       </Routes>
     </>

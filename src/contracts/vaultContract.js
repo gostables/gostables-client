@@ -1,11 +1,9 @@
-import { getCurrency } from "../utils/currencies";
 import SmartContractBase from "./smartContractBase";
 
 class VaultContract extends SmartContractBase {
   currency = null;
-  constructor(_currency) {
-    super(_currency.vaultAddress);
-    this.currency = _currency;
+  constructor(vaultAddress) {
+    super(vaultAddress);
   }
   init = async () => {
     try {
@@ -135,6 +133,4 @@ class VaultContract extends SmartContractBase {
   };
 }
 
-const ttddVault_ = new VaultContract(getCurrency("TTDD"));
-
-export const ttddVault = async () => await ttddVault_.init();
+export default VaultContract;

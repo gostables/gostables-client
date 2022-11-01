@@ -1,11 +1,10 @@
-import { getCurrency } from "../utils/currencies";
 import SmartContractBase from "./smartContractBase";
 
 class SwapContract extends SmartContractBase {
   currency = null;
-  constructor(_currency) {
-    super(_currency.swapAddress);
-    this.currency = _currency;
+  constructor(swapAddress) {
+    super(swapAddress);
+    // this.currency = _currency;
   }
   init = async () => {
     try {
@@ -161,6 +160,4 @@ class SwapContract extends SmartContractBase {
   };
 }
 
-const ttddSwap_ = new SwapContract(getCurrency("TTDD"));
-
-export const ttddSwap = async () => await ttddSwap_.init();
+export default SwapContract;
