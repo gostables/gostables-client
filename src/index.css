@@ -27,7 +27,7 @@ body {
 .mt-20{margin-top: 20px;}
 
 .nav-item.currency-select{
-  margin: 0px 2rem 0px 3.3rem;
+  margin: 0px 2.2rem 0px 4rem;
 }
 
 
@@ -45,15 +45,14 @@ body {
     border-radius: 5px;
     box-shadow: 0px 1px 4px #074643;
     width: 180px;
+    margin-top: -6px;
   
 }
 
-.web3-connect .text-warning{
-  color: fff!important;
-}
-
-.web3-connect .text-success{
+.web3-connect .text-warning, .web3-connect .text-success{
   color: #fff!important;
+      font-size: 12px;
+    padding-top: 3px;
 }
 
 .vault-item{
