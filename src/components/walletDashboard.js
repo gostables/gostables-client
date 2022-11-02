@@ -64,18 +64,18 @@ const WalletDashboard = () => {
       <div className="card-header dashboard p-0 position-relative mt-n4 mx-3 z-index-2">
         <div className="bg-gradient-info shadow-info border-radius-lg py-3 pe-1">
             <div className="text-center dash-stats">
-              <div className="row mt-5">
+              <div className="row mt-1">
                 <div className="col-sm-5">
                   <p className="small">Total Volume (USDD)</p>
                   <h5 className="fw-bold">$55,504,933.29</h5>
                 </div>
                 <div className="col-sm-4">
-                  <p className="small">Total (USDD)</p>
+                  <p className="small">Total Value Locked (USDD)</p>
                   <h5 className="fw-bold">$504,933.29</h5>
                 </div>
                 <div className="col-sm-3">
-                  <p className="small"> U(in gTTD)</p>
-                  <h5 className="fw-bold">$504,933.29</h5>
+                  <p className="small">Collateral Ratio</p>
+                  <h4 className="fw-bold">103%</h4>
                 </div>
               </div>
             </div>

@@ -78,8 +78,9 @@ body {
 
 
 .card-header.portfolio-bal, .card-header.dashboard{
-  background-color: #e6fbea;
+  background-color: #01948d;
   box-shadow: 0px 0px 5px #bbc;
+  color: #fff;
 }
 
 
