@@ -1,6 +1,7 @@
 import React from "react";
 import { ThreeDots } from "react-loader-spinner";
-import { getNetworkName } from "../utils/const";
+import { getNetworkName } from "../utils/network";
+
 import { getMaskedAddress } from "../utils/shorten";
 import getWalletDetails from "../utils/tronWeb";
 class TronlinkConnect extends React.Component {

@@ -1,5 +1,7 @@
 import { NavLink } from "react-router-dom";
-import { prodName } from "../utils/const";
+import SelectCurrency from "../del/selectCurrency";
+import currencyPublisher from "../publishers/currency";
+import { getCurrencies } from "../utils/currencies";
 import WalletConnect from "./walletConnect";
 
 const Navbar = () => {
@@ -30,8 +32,13 @@ const Navbar = () => {
             }
           </NavLink>
         </div>
-
         <ul className="nav">
+          <li className="nav-item">
+            <SelectCurrency
+              setSelectedCoin={(val) => currencyPublisher.setCurrency(val.key)}
+              data={getCurrencies()}
+            ></SelectCurrency>
+          </li>
           <li className="nav-item">
             <NavLink to="/admin" className="nav-link">
               Admin

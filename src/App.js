@@ -1,14 +1,26 @@
 import "./App.css";
 import { Route, Routes } from "react-router";
-import Landing from "./components/landing";
 import Navbar from "./components/navbar";
 import AdminFaucets from "./admin/faucets";
-import VaultAdmin from "./del/vaultAdmin";
 import SwapPage from "./components/swapPage";
 import WalletPage from "./components/walletPage";
 import AdminPage from "./admin/adminPage";
 import CurrencyVaultPage from "./components/currencyVaultPage";
+import currencyPublisher from "./publishers/currency";
+import { useEffect, useState } from "react";
+import { getCurrencies } from "./utils/currencies";
 const App = () => {
+  const [selectedCurrency, setSelectedCurrency] = useState(
+    getCurrencies()[0].key
+  );
+  useEffect(() => {
+    currencyPublisher.attach(setSelectedCurrency);
+
+    return () => {
+      currencyPublisher.detach(setSelectedCurrency);
+    };
+  }, [selectedCurrency]);
+
   return (
     <>
       <Navbar></Navbar>
@@ -24,13 +36,13 @@ const App = () => {
           path="/admin"
           // @ts-ignore
           exact
-          element={<AdminPage currencyKey={"TTDD"} />}
+          element={<AdminPage currencyKey={selectedCurrency} />}
         />
         <Route
           path="/vault"
           // @ts-ignore
           exact
-          element={<CurrencyVaultPage currencyKey={"TTDD"} />}
+          element={<CurrencyVaultPage currencyKey={selectedCurrency} />}
         />
         <Route
           path="/faucets"
@@ -42,7 +54,7 @@ const App = () => {
         <Route
           path="*"
           // @ts-ignore
-          element={<SwapPage currencyKey={"TTDD"} />}
+          element={<SwapPage currencyKey={selectedCurrency} />}
         />
       </Routes>
     </>

@@ -91,6 +91,7 @@ const WalletDetails = () => {
       <div className="card-body">
         {walletDetails.isSupportedNetwork ? (
           <>
+            {depositsJSX()}
             <p className="h6 card-title my-3">Balances</p>
             <ul className="list-group list-group-flush">
               <li className="list-group-item d-flex justify-content-between">
@@ -138,7 +139,6 @@ const WalletDetails = () => {
                 );
               })}
             </ul>
-            {depositsJSX()}
           </>
         ) : (
           <>

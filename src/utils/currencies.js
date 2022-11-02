@@ -4,10 +4,12 @@ import SwapContract from "../contracts/swapContract";
 import VaultContract from "../contracts/vaultContract";
 
 import ttddImg from "../ttdd.png";
+import xcddImg from "../gxcd.png";
 
 class Currency {
   key = null;
   label = null;
+  text = null;
   icon = null;
   swapAddress = null;
   swapMarketAddress = null;
@@ -17,6 +19,7 @@ class Currency {
   constructor(
     _key,
     _label,
+    _text,
     _icon,
     _swapAddress,
     _swapMarketAddress,
@@ -26,6 +29,7 @@ class Currency {
   ) {
     this.key = _key;
     this.label = _label;
+    this.text = _text;
     this.icon = _icon;
     this.swapAddress = _swapAddress;
     this.swapMarketAddress = _swapMarketAddress;
@@ -55,7 +59,19 @@ const CurrencyList = {
   TTDD: new Currency(
     "TTDD",
     "gTTD",
+    "Trinidad & Tobago Dollar",
     ttddImg,
+    "TBRGNBkWVVXpVjGvmi7LhBhmj6rCvdCsgU",
+    "TDLbLFD68VBqeTjsmneroJazrUSgSXf8f9",
+    "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU",
+    "TXfUYdQeLZ6VtqTaEYQkRifbGZBXF9Xb71",
+    "THwPd7EbZKvLbC52aZB795xZm2Jcr392iP"
+  ),
+  XCD: new Currency(
+    "XCD",
+    "gXCD",
+    "East Caribbean Dollar",
+    xcddImg,
     "TBRGNBkWVVXpVjGvmi7LhBhmj6rCvdCsgU",
     "TDLbLFD68VBqeTjsmneroJazrUSgSXf8f9",
     "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU",
