@@ -26,9 +26,34 @@ body {
 
 .mt-20{margin-top: 20px;}
 
+.nav-item.currency-select{
+  margin: 0px 2rem 0px 3.3rem;
+}
+
+
+.modal-content a.nav-link.active {
+    border-bottom: 2px solid;
+    margin-bottom: 20%;
+}
+
+.vault-card .vault-item {box-shadow: 1px 2px 12px; }
 
 .web3-connect{
-  /*border: 1px solid;*/
+    border-bottom: 5px solid #01948d;
+    background: #01948d!important;
+    color: #fff!important;
+    border-radius: 5px;
+    box-shadow: 0px 1px 4px #074643;
+    width: 180px;
+  
+}
+
+.web3-connect .text-warning{
+  color: fff!important;
+}
+
+.web3-connect .text-success{
+  color: #fff!important;
 }
 
 .vault-item{

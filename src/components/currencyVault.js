@@ -153,7 +153,7 @@ const CurrencyVault = (props) => {
               />
             </span>
             <button
-              className="btn btn-outline-primary"
+              className="btn btn-primary"
               type="button"
               id="button-deposit"
               onClick={callVault}

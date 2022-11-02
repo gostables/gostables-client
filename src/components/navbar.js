@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import SelectCurrency from "../del/selectCurrency";
+import SelectCurrency from "../components/selectCurrency";
 import currencyPublisher from "../publishers/currency";
 import { getCurrencies } from "../utils/currencies";
 import WalletConnect from "./walletConnect";
@@ -42,23 +42,10 @@ const Navbar = () => {
           </NavLink>
         </div>
         <ul className="nav">
-          <li className="nav-item">
-            <SelectCurrency
-              setSelectedCoin={(val) =>
-                currencyPublisher.setCurrency(val.value)
-              }
-              options={getCurrenciesForDropDown()}
-              defaultValue={getCurrenciesForDropDown()[0]}
-            ></SelectCurrency>
-          </li>
+
           <li className="nav-item">
             <NavLink to="/admin" className="nav-link">
               Admin
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink to="/" className="nav-link">
-              Swap
             </NavLink>
           </li>
           <li className="nav-item">
@@ -67,9 +54,23 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li className="nav-item">
+            <NavLink to="/" className="nav-link">
+              Swap
+            </NavLink>
+          </li>
+          <li className="nav-item">
             <NavLink to="/vault" className="nav-link">
               Vaults
             </NavLink>
+          </li>
+          <li className="nav-item currency-select">
+            <SelectCurrency
+              setSelectedCoin={(val) =>
+                currencyPublisher.setCurrency(val.value)
+              }
+              options={getCurrenciesForDropDown()}
+              defaultValue={getCurrenciesForDropDown()[0]}
+            ></SelectCurrency>
           </li>
           <li className="nav-item web3-connect">
             <WalletConnect></WalletConnect>

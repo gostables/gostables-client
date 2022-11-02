@@ -66,7 +66,7 @@ const CurrencyVaultList = (props) => {
       <div class="modal fade" id="modal" tabindex="-1">
         <div class="modal-dialog">
           <div class="modal-content">
-            <div class="modal-header bg-primary shadow-primary">
+            <div class="modal-header shadow-primary">
               <h1 class="modal-title fs-5 font-weight-bolder text-center mt-2 mb-0">
                 Vault
               </h1>
