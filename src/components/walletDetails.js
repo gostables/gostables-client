@@ -58,8 +58,8 @@ const WalletDetails = () => {
     return (
       <>
         <div className="text-center">
-          <p className="small">My Net Worth (in gTTD)</p>
-          <h3 className="fw-bold">$704,933.29</h3>
+          <p className="small">My Net Worth (gTTD)</p>
+          <h5 className="fw-bold">$704,933.29</h5>
           
         </div>
       </>

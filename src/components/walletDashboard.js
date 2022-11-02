@@ -40,17 +40,18 @@ const WalletDashboard = () => {
         <p className="h6 card-title my-3">Vault Deposits</p>
         {walletDashboard.vaultBalances.map((vb) => (
           <>
-            <div className="text-sm-start fw-bold">
-              {vb.balanceData.balance} <span className="mx-2">USDD</span>
+            <div className="text-sm-start vault-deposit fw-bold">
+              {vb.balanceData.balance}
               <span className="px-2">
                 <img
                   src={usddImg}
                   alt="USDD"
-                  width="16"
-                  height="16"
+                  width="32"
+                  height="32"
                   className="rounded-circle flex-shrink-0"
                 />
               </span>
+              <span className="mx-2">USDD</span>
               till {vb.balanceData.lock.toLocaleString()}
             </div>
           </>
@@ -65,7 +66,7 @@ const WalletDashboard = () => {
         <div className="bg-gradient-info shadow-info border-radius-lg py-3 pe-1">
             <div className="text-center dash-stats">
               <div className="row mt-1">
-                <div className="col-sm-5">
+                <div className="col-sm-4">
                   <p className="small">Total Volume (USDD)</p>
                   <h5 className="fw-bold">$55,504,933.29</h5>
                 </div>
@@ -73,9 +74,9 @@ const WalletDashboard = () => {
                   <p className="small">Total Value Locked (USDD)</p>
                   <h5 className="fw-bold">$504,933.29</h5>
                 </div>
-                <div className="col-sm-3">
+                <div className="col-sm-4">
                   <p className="small">Collateral Ratio</p>
-                  <h4 className="fw-bold">103%</h4>
+                  <h5 className="fw-bold">103%</h5>
                 </div>
               </div>
             </div>

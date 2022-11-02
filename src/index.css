@@ -76,6 +76,11 @@ body {
   margin-top: 5px;
 }
 
+.vault-deposit{
+    margin-bottom: 40px;
+    border-bottom: 1px solid #00000020;
+    padding: 11px;
+}
 
 .card-header.portfolio-bal, .card-header.dashboard{
   background-color: #01948d;
