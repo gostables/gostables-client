@@ -130,7 +130,7 @@ const SwapExchange = (props) => {
           walletDetails.isSupportedNetwork &&
           conversionRatio ? (
             <div className="h6 text-white font-weight-bolder text-center mt-2 mb-0">
-              Exchange Rate : 1 USD ≈ {conversionRatio}{" "}
+              Exchange Rate : 1 USDD ≈ {conversionRatio}{" "}
               {getCurrency(props.currencyKey).label}
             </div>
           ) : (
@@ -141,7 +141,7 @@ const SwapExchange = (props) => {
       {walletDetails && walletDetails.isSupportedNetwork ? (
         <div className="card-body mt-20">
           <p className="text-left">You Swap</p>
-          <p className="text-right">Balance: XXX</p>
+          <p className="text-right">Balance: {walletDetails.usddBalance}</p>
           {direction ? stableCoinJSX("You Swap") : tokenJSX("You Swap")}
           <div className="d-flex justify-content-center pt-x">
             <svg
@@ -160,7 +160,7 @@ const SwapExchange = (props) => {
             </svg>
           </div>
           <p className="text-left">For</p>
-          <p className="text-right">Balance: YYY</p>
+          <p className="text-right">Balance: 1200.895</p>
           {direction ? tokenJSX("For") : stableCoinJSX("For")}
 
           <div className="d-grid gap-2 mt-4">
@@ -168,8 +168,13 @@ const SwapExchange = (props) => {
               Swap
             </button>
             {swapFeesFactor ? (
-              <div className="text-xs text-center mt-20">
-                Protocol Fee: {swapFeesFactor * 100}%{" "}
+              <div className="text-xs mt-20">
+                <span className="text-left">
+                  Protocol Fee: {swapFeesFactor * 100}%{" "}
+                </span>
+                <span className="text-right">
+                  0.30
+                </span>
               </div>
             ) : (
               <></>

@@ -49,6 +49,8 @@ body {
   
 }
 
+.web3-connect .text-warning {padding-top: 15px!important;}
+
 .web3-connect .text-warning, .web3-connect .text-success{
   color: #fff!important;
       font-size: 12px;
