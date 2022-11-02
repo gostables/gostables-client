@@ -5,12 +5,7 @@ const { Option, SingleValue } = components;
 const IconOption = (props) => {
   return (
     <Option {...props}>
-      <img
-        // src={require("../" + props.data.icon)}
-        src={props.data.icon}
-        style={{ width: 18, paddingRight: 4 }}
-        alt={props.data.label}
-      />
+      <img src={props.data.icon} style={{ width: 18, paddingRight: 4 }} />
       {props.data.text}
     </Option>
   );
@@ -18,20 +13,15 @@ const IconOption = (props) => {
 const IconDisplayOption = (props) => {
   return (
     <SingleValue {...props}>
-      <img
-        // src={require("../" + props.data.icon)}
-        src={props.data.icon}
-        style={{ width: 18, paddingRight: 4 }}
-        alt={props.data.label}
-      />
+      <img src={props.data.icon} style={{ width: 18, paddingRight: 4 }} />
       {props.data.text}
     </SingleValue>
   );
 };
 
 const SelectCurrency = (props) => {
-  const { data, setSelectedCoin } = props;
-  console.log("data", data[0]);
+  const { options, setSelectedCoin } = props;
+  console.log("data", options[0]);
   const setCurrencySelected = (_val) => {
     console.log("selected", _val);
     setSelectedCoin(_val);
@@ -42,9 +32,9 @@ const SelectCurrency = (props) => {
       <Select
         className="basic-single"
         classNamePrefix="select"
-        defaultValue={data[0]}
+        defaultValue={options[0]}
         name="currencies"
-        options={data}
+        options={options}
         components={{ Option: IconOption, SingleValue: IconDisplayOption }}
         onChange={setCurrencySelected}
       />

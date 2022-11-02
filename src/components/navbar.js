@@ -4,6 +4,15 @@ import currencyPublisher from "../publishers/currency";
 import { getCurrencies } from "../utils/currencies";
 import WalletConnect from "./walletConnect";
 
+const getCurrenciesForDropDown = () => {
+  let currList = getCurrencies();
+  return currList.map((curr) => ({
+    value: curr.key,
+    text: curr.text,
+    icon: curr.icon,
+  }));
+};
+
 const Navbar = () => {
   return (
     <div className="container">
@@ -35,8 +44,11 @@ const Navbar = () => {
         <ul className="nav">
           <li className="nav-item">
             <SelectCurrency
-              setSelectedCoin={(val) => currencyPublisher.setCurrency(val.key)}
-              data={getCurrencies()}
+              setSelectedCoin={(val) =>
+                currencyPublisher.setCurrency(val.value)
+              }
+              options={getCurrenciesForDropDown()}
+              defaultValue={getCurrenciesForDropDown()[0]}
             ></SelectCurrency>
           </li>
           <li className="nav-item">
