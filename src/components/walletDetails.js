@@ -51,61 +51,46 @@ const WalletDetails = () => {
     }
   };
 
-  const depositsJSX = () => {
+  const portfolioJSX = () => {
     if (!walletDetails || !walletDetails.isSupportedNetwork) {
       return <></>;
     }
     return (
       <>
-        <p className="h6 card-title my-3">Vault Deposits</p>
-        {walletDetails.vaultBalances.map((vb) => (
-          <>
-            <div className="text-sm-start fw-bold">
-              {vb.balanceData.balance} <span className="mx-2">USDD</span>
-              <span className="px-2">
-                <img
-                  src={usddImg}
-                  alt="USDD"
-                  width="16"
-                  height="16"
-                  className="rounded-circle flex-shrink-0"
-                />
-              </span>
-              till {vb.balanceData.lock.toLocaleString()}
-            </div>
-          </>
-        ))}
+        <div className="text-center">
+          <p className="small">My Net Worth (in gTTD)</p>
+          <h3 className="fw-bold">$704,933.29</h3>
+          
+        </div>
       </>
     );
   };
 
   return (
     <div className="card z-index-0 fadeIn3 fadeInBottom">
-      <div className="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+      <div className="card-header portfolio-bal p-0 position-relative mt-n4 mx-3 z-index-2">
         <div className="bg-gradient-info shadow-info border-radius-lg py-3 pe-1">
-          <h4 className="text-white font-weight-bolder text-center mt-2 mb-0">
-            Wallet
-          </h4>
+            {portfolioJSX()}
         </div>
       </div>
       <div className="card-body">
         {walletDetails.isSupportedNetwork ? (
           <>
-            {depositsJSX()}
+            
             <p className="h6 card-title my-3">Balances</p>
             <ul className="list-group list-group-flush">
               <li className="list-group-item d-flex justify-content-between">
                 <div>
-                  <span>USDD </span>
                   <span className="px-2">
                     <img
                       src={usddImg}
                       alt="USDD"
-                      width="16"
-                      height="16"
+                      width="32"
+                      height="32"
                       className="rounded-circle flex-shrink-0"
                     />
                   </span>
+                  <span>USDD </span>
                 </div>
                 <div>{walletDetails.usddBalance}</div>
               </li>
@@ -123,15 +108,15 @@ const WalletDetails = () => {
                 return (
                   <li className="list-group-item d-flex justify-content-between">
                     <div>
-                      <span>{gStableCoin.name}</span>
                       <span className="px-2">
                         <img
                           src={gStableCoin.icon}
                           alt="USDD"
-                          width="16"
-                          height="16"
+                          width="32"
+                          height="32"
                           className="rounded-circle flex-shrink-0"
                         />
+                      <span>{gStableCoin.name}</span>
                       </span>
                     </div>
                     <div>{balance}</div>

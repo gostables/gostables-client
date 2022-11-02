@@ -19,6 +19,10 @@ body {
   padding-bottom: 2rem!important;
 }
 
+.px-2 img {
+    margin-right: 10px;
+}
+
 .py-x{
     padding-top: 0rem!important;
     padding-bottom: 1rem!important;
@@ -46,6 +50,7 @@ body {
     box-shadow: 0px 1px 4px #074643;
     width: 180px;
     margin-top: -6px;
+    cursor: pointer;
   
 }
 
@@ -70,3 +75,26 @@ body {
 .vault-img{
   margin-top: 5px;
 }
+
+
+.card-header.portfolio-bal, .card-header.dashboard{
+  background-color: #e6fbea;
+  box-shadow: 0px 0px 5px #bbc;
+}
+
+
+.card.dash-content{
+  min-height: 500px;
+}
+
+.currency-selector select{
+  border-radius: 30px;
+}
+
+.dash-stats {
+/*    margin-top: -2rem;
+    background-color: #01948d;
+    color: #fff;
+    border-radius: 12px 12px 0 0;*/
+}
+
