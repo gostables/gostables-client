@@ -660,6 +660,7 @@ progress {
   .container-md, .container-sm, .container {
     max-width: 720px;
   }
+
 }
 @media (min-width: 992px) {
   .container-lg, .container-md, .container-sm, .container {
@@ -4726,7 +4727,7 @@ textarea.form-control-lg {
   --bs-alert-color: white;
   --bs-alert-bg: #01948d;
   --bs-alert-border-color: #ccf0e2;
-  
+
 }
 .alert-success .alert-link {
   color: #cccccc;
@@ -4962,6 +4963,7 @@ textarea.form-control-lg {
     margin-left: calc(-1 * var(--bs-list-group-border-width));
     border-left-width: var(--bs-list-group-border-width);
   }
+
 }
 @media (min-width: 768px) {
   .list-group-horizontal-md {
@@ -7709,7 +7711,7 @@ textarea.form-control-lg {
 }
 
 .me-auto {
-  margin-right: auto !important;
+  margin-left: auto !important;
 }
 
 .mb-0 {

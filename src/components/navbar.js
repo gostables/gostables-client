@@ -15,13 +15,10 @@ const getCurrenciesForDropDown = () => {
 
 const Navbar = () => {
   return (
-    <div className="container">
-      <header className="d-flex flex-wrap justify-content-center py-x mb-4 border-bottom">
-        <div
-          href="/"
-          className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none"
-        >
-          <NavLink to="/" className="nav-link">
+<div className="container justify-content-center  border-bottom">
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="%PUBLIC_URL%">
             {
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -39,31 +36,34 @@ const Navbar = () => {
                 />
               </svg>
             }
-          </NavLink>
-        </div>
-        <ul className="nav">
-
-          <li className="nav-item">
-            <NavLink to="/admin" className="nav-link">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-lg-0">
+        <li class="nav-item">
+          <NavLink to="/admin" className="nav-link">
               Admin
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink to="/wallet" className="nav-link">
+          </NavLink>
+        </li>
+        <li class="nav-item">
+          <NavLink to="/wallet" className="nav-link">
               Wallet
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink to="/" className="nav-link">
+          </NavLink>
+        </li>
+        <li class="nav-item">
+          <NavLink to="/swap" className="nav-link">
               Swap
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink to="/vault" className="nav-link">
+          </NavLink>
+        </li>
+        <li class="nav-item">
+          <NavLink to="/vault" className="nav-link">
               Vaults
-            </NavLink>
-          </li>
-          <li className="nav-item currency-select">
+          </NavLink>
+        </li>
+      </ul>
+      <div class="currency-select">
             <SelectCurrency
               setSelectedCoin={(val) =>
                 currencyPublisher.setCurrency(val.value)
@@ -71,13 +71,14 @@ const Navbar = () => {
               options={getCurrenciesForDropDown()}
               defaultValue={getCurrenciesForDropDown()[0]}
             ></SelectCurrency>
-          </li>
-          <li className="nav-item web3-connect">
-            <WalletConnect></WalletConnect>
-          </li>
-        </ul>
-      </header>
+      </div>
+      <div class="">
+        <button class="btn btn-primary web3-connect"><WalletConnect></WalletConnect></button>
+      </div>
     </div>
+  </div>
+</nav>
+</div>
   );
 };
 
