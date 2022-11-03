@@ -53,17 +53,17 @@ class SwapContract extends SmartContractBase {
   };
   getConversion = async () => {
     this.check();
-    let cr = await this.contract.getConversion().call();
+    let cr = await this.contract.conversionRatio().call();
     return cr / 100;
   };
   getAccumulatedSwapFees = async () => {
     this.check();
-    let c = await this.contract.getAccumulatedSwapFees().call();
+    let c = await this.contract.accumulatedSwapFees().call();
     return this.web3.utils.fromWei(String(c), "ether");
   };
   getSwapFeesFactor = async () => {
     this.check();
-    let c = await this.contract.getSwapFeesFactor().call();
+    let c = await this.contract.swapFeesFactor().call();
     return c / 10000;
   };
   // GET end
@@ -112,6 +112,7 @@ class SwapContract extends SmartContractBase {
 
   deposit = async (_val) => {
     this.check();
+    debugger;
     if (!_val) throw new Error(`Number : ${_val}`);
 
     console.log("deposit", this.web3.utils.toWei(String(_val), "ether"));

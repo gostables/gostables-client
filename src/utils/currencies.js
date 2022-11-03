@@ -61,23 +61,23 @@ const CurrencyList = {
     "gTTD",
     "Trinidad & Tobago Dollar",
     ttddImg,
-    "TBRGNBkWVVXpVjGvmi7LhBhmj6rCvdCsgU",
-    "TDLbLFD68VBqeTjsmneroJazrUSgSXf8f9",
-    "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU",
-    "TXfUYdQeLZ6VtqTaEYQkRifbGZBXF9Xb71",
-    "THwPd7EbZKvLbC52aZB795xZm2Jcr392iP"
+    "TX4hAg2DQXnPuuQHYuvTfnEH69c6vUe4fW" /*swapAddress */,
+    "TQq9o4PahyoLociVzCnBMRRDdPZrNNkW1f" /*swapMarketAddress*/,
+    "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU" /*swapStableAddress*/,
+    "TY72rJ9tjnQSxgsqUDuXPUh2oPWC7cRmY6" /*gStableAddress*/,
+    "TR7Hby8oo6iEnwVh2WeTEfaBEAWXjeZXSJ" /*vaultAddress */
   ),
-  XCD: new Currency(
-    "XCD",
-    "gXCD",
-    "East Caribbean Dollar",
-    xcddImg,
-    "TBRGNBkWVVXpVjGvmi7LhBhmj6rCvdCsgU",
-    "TDLbLFD68VBqeTjsmneroJazrUSgSXf8f9",
-    "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU",
-    "TXfUYdQeLZ6VtqTaEYQkRifbGZBXF9Xb71",
-    "THwPd7EbZKvLbC52aZB795xZm2Jcr392iP"
-  ),
+  // XCD: new Currency(
+  //   "XCD",
+  //   "gXCD",
+  //   "East Caribbean Dollar",
+  //   xcddImg,
+  //   "TBRGNBkWVVXpVjGvmi7LhBhmj6rCvdCsgU",
+  //   "TDLbLFD68VBqeTjsmneroJazrUSgSXf8f9",
+  //   "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU",
+  //   "TXfUYdQeLZ6VtqTaEYQkRifbGZBXF9Xb71",
+  //   "THwPd7EbZKvLbC52aZB795xZm2Jcr392iP"
+  // ),
 };
 
 export const getCurrencies = () => {

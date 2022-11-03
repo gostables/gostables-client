@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { ttddMarket } from "../contracts/marketContract";
 import { usddContract } from "../contracts/usdContract";
 import { getCurrency } from "../utils/currencies";
+import ContractClientManager from "./contractClientManager";
+import GoStableBaseManager from "./goStableBaseManager";
 import SetLockInterval from "./setLockInterval";
 
 const VaultAdmin = (props) => {
@@ -62,6 +64,10 @@ const VaultAdmin = (props) => {
       <div className="card-body">
         <h5 className="card-title text-center">Vault Admin</h5>
         <p>{window.tronWeb.address.fromHex(details.address)} </p>
+        <ContractClientManager
+          address={getCurrency(props.currencyKey).vaultAddress}
+          key={getCurrency(props.currencyKey).vaultAddress}
+        ></ContractClientManager>
         <hr />
         <h6 className="card-title">Balances</h6>
         <p>
@@ -69,14 +75,13 @@ const VaultAdmin = (props) => {
         </p>
         <p>USDD : {details.usddBalance}</p>
         <hr />
-        <h6 className="card-title">Addresses</h6>
-        <p>
-          Stable Coin :{" "}
-          {window.tronWeb.address.fromHex(details.stableCoinAddress)}{" "}
-        </p>
-        <p>Market : {window.tronWeb.address.fromHex(details.marketAddress)} </p>
+        <GoStableBaseManager
+          address={getCurrency(props.currencyKey).vaultAddress}
+          key={
+            getCurrency(props.currencyKey).vaultAddress + "GoStableBaseManager"
+          }
+        ></GoStableBaseManager>
         <hr />
-        <h6 className="card-title">Lock Interval</h6>
         <p>Lock Interval : {details.interval}</p>
         <SetLockInterval
           vaultContract={vaultContract}

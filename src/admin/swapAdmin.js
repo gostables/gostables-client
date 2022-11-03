@@ -4,6 +4,8 @@ import { ttddMarket } from "../contracts/marketContract";
 import { ttddSwap } from "../contracts/swapContract";
 import { usddContract } from "../contracts/usdContract";
 import { getCurrency } from "../utils/currencies";
+import ContractClientManager from "./contractClientManager";
+import GoStableBaseManager from "./goStableBaseManager";
 import SetConversionRatio from "./setConversionRatio";
 import SetSwapFeesFactor from "./setSwapFeesFactor";
 
@@ -48,6 +50,10 @@ const SwapAdmin = (props) => {
       let { name: gStableCoinName, symbol: gStableCoinSymbol } =
         await gStableContract.getNameSymbol();
 
+      let gStableBalance = await gStableContract.balanceOf(
+        swapContract.address
+      );
+
       // usdd data
       let usdd = await usddContract();
       let usddBalance = await usdd.balanceOf(currency.swapAddress);
@@ -59,6 +65,7 @@ const SwapAdmin = (props) => {
         marketCoinSymbol,
         gStableCoinName,
         gStableCoinSymbol,
+        gStableBalance,
         usddBalance,
       };
       setDetails(swapDetails);
@@ -75,18 +82,23 @@ const SwapAdmin = (props) => {
         <h5 className="card-title text-center">Swap Admin</h5>
         <p>{window.tronWeb.address.fromHex(details.address)} </p>
         <hr />
+        <ContractClientManager
+          address={getCurrency(props.currencyKey).swapAddress}
+          key={getCurrency(props.currencyKey).swapAddress}
+        ></ContractClientManager>
+        <hr />
         <h6 className="card-title">Balances</h6>
         <p>
           {details.marketCoinName} : {details.marketCoinBalance}
         </p>
         <p>USDD : {details.usddBalance}</p>
         <hr />
-        <h6 className="card-title">Addresses</h6>
-        <p>
-          Stable Coin :{" "}
-          {window.tronWeb.address.fromHex(details.stableCoinAddress)}{" "}
-        </p>
-        <p>Market : {window.tronWeb.address.fromHex(details.marketAddress)} </p>
+        <GoStableBaseManager
+          address={getCurrency(props.currencyKey).swapAddress}
+          key={
+            getCurrency(props.currencyKey).swapAddress + "GoStableBaseManager"
+          }
+        ></GoStableBaseManager>
         <hr />
         <h6 className="card-title">Conversion Ratio</h6>
         <p>
@@ -101,6 +113,10 @@ const SwapAdmin = (props) => {
         <p>Swap Fees Factor : {details.swapFeesFactor}</p>
         <p>Accumulated Swap Fees : {details.accumulatedSwapFees}</p>
         <SetSwapFeesFactor swapContract={swapContract}></SetSwapFeesFactor>
+        <hr />
+        <h6 className="card-title">Rewards</h6>
+        {/* <p>Accumulated Swap Fees : {details.accumulatedSwapFees}</p> */}
+        {/* <SetSwapFeesFactor swapContract={swapContract}></SetSwapFeesFactor> */}
       </div>
     </div>
   );

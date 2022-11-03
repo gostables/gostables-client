@@ -63,6 +63,8 @@ class WalletPublisher {
         });
       }
 
+      console.log("vb", vaultBalances);
+
       this.walletDetails = {
         ...this.walletDetails,
         usddBalance: usddBal,

@@ -46,28 +46,35 @@ const SwapExchange = (props) => {
 
   const stableCoinJSX = () => {
     return (
-      <div className="input-group mb-3" key={1}>
-        <div className="form-floating">
-          <input
-            type="text"
-            className="form-control"
-            id="floatingInputGroup1"
-            placeholder="Value in USDD"
-            onChange={updateStableCoinValue}
-          />
-          <label for="floatingInputGroup1">Value in USDD</label>
+      <>
+        <div className="input-group mb-1" key={1}>
+          <div className="form-floating">
+            <input
+              type="text"
+              className="form-control"
+              id="floatingInputGroup1"
+              placeholder="Value in USDD"
+              onChange={updateStableCoinValue}
+            />
+            <label for="floatingInputGroup1">Value in USDD</label>
+          </div>
+          <span className="input-group-text">
+            <img
+              src={usddImg}
+              alt="USDD"
+              width="32"
+              height="32"
+              className="rounded-circle flex-shrink-0"
+            />
+            &nbsp; USDD
+          </span>
         </div>
-        <span className="input-group-text">
-          <img
-            src={usddImg}
-            alt="USDD"
-            width="32"
-            height="32"
-            className="rounded-circle flex-shrink-0"
-          />
-          &nbsp; USDD
-        </span>
-      </div>
+        {walletDetails ? (
+          <p className="pb-3">Balance: {walletDetails.usddBalance}</p>
+        ) : (
+          <></>
+        )}
+      </>
     );
   };
 
@@ -76,29 +83,41 @@ const SwapExchange = (props) => {
     setTokenValue(e.target.value);
   };
   const tokenJSX = (title) => {
+    let balJSX = <></>;
+    if (walletDetails && walletDetails.gStableBalances) {
+      let gsbList = walletDetails.gStableBalances.filter(
+        (gsb) => gsb.currencyKey.localeCompare(props.currencyKey) == 0
+      );
+      if (gsbList) {
+        balJSX = <>Balance: {gsbList[0].balance}</>;
+      }
+    }
     return (
-      <div className="input-group mb-3" key={2}>
-        <div className="form-floating">
-          <input
-            type="text"
-            className="form-control"
-            id="floatingInputGroup2"
-            placeholder="Value in gStable"
-            onChange={updateTokenValue}
-          />
-          <label for="floatingInputGroup2">Value in gStable</label>
+      <>
+        <div className="input-group mb-1" key={2}>
+          <div className="form-floating">
+            <input
+              type="text"
+              className="form-control"
+              id="floatingInputGroup2"
+              placeholder="Value in gStable"
+              onChange={updateTokenValue}
+            />
+            <label for="floatingInputGroup2">Value in gStable</label>
+          </div>
+          <span className="input-group-text">
+            <img
+              src={getCurrency(props.currencyKey).icon}
+              alt="gStable"
+              width="32"
+              height="32"
+              className="rounded-circle flex-shrink-0"
+            />{" "}
+            &nbsp; {getCurrency(props.currencyKey).label}
+          </span>
         </div>
-        <span className="input-group-text">
-          <img
-            src={getCurrency(props.currencyKey).icon}
-            alt="gStable"
-            width="32"
-            height="32"
-            className="rounded-circle flex-shrink-0"
-          />{" "}
-          &nbsp; {getCurrency(props.currencyKey).label}
-        </span>
-      </div>
+        <p className="pb-3">{balJSX}</p>
+      </>
     );
   };
 
@@ -117,6 +136,8 @@ const SwapExchange = (props) => {
       swapContract.withdraw(tokenValue);
     }
   };
+
+  // console.log("gsb : ", walletDetails.gStableBalances);
 
   return (
     <div className="card z-index-0 fadeIn3 fadeInBottom">
@@ -141,9 +162,8 @@ const SwapExchange = (props) => {
       {walletDetails && walletDetails.isSupportedNetwork ? (
         <div className="card-body mt-20">
           <p className="text-left">You Swap</p>
-          <p className="text-right">Balance: {walletDetails.usddBalance}</p>
           {direction ? stableCoinJSX("You Swap") : tokenJSX("You Swap")}
-          <div className="d-flex justify-content-center pt-x">
+          <div className="d-flex justify-content-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -160,21 +180,17 @@ const SwapExchange = (props) => {
             </svg>
           </div>
           <p className="text-left">For</p>
-          <p className="text-right">Balance: 1200.895</p>
+
           {direction ? tokenJSX("For") : stableCoinJSX("For")}
 
-          <div className="d-grid gap-2 mt-4">
+          <div className="d-grid gap-2 mt-4 pt-4">
             <button className="btn btn-primary" type="button" onClick={swap}>
               Swap
             </button>
             {swapFeesFactor ? (
               <div className="text-xs mt-20">
-                <span className="text-left">
-                  Protocol Fee: {swapFeesFactor * 100}%{" "}
-                </span>
-                <span className="text-right">
-                  0.30
-                </span>
+                <span className="text-left">Protocol Fee:</span>
+                <span className="text-right">{swapFeesFactor * 100}%</span>
               </div>
             ) : (
               <></>

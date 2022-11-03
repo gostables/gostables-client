@@ -126,7 +126,9 @@ class VaultContract extends SmartContractBase {
 
   balanceOf = async (hodlerAddress) => {
     this.check();
-    const [balHex, lockHex] = await this.contract.getBalance().call();
+    const [balHex, lockHex] = await this.contract
+      .getBalance(hodlerAddress)
+      .call();
     const balance = this.web3.utils.fromWei(String(balHex), "ether");
     let lock = new Date(lockHex * 1000);
     return { balance, lock };
