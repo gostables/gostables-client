@@ -39,7 +39,9 @@ li.nav-item {
     font-weight: 500;
 }
 
-.navbar-nav {padding-right: 22px;}
+.navbar-nav {padding-right: 42px;}
+
+.navbar-expand-lg .navbar-collapse.show .web3-connect {margin-top: 30px;}
 
 .modal-content a.nav-link.active {
     border-bottom: 2px solid;
