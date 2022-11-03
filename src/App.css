@@ -3774,7 +3774,7 @@ textarea.form-control-lg {
 
 .navbar {
   --bs-navbar-padding-x: 0;
-  --bs-navbar-padding-y: 0.5rem;
+  --bs-navbar-padding-y: 0;
   --bs-navbar-color: rgba(0, 0, 0, 0.3);
   --bs-navbar-hover-color: #5a5a5a;
   --bs-navbar-disabled-color: rgba(0, 0, 0, 0.1);

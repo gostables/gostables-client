@@ -50,7 +50,9 @@ li.nav-item {
 
 .vault-card .vault-item {box-shadow: 1px 2px 12px; }
 
+.select__control{    border-radius: 20px!important;}
 
+.swap-btn{padding: 15px!important;}
 
 .web3-connect{
     border-bottom: 5px solid #01948d;

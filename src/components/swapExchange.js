@@ -164,13 +164,13 @@ const SwapExchange = (props) => {
           {direction ? tokenJSX("For") : stableCoinJSX("For")}
 
           <div className="d-grid gap-2 mt-4">
-            <button className="btn btn-primary" type="button" onClick={swap}>
+            <button className="btn btn-primary swap-btn" type="button" onClick={swap}>
               Swap
             </button>
             {swapFeesFactor ? (
               <div className="text-xs mt-20">
                 <span className="text-left">
-                  Protocol Fee: {swapFeesFactor * 100}%{" "}
+                  Fee: {swapFeesFactor * 100}%{" "}
                 </span>
                 <span className="text-right">
                   0.30
