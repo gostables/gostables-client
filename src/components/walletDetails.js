@@ -122,7 +122,7 @@ const WalletDetails = () => {
     return (
       <>
         <div className="text-center">
-          <p className="small">My Net Worth (gTTD)</p>
+          <p className="small">Total Balance (USDD)</p>
           <h5 className="fw-bold">$704,933.29</h5>
         </div>
       </>
@@ -151,8 +151,8 @@ const WalletDetails = () => {
                       height="32"
                       className="rounded-circle flex-shrink-0"
                     />
+                  <span>USDD</span>                  
                   </span>
-                  <span>USDD </span>
                 </div>
                 <div>{walletDetails.usddBalance}</div>
               </li>
