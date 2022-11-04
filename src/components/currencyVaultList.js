@@ -1,7 +1,7 @@
 import { getCurrencies } from "../utils/currencies";
 import CurrencyVault from "./currencyVault";
 import usddImg from "../usdd.png";
-import ttddImg from "../ttdd.png";
+import gttdImg from "../ttdd.png";
 import trxImg from "../trx.png";
 import btcImg from "../btc.png";
 import { useEffect } from "react";
@@ -40,14 +40,7 @@ const CurrencyVaultList = (props) => {
                 class="rounded-circle flex-shrink-0 vault-img"
               />
               <div class="currency-name">
-              <b>
-              <img
-                src={usddImg}
-                alt="USDD"
-                width="16"
-                height="16"
-                class="rounded-circle flex-shrink-0 vault-img"
-              />USDD</b>
+              <b>USDD</b>
               <p class="small">Decentralized USD</p>
               </div>
             </div>
@@ -85,14 +78,7 @@ const CurrencyVaultList = (props) => {
                 class="rounded-circle flex-shrink-0 vault-img"
               />
               <div class="currency-name">
-              <b>
-              <img
-                src={trxImg}
-                alt="TRX"
-                width="16"
-                height="16"
-                class="rounded-circle flex-shrink-0 vault-img"
-              />TRX</b>
+              <b>TRX</b>
               <p class="small">Tron</p>
               </div>
             </div>
@@ -112,7 +98,7 @@ const CurrencyVaultList = (props) => {
                 data-bs-toggle="modal"
                 data-bs-target="#"
               >
-                Soon..
+                Inactive
               </button>
             </div>
           </div>
@@ -129,14 +115,7 @@ const CurrencyVaultList = (props) => {
                 class="rounded-circle flex-shrink-0 vault-img"
               />
               <div class="currency-name">
-              <b>
-              <img
-                src={btcImg}
-                alt="BTC"
-                width="16"
-                height="16"
-                class="rounded-circle flex-shrink-0 vault-img"
-              />BTC</b>
+              <b>BTC</b>
               <p class="small">Bitcoin</p>
               </div>
             </div>
@@ -156,7 +135,7 @@ const CurrencyVaultList = (props) => {
                 data-bs-toggle="modal"
                 data-bs-target="#"
               >
-                Soon..
+                Inactive
               </button>
             </div>
           </div>
@@ -166,18 +145,30 @@ const CurrencyVaultList = (props) => {
 
         <div class="coming-soon text-center">More Vaults coming soon...</div>
       </div>
-      <div class="modal fade" id="modal" tabindex="-1">
+
+      <div class="modal vault-modal fade" id="modal" tabindex="-1">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header shadow-primary">
-              <h1 class="modal-title fs-5 font-weight-bolder text-center mt-2 mb-0">
-                Vault
-              </h1>
+             <img
+                src={gttdImg}
+                alt="BTC"
+                width="32"
+                height="32"
+                class="rounded-circle flex-shrink-0 vault-img"
+              />
+              <div class="currency-name">
+                <h1 class="modal-title fs-5 font-weight-bolder mt-2 mb-0">
+                  gTTD Vault
+                </h1>
+               <div> <p class="small">Trinidad & Tobago Dollar</p></div>
+              </div>
               <button
                 type="button"
                 class="btn-close"
                 data-bs-dismiss="modal"
               ></button>
+
             </div>
             <div class="modal-body">
               <CurrencyVault {...props}></CurrencyVault>

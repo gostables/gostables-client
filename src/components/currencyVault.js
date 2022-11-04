@@ -110,8 +110,7 @@ const CurrencyVault = (props) => {
               <strong>Current Deposit :</strong>{" "}
               <div className="my-2">
                 {walletData.vaultBalance.balance}{" "}
-                <span className="mx-2">USDD</span>
-                <span className="px-2">
+                
                   <img
                     src={usddImg}
                     alt="USDD"
@@ -119,8 +118,7 @@ const CurrencyVault = (props) => {
                     height="16"
                     className="rounded-circle flex-shrink-0"
                   />
-                </span>
-                till {walletData.vaultBalance.lock.toLocaleString()}
+                <span className="mx-2">USDD</span>
               </div>
             </div>
           </>
@@ -151,9 +149,10 @@ const CurrencyVault = (props) => {
                 height="32"
                 className="rounded-circle flex-shrink-0"
               />
+
             </span>
             <button
-              className="btn btn-primary"
+              className="btn btn-primary vault-deposit"
               type="button"
               id="button-deposit"
               onClick={callVault}
@@ -161,6 +160,9 @@ const CurrencyVault = (props) => {
               {display ? "Deposit" : "Redeem"}
             </button>
           </div>
+
+
+
         )}
 
         {/* <a className="p-1 rounded small" href="#simple-list-item-1">
@@ -168,9 +170,11 @@ const CurrencyVault = (props) => {
         </a> */}
 
         {display && vaultDetails.interval ? (
-          <div className="text-xs mt-3">
+          <div className="text-xs text-center mt-3">
+          
+
             Your deposit will be locked for the next {vaultDetails.interval}{" "}
-            hrs.
+            hrs.<br/>Unlock Time: {walletData.vaultBalance.lock.toLocaleString()}
           </div>
         ) : (
           <></>
