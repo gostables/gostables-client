@@ -1,6 +1,6 @@
 import { getCurrencies } from "../utils/currencies";
 import CurrencyVault from "./currencyVault";
-import gttdImg from "../ttdd.png";
+import usddImg from "../usdd.png";
 import { useEffect } from "react";
 
 const CurrencyVaultList = (props) => {
@@ -28,29 +28,29 @@ const CurrencyVaultList = (props) => {
 
         <div class="card-body vault-item">
           <div class="row mt-4">
-            <div class="col-sm-1">
+            <div class="col-sm-12 col-md-4">
               <img
-                src={gttdImg}
-                alt="gStable"
+                src={usddImg}
+                alt="USDD"
                 width="32"
                 height="32"
                 class="rounded-circle flex-shrink-0 vault-img"
               />
-            </div>
-            <div class="col-sm-3">
-              <b>gTTD</b>
-              <p class="small">Trinidad & Tobago Dollar</p>
+              <div class="currency-name">
+              <b>USDD</b>
+              <p class="small">US Decentralised Dollar</p>
+              </div>
             </div>
 
-            <div class="col-sm-3 text-center">
+            <div class="col-sm-6 col-md-3 text-center">
               <b>TVL</b>
               <p class="small">$50,000</p>
             </div>
-            <div class="col-sm-3 text-center">
+            <div class="col-sm-6 col-md-3 text-center">
               <b>My Supply</b>
               <p class="small">$5000</p>
             </div>
-            <div class="col-sm-2 text-center">
+            <div class="col-sm-12 col-md-2 text-center">
               <button
                 type="button"
                 class="btn btn-primary"
@@ -61,7 +61,9 @@ const CurrencyVaultList = (props) => {
               </button>
             </div>
           </div>
+
         </div>
+        <div class="coming-soon text-center">More Vaults coming soon...</div>
       </div>
       <div class="modal fade" id="modal" tabindex="-1">
         <div class="modal-dialog">
