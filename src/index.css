@@ -51,7 +51,10 @@ li.nav-item {
     margin-bottom: 20%;
 }
 
-.vault-card .vault-item {box-shadow: 1px 2px 15px #d8d8d8; }
+.vault-card .vault-item {
+  box-shadow: 1px 2px 20px #9e9e9e;
+  margin-top: 30px!important
+ }
 
 .select__control{    border-radius: 20px!important;}
 
@@ -82,8 +85,6 @@ li.nav-item {
   border-radius: 30px;
 }
 
-.vault-card .card-body{margin-top: 50px!important;}
-
 .wallet-card .card-body, .dash-card .card-body, .swap-card .card-body, .vault-card .card-body{
   border: 1px solid lightgrey;
   margin: 20px 25px 0px 25px;
@@ -103,12 +104,25 @@ li.nav-item {
   /*border: none!important;*/
 }
 
-.vault-img{
+
+.vault-type{
+  padding: 8px;
+  background-color: #01948d;
+  color: #fff;
+}
+
+.vault-item img{
   margin-top: -32px;
   margin-right: 15px;
 }
 
+.currency-name img{
+  margin-top: 0px!important;
+  margin-right: 5px!important;
+}
+
 .currency-name{display: inline-block!important;}
+
 
 .vault-deposit{
     margin-bottom: 40px;

@@ -1,6 +1,9 @@
 import { getCurrencies } from "../utils/currencies";
 import CurrencyVault from "./currencyVault";
 import usddImg from "../usdd.png";
+import ttddImg from "../ttdd.png";
+import trxImg from "../trx.png";
+import btcImg from "../btc.png";
 import { useEffect } from "react";
 
 const CurrencyVaultList = (props) => {
@@ -31,14 +34,21 @@ const CurrencyVaultList = (props) => {
             <div class="col-sm-12 col-md-4">
               <img
                 src={usddImg}
-                alt="USDD"
+                alt="gStable"
                 width="32"
                 height="32"
                 class="rounded-circle flex-shrink-0 vault-img"
               />
               <div class="currency-name">
-              <b>USDD</b>
-              <p class="small">US Decentralised Dollar</p>
+              <b>
+              <img
+                src={usddImg}
+                alt="USDD"
+                width="16"
+                height="16"
+                class="rounded-circle flex-shrink-0 vault-img"
+              />USDD</b>
+              <p class="small">Decentralized USD</p>
               </div>
             </div>
 
@@ -48,7 +58,7 @@ const CurrencyVaultList = (props) => {
             </div>
             <div class="col-sm-6 col-md-3 text-center">
               <b>My Supply</b>
-              <p class="small">$5000</p>
+              <p class="small">5000</p>
             </div>
             <div class="col-sm-12 col-md-2 text-center">
               <button
@@ -61,8 +71,99 @@ const CurrencyVaultList = (props) => {
               </button>
             </div>
           </div>
-
         </div>
+
+
+        <div class="card-body vault-item">
+          <div class="row mt-4">
+            <div class="col-sm-12 col-md-4">
+              <img
+                src={trxImg}
+                alt="gStable"
+                width="32"
+                height="32"
+                class="rounded-circle flex-shrink-0 vault-img"
+              />
+              <div class="currency-name">
+              <b>
+              <img
+                src={trxImg}
+                alt="TRX"
+                width="16"
+                height="16"
+                class="rounded-circle flex-shrink-0 vault-img"
+              />TRX</b>
+              <p class="small">Tron</p>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3 text-center">
+              <b>TVL</b>
+              <p class="small">--</p>
+            </div>
+            <div class="col-sm-6 col-md-3 text-center">
+              <b>My Supply</b>
+              <p class="small">--</p>
+            </div>
+            <div class="col-sm-12 col-md-2 text-center">
+              <button
+                type="button"
+                class="btn btn-secondary disabled"
+                data-bs-toggle="modal"
+                data-bs-target="#"
+              >
+                Soon..
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body vault-item">
+          <div class="row mt-4">
+            <div class="col-sm-12 col-md-4">
+              <img
+                src={btcImg}
+                alt="gStable"
+                width="32"
+                height="32"
+                class="rounded-circle flex-shrink-0 vault-img"
+              />
+              <div class="currency-name">
+              <b>
+              <img
+                src={btcImg}
+                alt="BTC"
+                width="16"
+                height="16"
+                class="rounded-circle flex-shrink-0 vault-img"
+              />BTC</b>
+              <p class="small">Bitcoin</p>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3 text-center">
+              <b>TVL</b>
+              <p class="small">--</p>
+            </div>
+            <div class="col-sm-6 col-md-3 text-center">
+              <b>My Supply</b>
+              <p class="small">--</p>
+            </div>
+            <div class="col-sm-12 col-md-2 text-center">
+              <button
+                type="button"
+                class="btn btn-secondary disabled"
+                data-bs-toggle="modal"
+                data-bs-target="#"
+              >
+                Soon..
+              </button>
+            </div>
+          </div>
+        </div>
+
+
+
         <div class="coming-soon text-center">More Vaults coming soon...</div>
       </div>
       <div class="modal fade" id="modal" tabindex="-1">
