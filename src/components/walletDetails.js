@@ -130,7 +130,7 @@ const WalletDetails = () => {
   };
 
   return (
-    <div className="card z-index-0 fadeIn3 fadeInBottom">
+    <div className="card wallet-card z-index-0 fadeIn3 fadeInBottom">
       <div className="card-header portfolio-bal p-0 position-relative mt-n4 mx-3 z-index-2">
         <div className="bg-gradient-info shadow-info border-radius-lg py-3 pe-1">
           {portfolioJSX()}

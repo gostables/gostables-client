@@ -59,7 +59,7 @@ const WalletDashboard = () => {
   };
 
   return (
-    <div className="card dash-content z-index-0 fadeIn3 fadeInBottom">
+    <div className="card dash-card z-index-0 fadeIn3 fadeInBottom">
       <div className="card-header dashboard p-0 position-relative mt-n4 mx-3 z-index-2">
         <div className="bg-gradient-info shadow-info border-radius-lg py-3 pe-1">
           <div className="text-center dash-stats">

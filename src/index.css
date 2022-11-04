@@ -82,24 +82,24 @@ li.nav-item {
   border-radius: 30px;
 }
 
+.vault-card .card-body{margin-top: 50px!important;}
 
-
-.swap-card .card-body, .vault-item{
+.wallet-card .card-body, .dash-card .card-body, .swap-card .card-body, .vault-card .card-body{
   border: 1px solid lightgrey;
   margin: 20px 25px 0px 25px;
   border-radius: .4rem;
   background-color: #fff;
 }
 
-.swap-card .card-header, .vault-card .card-header{
+.wallet-card .card-header, .dash-card .card-header, .swap-card .card-header, .vault-card .card-header{
   border: none!important;
   margin-top: 0px!important;
 }
 
-.vault-card, .swap-card {
+.wallet-card, .dash-card, .vault-card, .swap-card {
   padding-bottom: 40px;
   /*background-color: transparent!important;*/
-  background: linear-gradient(180deg, #01948d 35%, #e6fbea 0%)!important;
+  background: linear-gradient(180deg, #01948d 200px, #e6fbea 0%)!important;
   /*border: none!important;*/
 }
 
@@ -118,13 +118,12 @@ li.nav-item {
 
 .card-header.portfolio-bal, .card-header.dashboard{
   background-color: #01948d;
-  box-shadow: 0px 0px 5px #bbc;
   color: #fff;
 }
 
 
-.card.dash-content{
-  min-height: 500px;
+.dash-card, .wallet-card, .swap-card .vault-card{
+  min-height: 600px;
 }
 
 .currency-selector select{
