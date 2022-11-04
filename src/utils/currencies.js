@@ -65,7 +65,7 @@ const CurrencyList = {
     "TQq9o4PahyoLociVzCnBMRRDdPZrNNkW1f" /*swapMarketAddress*/,
     "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU" /*swapStableAddress*/,
     "TY72rJ9tjnQSxgsqUDuXPUh2oPWC7cRmY6" /*gStableAddress*/,
-    "TR7Hby8oo6iEnwVh2WeTEfaBEAWXjeZXSJ" /*vaultAddress */
+    "TADkkwYBXQ7mKQzd4wCZMV2CnkQXKWT2YX" /*vaultAddress */
   ),
   // XCD: new Currency(
   //   "XCD",

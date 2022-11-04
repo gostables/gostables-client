@@ -1,5 +1,6 @@
 import CurrencyVault from "../components/currencyVault";
 import SwapExchange from "../components/swapExchange";
+import WalletDashboard from "../components/walletDashboard";
 import WalletDetails from "../components/walletDetails";
 import GStableAdmin from "./gStableAdmin";
 import SwapAdmin from "./swapAdmin";
@@ -15,10 +16,10 @@ const AdminPage = (props) => {
               <SwapAdmin currencyKey={props.currencyKey}></SwapAdmin>
             </div>
             <div className="col">
-              <GStableAdmin currencyKey={props.currencyKey}></GStableAdmin>
+              <VaultAdmin currencyKey={props.currencyKey}></VaultAdmin>
             </div>
             <div className="col">
-              <VaultAdmin currencyKey={props.currencyKey}></VaultAdmin>
+              <GStableAdmin currencyKey={props.currencyKey}></GStableAdmin>
             </div>
           </div>
         </div>
@@ -38,6 +39,9 @@ const AdminPage = (props) => {
             </div>
             <div className="col pb-3">
               <WalletDetails></WalletDetails>
+            </div>
+            <div className="col pb-3">
+              <WalletDashboard></WalletDashboard>
             </div>
           </div>
         </div>

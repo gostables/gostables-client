@@ -152,6 +152,21 @@ class SwapContract extends SmartContractBase {
     }
   };
 
+  clearAccumulatedSwapFees = async (vaultAddress) => {
+    this.check();
+    if (!vaultAddress) throw new Error(`Vault Address : ${vaultAddress}`);
+
+    try {
+      await this.contract.transferRewards(vaultAddress).send({
+        feeLimit: 100_000_000,
+        callValue: 0,
+        shouldPollResponse: false,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   balanceOf = async (hodlerAddress) => {
     this.check();
     const balHex = await this.contract.balanceOf(hodlerAddress).call();

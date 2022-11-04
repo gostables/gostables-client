@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { ttddMarket } from "../contracts/marketContract";
 import { usddContract } from "../contracts/usdContract";
 import { getCurrency } from "../utils/currencies";
 import ContractClientManager from "./contractClientManager";
+import DistributeRewards from "./distributeRewards";
 import GoStableBaseManager from "./goStableBaseManager";
 import SetLockInterval from "./setLockInterval";
 
@@ -41,6 +41,15 @@ const VaultAdmin = (props) => {
       let { name: marketCoinName, symbol: marketCoinSymbol } =
         await marketContract.getNameSymbol();
 
+      //gStable Data
+      let gStableContract = await currency.gStableContract();
+      let { name: gStableCoinName, symbol: gStableCoinSymbol } =
+        await gStableContract.getNameSymbol();
+
+      let gStableBalance = await gStableContract.balanceOf(
+        vaultContract.address
+      );
+
       // usdd data
       let usdd = await usddContract();
       let usddBalance = await usdd.balanceOf(currency.vaultAddress);
@@ -50,6 +59,9 @@ const VaultAdmin = (props) => {
         marketCoinBalance,
         marketCoinName,
         marketCoinSymbol,
+        gStableCoinName,
+        gStableCoinSymbol,
+        gStableBalance,
         usddBalance,
       };
       setDetails(vaultDetails);
@@ -73,6 +85,9 @@ const VaultAdmin = (props) => {
         <p>
           {details.marketCoinName} : {details.marketCoinBalance}
         </p>
+        <p>
+          {details.gStableCoinName} : {details.gStableBalance}
+        </p>
         <p>USDD : {details.usddBalance}</p>
         <hr />
         <GoStableBaseManager
@@ -88,6 +103,7 @@ const VaultAdmin = (props) => {
           {...props}
         ></SetLockInterval>
         <hr />
+        <DistributeRewards {...props}></DistributeRewards>
       </div>
     </div>
   );

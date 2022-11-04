@@ -57,13 +57,15 @@ class WalletPublisher {
         let vaultBalData = await vaultContract.balanceOf(
           this.walletDetails.address
         );
+        let vaultRewards = await vaultContract.getPendingRewards(
+          this.walletDetails.address
+        );
         vaultBalances.push({
           currencyKey: currency.key,
           balanceData: vaultBalData,
+          rewards: vaultRewards,
         });
       }
-
-      console.log("vb", vaultBalances);
 
       this.walletDetails = {
         ...this.walletDetails,
@@ -72,7 +74,7 @@ class WalletPublisher {
         vaultBalances: vaultBalances,
       };
       this.notify();
-    }, 3 * 1000);
+    }, 10 * 1000);
   };
 
   attach = (observer) => {

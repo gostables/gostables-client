@@ -4,6 +4,7 @@ import { ttddMarket } from "../contracts/marketContract";
 import { ttddSwap } from "../contracts/swapContract";
 import { usddContract } from "../contracts/usdContract";
 import { getCurrency } from "../utils/currencies";
+import ClearAccumulatedSwapFees from "./clearAccumulatedSwapFees";
 import ContractClientManager from "./contractClientManager";
 import GoStableBaseManager from "./goStableBaseManager";
 import SetConversionRatio from "./setConversionRatio";
@@ -38,6 +39,7 @@ const SwapAdmin = (props) => {
       let swapContract = await currency.swapContract();
 
       let swapDetails = await swapContract.getDetails();
+
       //Market coin data
       let marketContract = await currency.marketContract();
       let marketCoinBalance = await marketContract.balanceOf(
@@ -91,6 +93,9 @@ const SwapAdmin = (props) => {
         <p>
           {details.marketCoinName} : {details.marketCoinBalance}
         </p>
+        <p>
+          {details.gStableCoinName} : {details.gStableBalance}
+        </p>
         <p>USDD : {details.usddBalance}</p>
         <hr />
         <GoStableBaseManager
@@ -114,9 +119,8 @@ const SwapAdmin = (props) => {
         <p>Accumulated Swap Fees : {details.accumulatedSwapFees}</p>
         <SetSwapFeesFactor swapContract={swapContract}></SetSwapFeesFactor>
         <hr />
-        <h6 className="card-title">Rewards</h6>
-        {/* <p>Accumulated Swap Fees : {details.accumulatedSwapFees}</p> */}
-        {/* <SetSwapFeesFactor swapContract={swapContract}></SetSwapFeesFactor> */}
+        <h6 className="card-title">Transfer Rewards</h6>
+        <ClearAccumulatedSwapFees {...props}></ClearAccumulatedSwapFees>
       </div>
     </div>
   );

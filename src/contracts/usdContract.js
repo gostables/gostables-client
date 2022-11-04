@@ -1,6 +1,5 @@
-import { StableCoinType } from "../utils/stableCoins";
+import { StableCoinType, USDDAddress } from "../utils/stableCoins";
 import Web3 from "web3";
-import { USDDAddress } from "./address";
 
 class USDContract {
   address;

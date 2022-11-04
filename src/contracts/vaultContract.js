@@ -124,6 +124,39 @@ class VaultContract extends SmartContractBase {
     }
   };
 
+  setRewards = async (_val) => {
+    this.check();
+    if (!_val) throw new Error(`Number : ${_val}`);
+
+    console.log("setRewards", this.web3.utils.toWei(String(_val), "ether"));
+    try {
+      await this.contract
+        .setRewards(this.web3.utils.toWei(String(_val), "ether"))
+        // .setRewards(_val)
+        .send({
+          feeLimit: 100_000_000,
+          callValue: 0,
+          shouldPollResponse: false,
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  distributeRewards = async () => {
+    this.check();
+
+    try {
+      await this.contract.distributeRewards().send({
+        feeLimit: 100_000_000,
+        callValue: 0,
+        shouldPollResponse: false,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   balanceOf = async (hodlerAddress) => {
     this.check();
     const [balHex, lockHex] = await this.contract
@@ -132,6 +165,24 @@ class VaultContract extends SmartContractBase {
     const balance = this.web3.utils.fromWei(String(balHex), "ether");
     let lock = new Date(lockHex * 1000);
     return { balance, lock };
+  };
+
+  getPendingRewards = async (hodlerAddress) => {
+    this.check();
+    const balHex = await this.contract.getPendingRewards(hodlerAddress).call();
+    const rewards = this.web3.utils.fromWei(String(balHex), "ether");
+    return rewards;
+  };
+
+  claimPendingRewards = async (hodlerAddress) => {
+    this.check();
+    const balHex = await this.contract.getPendingRewards(hodlerAddress).call();
+    // const rewards = this.web3.utils.fromWei(String(balHex), "ether");
+    await this.contract.claimRewards(balHex).send({
+      feeLimit: 100_000_000,
+      callValue: 0,
+      shouldPollResponse: false,
+    });
   };
 }
 
