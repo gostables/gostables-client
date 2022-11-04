@@ -140,7 +140,7 @@ const SwapExchange = (props) => {
   // console.log("gsb : ", walletDetails.gStableBalances);
 
   return (
-    <div className="card z-index-0 fadeIn3 fadeInBottom">
+    <div className="card swap-card z-index-0 fadeIn3 fadeInBottom">
       <div className="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
         <div className="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
           <h4 className="text-white font-weight-bolder text-center mt-2 mb-0">

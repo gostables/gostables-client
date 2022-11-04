@@ -82,23 +82,25 @@ li.nav-item {
   border-radius: 30px;
 }
 
-.vault-item{
+
+
+.swap-card .card-body, .vault-item{
   border: 1px solid lightgrey;
   margin: 20px 25px 0px 25px;
   border-radius: .4rem;
   background-color: #fff;
 }
 
-.vault-card .card-header{
+.swap-card .card-header, .vault-card .card-header{
   border: none!important;
   margin-top: 0px!important;
 }
 
-.vault-card{
+.vault-card, .swap-card {
   padding-bottom: 40px;
   /*background-color: transparent!important;*/
   background: linear-gradient(180deg, #01948d 35%, #e6fbea 0%)!important;
-  border: none!important;
+  /*border: none!important;*/
 }
 
 .vault-img{
