@@ -21,7 +21,7 @@ const WalletConnect = () => {
     case -1:
       return (
         <div className={`${className} text-warning`}>
-          Please connect to TronLink
+          Connect Wallet
         </div>
       );
     case 1:

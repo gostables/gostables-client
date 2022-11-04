@@ -70,7 +70,7 @@ const SwapExchange = (props) => {
           </span>
         </div>
         {walletDetails ? (
-          <p className="pb-3">Balance: {walletDetails.usddBalance}</p>
+          <p className="small pb-3">Balance: {walletDetails.usddBalance}</p>
         ) : (
           <></>
         )}
@@ -116,7 +116,7 @@ const SwapExchange = (props) => {
             &nbsp; {getCurrency(props.currencyKey).label}
           </span>
         </div>
-        <p className="pb-3">{balJSX}</p>
+        <p className="small pb-3">{balJSX}</p>
       </>
     );
   };
@@ -183,14 +183,14 @@ const SwapExchange = (props) => {
 
           {direction ? tokenJSX("For") : stableCoinJSX("For")}
 
-          <div className="d-grid gap-2 mt-4 pt-4">
-            <button className="btn btn-primary" type="button" onClick={swap}>
+          <div className="d-grid gap-2 mt-4">
+            <button className="btn btn-primary swap-btn" type="button" onClick={swap}>
               Swap
             </button>
             {swapFeesFactor ? (
               <div className="text-xs mt-20">
-                <span className="text-left">Protocol Fee:</span>
-                <span className="text-right">{swapFeesFactor * 100}%</span>
+                <span className="text-left">Fee:</span>
+                <span className="text-right"><b>{swapFeesFactor * 100}%</b></span>
               </div>
             ) : (
               <></>

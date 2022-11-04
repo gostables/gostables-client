@@ -97,7 +97,7 @@ const VaultAdmin = (props) => {
           }
         ></GoStableBaseManager>
         <hr />
-        <p>Lock Interval : {details.interval}</p>
+        <p>Lock Interval : {details.interval} Hour(s)</p>
         <SetLockInterval
           vaultContract={vaultContract}
           {...props}

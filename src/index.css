@@ -11,6 +11,9 @@ body {
   background-color: #e6fbea !important;
 }
 
+
+.container.justify-content-center{margin-top: 20px;}
+
 .text-left{float: left;}
 .text-right{float: right;}
 
@@ -48,7 +51,7 @@ li.nav-item {
     margin-bottom: 20%;
 }
 
-.vault-card .vault-item {box-shadow: 1px 2px 12px; }
+.vault-card .vault-item {box-shadow: 1px 2px 15px #d8d8d8; }
 
 .select__control{    border-radius: 20px!important;}
 
@@ -64,20 +67,37 @@ li.nav-item {
 }
 
 
-.web3-connect .text-warning, .web3-connect .text-success{
+.web3-connect .text-success{
   color: #fff!important;
-      font-size: 12px;
-    padding-top: 3px;
+  font-size: 12px;
+  padding-top: 3px;
+}
+
+
+.web3-connect .text-warning{
+  color: #fff!important;
+  font-size: 12px;
+  padding-top: 3px;
+  border-radius: 30px;
 }
 
 .vault-item{
   border: 1px solid lightgrey;
   margin: 20px 25px 0px 25px;
-  border-radius: 3px;
+  border-radius: .4rem;
+  background-color: #fff;
+}
+
+.vault-card .card-header{
+  border: none!important;
+  margin-top: 0px!important;
 }
 
 .vault-card{
   padding-bottom: 40px;
+  /*background-color: transparent!important;*/
+  background: linear-gradient(180deg, #01948d 50%, #e6fbea 0%)!important;
+  border: none!important;
 }
 
 .vault-img{
