@@ -106,18 +106,10 @@ const CurrencyVault = (props) => {
       <div className="card-body">
         {walletData.vaultBalance && walletData.vaultBalance.balance > 0 ? (
           <>
-            <div className="alert alert-success">
-              <strong>Current Deposit :</strong>{" "}
+            <div className="alert alert-success text-center">
+              <strong>My Supply</strong>{" "}
               <div className="my-2">
-                {walletData.vaultBalance.balance}{" "}
-                
-                  <img
-                    src={usddImg}
-                    alt="USDD"
-                    width="16"
-                    height="16"
-                    className="rounded-circle flex-shrink-0"
-                  />
+                {walletData.vaultBalance.balance}                
                 <span className="mx-2">USDD</span>
               </div>
             </div>
@@ -170,11 +162,13 @@ const CurrencyVault = (props) => {
         </a> */}
 
         {display && vaultDetails.interval ? (
-          <div className="text-xs text-center mt-3">
+          <div className="text-xs text-center mt-2">
           
 
-            Your deposit will be locked for the next {vaultDetails.interval}{" "}
-            hrs.<br/>Unlock Time: {walletData.vaultBalance.lock.toLocaleString()}
+            <span class="small">Your deposit will be locked for the next {vaultDetails.interval}{" "}
+            hrs.</span><br/>
+            <span class="text-danger">Unlock Time: {walletData.vaultBalance.lock.toLocaleString()}</span>
+            <span class="text-success">Unlocked</span>
           </div>
         ) : (
           <></>
