@@ -108,7 +108,8 @@ li.nav-item {
 .vault-type{
   padding: 8px;
   background-color: #01948d;
-  color: #fff;
+  color: #fff!important;
+  border-radius: 50px;
 }
 
 .vault-item .vault-img{

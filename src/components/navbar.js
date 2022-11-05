@@ -48,11 +48,6 @@ const Navbar = () => {
           </NavLink>
         </li>
         <li class="nav-item">
-          <NavLink to="/wallet" className="nav-link">
-              Wallet
-          </NavLink>
-        </li>
-        <li class="nav-item">
           <NavLink to="/swap" className="nav-link">
               Swap
           </NavLink>
@@ -60,6 +55,11 @@ const Navbar = () => {
         <li class="nav-item">
           <NavLink to="/vault" className="nav-link">
               Vaults
+          </NavLink>
+        </li>
+        <li class="nav-item">
+          <NavLink to="/wallet" className="nav-link">
+              Wallet
           </NavLink>
         </li>
       </ul>
