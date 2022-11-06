@@ -4,6 +4,8 @@ import { usddContract } from "../contracts/usdContract";
 import { ThreeDots } from "react-loader-spinner";
 import { getCurrency } from "../utils/currencies";
 import USDDIcon from "./iconUSDD";
+import LockIcon from "../svg/vaultLock";
+import UnlockIcon from "../svg/vaultUnlock";
 import { formatUSD } from "../utils/currencyFormatter";
 
 const CurrencyVault = (props) => {
@@ -155,6 +157,7 @@ const CurrencyVault = (props) => {
           <div className="text-xs text-center mt-2">
             {walletData.vaultBalance.lock > new Date() ? (
               <>
+                <span className="lock-icon"><LockIcon></LockIcon></span><br/><br/>
                 <span class="small">
                   Your deposit will be locked for the next{" "}
                   {vaultDetails.interval} hrs.
@@ -165,7 +168,8 @@ const CurrencyVault = (props) => {
                 </span>
               </>
             ) : (
-              <span class="text-success">Unlocked</span>
+              <><span className="unlock-icon"><UnlockIcon></UnlockIcon></span><br/><br/>
+              <span class="text-success">Unlocked</span></>
             )}
           </div>
         ) : (

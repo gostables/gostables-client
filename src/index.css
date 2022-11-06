@@ -155,6 +155,22 @@ li.nav-item {
     padding: 11px;
 }
 
+
+.lock-icon{
+    background-color: #ff7851;
+}
+
+.unlock-icon{
+    background-color: #01948d;
+}
+
+.lock-icon, .unlock-icon{
+    padding: 8px 12px;
+    color: #fff;
+    margin-right: 5px;
+    border-radius: 12px;
+}
+
 .card-header.portfolio-bal, .card-header.dashboard{
   background-color: #01948d;
   color: #fff;
