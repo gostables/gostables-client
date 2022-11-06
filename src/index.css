@@ -48,7 +48,6 @@ li.nav-item {
 
 .navbar-expand-lg .navbar-collapse.show .currency-select{
   margin-top: 30px;
-  max-width: 260px;
 }
 
 .modal-content a.nav-link.active {
@@ -61,7 +60,7 @@ li.nav-item {
   margin-top: 30px!important
  }
 
-.select__control{    border-radius: 20px!important;}
+.select__control, .wallet-btn{border-radius: 20px!important;}
 
 .swap-btn{padding: 15px!important;}
 
