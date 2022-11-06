@@ -65,9 +65,10 @@ const CurrencyVaultList = (props) => {
         <div class="card-body vault-item">
           <div class="row mt-4">
             <div class="col-sm-12 col-md-4">
-              <div class="">
-                <USDDIcon height={32} noTitle={true}></USDDIcon>
-                <span className="px-2 fw-bold">USDD</span>
+              
+              <USDDIcon height={32} noTitle={true}></USDDIcon>
+              <div class="currency-name">
+                <b>USDD</b>
                 <p class="small">Decentralized USD</p>
               </div>
             </div>

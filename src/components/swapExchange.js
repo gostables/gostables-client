@@ -45,7 +45,7 @@ const SwapExchange = (props) => {
     console.log("StableCoinValue : ", e.target.value);
     setStableCoinValue(e.target.value);
     console.log("converted : ", e.target.value * conversionRatio);
-    setTokenValue(e.target.value * conversionRatio);
+    setTokenValue((e.target.value - e.target.value * swapFeesFactor) * conversionRatio);
   };
 
   const stableCoinJSX = () => {
@@ -82,7 +82,7 @@ const SwapExchange = (props) => {
     console.log("TokenValue : ", e.target.value);
     setTokenValue(e.target.value);
     console.log("converted : ", e.target.value / conversionRatio);
-    setStableCoinValue(e.target.value / conversionRatio);
+    setStableCoinValue((e.target.value - e.target.value * swapFeesFactor) / conversionRatio);
   };
   const tokenJSX = (title) => {
     let balJSX = <></>;
@@ -189,11 +189,9 @@ const SwapExchange = (props) => {
               Swap
             </button>
             {swapFeesFactor ? (
-              <div className="text-xs mt-20 d-flex justify-content-around">
-                <span className="text-left">
-                  Fee (<b>{swapFeesFactor * 100}%</b>) : ≈{" "}
+              <div className="text-xs mt-20 d-flex justify-content-center">
+                  <b>Fee ({swapFeesFactor * 100}%)</b>: ≈{" "}
                   {formatUSD.format(stableCoinValue * swapFeesFactor)}
-                </span>
               </div>
             ) : (
               <></>

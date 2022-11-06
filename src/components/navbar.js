@@ -18,7 +18,7 @@ const Navbar = () => {
 <div className="container justify-content-center  border-bottom">
 <nav class="navbar navbar-expand-lg navbar-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="%PUBLIC_URL%">
+    <a class="navbar-brand" href="/">
             {
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -41,6 +41,15 @@ const Navbar = () => {
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="currency-select">
+            <SelectCurrency
+              setSelectedCoin={(val) =>
+                currencyPublisher.setCurrency(val.value)
+              }
+              options={getCurrenciesForDropDown()}
+              defaultValue={getCurrenciesForDropDown()[0]}
+            ></SelectCurrency>
+      </div>
       <ul class="navbar-nav me-auto mb-lg-0">
         <li class="nav-item">
           <NavLink to="/admin" className="nav-link">
@@ -57,20 +66,11 @@ const Navbar = () => {
               Vaults
           </NavLink>
         </li>
-        <li class="nav-item">
-          <NavLink to="/wallet" className="nav-link">
-              Wallet
-          </NavLink>
-        </li>
       </ul>
-      <div class="currency-select">
-            <SelectCurrency
-              setSelectedCoin={(val) =>
-                currencyPublisher.setCurrency(val.value)
-              }
-              options={getCurrenciesForDropDown()}
-              defaultValue={getCurrenciesForDropDown()[0]}
-            ></SelectCurrency>
+      <div class="btn btn-outline-primary wallet-btn">
+        <NavLink to="/wallet" className="nav-link">
+          <i class="bi bi-wallet2"></i> Wallet
+        </NavLink>
       </div>
       <div class="">
         <button class="btn btn-primary web3-connect"><WalletConnect></WalletConnect></button>

@@ -10,7 +10,7 @@ const USDDIcon = ({ height = 16, noTitle = false }) => {
         height={height}
         className="rounded-circle flex-shrink-0"
       />
-      {noTitle ? <></> : <span className="mx-2">USDD</span>}
+      {noTitle ? <></> : <span className="mx-1">USDD</span>}
     </>
   );
 };

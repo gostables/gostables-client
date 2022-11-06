@@ -5,7 +5,7 @@ const StableIcon = (props) => {
   let curr = getCurrency(currencyKey);
   return (
     <>
-      <span className="px-1">
+      <span className="">
         <img
           src={curr.icon}
           alt={curr.label}
