@@ -33,9 +33,9 @@ const WalletRewards = (props) => {
               <p>
                 <StableIcon
                   currencyKey={vb.currencyKey}
-                  height="32"
+                  height="24"
                 ></StableIcon>
-                {formatM(vb.rewards)}
+                <span className="small">{formatM(vb.rewards)}</span>
               </p>
               <button
                 type="button"

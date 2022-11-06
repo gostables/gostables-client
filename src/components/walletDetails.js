@@ -46,9 +46,9 @@ const WalletDetails = (props) => {
             <ul className="list-group list-group-flush">
               <li className="list-group-item d-flex justify-content-between">
                 <div>
-                  <USDDIcon height={32}></USDDIcon>
+                  <USDDIcon height={24}></USDDIcon>
                 </div>
-                <div>{formatM(walletData.usddBalance)}</div>
+                <div className="small">{formatM(walletData.usddBalance)}</div>
               </li>
               {stableCoins.map((stableCoin) => {
                 let balances = walletData.gStableBalances.filter((gsb) => {
@@ -66,10 +66,10 @@ const WalletDetails = (props) => {
                     <div>
                       <StableIcon
                         currencyKey={stableCoin.currencyKey}
-                        height="32"
+                        height="24"
                       ></StableIcon>
                     </div>
-                    <div>{formatM(balance)}</div>
+                    <div className="small">{formatM(balance)}</div>
                   </li>
                 );
               })}

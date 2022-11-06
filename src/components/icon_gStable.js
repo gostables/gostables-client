@@ -5,7 +5,7 @@ const StableIcon = (props) => {
   let curr = getCurrency(currencyKey);
   return (
     <>
-      <span className="px-2">
+      <span className="px-1">
         <img
           src={curr.icon}
           alt={curr.label}
@@ -14,7 +14,7 @@ const StableIcon = (props) => {
           className="rounded-circle flex-shrink-0"
         />
       </span>
-      <span className="mx-2">{noTitle ? "" : curr.label}</span>
+      <span className="mx-1">{noTitle ? "" : curr.label}</span>
     </>
   );
 };

@@ -3,7 +3,7 @@ import usddImg from "../usdd.png";
 const USDDIcon = ({ height = 16, noTitle = false }) => {
   return (
     <>
-      <span className="px-2">
+      <span className="px-1">
         <img
           src={usddImg}
           alt="USDD"
@@ -12,7 +12,7 @@ const USDDIcon = ({ height = 16, noTitle = false }) => {
           className="rounded-circle flex-shrink-0"
         />
       </span>
-      <span className="mx-2">{noTitle ? "" : "USDD"}</span>
+      <span className="mx-1">{noTitle ? "" : "USDD"}</span>
     </>
   );
 };
