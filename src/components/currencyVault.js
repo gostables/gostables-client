@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import usddImg from "../usdd.png";
 import walletPublisher from "../publishers/wallet";
 import { usddContract } from "../contracts/usdContract";
 import { ThreeDots } from "react-loader-spinner";
 import { getCurrency } from "../utils/currencies";
+import USDDIcon from "./iconUSDD";
+import { formatUSD } from "../utils/currencyFormatter";
 
 const CurrencyVault = (props) => {
   const [display, setDisplay] = useState(true);
@@ -109,8 +110,7 @@ const CurrencyVault = (props) => {
             <div className="alert alert-success text-center">
               <strong>My Supply</strong>{" "}
               <div className="my-2">
-                {walletData.vaultBalance.balance}                
-                <span className="mx-2">USDD</span>
+                {formatUSD.format(walletData.vaultBalance.balance)}
               </div>
             </div>
           </>
@@ -134,14 +134,7 @@ const CurrencyVault = (props) => {
               <label for="floatingInputGroup1">Value in USDD</label>
             </div>
             <span className="input-group-text">
-              <img
-                src={usddImg}
-                alt="USDD"
-                width="32"
-                height="32"
-                className="rounded-circle flex-shrink-0"
-              />
-
+              <USDDIcon height={32}></USDDIcon>
             </span>
             <button
               className="btn btn-primary vault-deposit"
@@ -152,23 +145,28 @@ const CurrencyVault = (props) => {
               {display ? "Deposit" : "Redeem"}
             </button>
           </div>
-
-
-
         )}
 
         {/* <a className="p-1 rounded small" href="#simple-list-item-1">
           Set Max
         </a> */}
 
-        {display && vaultDetails.interval ? (
+        {vaultDetails.interval ? (
           <div className="text-xs text-center mt-2">
-          
-
-            <span class="small">Your deposit will be locked for the next {vaultDetails.interval}{" "}
-            hrs.</span><br/>
-            <span class="text-danger">Unlock Time: {walletData.vaultBalance.lock.toLocaleString()}</span>
-            <span class="text-success">Unlocked</span>
+            {walletData.vaultBalance.lock > new Date() ? (
+              <>
+                <span class="small">
+                  Your deposit will be locked for the next{" "}
+                  {vaultDetails.interval} hrs.
+                </span>
+                <br />
+                <span class="text-danger">
+                  Unlock Time: {walletData.vaultBalance.lock.toLocaleString()}
+                </span>
+              </>
+            ) : (
+              <span class="text-success">Unlocked</span>
+            )}
           </div>
         ) : (
           <></>
@@ -181,13 +179,6 @@ const CurrencyVault = (props) => {
 
   return (
     <div class="">
-      {/* <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-        <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-          <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">
-            Vault
-          </h4>
-        </div>
-      </div> */}
       {walletData.isSupportedNetwork ? (
         <div className="card-body">
           <ul className="nav justify-content-center">

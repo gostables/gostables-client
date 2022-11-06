@@ -44,6 +44,8 @@ const SwapExchange = (props) => {
   const updateStableCoinValue = (e) => {
     console.log("StableCoinValue : ", e.target.value);
     setStableCoinValue(e.target.value);
+    console.log("converted : ", e.target.value * conversionRatio);
+    setTokenValue(e.target.value * conversionRatio);
   };
 
   const stableCoinJSX = () => {
@@ -56,6 +58,7 @@ const SwapExchange = (props) => {
               className="form-control"
               id="floatingInputGroup1"
               placeholder="Value in USDD"
+              value={stableCoinValue}
               onChange={updateStableCoinValue}
             />
             <label for="floatingInputGroup1">Value in USDD</label>
@@ -78,6 +81,8 @@ const SwapExchange = (props) => {
   const updateTokenValue = (e) => {
     console.log("TokenValue : ", e.target.value);
     setTokenValue(e.target.value);
+    console.log("converted : ", e.target.value / conversionRatio);
+    setStableCoinValue(e.target.value / conversionRatio);
   };
   const tokenJSX = (title) => {
     let balJSX = <></>;
@@ -98,6 +103,7 @@ const SwapExchange = (props) => {
               className="form-control"
               id="floatingInputGroup2"
               placeholder="Value in gStable"
+              value={tokenValue}
               onChange={updateTokenValue}
             />
             <label for="floatingInputGroup2">Value in gStable</label>
@@ -129,8 +135,6 @@ const SwapExchange = (props) => {
       swapContract.withdraw(tokenValue);
     }
   };
-
-  // console.log("gsb : ", walletDetails.gStableBalances);
 
   return (
     <div className="card swap-card z-index-0 fadeIn3 fadeInBottom">
@@ -185,10 +189,10 @@ const SwapExchange = (props) => {
               Swap
             </button>
             {swapFeesFactor ? (
-              <div className="text-xs mt-20">
-                <span className="text-left">Fee:</span>
-                <span className="text-right">
-                  <b>{swapFeesFactor * 100}%</b>
+              <div className="text-xs mt-20 d-flex justify-content-around">
+                <span className="text-left">
+                  Fee (<b>{swapFeesFactor * 100}%</b>) : ≈{" "}
+                  {formatUSD.format(stableCoinValue * swapFeesFactor)}
                 </span>
               </div>
             ) : (

@@ -22,7 +22,14 @@ const WalletRewards = (props) => {
     }
     let rewards = walletData.vaultBalances.filter((vb) => vb.rewards > 0);
     if (!rewards.length) {
-      return <></>;
+      return (
+        <>
+          <p className="my-2">You have not earned any rewards as yet.</p>
+          <p>
+            Earn Rewards <a href="/vault">by supporting goStables </a>
+          </p>
+        </>
+      );
     }
     return (
       <>

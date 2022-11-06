@@ -19,20 +19,20 @@ const WalletConnect = () => {
 
   switch (walletDetails.status) {
     case -1:
-      return (
-        <div className={`${className} text-warning`}>
-          Connect Wallet
-        </div>
-      );
+      return <div className={`${className} text-warning`}>Connect Wallet</div>;
     case 1:
       return (
         <>
-          <div className={`${className} text-success text-center text-xs`}>
+          <div className={`${className} text-success text-center text-xxs`}>
             {getMaskedAddress(walletDetails.address)}
-          </div>
-          <div className={`${className} text-success small text-center text-xs`}>
+            {" / "}
             {getNetworkName(walletDetails.network)}
           </div>
+          {/* <div
+            className={`${className} text-success small text-center text-xs`}
+          >
+            {getNetworkName(walletDetails.network)}
+          </div> */}
         </>
       );
     case -2:

@@ -11,26 +11,43 @@ const WalletVaultDeposits = (props) => {
     if (!walletData || !walletData.isSupportedNetwork) {
       return <></>;
     }
+    let rewards = walletData.vaultBalances.filter((vb) => {
+      return vb.balanceData.balance > 0;
+    });
+    if (!rewards.length) {
+      return (
+        <>
+          <p>You have not made any Deposits as yet.</p>
+          <p>
+            Deposit USDD <a href="/vault">on our Vaults</a> and earn rewards!
+          </p>
+        </>
+      );
+    }
     return (
       <>
         <ul class="list-group mb-3">
-          {walletData.vaultBalances.map((vb) => (
-            <>
-              <li class="list-group-item d-flex justify-content-between lh-sm border-0">
-                <div>
-                  <h6 class="my-0">
-                    {formatUSD.format(vb.balanceData.balance)}
-                  </h6>
-                  <div class="small text-muted  py-2">
-                    till {vb.balanceData.lock.toLocaleString()}
+          {walletData.vaultBalances.map((vb) =>
+            vb.balanceData.balance > 0 ? (
+              <>
+                <li class="list-group-item d-flex justify-content-between lh-sm border-0">
+                  <div>
+                    <h6 class="my-0">
+                      {formatUSD.format(vb.balanceData.balance)}
+                    </h6>
+                    <div class="small text-muted  py-2">
+                      till {vb.balanceData.lock.toLocaleString()}
+                    </div>
                   </div>
-                </div>
-                <span class="text-muted">
-                  {getCurrency(vb.currencyKey).label}
-                </span>
-              </li>
-            </>
-          ))}
+                  <span class="text-muted">
+                    {getCurrency(vb.currencyKey).label}
+                  </span>
+                </li>
+              </>
+            ) : (
+              <></>
+            )
+          )}
         </ul>
       </>
     );
@@ -47,7 +64,7 @@ const WalletVaultDeposits = (props) => {
     return (
       <>
         <div className="text-center">
-          <p className="small">Total Value Locked (USDD)</p>
+          <p className="small">Total Vault Deposits (USDD)</p>
           <h5 className="fw-bold">{formatUSD.format(total)}</h5>
         </div>
       </>

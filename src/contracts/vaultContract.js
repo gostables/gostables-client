@@ -24,16 +24,21 @@ class VaultContract extends SmartContractBase {
     let stableCoinAddress = await this.getStableCoinAddress();
     let marketAddress = await this.getMarketAddress();
     let interval = await this.getInterval();
-    let swapDetails = {
+    let details = {
       status: this.contract ? true : false,
       address: this.address,
       interval,
       stableCoinAddress,
       marketAddress,
     };
-    return swapDetails;
+    return details;
   };
   // GET
+  getTVL = async () => {
+    this.check();
+    let c = await this.contract.totalValue().call();
+    return this.web3.utils.fromWei(String(c), "ether");
+  };
   getInterval = async () => {
     this.check();
     let c = await this.contract.interval().call();
