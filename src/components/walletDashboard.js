@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import walletPublisher from "../publishers/wallet";
-import usddImg from "../usdd.png";
+
 import { ThreeDots } from "react-loader-spinner";
 import { getCurrencies, getCurrency } from "../utils/currencies";
+import WalletRewards from "./walletRewards";
+import WalletDetails from "./walletDetails";
+import WalletVaultDeposits from "./walletVaultDeposits";
 
-const WalletDashboard = () => {
-  const [walletDashboard, setWalletDashboard] = useState({
+const WalletDashboard = (props) => {
+  const { displayDetails, displayDeposits, displayRewards } = props;
+  const [walletData, setWalletDetails] = useState({
     status: 1,
     isSupportedNetwork: false,
     address: "",
@@ -14,95 +18,98 @@ const WalletDashboard = () => {
     vaultBalances: [],
   });
 
-  const [gStableCoins, setgStableCoins] = useState([]);
+  const [stableCoins, setStableCoins] = useState([]);
 
   useEffect(() => {
-    walletPublisher.attach(setWalletDashboard);
+    walletPublisher.attach(setWalletDetails);
     return () => {
-      walletPublisher.detach(setWalletDashboard);
+      walletPublisher.detach(setWalletDetails);
     };
   }, []);
 
   useEffect(() => {
+    init();
+
     return () => {
       console.log("unmounting WalletDashboard");
     };
   }, []);
-
-  const depositsJSX = () => {
-    if (!walletDashboard || !walletDashboard.isSupportedNetwork) {
-      return <></>;
+  const init = async () => {
+    try {
+      //gStable Data
+      let stableCoins = [];
+      getCurrencies().map(async (currency) => {
+        let gStableContract = await currency.gStableContract();
+        let { name: gStableCoinName, symbol: gStableCoinSymbol } =
+          await gStableContract.getNameSymbol();
+        let swapContract = await currency.swapContract();
+        let conversionRatio = await swapContract.getConversion();
+        stableCoins.push({
+          name: gStableCoinName,
+          symbol: gStableCoinSymbol,
+          icon: currency.icon,
+          currencyKey: currency.key,
+          conversionRatio,
+        });
+      });
+      setStableCoins(stableCoins);
+    } catch (error) {
+      console.error();
     }
-    return (
-      <>
-        <p className="h6 card-title my-3">Vault Deposits</p>
-        {walletDashboard.vaultBalances.map((vb) => (
-          <>
-            <div className="text-sm-start fw-bold">
-              {vb.balanceData.balance}
-              <span className="px-2">
-                <img
-                  src={usddImg}
-                  alt="USDD"
-                  width="32"
-                  height="32"
-                  className="rounded-circle flex-shrink-0"
-                />
-              </span>
-              <span className="mx-2">USDD</span>
-              till {vb.balanceData.lock.toLocaleString()}
-            </div>
-          </>
-        ))}
-      </>
-    );
   };
 
+  const getStableCoinByCurrencyKey = (currencyKey) => {
+    let scArray = stableCoins.filter((sc) => {
+      return sc.currencyKey.localeCompare(currencyKey) == 0;
+    });
+    if (!scArray.length) throw new Error(`uh oh ${currencyKey}`);
+    return scArray[0];
+  };
+
+  let countColumns = [displayDetails, displayDeposits, displayRewards].reduce(
+    function (count, currentValue) {
+      return (
+        count[currentValue] ? ++count[currentValue] : (count[currentValue] = 1),
+        count
+      );
+    },
+    {}
+  );
+
+  let colWidth = 12 / countColumns.true;
+
   return (
-    <div className="card dash-card z-index-0 fadeIn3 fadeInBottom">
-      <div className="card-header dashboard p-0 position-relative mt-n4 mx-3 z-index-2">
-        <div className="bg-gradient-info shadow-info border-radius-lg py-3 pe-1">
-          <div className="text-center dash-stats">
-            <div className="row mt-1">
-              <div className="col-sm-4">
-                <p className="small">Total Volume (USDD)</p>
-                <h5 className="fw-bold">$55,504,933.29</h5>
-              </div>
-              <div className="col-sm-4">
-                <p className="small">Total Value Locked (USDD)</p>
-                <h5 className="fw-bold">$504,933.29</h5>
-              </div>
-              <div className="col-sm-4">
-                <p className="small">Collateral Ratio</p>
-                <h5 className="fw-bold">103%</h5>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="card-body">
-        {walletDashboard.isSupportedNetwork ? (
-          <>
-            <div>{depositsJSX()}</div>
-          </>
+    <>
+      <div className={`col-sm-${colWidth}`}>
+        {displayDetails ? (
+          <WalletDetails
+            walletData={walletData}
+            stableCoins={stableCoins}
+            getStableCoinByCurrencyKey={getStableCoinByCurrencyKey}
+          ></WalletDetails>
         ) : (
-          <>
-            <div className="mt-2 w-100 d-flex justify-content-center">
-              <ThreeDots
-                height="32"
-                width="32"
-                radius="9"
-                color="#4fa94d"
-                ariaLabel="three-dots-loading"
-                wrapperStyle={{}}
-                wrapperClassName=""
-                visible={true}
-              />
-            </div>
-          </>
+          <></>
         )}
       </div>
-    </div>
+      <div className={`col-sm-${colWidth}`}>
+        {displayRewards ? (
+          <WalletRewards
+            walletData={walletData}
+            stableCoins={stableCoins}
+            getStableCoinByCurrencyKey={getStableCoinByCurrencyKey}
+          ></WalletRewards>
+        ) : (
+          <></>
+        )}
+      </div>
+      <div className={`col-sm-${colWidth}`}>
+        {displayDeposits ? (
+          <WalletVaultDeposits walletData={walletData}></WalletVaultDeposits>
+        ) : (
+          <></>
+        )}
+      </div>
+    </>
   );
 };
 

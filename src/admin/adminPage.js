@@ -37,9 +37,9 @@ const AdminPage = (props) => {
                 </div>
               </div>
             </div>
-            <div className="col pb-3">
+            {/* <div className="col pb-3">
               <WalletDetails></WalletDetails>
-            </div>
+            </div> */}
             <div className="col pb-3">
               <WalletDashboard></WalletDashboard>
             </div>

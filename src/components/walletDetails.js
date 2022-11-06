@@ -3,127 +3,31 @@ import walletPublisher from "../publishers/wallet";
 import usddImg from "../usdd.png";
 import { ThreeDots } from "react-loader-spinner";
 import { getCurrencies, getCurrency } from "../utils/currencies";
+import USDDIcon from "./iconUSDD";
+import { formatM, formatUSD } from "../utils/currencyFormatter";
+import StableIcon from "./icon_gStable";
+import { isFocusable } from "@testing-library/user-event/dist/utils";
 
-const WalletDetails = () => {
-  const [walletDetails, setWalletDetails] = useState({
-    status: 1,
-    isSupportedNetwork: false,
-    address: "",
-    network: "",
-    usddBalance: "",
-    vaultBalances: [],
-  });
-
-  const [gStableCoins, setgStableCoins] = useState([]);
-
-  useEffect(() => {
-    walletPublisher.attach(setWalletDetails);
-    return () => {
-      walletPublisher.detach(setWalletDetails);
-    };
-  }, []);
-
-  useEffect(() => {
-    init();
-
-    return () => {
-      console.log("unmounting WalletDetails");
-    };
-  }, []);
-  const init = async () => {
-    try {
-      //gStable Data
-      let gStableCoins = [];
-      getCurrencies().map(async (currency) => {
-        let gStableContract = await currency.gStableContract();
-        let { name: gStableCoinName, symbol: gStableCoinSymbol } =
-          await gStableContract.getNameSymbol();
-        gStableCoins.push({
-          name: gStableCoinName,
-          symbol: gStableCoinSymbol,
-          icon: currency.icon,
-          currencyKey: currency.key,
-        });
-      });
-      setgStableCoins(gStableCoins);
-    } catch (error) {
-      console.error();
-    }
-  };
-
-  const get_gStableCoin = (currencyKey) => {
-    let gscList = gStableCoins.filter(
-      (gsc) => gsc.currencyKey.localeCompare(currencyKey) == 0
-    );
-    if (gscList.length) {
-      return gscList[0];
-    }
-    return null;
-  };
-
-  const claim = async (currencyKey) => {
-    let currency = getCurrency(currencyKey);
-    let vaultContract = await currency.vaultContract();
-    debugger;
-    await vaultContract.claimPendingRewards(walletDetails.address);
-  };
-
-  const rewardsJSX = () => {
-    if (!walletDetails || !walletDetails.isSupportedNetwork) {
-      return <></>;
-    }
-    let rewards = walletDetails.vaultBalances.filter((vb) => vb.rewards > 0);
-    if (!rewards.length) {
-      return <></>;
-    }
-    return (
-      <>
-        <p className="h6 card-title my-3">Vault Rewards</p>
-        <div className="list-group"></div>
-        {walletDetails.vaultBalances.map((vb) => (
-          <>
-            <div className="d-flex justify-content-between w-100">
-              <p>
-                <span className="px-2">
-                  <img
-                    src={getCurrency(vb.currencyKey).icon}
-                    alt="USDD"
-                    width="32"
-                    height="32"
-                    className="rounded-circle flex-shrink-0"
-                  />
-                </span>
-                {vb.rewards}{" "}
-                {/* {get_gStableCoin(vb.currencyKey) != null
-                  ? get_gStableCoin(vb.currencyKey).name
-                  : ""}{" "} */}
-                {getCurrencies(vb.currencyKey).length
-                  ? getCurrencies(vb.currencyKey)[0].label
-                  : ""}
-              </p>
-              <button
-                type="button"
-                className="btn btn-primary btn-sm"
-                onClick={() => claim(vb.currencyKey)}
-              >
-                Claim
-              </button>
-            </div>
-          </>
-        ))}
-      </>
-    );
-  };
+const WalletDetails = (props) => {
+  const { walletData, stableCoins, getStableCoinByCurrencyKey } = props;
 
   const portfolioJSX = () => {
-    if (!walletDetails || !walletDetails.isSupportedNetwork) {
+    if (!walletData || !walletData.isSupportedNetwork) {
       return <></>;
+    }
+    let total = parseFloat(walletData.usddBalance);
+    for (let index = 0; index < walletData.gStableBalances.length; index++) {
+      let cr = getStableCoinByCurrencyKey(
+        walletData.gStableBalances[index].currencyKey
+      ).conversionRatio;
+      let bal = parseFloat(walletData.gStableBalances[index].balance);
+      total += bal / cr;
     }
     return (
       <>
         <div className="text-center">
           <p className="small">Total Balance (USDD)</p>
-          <h5 className="fw-bold">$704,933.29</h5>
+          <h5 className="fw-bold">{formatUSD.format(total)}</h5>
         </div>
       </>
     );
@@ -137,29 +41,19 @@ const WalletDetails = () => {
         </div>
       </div>
       <div className="card-body">
-        {walletDetails.isSupportedNetwork ? (
+        {walletData.isSupportedNetwork ? (
           <>
-            <p className="h6 card-title my-3">Balances</p>
             <ul className="list-group list-group-flush">
               <li className="list-group-item d-flex justify-content-between">
                 <div>
-                  <span className="px-2">
-                    <img
-                      src={usddImg}
-                      alt="USDD"
-                      width="32"
-                      height="32"
-                      className="rounded-circle flex-shrink-0"
-                    />
-                  <span>USDD</span>                  
-                  </span>
+                  <USDDIcon height={32}></USDDIcon>
                 </div>
-                <div>{walletDetails.usddBalance}</div>
+                <div>{formatM(walletData.usddBalance)}</div>
               </li>
-              {gStableCoins.map((gStableCoin) => {
-                let balances = walletDetails.gStableBalances.filter((gsb) => {
+              {stableCoins.map((stableCoin) => {
+                let balances = walletData.gStableBalances.filter((gsb) => {
                   return (
-                    gsb.currencyKey.localeCompare(gStableCoin.currencyKey) == 0
+                    gsb.currencyKey.localeCompare(stableCoin.currencyKey) == 0
                   );
                 });
 
@@ -170,23 +64,16 @@ const WalletDetails = () => {
                 return (
                   <li className="list-group-item d-flex justify-content-between">
                     <div>
-                      <span className="px-2">
-                        <img
-                          src={gStableCoin.icon}
-                          alt="USDD"
-                          width="32"
-                          height="32"
-                          className="rounded-circle flex-shrink-0"
-                        />
-                        <span>{gStableCoin.name}</span>
-                      </span>
+                      <StableIcon
+                        currencyKey={stableCoin.currencyKey}
+                        height="32"
+                      ></StableIcon>
                     </div>
-                    <div>{balance}</div>
+                    <div>{formatM(balance)}</div>
                   </li>
                 );
               })}
             </ul>
-            {rewardsJSX()}
           </>
         ) : (
           <>

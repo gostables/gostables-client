@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { usddContract } from "../contracts/usdContract";
 import walletPublisher from "../publishers/wallet";
-import usddImg from "../usdd.png";
+import USDDIcon from "./iconUSDD";
 import { ThreeDots } from "react-loader-spinner";
 import { getCurrency } from "../utils/currencies";
 import { getSwapPublisherByCurrencyKey } from "../publishers/publishers";
+import StableIcon from "./icon_gStable";
+import { formatM, formatUSD } from "../utils/currencyFormatter";
 
 const SwapExchange = (props) => {
   const [direction, setDirection] = useState(true);
@@ -59,18 +61,13 @@ const SwapExchange = (props) => {
             <label for="floatingInputGroup1">Value in USDD</label>
           </div>
           <span className="input-group-text">
-            <img
-              src={usddImg}
-              alt="USDD"
-              width="32"
-              height="32"
-              className="rounded-circle flex-shrink-0"
-            />
-            &nbsp; USDD
+            <USDDIcon height={32}></USDDIcon>
           </span>
         </div>
         {walletDetails ? (
-          <p className="small pb-3">Balance: {walletDetails.usddBalance}</p>
+          <p className="small pb-3">
+            Balance: {formatUSD.format(walletDetails.usddBalance)}
+          </p>
         ) : (
           <></>
         )}
@@ -89,7 +86,7 @@ const SwapExchange = (props) => {
         (gsb) => gsb.currencyKey.localeCompare(props.currencyKey) == 0
       );
       if (gsbList) {
-        balJSX = <>Balance: {gsbList[0].balance}</>;
+        balJSX = <>Balance: {formatM(gsbList[0].balance)}</>;
       }
     }
     return (
@@ -106,14 +103,10 @@ const SwapExchange = (props) => {
             <label for="floatingInputGroup2">Value in gStable</label>
           </div>
           <span className="input-group-text">
-            <img
-              src={getCurrency(props.currencyKey).icon}
-              alt="gStable"
-              width="32"
-              height="32"
-              className="rounded-circle flex-shrink-0"
-            />{" "}
-            &nbsp; {getCurrency(props.currencyKey).label}
+            <StableIcon
+              height={32}
+              currencyKey={props.currencyKey}
+            ></StableIcon>
           </span>
         </div>
         <p className="small pb-3">{balJSX}</p>
@@ -184,13 +177,19 @@ const SwapExchange = (props) => {
           {direction ? tokenJSX("For") : stableCoinJSX("For")}
 
           <div className="d-grid gap-2 mt-4">
-            <button className="btn btn-primary swap-btn" type="button" onClick={swap}>
+            <button
+              className="btn btn-primary swap-btn"
+              type="button"
+              onClick={swap}
+            >
               Swap
             </button>
             {swapFeesFactor ? (
               <div className="text-xs mt-20">
                 <span className="text-left">Fee:</span>
-                <span className="text-right"><b>{swapFeesFactor * 100}%</b></span>
+                <span className="text-right">
+                  <b>{swapFeesFactor * 100}%</b>
+                </span>
               </div>
             ) : (
               <></>
