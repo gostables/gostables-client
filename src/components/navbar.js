@@ -1,6 +1,9 @@
 import { NavLink } from "react-router-dom";
 import SelectCurrency from "../components/selectCurrency";
 import currencyPublisher from "../publishers/currency";
+import SwapIcon from "../svg/swap";
+import VaultIcon from "../svg/vault";
+import WalletIcon from "../svg/wallet";
 import { getCurrencies } from "../utils/currencies";
 import WalletConnect from "./walletConnect";
 
@@ -15,10 +18,10 @@ const getCurrenciesForDropDown = () => {
 
 const Navbar = () => {
   return (
-<div className="container justify-content-center  border-bottom">
-<nav class="navbar navbar-expand-lg navbar-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">
+    <div className="container justify-content-center  border-bottom">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">
             {
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -36,49 +39,65 @@ const Navbar = () => {
                 />
               </svg>
             }
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <div class="currency-select">
-            <SelectCurrency
-              setSelectedCoin={(val) =>
-                currencyPublisher.setCurrency(val.value)
-              }
-              options={getCurrenciesForDropDown()}
-              defaultValue={getCurrenciesForDropDown()[0]}
-            ></SelectCurrency>
-      </div>
-      <ul class="navbar-nav me-auto mb-lg-0">
-        <li class="nav-item">
-          <NavLink to="/admin" className="nav-link">
-              Admin
-          </NavLink>
-        </li>
-        <li class="nav-item">
-          <NavLink to="/swap" className="nav-link">
-              Swap
-          </NavLink>
-        </li>
-        <li class="nav-item">
-          <NavLink to="/vault" className="nav-link">
-              Vaults
-          </NavLink>
-        </li>
-      </ul>
-      <div class="btn btn-outline-primary wallet-btn">
-        <NavLink to="/wallet" className="nav-link">
-          <i class="bi bi-wallet2"></i> Wallet
-        </NavLink>
-      </div>
-      <div class="">
-        <button class="btn btn-primary web3-connect"><WalletConnect></WalletConnect></button>
-      </div>
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="currency-select">
+              <SelectCurrency
+                setSelectedCoin={(val) =>
+                  currencyPublisher.setCurrency(val.value)
+                }
+                options={getCurrenciesForDropDown()}
+                defaultValue={getCurrenciesForDropDown()[0]}
+              ></SelectCurrency>
+            </div>
+            <ul class="navbar-nav me-auto mb-lg-0">
+              {/* <li class="nav-item">
+                <NavLink to="/admin" className="nav-link">
+                  Admin
+                </NavLink>
+              </li> */}
+              <li class="nav-item">
+                <NavLink to="/swap" className="nav-link">
+                  <span className="px-2">
+                    <SwapIcon></SwapIcon>
+                  </span>
+                  Swap
+                </NavLink>
+              </li>
+              <li class="nav-item">
+                <NavLink to="/vault" className="nav-link">
+                  <span className="px-2">
+                    <VaultIcon></VaultIcon>
+                  </span>
+                  Vaults
+                </NavLink>
+              </li>
+            </ul>
+            <div class="btn btn-outline-primary wallet-btn">
+              <NavLink to="/wallet" className="nav-link">
+                <WalletIcon></WalletIcon> Wallet
+              </NavLink>
+            </div>
+            <div class="">
+              <button class="btn btn-primary web3-connect">
+                <WalletConnect></WalletConnect>
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
     </div>
-  </div>
-</nav>
-</div>
   );
 };
 
