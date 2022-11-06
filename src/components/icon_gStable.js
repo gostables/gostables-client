@@ -1,7 +1,7 @@
 import { getCurrency } from "../utils/currencies";
 
 const StableIcon = (props) => {
-  const { height, noTitle, currencyKey } = props;
+  const { height = 16, noTitle = false, currencyKey } = props;
   let curr = getCurrency(currencyKey);
   return (
     <>

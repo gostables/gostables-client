@@ -78,9 +78,9 @@ const WalletDashboard = (props) => {
 
   let colWidth = 12 / countColumns.true;
 
-  return (
-    <>
-      <div className={`col-sm-${colWidth}`}>
+  const detailsJSX = () => {
+    return (
+      <>
         {displayDetails ? (
           <WalletDetails
             walletData={walletData}
@@ -90,8 +90,13 @@ const WalletDashboard = (props) => {
         ) : (
           <></>
         )}
-      </div>
-      <div className={`col-sm-${colWidth}`}>
+      </>
+    );
+  };
+
+  const rewardsJSX = () => {
+    return (
+      <>
         {displayRewards ? (
           <WalletRewards
             walletData={walletData}
@@ -101,14 +106,46 @@ const WalletDashboard = (props) => {
         ) : (
           <></>
         )}
-      </div>
-      <div className={`col-sm-${colWidth}`}>
+      </>
+    );
+  };
+
+  const depositsJSX = () => {
+    return (
+      <>
         {displayDeposits ? (
           <WalletVaultDeposits walletData={walletData}></WalletVaultDeposits>
         ) : (
           <></>
         )}
-      </div>
+      </>
+    );
+  };
+
+  if (!stableCoins.length) {
+    return (
+      <>
+        <div className="mt-5 w-100 d-flex justify-content-center">
+          <ThreeDots
+            height="48"
+            width="48"
+            radius="9"
+            color="#4fa94d"
+            ariaLabel="three-dots-loading"
+            wrapperStyle={{}}
+            wrapperClassName=""
+            visible={true}
+          />
+        </div>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <div className={`col-sm-${colWidth}`}>{detailsJSX()}</div>
+      <div className={`col-sm-${colWidth}`}>{rewardsJSX()}</div>
+      <div className={`col-sm-${colWidth}`}>{depositsJSX()}</div>
     </>
   );
 };
