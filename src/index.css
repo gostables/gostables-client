@@ -171,6 +171,13 @@ li.nav-item {
     border-radius: 12px;
 }
 
+.empty-img {margin-top: 30px;}
+
+.empty-img img{
+  opacity: 0.2;
+  height: 64px;
+}
+
 .card-header.portfolio-bal, .card-header.dashboard{
   background-color: #01948d;
   color: #fff;
