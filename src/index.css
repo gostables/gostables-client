@@ -35,7 +35,7 @@ body {
 
 .currency-select{
   margin-left: 20px;
-  margin-right: 88px;
+  margin-right: 40px;
 }
 
 li.nav-item {
@@ -171,11 +171,11 @@ li.nav-item {
     border-radius: 12px;
 }
 
-.empty-img {margin-top: 30px;}
+.empty-img {margin-top: 50px;}
 
 .empty-img img{
-  opacity: 0.2;
-  height: 64px;
+  opacity: 0.15;
+  height: 80px;
 }
 
 .card-header.portfolio-bal, .card-header.dashboard{

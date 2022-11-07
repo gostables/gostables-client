@@ -28,7 +28,7 @@ const WalletRewards = (props) => {
           <div className="justify-content-center text-center empty-img">
             <img src={emptyImg} /><br/>
             <p className="text-muted small">No Pending Rewards yet.<br/>          
-            Earn with <a href="/vault">gStable Vaults</a>
+            Start earning with <a href="/vault">gStable Vaults</a>
           </p>
          </div> 
         </>
