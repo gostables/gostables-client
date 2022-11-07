@@ -61,11 +61,11 @@ const CurrencyList = {
     "gTTD",
     "Trinidad & Tobago Dollar",
     ttddImg,
-    "TX4hAg2DQXnPuuQHYuvTfnEH69c6vUe4fW" /*swapAddress */,
+    "TTRfHS3zCQKDDPQVPPebmAXq8BtxnqRRfZ" /*swapAddress */,
     "TQq9o4PahyoLociVzCnBMRRDdPZrNNkW1f" /*swapMarketAddress*/,
     "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU" /*swapStableAddress*/,
     "TY72rJ9tjnQSxgsqUDuXPUh2oPWC7cRmY6" /*gStableAddress*/,
-    "TADkkwYBXQ7mKQzd4wCZMV2CnkQXKWT2YX" /*vaultAddress */
+    "TFq1VGyhbMxPc85FtZ5x2QNZqBVsYX1DPL" /*vaultAddress */
   ),
   // XCD: new Currency(
   //   "XCD",

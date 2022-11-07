@@ -5,6 +5,7 @@ import ContractClientManager from "./contractClientManager";
 import DistributeRewards from "./distributeRewards";
 import GoStableBaseManager from "./goStableBaseManager";
 import SetLockInterval from "./setLockInterval";
+import TreasuryManager from "./treasuryManager";
 
 const VaultAdmin = (props) => {
   const [details, setDetails] = useState({
@@ -50,10 +51,6 @@ const VaultAdmin = (props) => {
         vaultContract.address
       );
 
-      // usdd data
-      let usdd = await usddContract();
-      let usddBalance = await usdd.balanceOf(currency.vaultAddress);
-
       vaultDetails = {
         ...vaultDetails,
         marketCoinBalance,
@@ -62,7 +59,6 @@ const VaultAdmin = (props) => {
         gStableCoinName,
         gStableCoinSymbol,
         gStableBalance,
-        usddBalance,
       };
       setDetails(vaultDetails);
       setVaultContract(vaultContract);
@@ -76,6 +72,7 @@ const VaultAdmin = (props) => {
       <div className="card-body">
         <h5 className="card-title text-center">Vault Admin</h5>
         <p>{window.tronWeb.address.fromHex(details.address)} </p>
+        <hr />
         <ContractClientManager
           address={getCurrency(props.currencyKey).vaultAddress}
           key={getCurrency(props.currencyKey).vaultAddress}
@@ -85,10 +82,13 @@ const VaultAdmin = (props) => {
         <p>
           {details.marketCoinName} : {details.marketCoinBalance}
         </p>
-        <p>
-          {details.gStableCoinName} : {details.gStableBalance}
-        </p>
-        <p>USDD : {details.usddBalance}</p>
+        <hr />
+        <TreasuryManager
+          address={getCurrency(props.currencyKey).vaultAddress}
+          key={
+            getCurrency(props.currencyKey).vaultAddress + "VaultTreasuryManager"
+          }
+        ></TreasuryManager>
         <hr />
         <GoStableBaseManager
           address={getCurrency(props.currencyKey).vaultAddress}
@@ -103,6 +103,9 @@ const VaultAdmin = (props) => {
           {...props}
         ></SetLockInterval>
         <hr />
+        <p>
+          {details.gStableCoinName} : {details.gStableBalance}
+        </p>
         <DistributeRewards {...props}></DistributeRewards>
       </div>
     </div>

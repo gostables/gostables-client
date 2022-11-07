@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import GoStableBaseContract from "../contracts/goStableBaseContract";
-import SetGoStableAddress, {
-  G_STABLE,
-  MARKET,
-  STABLE,
-} from "./setGoStableAddress";
+// import SetGoStableAddress, {
+//   G_STABLE,
+//   MARKET,
+//   STABLE,
+// } from "./setGoStableAddress";
 
 const GoStableBaseManager = (props) => {
   const { address } = props;

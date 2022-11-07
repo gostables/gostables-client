@@ -24,6 +24,7 @@ class GoStableBaseContract extends SmartContractBase {
       stableCoinAddress: await this.getStableCoinAddress(),
       marketAddress: await this.getMarketAddress(),
       gStableCoinAddress: await this.getgStableCoinAddress(),
+      treasuryStableCoinValue: this.getTreasuryStableCoinValue(),
     };
     return details;
   };
@@ -43,6 +44,13 @@ class GoStableBaseContract extends SmartContractBase {
     this.check();
     let c = await this.contract.getgStableCoinAddress().call();
     return c;
+  };
+  //
+  getTreasuryStableCoinValue = async () => {
+    this.check();
+    let balHex = await this.contract.treasuryStableCoinValue().call();
+    const bal = this.web3.utils.fromWei(String(balHex), "ether");
+    return bal;
   };
   // GET end
   // SET
@@ -77,6 +85,51 @@ class GoStableBaseContract extends SmartContractBase {
     });
   };
   //SET end
+  invest = async (_val) => {
+    this.check();
+    if (!_val) throw new Error(`Number : ${_val}`);
+
+    console.log("invest", this.web3.utils.toWei(String(_val), "ether"));
+
+    try {
+      await this.contract
+        .investIntoTreasury(
+          // _val,
+          this.web3.utils.toWei(String(_val), "ether")
+        )
+        .send({
+          feeLimit: 100_000_000,
+          callValue: 0,
+          shouldPollResponse: false,
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  withdrawFromTreasury = async (_val) => {
+    this.check();
+    if (!_val) throw new Error(`Number : ${_val}`);
+
+    console.log(
+      "withdrawFromTreasury",
+      this.web3.utils.toWei(String(_val), "ether")
+    );
+
+    try {
+      await this.contract
+        .withdrawFromTreasury(
+          // _val,
+          this.web3.utils.toWei(String(_val), "ether")
+        )
+        .send({
+          feeLimit: 100_000_000,
+          callValue: 0,
+          shouldPollResponse: false,
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 }
 
 export default GoStableBaseContract;

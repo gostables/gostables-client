@@ -15,9 +15,7 @@ const AdminPage = (props) => {
             <div className="col pb-3">
               <SwapAdmin currencyKey={props.currencyKey}></SwapAdmin>
             </div>
-            <div className="col">
-              <VaultAdmin currencyKey={props.currencyKey}></VaultAdmin>
-            </div>
+            <div className="col"></div>
             <div className="col">
               <GStableAdmin currencyKey={props.currencyKey}></GStableAdmin>
             </div>
@@ -26,23 +24,10 @@ const AdminPage = (props) => {
         <div className="col-sm-6">
           <div className="row>">
             <div className="col pb-6">
-              <SwapExchange currencyKey={props.currencyKey}></SwapExchange>
+              <VaultAdmin currencyKey={props.currencyKey}></VaultAdmin>
             </div>
-            <div className="col pb-3">
-              <div class="card">
-                <div class="card-body">
-                  <CurrencyVault
-                    currencyKey={props.currencyKey}
-                  ></CurrencyVault>
-                </div>
-              </div>
-            </div>
-            {/* <div className="col pb-3">
-              <WalletDetails></WalletDetails>
-            </div> */}
-            <div className="col pb-3">
-              <WalletDashboard></WalletDashboard>
-            </div>
+            <div className="col pb-3"></div>
+            <div className="col pb-3"></div>
           </div>
         </div>
       </div>

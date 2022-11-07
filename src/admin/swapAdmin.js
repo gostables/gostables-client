@@ -8,7 +8,9 @@ import ClearAccumulatedSwapFees from "./clearAccumulatedSwapFees";
 import ContractClientManager from "./contractClientManager";
 import GoStableBaseManager from "./goStableBaseManager";
 import SetConversionRatio from "./setConversionRatio";
+import SetRewardsPercent from "./setRewardsPercent";
 import SetSwapFeesFactor from "./setSwapFeesFactor";
+import TreasuryManager from "./treasuryManager";
 
 const SwapAdmin = (props) => {
   const [details, setDetails] = useState({
@@ -52,14 +54,6 @@ const SwapAdmin = (props) => {
       let { name: gStableCoinName, symbol: gStableCoinSymbol } =
         await gStableContract.getNameSymbol();
 
-      let gStableBalance = await gStableContract.balanceOf(
-        swapContract.address
-      );
-
-      // usdd data
-      let usdd = await usddContract();
-      let usddBalance = await usdd.balanceOf(currency.swapAddress);
-
       swapDetails = {
         ...swapDetails,
         marketCoinBalance,
@@ -67,8 +61,6 @@ const SwapAdmin = (props) => {
         marketCoinSymbol,
         gStableCoinName,
         gStableCoinSymbol,
-        gStableBalance,
-        usddBalance,
       };
       setDetails(swapDetails);
 
@@ -93,10 +85,13 @@ const SwapAdmin = (props) => {
         <p>
           {details.marketCoinName} : {details.marketCoinBalance}
         </p>
-        <p>
-          {details.gStableCoinName} : {details.gStableBalance}
-        </p>
-        <p>USDD : {details.usddBalance}</p>
+        <hr />
+        <TreasuryManager
+          address={getCurrency(props.currencyKey).swapAddress}
+          key={
+            getCurrency(props.currencyKey).swapAddress + "SwapTreasuryManager"
+          }
+        ></TreasuryManager>
         <hr />
         <GoStableBaseManager
           address={getCurrency(props.currencyKey).swapAddress}
@@ -105,7 +100,6 @@ const SwapAdmin = (props) => {
           }
         ></GoStableBaseManager>
         <hr />
-        <h6 className="card-title">Conversion Ratio</h6>
         <p>
           1 USD ≈ {details.conversion} {details.gStableCoinName}
         </p>
@@ -114,12 +108,13 @@ const SwapAdmin = (props) => {
           {...props}
         ></SetConversionRatio>
         <hr />
-        <h6 className="card-title">Protocol Fees</h6>
         <p>Swap Fees Factor : {details.swapFeesFactor}</p>
         <p>Accumulated Swap Fees : {details.accumulatedSwapFees}</p>
         <SetSwapFeesFactor swapContract={swapContract}></SetSwapFeesFactor>
         <hr />
-        <h6 className="card-title">Transfer Rewards</h6>
+        <p>Rewards Percent : {details.rewardsPC}</p>
+        <SetRewardsPercent swapContract={swapContract}></SetRewardsPercent>
+        <br />
         <ClearAccumulatedSwapFees {...props}></ClearAccumulatedSwapFees>
       </div>
     </div>

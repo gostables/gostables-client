@@ -29,6 +29,7 @@ class SwapContract extends SmartContractBase {
     let accumulatedSwapFees = await this.getAccumulatedSwapFees();
     let swapFeesFactor = await this.getSwapFeesFactor();
     let marketAddress = await this.getMarketAddress();
+    let rewardsPC = await this.getRewardsPercent();
     let swapDetails = {
       status: this.contract ? true : false,
       address: this.address,
@@ -37,6 +38,7 @@ class SwapContract extends SmartContractBase {
       accumulatedSwapFees,
       swapFeesFactor,
       marketAddress,
+      rewardsPC,
     };
     return swapDetails;
   };
@@ -54,7 +56,7 @@ class SwapContract extends SmartContractBase {
   getConversion = async () => {
     this.check();
     let cr = await this.contract.conversionRatio().call();
-    return cr / 100;
+    return cr / 10000;
   };
   getAccumulatedSwapFees = async () => {
     this.check();
@@ -66,13 +68,17 @@ class SwapContract extends SmartContractBase {
     let c = await this.contract.swapFeesFactor().call();
     return c / 10000;
   };
+  getRewardsPercent = async () => {
+    this.check();
+    let c = await this.contract.rewardPC().call();
+    return String(c);
+  };
   // GET end
   // SET
   setConversion = async (cr) => {
     this.check();
     if (!cr) throw new Error(`CR : ${cr}`);
-
-    await this.contract.setConversion(cr * 100).send({
+    await this.contract.setConversion(cr * 10000).send({
       feeLimit: 100_000_000,
       callValue: 0,
       shouldPollResponse: false,
@@ -81,7 +87,6 @@ class SwapContract extends SmartContractBase {
   setSwapFeesFactor = async (sff) => {
     this.check();
     if (!sff) throw new Error(`SFF : ${sff}`);
-
     await this.contract.setSwapFeesFactor(sff * 10000).send({
       feeLimit: 100_000_000,
       callValue: 0,
@@ -103,6 +108,15 @@ class SwapContract extends SmartContractBase {
     if (!address) throw new Error(`Address : ${address}`);
 
     await this.contract.setMarket(address).send({
+      feeLimit: 100_000_000,
+      callValue: 0,
+      shouldPollResponse: false,
+    });
+  };
+  setRewardsPercent = async (rp) => {
+    this.check();
+    if (!rp) throw new Error(`SFF : ${rp}`);
+    await this.contract.setRewardsPercent(rp).send({
       feeLimit: 100_000_000,
       callValue: 0,
       shouldPollResponse: false,
@@ -155,7 +169,7 @@ class SwapContract extends SmartContractBase {
   clearAccumulatedSwapFees = async (vaultAddress) => {
     this.check();
     if (!vaultAddress) throw new Error(`Vault Address : ${vaultAddress}`);
-
+    debugger;
     try {
       await this.contract.transferRewards(vaultAddress).send({
         feeLimit: 100_000_000,
