@@ -48,7 +48,6 @@ li.nav-item {
 
 .navbar-expand-lg .navbar-collapse.show .currency-select{
   margin-top: 30px;
-  max-width: 260px;
 }
 
 .modal-content a.nav-link.active {
@@ -61,7 +60,7 @@ li.nav-item {
   margin-top: 30px!important
  }
 
-.select__control{    border-radius: 20px!important;}
+.select__control, .wallet-btn{border-radius: 20px!important;}
 
 .swap-btn{padding: 15px!important;}
 
@@ -154,6 +153,29 @@ li.nav-item {
     margin-bottom: 40px;
     border-bottom: 1px solid #00000020;
     padding: 11px;
+}
+
+
+.lock-icon{
+    background-color: #ff7851;
+}
+
+.unlock-icon{
+    background-color: #01948d;
+}
+
+.lock-icon, .unlock-icon{
+    padding: 8px 12px;
+    color: #fff;
+    margin-right: 5px;
+    border-radius: 12px;
+}
+
+.empty-img {margin-top: 30px;}
+
+.empty-img img{
+  opacity: 0.2;
+  height: 64px;
 }
 
 .card-header.portfolio-bal, .card-header.dashboard{

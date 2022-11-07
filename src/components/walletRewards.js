@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import walletPublisher from "../publishers/wallet";
 import usddImg from "../usdd.png";
+import emptyImg from "../empty.png";
 import { ThreeDots } from "react-loader-spinner";
 import { getCurrencies, getCurrency } from "../utils/currencies";
 import StableIcon from "./icon_gStable";
@@ -24,10 +25,12 @@ const WalletRewards = (props) => {
     if (!rewards.length) {
       return (
         <>
-          <p className="my-2">You have not earned any rewards as yet.</p>
-          <p>
-            Earn Rewards <a href="/vault">by supporting goStables </a>
+          <div className="justify-content-center text-center empty-img">
+            <img src={emptyImg} /><br/>
+            <p className="text-muted small">No Pending Rewards yet.<br/>          
+            Earn with <a href="/vault">gStable Vaults</a>
           </p>
+         </div> 
         </>
       );
     }

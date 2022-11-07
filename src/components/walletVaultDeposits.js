@@ -2,6 +2,7 @@ import usddImg from "../usdd.png";
 import { ThreeDots } from "react-loader-spinner";
 import { getCurrencies, getCurrency } from "../utils/currencies";
 import USDDIcon from "./iconUSDD";
+import emptyImg from "../empty.png";
 import { formatUSD } from "../utils/currencyFormatter";
 
 const WalletVaultDeposits = (props) => {
@@ -17,10 +18,12 @@ const WalletVaultDeposits = (props) => {
     if (!rewards.length) {
       return (
         <>
-          <p>You have not made any Deposits as yet.</p>
-          <p>
-            Deposit USDD <a href="/vault">on our Vaults</a> and earn rewards!
+          <div className="justify-content-center text-center empty-img">
+            <img src={emptyImg} /><br/>
+            <p className="text-muted small">No Vault Deposits yet.<br/>          
+            Earn with <a href="/vault">gStable Vaults</a>
           </p>
+         </div> 
         </>
       );
     }
