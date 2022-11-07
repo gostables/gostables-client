@@ -12,6 +12,7 @@ const VaultAdmin = (props) => {
     status: false,
     address: "",
     interval: "",
+    allocatedRewards: "",
     stableCoinAddress: "",
     marketAddress: "",
     marketCoinBalance: 0,
@@ -105,6 +106,12 @@ const VaultAdmin = (props) => {
         <hr />
         <p>
           {details.gStableCoinName} : {details.gStableBalance}
+        </p>
+        <p>Allocated Rewards : {details.allocatedRewards}</p>
+        <p className="small muted">
+          You should not allocate more than{" "}
+          {details.gStableBalance - details.allocatedRewards}{" "}
+          {details.gStableCoinName}
         </p>
         <DistributeRewards {...props}></DistributeRewards>
       </div>

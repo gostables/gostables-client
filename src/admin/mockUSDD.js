@@ -64,7 +64,7 @@ const MockUSDD = () => {
               type="button"
               onClick={() => mintUSDD()}
             >
-              Get !
+              Get NILE USDD
             </button>
           )}
         </div>

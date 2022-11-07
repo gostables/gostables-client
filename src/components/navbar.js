@@ -5,6 +5,7 @@ import SwapIcon from "../svg/swap";
 import VaultIcon from "../svg/vault";
 import WalletIcon from "../svg/wallet";
 import { getCurrencies } from "../utils/currencies";
+import USDDIcon from "./iconUSDD";
 import WalletConnect from "./walletConnect";
 
 const getCurrenciesForDropDown = () => {
@@ -62,11 +63,16 @@ const Navbar = () => {
               ></SelectCurrency>
             </div>
             <ul class="navbar-nav me-auto mb-lg-0">
-              {/* <li class="nav-item">
+              <li class="nav-item">
                 <NavLink to="/admin" className="nav-link">
                   Admin
                 </NavLink>
-              </li> */}
+              </li>
+              <li class="nav-item">
+                <NavLink to="/faucets" className="nav-link">
+                  <USDDIcon height={16} noTitle={true}></USDDIcon> Faucet
+                </NavLink>
+              </li>
               <li class="nav-item">
                 <NavLink to="/swap" className="nav-link">
                   <span className="px-2">

@@ -8,7 +8,7 @@ const DistributeRewards = (props) => {
       let currency = getCurrency(props.currencyKey);
       let vaultContract = await currency.vaultContract();
       await vaultContract.setRewards(amount);
-      // await vaultContract.distributeRewards();
+      setAmount(0);
     } catch (error) {
       console.error(error);
     }
@@ -39,7 +39,7 @@ const DistributeRewards = (props) => {
               className="btn btn-primary"
               onClick={() => distribute()}
             >
-              Distribute Rewards
+              Allocate Rewards
             </button>
           </div>
         </div>

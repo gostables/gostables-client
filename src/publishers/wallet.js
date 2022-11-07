@@ -74,7 +74,7 @@ class WalletPublisher {
         vaultBalances: vaultBalances,
       };
       this.notify();
-    }, 10 * 1000);
+    }, 3 * 1000);
   };
 
   attach = (observer) => {
