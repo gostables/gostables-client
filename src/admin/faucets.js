@@ -6,7 +6,7 @@ const AdminFaucets = () => {
   return (
     <div className="container">
       <div className="row mt-5 d-flex justify-content-center">
-        <div className="col-sm-6">
+        <div className="col-sm-4">
           <MockUSDD></MockUSDD>
         </div>
       </div>

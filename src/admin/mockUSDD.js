@@ -40,7 +40,7 @@ const MockUSDD = () => {
   };
 
   return (
-    <div className="card">
+    <div className="card" style={{ width: "18rem" }}>
       <div className="card-body">
         <h5 className="card-title">NILE USDD Faucet</h5>
         <div className="mt-5">
