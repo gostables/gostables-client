@@ -68,6 +68,10 @@ li.nav-item {
 
 .swap-btn{padding: 15px!important;}
 
+.web3-connect-dark{
+  background-color: #111!important;
+}
+
 .web3-connect{
     background: #01948d!important;
     color: #fff!important;
@@ -91,7 +95,6 @@ li.nav-item {
   color: #fff!important;
   font-size: 12px;
   padding-top: 3px;
-  border-radius: 30px;
 }
 
 .wallet-card .card-body, .dash-card .card-body, .swap-card .card-body, .vault-card .card-body{

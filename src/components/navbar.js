@@ -77,9 +77,7 @@ const Navbar = () => {
               </NavLink>
             </div>
             <div class="">
-              <button class="btn btn-primary web3-connect">
                 <WalletConnect></WalletConnect>
-              </button>
             </div>
           </div>
         </div>

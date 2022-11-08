@@ -19,27 +19,33 @@ const WalletConnect = () => {
 
   switch (walletDetails.status) {
     case -1:
-      return <div className={`${className} text-warning`}>Connect Wallet</div>;
+      return (
+        <>
+        <button class="btn btn-primary web3-connect-dark">
+          <div className={`${className} text-warning`}>Connect Walllet</div>
+        </button>
+        </>);
     case 1:
       return (
         <>
-          <div className={`${className} text-success text-center text-xxs`}>
-            {getMaskedAddress(walletDetails.address)}
-            {" / "}
-            {getNetworkName(walletDetails.network)}
-          </div>
-          {/* <div
-            className={`${className} text-success small text-center text-xs`}
-          >
-            {getNetworkName(walletDetails.network)}
-          </div> */}
+          <button class="btn btn-primary web3-connect">
+            <div className={`${className} text-success text-center text-xxs`}>
+              {getMaskedAddress(walletDetails.address)}
+              {" / "}
+              {getNetworkName(walletDetails.network)}
+            </div>
+          </button>
         </>
       );
     case -2:
       return (
+      <>
+      <button class="btn btn-primary web3-connect-dark">
         <div className={`${className} text-danger`}>
           Please install TronLink
         </div>
+      </button>
+      </>
       );
     default:
       return (
