@@ -82,7 +82,7 @@ const WalletDetails = (props) => {
                 height="64"
                 width="64"
                 radius="9"
-                color="#fff"
+                color="#4fa94d"
                 ariaLabel="three-dots-loading"
                 wrapperStyle={{}}
                 wrapperClassName=""
