@@ -48,7 +48,7 @@ const WalletConnect = () => {
             height="26"
             width="26"
             radius="9"
-            color="#4fa94d"
+            color="#fff"
             ariaLabel="three-dots-loading"
             wrapperStyle={{}}
             wrapperClassName=""

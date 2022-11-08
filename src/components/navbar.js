@@ -19,7 +19,7 @@ const getCurrenciesForDropDown = () => {
 
 const Navbar = () => {
   return (
-    <div className="container justify-content-center  border-bottom">
+    <div className="container justify-content-center">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
           <a class="navbar-brand" href="/">

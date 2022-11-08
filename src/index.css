@@ -8,9 +8,13 @@ body {
 }
 
 .bg {
-  background-color: #e6fbea !important;
+    background: linear-gradient(180deg, #01948d 300px, #e6fbea 0%)!important;
+  /*background-color: #01948d !important;*/
 }
 
+.navbar a {
+    color: #fff!important;
+}
 
 .container.justify-content-center{margin-top: 20px;}
 
@@ -99,13 +103,15 @@ li.nav-item {
 
 .wallet-card .card-header, .dash-card .card-header, .swap-card .card-header, .vault-card .card-header{
   border: none!important;
-  margin-top: 0px!important;
+  margin-top: 0px;
 }
+
+.vault-card .card-header{  margin-top: 20px!important;}
 
 .wallet-card, .dash-card, .vault-card, .swap-card {
   padding-bottom: 40px;
   /*background-color: transparent!important;*/
-  background: linear-gradient(180deg, #01948d 200px, #e6fbea 0%)!important;
+  background: linear-gradient(180deg, #01948d 213px, #e6fbea 0%)!important;
   /*border: none!important;*/
 }
 

@@ -92,8 +92,8 @@ const WalletVaultDeposits = (props) => {
           <>
             <div className="mt-2 w-100 d-flex justify-content-center">
               <ThreeDots
-                height="32"
-                width="32"
+                height="64"
+                width="64"
                 radius="9"
                 color="#4fa94d"
                 ariaLabel="three-dots-loading"

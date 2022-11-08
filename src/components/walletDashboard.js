@@ -127,10 +127,10 @@ const WalletDashboard = (props) => {
       <>
         <div className="mt-5 w-100 d-flex justify-content-center">
           <ThreeDots
-            height="48"
-            width="48"
+            height="64"
+            width="64"
             radius="9"
-            color="#4fa94d"
+            color="#fff"
             ariaLabel="three-dots-loading"
             wrapperStyle={{}}
             wrapperClassName=""

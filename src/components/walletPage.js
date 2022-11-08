@@ -5,7 +5,7 @@ import WalletVaultDeposits from "./walletVaultDeposits";
 const WalletPage = () => {
   return (
     <div className="container">
-      <div className="row mt-5">
+      <div className="row mt-3">
         <WalletDashboard
           displayDetails={true}
           displayDeposits={true}
