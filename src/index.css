@@ -75,6 +75,10 @@ li.nav-item {
   background-color: #111!important;
 }
 
+.web3-dark svg {
+    margin: 3px 0px 0px 18px;
+}
+
 .web3-connect{
     background: #01948d;
     color: #fff!important;
