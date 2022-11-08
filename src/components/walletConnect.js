@@ -40,7 +40,7 @@ const WalletConnect = () => {
     case -2:
       return (
       <>
-      <button class="btn btn-primary web3-connect-dark">
+      <button class="btn btn-primary web3-connect web3-dark">
         <div className={`${className} text-danger`}>
           Please install TronLink
         </div>
