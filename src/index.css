@@ -190,8 +190,8 @@ li.nav-item {
 }
 
 
-.dash-card, .wallet-card, .swap-card .vault-card{
-  min-height: 600px;
+.dash-card, .wallet-card, .swap-card .vault-card, .faucet{
+  min-height: 630px;
 }
 
 .currency-selector select{

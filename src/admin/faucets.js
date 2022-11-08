@@ -4,7 +4,7 @@ import WalletDetails from "../components/walletDetails";
 
 const AdminFaucets = () => {
   return (
-    <div className="container">
+    <div className="container faucet">
       <div className="row mt-5 d-flex justify-content-center">
         <div className="col-sm-4">
           <MockUSDD></MockUSDD>

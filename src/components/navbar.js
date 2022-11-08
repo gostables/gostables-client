@@ -63,11 +63,7 @@ const Navbar = () => {
               ></SelectCurrency>
             </div>
             <ul class="navbar-nav me-auto mb-lg-0">
-              <li class="nav-item">
-                <NavLink to="/admin" className="nav-link">
-                  Admin
-                </NavLink>
-              </li>
+
               <li class="nav-item">
                 <NavLink to="/faucets" className="nav-link">
                   <USDDIcon height={16} noTitle={true}></USDDIcon> Faucet
@@ -92,7 +88,7 @@ const Navbar = () => {
             </ul>
             <div class="btn btn-outline-primary wallet-btn">
               <NavLink to="/wallet" className="nav-link">
-                <WalletIcon></WalletIcon> Wallet
+                <span className="px-2"><WalletIcon></WalletIcon></span> Wallet
               </NavLink>
             </div>
             <div class="">
