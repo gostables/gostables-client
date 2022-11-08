@@ -21,7 +21,7 @@ const WalletConnect = () => {
     case -1:
       return (
         <>
-        <button class="btn btn-primary web3-connect-dark">
+        <button class="btn btn-primary web3-connect web3-dark">
           <div className={`${className} text-warning`}>Connect Walllet</div>
         </button>
         </>);

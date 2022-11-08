@@ -68,12 +68,15 @@ li.nav-item {
 
 .swap-btn{padding: 15px!important;}
 
-.web3-connect-dark{
+.web3-dark:hover{
+  background-color: #434343!important;
+}
+.web3-dark{
   background-color: #111!important;
 }
 
 .web3-connect{
-    background: #01948d!important;
+    background: #01948d;
     color: #fff!important;
     border-radius: 12px!important;
     box-shadow: 0px 0px 3px #074643;
