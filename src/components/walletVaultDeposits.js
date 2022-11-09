@@ -19,7 +19,6 @@ const WalletVaultDeposits = (props) => {
       return (
         <>
           <div className="justify-content-center text-center empty-img">
-          /*https://iconscout.com/icon/no-coins-4414925*/
             <img src={emptyImg} /><br/>
             <p className="text-muted small">No Vault Deposits yet.<br/>          
             Start earning with <a href="/vault">gStable Vaults</a>
