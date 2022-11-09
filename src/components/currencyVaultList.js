@@ -4,6 +4,7 @@ import usddImg from "../usdd.png";
 import gttdImg from "../ttdd.png";
 import trxImg from "../trx.png";
 import btcImg from "../btc.png";
+import ethImg from "../eth.png";
 import { useEffect, useState } from "react";
 import USDDIcon from "./iconUSDD";
 import { formatUSD } from "../utils/currencyFormatter";
@@ -86,13 +87,14 @@ const CurrencyVaultList = (props) => {
                 type="button"
                 class="btn btn-primary"
                 data-bs-toggle="modal"
-                data-bs-target="#modal"
+                data-bs-target="#v1modal"
               >
                 Open
               </button>
             </div>
           </div>
         </div>
+
 
         <div class="card-body vault-item">
           <div class="row mt-4">
@@ -131,6 +133,8 @@ const CurrencyVaultList = (props) => {
           </div>
         </div>
 
+
+
         <div class="card-body vault-item">
           <div class="row mt-4">
             <div class="col-sm-12 col-md-4">
@@ -168,10 +172,48 @@ const CurrencyVaultList = (props) => {
           </div>
         </div>
 
+
+        <div class="card-body vault-item">
+          <div class="row mt-4">
+            <div class="col-sm-12 col-md-4">
+              <img
+                src={ethImg}
+                alt="gStable"
+                width="32"
+                height="32"
+                class="rounded-circle flex-shrink-0 vault-img"
+              />
+              <div class="currency-name">
+                <b>ETH</b>
+                <p class="small">Ethereum</p>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3 text-center">
+              <b>TVL</b>
+              <p class="small">--</p>
+            </div>
+            <div class="col-sm-6 col-md-3 text-center">
+              <b>My Supply</b>
+              <p class="small">--</p>
+            </div>
+            <div class="col-sm-12 col-md-2 text-center">
+              <button
+                type="button"
+                class="btn btn-secondary disabled"
+                data-bs-toggle="modal"
+                data-bs-target="#"
+              >
+                Inactive
+              </button>
+            </div>
+          </div>
+        </div>
+
         <div class="coming-soon text-center">More Vaults coming soon...</div>
       </div>
 
-      <div class="modal vault-modal fade" id="modal" tabindex="-1">
+      <div class="modal vault-modal fade" id="v1modal" tabindex="-1">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header shadow-primary">

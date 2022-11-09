@@ -68,8 +68,19 @@ li.nav-item {
 
 .swap-btn{padding: 15px!important;}
 
+.web3-dark:hover{
+  background-color: #434343!important;
+}
+.web3-dark{
+  background-color: #111!important;
+}
+
+.web3-dark svg {
+    margin: 3px 0px 0px 18px;
+}
+
 .web3-connect{
-    background: #01948d!important;
+    background: #01948d;
     color: #fff!important;
     border-radius: 12px!important;
     box-shadow: 0px 0px 3px #074643;
@@ -91,7 +102,6 @@ li.nav-item {
   color: #fff!important;
   font-size: 12px;
   padding-top: 3px;
-  border-radius: 30px;
 }
 
 .wallet-card .card-body, .dash-card .card-body, .swap-card .card-body, .vault-card .card-body{
