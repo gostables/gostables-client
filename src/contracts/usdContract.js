@@ -67,4 +67,12 @@ class USDContract {
 
 const usddContract_ = new USDContract(USDDAddress, StableCoinType.USDD);
 
-export const usddContract = async () => await usddContract_.init();
+let usddContractInitialized = null;
+
+export const usddContract = async () => {
+  if (!usddContractInitialized) {
+    console.log("initializing USDD contract");
+    usddContractInitialized = await usddContract_.init();
+  }
+  return usddContractInitialized;
+};

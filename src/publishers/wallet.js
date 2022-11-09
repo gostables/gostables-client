@@ -11,61 +11,67 @@ class WalletPublisher {
   constructor() {
     this.init();
   }
-  init = async () => {
-    this.walletDetails = await getWalletDetails();
-    console.log(this.walletDetails);
-
-    this.usdd = await usddContract();
-
-    this.timer = setInterval(async () => {
+  get_gStableBalances = async (currencies) => {
+    let gStableBalances = [];
+    for (let index = 0; index < currencies.length; index += 1) {
+      const currency = currencies[index];
+      let gStableContract = await currency.gStableContract();
+      let gStableBal = await gStableContract.balanceOf(
+        this.walletDetails.address
+      );
+      gStableBalances.push({
+        currencyKey: currency.key,
+        balance: gStableBal,
+      });
+    }
+    return gStableBalances;
+  };
+  getVaultBalances = async (currencies) => {
+    let vaultBalances = [];
+    for (let index = 0; index < currencies.length; index += 1) {
+      const currency = currencies[index];
+      let vaultContract = await currency.vaultContract();
+      let vaultBalData = await vaultContract.balanceOf(
+        this.walletDetails.address
+      );
+      let vaultRewards = await vaultContract.getPendingRewards(
+        this.walletDetails.address
+      );
+      vaultBalances.push({
+        currencyKey: currency.key,
+        balanceData: vaultBalData,
+        rewards: vaultRewards,
+      });
+    }
+    return vaultBalances;
+  };
+  getUSDDBalance = async () => {
+    let usddBal;
+    try {
+      if (this.usdd) {
+        usddBal = await this.usdd.balanceOf(this.walletDetails.address);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+    return usddBal;
+  };
+  getData = async () => {
+    {
       try {
         // Continuous polling as per https://github.com/ibnzUK/Tron-Wallet-React-Integration/blob/main/src/App.js
         this.walletDetails = await getWalletDetails();
       } catch (error) {
         console.error(error);
       }
-      let usddBal;
-      try {
-        if (this.usdd) {
-          usddBal = await this.usdd.balanceOf(this.walletDetails.address);
-          // console.log("usddBal", usddBal);
-        }
-      } catch (error) {
-        console.error(error);
-      }
+      let usddBal = await this.getUSDDBalance();
 
       let currencies = getCurrencies();
       // reading gStable Balances
-      let gStableBalances = [];
-      for (let index = 0; index < currencies.length; index += 1) {
-        const currency = currencies[index];
-        let gStableContract = await currency.gStableContract();
-        let gStableBal = await gStableContract.balanceOf(
-          this.walletDetails.address
-        );
-        gStableBalances.push({
-          currencyKey: currency.key,
-          balance: gStableBal,
-        });
-      }
+      let gStableBalances = await this.get_gStableBalances(currencies);
 
       // reading vault Balances
-      let vaultBalances = [];
-      for (let index = 0; index < currencies.length; index += 1) {
-        const currency = currencies[index];
-        let vaultContract = await currency.vaultContract();
-        let vaultBalData = await vaultContract.balanceOf(
-          this.walletDetails.address
-        );
-        let vaultRewards = await vaultContract.getPendingRewards(
-          this.walletDetails.address
-        );
-        vaultBalances.push({
-          currencyKey: currency.key,
-          balanceData: vaultBalData,
-          rewards: vaultRewards,
-        });
-      }
+      let vaultBalances = await this.getVaultBalances(currencies);
 
       this.walletDetails = {
         ...this.walletDetails,
@@ -74,7 +80,15 @@ class WalletPublisher {
         vaultBalances: vaultBalances,
       };
       this.notify();
-    }, 3 * 1000);
+    }
+  };
+  init = async () => {
+    this.walletDetails = await getWalletDetails();
+    console.log(this.walletDetails);
+
+    this.usdd = await usddContract();
+
+    this.timer = setInterval(() => this.getData(), 3 * 1000);
   };
 
   attach = (observer) => {

@@ -23,8 +23,9 @@ const SwapAdmin = (props) => {
     marketAddress: "",
     marketCoinBalance: 0,
   });
-  const [swapContract, setSwapContract] = useState({});
+  const [swapContract, setSwapContract] = useState(null);
   useEffect(() => {
+    initSwapContract();
     let timer = setInterval(() => {
       initSwapContract();
     }, 5 * 1000);
@@ -37,15 +38,19 @@ const SwapAdmin = (props) => {
 
   const initSwapContract = async () => {
     try {
+      let swapContract_ = swapContract;
       let currency = getCurrency(props.currencyKey);
-      let swapContract = await currency.swapContract();
+      if (!swapContract) {
+        swapContract_ = await currency.swapContract();
+        setSwapContract(swapContract_);
+      }
 
-      let swapDetails = await swapContract.getDetails();
+      let swapDetails = await swapContract_.getDetails();
 
       //Market coin data
       let marketContract = await currency.marketContract();
       let marketCoinBalance = await marketContract.balanceOf(
-        swapContract.address
+        swapContract_.address
       );
       let { name: marketCoinName, symbol: marketCoinSymbol } =
         await marketContract.getNameSymbol();
@@ -63,8 +68,6 @@ const SwapAdmin = (props) => {
         gStableCoinSymbol,
       };
       setDetails(swapDetails);
-
-      setSwapContract(swapContract);
     } catch (error) {
       console.error(error);
     }

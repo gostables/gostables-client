@@ -1,10 +1,5 @@
 import { useEffect, useState } from "react";
 import GoStableBaseContract from "../contracts/goStableBaseContract";
-// import SetGoStableAddress, {
-//   G_STABLE,
-//   MARKET,
-//   STABLE,
-// } from "./setGoStableAddress";
 
 const GoStableBaseManager = (props) => {
   const { address } = props;
@@ -13,12 +8,9 @@ const GoStableBaseManager = (props) => {
   const [gStableCoinAddress, setgStableCoinAddress] = useState("");
 
   useEffect(() => {
-    let timer = setInterval(() => {
-      read();
-    }, 5 * 1000);
+    read();
 
     return () => {
-      clearInterval(timer);
       console.log("unmounting GoStableBaseManager");
     };
   }, []);
@@ -40,29 +32,16 @@ const GoStableBaseManager = (props) => {
       <p className="fw-bold">
         StableCoin : {window.tronWeb.address.fromHex(stableCoinAddress)}{" "}
       </p>
-      {/* <SetGoStableAddress
-        type={STABLE}
-        address={address}
-        key={"G_STABLE"}
-      ></SetGoStableAddress> */}
+
       <hr />
       <p className="fw-bold">
         Market : {window.tronWeb.address.fromHex(marketAddress)}{" "}
       </p>
-      {/* <SetGoStableAddress
-        type={MARKET}
-        address={address}
-        key={"MARKET"}
-      ></SetGoStableAddress> */}
+
       <hr />
       <p className="fw-bold">
         gStable : {window.tronWeb.address.fromHex(gStableCoinAddress)}{" "}
       </p>
-      {/* <SetGoStableAddress
-        type={G_STABLE}
-        address={address}
-        key={"STABLE"}
-      ></SetGoStableAddress> */}
     </>
   );
 };

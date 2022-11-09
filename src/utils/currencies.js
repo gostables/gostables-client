@@ -16,6 +16,10 @@ class Currency {
   swapStableAddress = null;
   gStableAddress = null;
   vaultAddress = null;
+  swapContract_ = null;
+  vaultContract_ = null;
+  marketContract_ = null;
+  gStableContract_ = null;
   constructor(
     _key,
     _label,
@@ -38,20 +42,36 @@ class Currency {
     this.vaultAddress = _vaultAddress;
   }
   swapContract() {
-    const contract_ = new SwapContract(this.swapAddress);
-    return contract_.init();
+    if (!this.swapContract_) {
+      console.log("initializing SwapContract");
+      const contract_ = new SwapContract(this.swapAddress);
+      this.swapContract_ = contract_.init();
+    }
+    return this.swapContract_;
   }
   vaultContract() {
-    const contract_ = new VaultContract(this.vaultAddress);
-    return contract_.init();
+    if (!this.vaultContract_) {
+      console.log("initializing VaultContract");
+      const contract_ = new VaultContract(this.vaultAddress);
+      this.vaultContract_ = contract_.init();
+    }
+    return this.vaultContract_;
   }
   marketContract() {
-    const contract_ = new MarketContract(this.swapMarketAddress);
-    return contract_.init();
+    if (!this.marketContract_) {
+      console.log("initializing MarketContract");
+      const contract_ = new MarketContract(this.swapMarketAddress);
+      this.marketContract_ = contract_.init();
+    }
+    return this.marketContract_;
   }
   gStableContract() {
-    const contract_ = new gStableContract(this.gStableAddress);
-    return contract_.init();
+    if (!this.gStableContract_) {
+      console.log("initializing gStableContract");
+      const contract_ = new gStableContract(this.gStableAddress);
+      this.gStableContract_ = contract_.init();
+    }
+    return this.gStableContract_;
   }
 }
 

@@ -10,17 +10,14 @@ const ContractClientManager = (props) => {
   });
   const [, setContract] = useState({});
   useEffect(() => {
-    let timer = setInterval(() => {
-      initContract();
-    }, 5 * 1000);
+    getData();
 
     return () => {
-      clearInterval(timer);
       console.log("unmounting ContractClientManager");
     };
   }, []);
 
-  const initContract = async () => {
+  const getData = async () => {
     try {
       let contract_ = new ClientsContract(props.address);
 
@@ -47,6 +44,9 @@ const ContractClientManager = (props) => {
           );
         })}
       </ul>
+      <button className="btn btn-secondary btn-sm" onClick={getData}>
+        Refresh
+      </button>
       <AddClientAddress address={details.address}></AddClientAddress>
     </>
   );

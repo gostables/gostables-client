@@ -21,6 +21,7 @@ const WalletDashboard = (props) => {
   const [stableCoins, setStableCoins] = useState([]);
 
   useEffect(() => {
+    walletPublisher.getUSDDBalance();
     walletPublisher.attach(setWalletDetails);
     return () => {
       walletPublisher.detach(setWalletDetails);
@@ -28,8 +29,20 @@ const WalletDashboard = (props) => {
   }, []);
 
   useEffect(() => {
-    init();
+    getBalances();
+    return () => {
+      console.log("unmounting WalletDashboard balances");
+    };
+  }, []);
 
+  const getBalances = async () => {
+    let usddBalance = await walletPublisher.getUSDDBalance();
+    let vaultBalances = await walletPublisher.getVaultBalances();
+    setWalletDetails({ ...walletData, usddBalance, vaultBalances });
+  };
+
+  useEffect(() => {
+    init();
     return () => {
       console.log("unmounting WalletDashboard");
     };

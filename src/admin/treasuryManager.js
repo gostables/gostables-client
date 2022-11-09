@@ -10,12 +10,9 @@ const TreasuryManager = (props) => {
   const [usddBalance, setUSDDBalance] = useState(0);
 
   useEffect(() => {
-    let timer = setInterval(() => {
-      read();
-    }, 5 * 1000);
+    read();
 
     return () => {
-      clearInterval(timer);
       console.log("unmounting TreasuryManager");
     };
   }, []);
@@ -43,6 +40,9 @@ const TreasuryManager = (props) => {
         Available USDD is the USDD that is NOT yet invested in JLM
       </p>
       <p className="fw-bold">Available USDD : {usddBalance}</p>
+      <button className="btn btn-secondary btn-sm" onClick={read}>
+        Refresh
+      </button>
       <p className="small muted pt-3">Invest from Available</p>
       <InvestAvailable {...props}></InvestAvailable>
       <p className="small muted pt-3">Withdraw from Invested</p>
