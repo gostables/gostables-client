@@ -26,11 +26,14 @@ const WalletRewards = (props) => {
       return (
         <>
           <div className="justify-content-center text-center empty-img">
-            <img src={emptyImg} /><br/>
-            <p className="text-muted small">No Pending Rewards yet.<br/>          
-            Start earning with <a href="/vault">gStable Vaults</a>
-          </p>
-         </div> 
+            <img src={emptyImg} />
+            <br />
+            <p className="text-muted small">
+              No Pending Rewards yet.
+              <br />
+              Start earning with <a href="/vault">gStable Vaults</a>
+            </p>
+          </div>
         </>
       );
     }
@@ -39,7 +42,7 @@ const WalletRewards = (props) => {
         <div className="list-group"></div>
         {walletData.vaultBalances.map((vb) => (
           <>
-            <div className="d-flex justify-content-between w-100">
+            <div className="d-flex justify-content-between w-100 py-2">
               <p>
                 <StableIcon
                   currencyKey={vb.currencyKey}

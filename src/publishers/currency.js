@@ -4,6 +4,7 @@ class CurrencyPublisher {
   currencyKey = getCurrencies()[0].key;
   observers = [];
   setCurrency = (currencyKey_) => {
+    console.log("updatedCurrency", currencyKey_);
     this.currencyKey = currencyKey_;
     this.notify();
   };

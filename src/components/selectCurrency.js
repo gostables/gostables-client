@@ -2,16 +2,16 @@ import Select, { components } from "react-select";
 // https://react-select.com/home
 
 const styles = {
-   fontSize: '14px',
-   display: 'inline',
-}
+  fontSize: "14px",
+  display: "inline",
+};
 
 const { Option, SingleValue } = components;
 const IconOption = (props) => {
   return (
     <Option {...props}>
       <img src={props.data.icon} style={{ width: 30, paddingRight: 4 }} />
-       <div style={styles}>{props.data.text}</div>
+      <div style={styles}>{props.data.text}</div>
     </Option>
   );
 };
@@ -19,16 +19,16 @@ const IconDisplayOption = (props) => {
   return (
     <SingleValue {...props}>
       <img src={props.data.icon} style={{ width: 30, paddingRight: 4 }} />
-       <div style={styles}>{props.data.text}</div>
+      <div style={styles}>{props.data.text}</div>
     </SingleValue>
   );
 };
 
 const SelectCurrency = (props) => {
   const { options, setSelectedCoin } = props;
-  console.log("data", options[0]);
+  console.log("data", options[0].value);
   const setCurrencySelected = (_val) => {
-    console.log("selected", _val);
+    console.log("selected", _val.value);
     setSelectedCoin(_val);
   };
 
@@ -46,7 +46,7 @@ const SelectCurrency = (props) => {
           ...theme,
           colors: {
             ...theme.colors,
-            primary: '#01948d',
+            primary: "#01948d",
           },
         })}
       />

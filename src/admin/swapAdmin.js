@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-import { ttdd } from "../contracts/gStableContract ";
-import { ttddMarket } from "../contracts/marketContract";
-import { ttddSwap } from "../contracts/swapContract";
-import { usddContract } from "../contracts/usdContract";
+import currencyPublisher from "../publishers/currency";
 import { getCurrency } from "../utils/currencies";
+import Balances from "./balances";
 import ClearAccumulatedSwapFees from "./clearAccumulatedSwapFees";
 import ContractClientManager from "./contractClientManager";
 import GoStableBaseManager from "./goStableBaseManager";
@@ -13,61 +11,27 @@ import SetSwapFeesFactor from "./setSwapFeesFactor";
 import TreasuryManager from "./treasuryManager";
 
 const SwapAdmin = (props) => {
-  const [details, setDetails] = useState({
-    status: false,
-    address: "",
-    conversion: "",
-    stableCoinAddress: "",
-    accumulatedSwapFees: 0,
-    swapFeesFactor: 0,
-    marketAddress: "",
-    marketCoinBalance: 0,
-  });
   const [swapContract, setSwapContract] = useState(null);
+  const [currencyKey, setCurrencyKey] = useState(props.currencyKey);
   useEffect(() => {
-    initSwapContract();
-    let timer = setInterval(() => {
-      initSwapContract();
-    }, 5 * 1000);
-
+    currencyPublisher.attach(updateCurrency);
     return () => {
-      clearInterval(timer);
-      console.log("unmounting swapAdmin");
+      currencyPublisher.detach(updateCurrency);
     };
   }, []);
+  const updateCurrency = (currKey) => {
+    console.log("updating currency swap admin : ", currKey);
+    setCurrencyKey(currKey);
+    initSwapContract();
+  };
 
   const initSwapContract = async () => {
     try {
-      let swapContract_ = swapContract;
-      let currency = getCurrency(props.currencyKey);
+      let currency = getCurrency(currencyKey);
       if (!swapContract) {
-        swapContract_ = await currency.swapContract();
-        setSwapContract(swapContract_);
+        let swapContract = await currency.swapContract();
+        setSwapContract(swapContract);
       }
-
-      let swapDetails = await swapContract_.getDetails();
-
-      //Market coin data
-      let marketContract = await currency.marketContract();
-      let marketCoinBalance = await marketContract.balanceOf(
-        swapContract_.address
-      );
-      let { name: marketCoinName, symbol: marketCoinSymbol } =
-        await marketContract.getNameSymbol();
-      //gStable Data
-      let gStableContract = await currency.gStableContract();
-      let { name: gStableCoinName, symbol: gStableCoinSymbol } =
-        await gStableContract.getNameSymbol();
-
-      swapDetails = {
-        ...swapDetails,
-        marketCoinBalance,
-        marketCoinName,
-        marketCoinSymbol,
-        gStableCoinName,
-        gStableCoinSymbol,
-      };
-      setDetails(swapDetails);
     } catch (error) {
       console.error(error);
     }
@@ -77,48 +41,52 @@ const SwapAdmin = (props) => {
     <div className="card">
       <div className="card-body">
         <h5 className="card-title text-center">Swap Admin</h5>
-        <p>{window.tronWeb.address.fromHex(details.address)} </p>
+        <p>{getCurrency(currencyKey).swapAddress} </p>
         <hr />
         <ContractClientManager
-          address={getCurrency(props.currencyKey).swapAddress}
-          key={getCurrency(props.currencyKey).swapAddress}
+          address={getCurrency(currencyKey).swapAddress}
+          key={getCurrency(currencyKey).swapAddress}
         ></ContractClientManager>
         <hr />
-        <h6 className="card-title">Balances</h6>
-        <p>
-          {details.marketCoinName} : {details.marketCoinBalance}
-        </p>
+        <Balances
+          address={getCurrency(currencyKey).swapAddress}
+          currencyKey={currencyKey}
+          key={getCurrency(currencyKey).swapAddress + "Balances"}
+        ></Balances>
         <hr />
         <TreasuryManager
-          address={getCurrency(props.currencyKey).swapAddress}
-          key={
-            getCurrency(props.currencyKey).swapAddress + "SwapTreasuryManager"
-          }
+          address={getCurrency(currencyKey).swapAddress}
+          key={getCurrency(currencyKey).swapAddress + "SwapTreasuryManager"}
         ></TreasuryManager>
         <hr />
         <GoStableBaseManager
-          address={getCurrency(props.currencyKey).swapAddress}
-          key={
-            getCurrency(props.currencyKey).swapAddress + "GoStableBaseManager"
-          }
+          address={getCurrency(currencyKey).swapAddress}
+          key={getCurrency(currencyKey).swapAddress + "GoStableBaseManager"}
         ></GoStableBaseManager>
         <hr />
-        <p>
-          1 USD ≈ {details.conversion} {details.gStableCoinName}
-        </p>
+
         <SetConversionRatio
-          swapContract={swapContract}
-          {...props}
+          currencyKey={currencyKey}
+          key={getCurrency(currencyKey).swapAddress + "SetConversionRatio"}
         ></SetConversionRatio>
         <hr />
-        <p>Swap Fees Factor : {details.swapFeesFactor}</p>
-        <p>Accumulated Swap Fees : {details.accumulatedSwapFees}</p>
-        <SetSwapFeesFactor swapContract={swapContract}></SetSwapFeesFactor>
+
+        <SetSwapFeesFactor
+          currencyKey={currencyKey}
+          key={getCurrency(currencyKey).swapAddress + "SetSwapFeesFactor"}
+        ></SetSwapFeesFactor>
         <hr />
-        <p>Rewards Percent : {details.rewardsPC}</p>
-        <SetRewardsPercent swapContract={swapContract}></SetRewardsPercent>
-        <br />
-        <ClearAccumulatedSwapFees {...props}></ClearAccumulatedSwapFees>
+        <SetRewardsPercent
+          currencyKey={currencyKey}
+          key={getCurrency(currencyKey).swapAddress + "SetRewardsPercent"}
+        ></SetRewardsPercent>
+        <hr />
+        <ClearAccumulatedSwapFees
+          currencyKey={currencyKey}
+          key={
+            getCurrency(currencyKey).swapAddress + "ClearAccumulatedSwapFees"
+          }
+        ></ClearAccumulatedSwapFees>
       </div>
     </div>
   );

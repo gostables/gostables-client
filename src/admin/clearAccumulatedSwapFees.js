@@ -1,6 +1,25 @@
+import { useEffect, useState } from "react";
 import { getCurrency } from "../utils/currencies";
 
 const ClearAccumulatedSwapFees = (props) => {
+  const { currencyKey } = props;
+  const [accumulatedSwapFees, setAccumulatedSwapFees] = useState(0);
+  useEffect(() => {
+    read();
+
+    return () => {
+      console.log("unmounting ClearAccumulatedSwapFees");
+    };
+  }, []);
+
+  const read = async () => {
+    let currency = getCurrency(currencyKey);
+
+    let swapContract = await currency.swapContract();
+    let accumulatedSwapFees = await swapContract.getAccumulatedSwapFees();
+
+    setAccumulatedSwapFees(accumulatedSwapFees);
+  };
   const clear = async () => {
     try {
       let currency = getCurrency(props.currencyKey);
@@ -14,6 +33,7 @@ const ClearAccumulatedSwapFees = (props) => {
 
   return (
     <>
+      <p>Accumulated Swap Fees : {accumulatedSwapFees}</p>
       <form className="row g-3 d-flex justify-content-between">
         <div className="col-sm-12">
           <div className="d-grid gap-2">

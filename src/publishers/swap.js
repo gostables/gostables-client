@@ -29,14 +29,16 @@ class SwapPublisher {
     try {
       this.usdd = await usddContract();
       try {
-        //dynamic read from smart contract
         let swapContract = await this.currency.swapContract();
-        this.swapDetails.stableCoinAddress =
-          await swapContract.getStableCoinAddress();
-        this.swapDetails.marketAddress = await swapContract.getMarketAddress();
+
+        //dynamic read from smart contract
+        // this.swapDetails.stableCoinAddress =
+        //   await swapContract.getStableCoinAddress();
+        // this.swapDetails.marketAddress = await swapContract.getMarketAddress();
+
         // static read from currency "config" - see currencies.js
-        // this.swapDetails.stableCoinAddress = this.currency.swapStableAddress;
-        // this.swapDetails.marketAddress = this.currency.swapStableAddress;
+        this.swapDetails.stableCoinAddress = this.currency.swapStableAddress;
+        this.swapDetails.marketAddress = this.currency.swapStableAddress;
       } catch (error) {
         console.error(error);
       }
@@ -45,9 +47,15 @@ class SwapPublisher {
     }
     // Continuous polling as per https://github.com/ibnzUK/Tron-Wallet-React-Integration/blob/main/src/App.js
     this.timer = setInterval(async () => {
+      console.log("swap Publisher updating : ", this.currency.key);
       let swapContract = await this.currency.swapContract();
       try {
         this.swapDetails.conversionRatio = await swapContract.getConversion();
+        console.log(
+          "swap Publisher conversionRatio updating : ",
+          this.currency.key,
+          this.swapDetails.conversionRatio
+        );
       } catch (error) {
         console.error(error);
       }
@@ -68,7 +76,7 @@ class SwapPublisher {
       }
 
       this.notify();
-    }, 3 * 1000);
+    }, 10 * 1000);
   };
 
   attach = (observer) => {

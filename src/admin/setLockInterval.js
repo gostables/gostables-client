@@ -1,18 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getCurrency } from "../utils/currencies";
 
 const SetLockInterval = (props) => {
-  const [interval, setInterval] = useState("");
+  const { currencyKey } = props;
+  const [intrvl, setIntrvl] = useState("");
+  const [interval, setInterval] = useState(0);
+
+  useEffect(() => {
+    read();
+
+    return () => {
+      console.log("unmounting SetLockInterval");
+    };
+  }, []);
+
+  const read = async () => {
+    let currency = getCurrency(currencyKey);
+
+    let vaultContract = await currency.vaultContract();
+    let interval = await vaultContract.getInterval();
+
+    setInterval(interval);
+  };
 
   const set = async () => {
-    let currency = getCurrency(props.currencyKey);
-    let vaultContract = await currency.vaultContract();
-
     setInterval("");
     try {
       console.log(`SetLockInterval : ${interval}`);
-      if (interval) {
-        await vaultContract.setInterval(interval);
+      if (intrvl) {
+        let currency = getCurrency(currencyKey);
+        let vaultContract = await currency.vaultContract();
+        await vaultContract.setInterval(intrvl);
       }
     } catch (error) {
       console.error(error);
@@ -21,19 +39,20 @@ const SetLockInterval = (props) => {
 
   const updateInterval = (e) => {
     if (e.target.value) {
-      setInterval(e.target.value);
+      setIntrvl(e.target.value);
     }
   };
 
   return (
     <>
+      <p>Lock Interval : {interval} Hour(s)</p>
       <form className="row g-3 d-flex justify-content-between">
         <div className="col-sm-5">
           <input
             type="text"
             className="form-control"
             placeholder="Lock Interval"
-            value={interval}
+            value={intrvl}
             onChange={updateInterval}
           />
         </div>

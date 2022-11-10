@@ -1,15 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getCurrency } from "../utils/currencies";
 
 const SetSwapFeesFactor = (props) => {
+  const { currencyKey } = props;
   const [sff, setSFF] = useState("");
+  const [swapFeesFactor, setSwapFeesFactor] = useState(0);
 
-  const { swapContract } = props;
+  useEffect(() => {
+    read();
+
+    return () => {
+      console.log("unmounting SetSwapFeesFactor");
+    };
+  }, []);
+
+  const read = async () => {
+    let currency = getCurrency(currencyKey);
+
+    let swapContract = await currency.swapContract();
+    let swapFeesFactor = await swapContract.getSwapFeesFactor();
+
+    setSwapFeesFactor(swapFeesFactor);
+  };
 
   const set = async () => {
     setSFF("");
     try {
       console.log(`SetSwapFeesFactor : ${sff}`);
       if (sff) {
+        let swapContract = await getCurrency(currencyKey).swapContract();
         await swapContract.setSwapFeesFactor(sff);
       }
     } catch (error) {
@@ -25,6 +44,7 @@ const SetSwapFeesFactor = (props) => {
 
   return (
     <>
+      <p>Swap Fees Factor : {swapFeesFactor}</p>
       <form className="row g-3 d-flex justify-content-between">
         <div className="col-sm-5">
           <input

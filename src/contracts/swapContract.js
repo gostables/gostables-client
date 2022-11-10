@@ -56,7 +56,7 @@ class SwapContract extends SmartContractBase {
   getConversion = async () => {
     this.check();
     let cr = await this.contract.conversionRatio().call();
-    return cr / 10000;
+    return String(cr) / 10000;
   };
   getAccumulatedSwapFees = async () => {
     this.check();

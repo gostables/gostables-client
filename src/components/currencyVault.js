@@ -9,6 +9,7 @@ import UnlockIcon from "../svg/vaultUnlock";
 import { formatUSD } from "../utils/currencyFormatter";
 
 const CurrencyVault = (props) => {
+  const [currencyKey, setCurrencyKey] = useState(props.currencyKey);
   const [display, setDisplay] = useState(true);
   const [usddValue, setUSDDValue] = useState();
 
@@ -42,7 +43,7 @@ const CurrencyVault = (props) => {
 
   const setWalletDetails = (walletDetails) => {
     let vbList = walletDetails.vaultBalances.filter(
-      (vb) => vb.currencyKey.localeCompare(props.currencyKey) == 0
+      (vb) => vb.currencyKey.localeCompare(currencyKey) == 0
     );
 
     let vb_ = vbList.length
@@ -60,7 +61,7 @@ const CurrencyVault = (props) => {
 
   const initVaultContract = async () => {
     try {
-      let currency = getCurrency(props.currencyKey);
+      let currency = getCurrency(currencyKey);
       let vaultContract = await currency.vaultContract();
 
       let vaultDetails = await vaultContract.getDetails();
@@ -81,7 +82,7 @@ const CurrencyVault = (props) => {
     if (vaultContract) {
       try {
         debugger;
-        let currency = getCurrency(props.currencyKey);
+        let currency = getCurrency(currencyKey);
         await usd.approve(currency.vaultAddress, usddValue);
         console.log("approved");
         vaultContract.deposit(usddValue);
@@ -157,7 +158,11 @@ const CurrencyVault = (props) => {
           <div className="text-xs text-center mt-2">
             {walletData.vaultBalance.lock > new Date() ? (
               <>
-                <span className="lock-icon"><LockIcon></LockIcon></span><br/><br/>
+                <span className="lock-icon">
+                  <LockIcon></LockIcon>
+                </span>
+                <br />
+                <br />
                 <span class="small">
                   Your deposit will be locked for the next{" "}
                   {vaultDetails.interval} hrs.
@@ -168,8 +173,14 @@ const CurrencyVault = (props) => {
                 </span>
               </>
             ) : (
-              <><span className="unlock-icon"><UnlockIcon></UnlockIcon></span><br/><br/>
-              <span class="text-success">Unlocked</span></>
+              <>
+                <span className="unlock-icon">
+                  <UnlockIcon></UnlockIcon>
+                </span>
+                <br />
+                <br />
+                <span class="text-success">Unlocked</span>
+              </>
             )}
           </div>
         ) : (

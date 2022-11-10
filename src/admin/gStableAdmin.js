@@ -1,12 +1,25 @@
 import { useEffect, useState } from "react";
+import currencyPublisher from "../publishers/currency";
 import { getCurrency } from "../utils/currencies";
 import ContractClientManager from "./contractClientManager";
 
 const GStableAdmin = (props) => {
   const [address, setAddress] = useState();
 
+  const [currencyKey, setCurrencyKey] = useState(props.currencyKey);
   useEffect(() => {
-    let currency = getCurrency(props.currencyKey);
+    currencyPublisher.attach(updateCurrency);
+    return () => {
+      currencyPublisher.detach(updateCurrency);
+    };
+  }, []);
+  const updateCurrency = (currKey) => {
+    console.log("updating currency gstable admin : ", currKey);
+    setCurrencyKey(currKey);
+  };
+
+  useEffect(() => {
+    let currency = getCurrency(currencyKey);
     setAddress(currency.gStableAddress);
     console.log(address);
 
@@ -23,8 +36,8 @@ const GStableAdmin = (props) => {
           <p>{address}</p>
           <hr />
           <ContractClientManager
-            address={address}
-            key={address}
+            address={getCurrency(currencyKey).gStableAddress}
+            key={getCurrency(currencyKey).gStableAddress}
           ></ContractClientManager>
         </div>
       </div>

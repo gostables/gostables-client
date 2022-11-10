@@ -7,6 +7,7 @@ import { getCurrency } from "../utils/currencies";
 import { getSwapPublisherByCurrencyKey } from "../publishers/publishers";
 import StableIcon from "./icon_gStable";
 import { formatM, formatUSD } from "../utils/currencyFormatter";
+import currencyPublisher from "../publishers/currency";
 
 const SwapExchange = (props) => {
   const [direction, setDirection] = useState(true);
@@ -18,6 +19,8 @@ const SwapExchange = (props) => {
   const [conversionRatio, setConversionRatio] = useState();
   const [swapFeesFactor, setSwapFeesFactor] = useState();
   const [trxHash, setTRXHash] = useState(null);
+
+  const [currencyKey, setCurrencyKey] = useState(props.currencyKey);
 
   useEffect(() => {
     walletPublisher.attach(setWallet);
@@ -31,11 +34,41 @@ const SwapExchange = (props) => {
   };
 
   useEffect(() => {
-    getSwapPublisherByCurrencyKey(props.currencyKey).attach(setSwapDetails);
+    init();
     return () => {
-      getSwapPublisherByCurrencyKey(props.currencyKey).detach(setSwapDetails);
+      console.log("unmounting swapExchange init");
     };
   }, []);
+
+  const init = async () => {
+    console.log("initializing with currencyKey : ", currencyKey);
+    let swapContract = await getCurrency(currencyKey).swapContract();
+    let conversionRatio = await swapContract.getConversion();
+    let swapFeesFactor = await swapContract.getSwapFeesFactor();
+    setSwapDetails({ conversionRatio, swapFeesFactor });
+  };
+
+  useEffect(() => {
+    currencyPublisher.attach(updateCurrency);
+    return () => {
+      currencyPublisher.detach(updateCurrency);
+      getSwapPublisherByCurrencyKey(currencyKey).detach(setSwapDetails);
+    };
+  }, []);
+
+  const updateCurrency = (currKey) => {
+    console.log("updating currency : ", currKey);
+    setCurrencyKey(currKey);
+    getSwapPublisherByCurrencyKey(currencyKey).attach(setSwapDetails);
+  };
+
+  // useEffect(() => {
+  //   getSwapPublisherByCurrencyKey(currencyKey).attach(setSwapDetails);
+  //   return () => {
+  //     getSwapPublisherByCurrencyKey(currencyKey).detach(setSwapDetails);
+  //     console.log("unmounting Swap Exchange swapPublisher");
+  //   };
+  // }, [currencyKey]);
 
   const setSwapDetails = async (swapDetails) => {
     setConversionRatio(swapDetails.conversionRatio);
@@ -84,16 +117,18 @@ const SwapExchange = (props) => {
   const updateTokenValue = (e) => {
     console.log("TokenValue : ", e.target.value);
     setTokenValue(e.target.value);
-    console.log("converted : ", e.target.value / conversionRatio);
-    setStableCoinValue(
-      (e.target.value - e.target.value * swapFeesFactor) / conversionRatio
-    );
+    if (conversionRatio != 0) {
+      console.log("converted : ", e.target.value / conversionRatio);
+      setStableCoinValue(
+        (e.target.value - e.target.value * swapFeesFactor) / conversionRatio
+      );
+    }
   };
   const tokenJSX = (title) => {
     let balJSX = <></>;
     if (walletDetails && walletDetails.gStableBalances) {
       let gsbList = walletDetails.gStableBalances.filter(
-        (gsb) => gsb.currencyKey.localeCompare(props.currencyKey) == 0
+        (gsb) => gsb.currencyKey.localeCompare(currencyKey) == 0
       );
       if (gsbList) {
         balJSX = <>Balance: {formatM(gsbList[0].balance)}</>;
@@ -114,10 +149,7 @@ const SwapExchange = (props) => {
             <label for="floatingInputGroup2">Value in gStable</label>
           </div>
           <span className="input-group-text">
-            <StableIcon
-              height={32}
-              currencyKey={props.currencyKey}
-            ></StableIcon>
+            <StableIcon height={32} currencyKey={currencyKey}></StableIcon>
           </span>
         </div>
         <p className="small pb-3">{balJSX}</p>
@@ -127,7 +159,7 @@ const SwapExchange = (props) => {
 
   const swap = async () => {
     debugger;
-    let currency = getCurrency(props.currencyKey);
+    let currency = getCurrency(currencyKey);
     let swapContract = await currency.swapContract();
     let usd = await usddContract();
 
@@ -199,12 +231,11 @@ const SwapExchange = (props) => {
             Swap
           </h4>
 
-          {walletDetails &&
-          walletDetails.isSupportedNetwork &&
-          conversionRatio ? (
+          {walletDetails && walletDetails.isSupportedNetwork /*&&
+          conversionRatio*/ ? (
             <div className="h6 text-white font-weight-bolder text-center mt-2 mb-0">
               Exchange Rate : 1 USDD ≈ {conversionRatio}{" "}
-              {getCurrency(props.currencyKey).label}
+              {getCurrency(currencyKey).label}
             </div>
           ) : (
             <></>
@@ -241,14 +272,16 @@ const SwapExchange = (props) => {
             >
               Swap
             </button>
-            {swapFeesFactor ? (
-              <div className="text-xs mt-20 d-flex justify-content-center">
-                <b>Fee ({swapFeesFactor * 100}%)</b>: ≈{" "}
-                {formatUSD.format(stableCoinValue * swapFeesFactor)}
-              </div>
-            ) : (
-              <></>
-            )}
+            {
+              /*swapFeesFactor*/ true ? (
+                <div className="text-xs mt-20 d-flex justify-content-center">
+                  <b>Fee ({swapFeesFactor * 100}%)</b>: ≈{" "}
+                  {formatUSD.format(stableCoinValue * swapFeesFactor)}
+                </div>
+              ) : (
+                <></>
+              )
+            }
           </div>
           {trxHashAlertJSX()}
         </div>

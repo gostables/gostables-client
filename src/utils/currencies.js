@@ -87,17 +87,17 @@ const CurrencyList = {
     "TY72rJ9tjnQSxgsqUDuXPUh2oPWC7cRmY6" /*gStableAddress*/,
     "TFq1VGyhbMxPc85FtZ5x2QNZqBVsYX1DPL" /*vaultAddress */
   ),
-  // XCD: new Currency(
-  //   "XCD",
-  //   "gXCD",
-  //   "East Caribbean Dollar",
-  //   xcddImg,
-  //   "TBRGNBkWVVXpVjGvmi7LhBhmj6rCvdCsgU",
-  //   "TDLbLFD68VBqeTjsmneroJazrUSgSXf8f9",
-  //   "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU",
-  //   "TXfUYdQeLZ6VtqTaEYQkRifbGZBXF9Xb71",
-  //   "THwPd7EbZKvLbC52aZB795xZm2Jcr392iP"
-  // ),
+  XCD: new Currency(
+    "XCD",
+    "gXCD",
+    "East Caribbean Dollar",
+    xcddImg,
+    "TJCfkDjutgARxZyh5NQ39yY8GBqWmWYjtJ" /*swapAddress */,
+    "TQq9o4PahyoLociVzCnBMRRDdPZrNNkW1f" /*swapMarketAddress*/,
+    "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU" /*swapStableAddress*/,
+    "TNpsUntsPFwUEkRJN3CVVPVnif1v8RcL9B" /*gStableAddress*/,
+    "TTuig6rx6u7uB72oVQ4U9sB76HVVTALhFD" /*vaultAddress */
+  ),
 };
 
 export const getCurrencies = () => {

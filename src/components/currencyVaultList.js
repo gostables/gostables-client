@@ -10,23 +10,33 @@ import USDDIcon from "./iconUSDD";
 import { formatUSD } from "../utils/currencyFormatter";
 import walletPublisher from "../publishers/wallet";
 import IncorrectNetwork from "./incorrectNetwork";
+import currencyPublisher from "../publishers/currency";
 
 const CurrencyVaultList = (props) => {
   const [tvl, setTVL] = useState(0);
   const [walletDetails, setWalletDetails] = useState();
+  const [mySupply, setMySupply] = useState(null);
+  const [currencyKey, setCurrencyKey] = useState(props.currencyKey);
   useEffect(() => {
-    init();
+    init(currencyKey);
     return () => {
       console.log("Unmounting VaultList");
     };
   }, []);
 
-  const init = async () => {
-    let currency = getCurrency(props.currencyKey);
+  const init = async (currencyKey) => {
+    let currency = getCurrency(currencyKey);
 
     let vaultContract = await currency.vaultContract();
+
     let tvl = await vaultContract.getTVL();
+
+    let vaultBalData = await vaultContract.balanceOf(
+      walletPublisher.walletDetails.address
+    );
+
     setTVL(tvl);
+    setMySupply(vaultBalData);
   };
 
   useEffect(() => {
@@ -40,17 +50,35 @@ const CurrencyVaultList = (props) => {
     setWalletDetails(walletDetails);
   };
 
+  useEffect(() => {
+    currencyPublisher.attach(updateCurrency);
+    return () => {
+      currencyPublisher.detach(updateCurrency);
+    };
+  }, []);
+
+  const updateCurrency = async (currKey) => {
+    console.log("updating currency : ", currKey);
+    setCurrencyKey(currKey);
+    debugger;
+    init(currKey);
+  };
+
   const getMySupply = () => {
-    let mySupply = 0;
-    if (walletDetails && walletDetails.vaultBalances) {
-      let vaultBalances = walletDetails.vaultBalances.filter((vb) => {
-        return vb.currencyKey.localeCompare(props.currencyKey) == 0;
-      });
-      if (vaultBalances.length) {
-        mySupply = vaultBalances[0].balanceData.balance;
+    if (mySupply) {
+      return mySupply.balance;
+    } else {
+      let mySupply_ = 0;
+      if (walletDetails && walletDetails.vaultBalances) {
+        let vaultBalances = walletDetails.vaultBalances.filter((vb) => {
+          return vb.currencyKey.localeCompare(currencyKey) == 0;
+        });
+        if (vaultBalances.length) {
+          mySupply = vaultBalances[0].balanceData.balance;
+        }
       }
+      return mySupply_;
     }
-    return mySupply;
   };
 
   // if (walletDetails && !walletDetails.isSupportedNetwork) {
@@ -230,10 +258,10 @@ const CurrencyVaultList = (props) => {
               />
               <div class="currency-name">
                 <h1 class="modal-title fs-5 font-weight-bolder mt-2 mb-0">
-                  gTTD Vault
+                  {getCurrency(currencyKey).label} Vault
                 </h1>
                 <div>
-                  <p class="small">{getCurrency(props.currencyKey).text}</p>
+                  <p class="small">{getCurrency(currencyKey).text}</p>
                 </div>
               </div>
               <button
@@ -243,7 +271,10 @@ const CurrencyVaultList = (props) => {
               ></button>
             </div>
             <div class="modal-body">
-              <CurrencyVault {...props}></CurrencyVault>
+              <CurrencyVault
+                currencyKey={currencyKey}
+                key={currencyKey}
+              ></CurrencyVault>
             </div>
           </div>
         </div>

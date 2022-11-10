@@ -54,7 +54,9 @@ const App = () => {
         <Route
           path="*"
           // @ts-ignore
-          element={<SwapPage currencyKey={selectedCurrency} />}
+          element={
+            <SwapPage currencyKey={selectedCurrency} key={selectedCurrency} />
+          }
         />
       </Routes>
     </>
