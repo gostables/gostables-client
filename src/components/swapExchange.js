@@ -196,7 +196,7 @@ const SwapExchange = (props) => {
             >
               Transaction
             </a>{" "}
-            was successful!
+            is being processed!
           </strong>
 
           <button
