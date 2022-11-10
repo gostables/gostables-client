@@ -126,13 +126,12 @@ class SwapContract extends SmartContractBase {
 
   deposit = async (_val) => {
     this.check();
-    debugger;
     if (!_val) throw new Error(`Number : ${_val}`);
 
     console.log("deposit", this.web3.utils.toWei(String(_val), "ether"));
-
+    let result = null;
     try {
-      await this.contract
+      result = await this.contract
         .deposit(
           // _val,
           this.web3.utils.toWei(String(_val), "ether")
@@ -145,6 +144,7 @@ class SwapContract extends SmartContractBase {
     } catch (error) {
       console.error(error);
     }
+    return result;
   };
 
   withdraw = async (_val) => {
@@ -152,9 +152,9 @@ class SwapContract extends SmartContractBase {
     if (!_val) throw new Error(`Number : ${_val}`);
 
     console.log("withdraw", this.web3.utils.toWei(String(_val), "ether"));
-
+    let result = null;
     try {
-      await this.contract
+      result = await this.contract
         .withdraw(this.web3.utils.toWei(String(_val), "ether"))
         .send({
           feeLimit: 100_000_000,
@@ -162,8 +162,9 @@ class SwapContract extends SmartContractBase {
           shouldPollResponse: false,
         });
     } catch (error) {
-      console.error(error);
+      console.error("withdrawError", error);
     }
+    return result;
   };
 
   clearAccumulatedSwapFees = async (vaultAddress) => {

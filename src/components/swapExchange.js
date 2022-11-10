@@ -17,6 +17,7 @@ const SwapExchange = (props) => {
 
   const [conversionRatio, setConversionRatio] = useState();
   const [swapFeesFactor, setSwapFeesFactor] = useState();
+  const [trxHash, setTRXHash] = useState(null);
 
   useEffect(() => {
     walletPublisher.attach(setWallet);
@@ -25,8 +26,8 @@ const SwapExchange = (props) => {
     };
   }, []);
 
-  const setWallet = (walletDetails) => {
-    setWalletDetails(walletDetails);
+  const setWallet = (walletDetails_) => {
+    setWalletDetails(walletDetails_);
   };
 
   useEffect(() => {
@@ -45,7 +46,9 @@ const SwapExchange = (props) => {
     console.log("StableCoinValue : ", e.target.value);
     setStableCoinValue(e.target.value);
     console.log("converted : ", e.target.value * conversionRatio);
-    setTokenValue((e.target.value - e.target.value * swapFeesFactor) * conversionRatio);
+    setTokenValue(
+      (e.target.value - e.target.value * swapFeesFactor) * conversionRatio
+    );
   };
 
   const stableCoinJSX = () => {
@@ -82,7 +85,9 @@ const SwapExchange = (props) => {
     console.log("TokenValue : ", e.target.value);
     setTokenValue(e.target.value);
     console.log("converted : ", e.target.value / conversionRatio);
-    setStableCoinValue((e.target.value - e.target.value * swapFeesFactor) / conversionRatio);
+    setStableCoinValue(
+      (e.target.value - e.target.value * swapFeesFactor) / conversionRatio
+    );
   };
   const tokenJSX = (title) => {
     let balJSX = <></>;
@@ -121,21 +126,71 @@ const SwapExchange = (props) => {
   };
 
   const swap = async () => {
+    debugger;
     let currency = getCurrency(props.currencyKey);
     let swapContract = await currency.swapContract();
     let usd = await usddContract();
 
+    let hash = null;
     if (direction) {
       //swap USD for currency
       await usd.approve(currency.swapAddress, stableCoinValue);
       console.log("approved");
-      swapContract.deposit(stableCoinValue);
+      hash = await swapContract.deposit(stableCoinValue);
     } else {
       //swap currency for USD
-      swapContract.withdraw(tokenValue);
+      hash = swapContract.withdraw(tokenValue);
     }
+    if (hash) setTRXHash(hash);
   };
 
+  const clearHash = () => {
+    setTRXHash(null);
+  };
+
+  const trxHashAlertJSX = () => {
+    if (trxHash) {
+      return (
+        <div
+          class="alert alert-primary alert-dismissible fade show mt-3"
+          role="alert"
+        >
+          <strong>
+            Your{" "}
+            <a
+              href={`https://nile.tronscan.org/#/transaction/${trxHash}`}
+              class="alert-link"
+              target="_blank"
+            >
+              Transaction
+            </a>{" "}
+            was successful!
+          </strong>
+
+          <button
+            type="button"
+            class="btn-close"
+            aria-label="Close"
+            onClick={clearHash}
+          ></button>
+        </div>
+      );
+    }
+    return <></>;
+  };
+
+  if (!walletDetails || !walletDetails.isSupportedNetwork) {
+    return (
+      <div class="alert alert-info mt-5 py-3 text-center" role="alert">
+        <p>goStables is currently deployed on the NILE testnet.</p>
+        <p>
+          Please switch to the NILE testnet in your wallet if you havent
+          already.
+        </p>
+        {/* <p>Mainnet coming soon!.</p> */}
+      </div>
+    );
+  }
   return (
     <div className="card swap-card z-index-0 fadeIn3 fadeInBottom">
       <div className="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
@@ -177,9 +232,7 @@ const SwapExchange = (props) => {
             </svg>
           </div>
           <p className="text-left">For</p>
-
           {direction ? tokenJSX("For") : stableCoinJSX("For")}
-
           <div className="d-grid gap-2 mt-4">
             <button
               className="btn btn-primary swap-btn"
@@ -190,13 +243,14 @@ const SwapExchange = (props) => {
             </button>
             {swapFeesFactor ? (
               <div className="text-xs mt-20 d-flex justify-content-center">
-                  <b>Fee ({swapFeesFactor * 100}%)</b>: ≈{" "}
-                  {formatUSD.format(stableCoinValue * swapFeesFactor)}
+                <b>Fee ({swapFeesFactor * 100}%)</b>: ≈{" "}
+                {formatUSD.format(stableCoinValue * swapFeesFactor)}
               </div>
             ) : (
               <></>
             )}
           </div>
+          {trxHashAlertJSX()}
         </div>
       ) : (
         <>

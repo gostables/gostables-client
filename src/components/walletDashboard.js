@@ -6,10 +6,11 @@ import { getCurrencies, getCurrency } from "../utils/currencies";
 import WalletRewards from "./walletRewards";
 import WalletDetails from "./walletDetails";
 import WalletVaultDeposits from "./walletVaultDeposits";
+import IncorrectNetwork from "./incorrectNetwork";
 
 const WalletDashboard = (props) => {
   const { displayDetails, displayDeposits, displayRewards } = props;
-  const [walletData, setWalletDetails] = useState({
+  const [walletDetails, setWalletDetails] = useState({
     status: 1,
     isSupportedNetwork: false,
     address: "",
@@ -38,7 +39,7 @@ const WalletDashboard = (props) => {
   const getBalances = async () => {
     let usddBalance = await walletPublisher.getUSDDBalance();
     let vaultBalances = await walletPublisher.getVaultBalances();
-    setWalletDetails({ ...walletData, usddBalance, vaultBalances });
+    setWalletDetails({ ...walletDetails, usddBalance, vaultBalances });
   };
 
   useEffect(() => {
@@ -96,7 +97,7 @@ const WalletDashboard = (props) => {
       <>
         {displayDetails ? (
           <WalletDetails
-            walletData={walletData}
+            walletData={walletDetails}
             stableCoins={stableCoins}
             getStableCoinByCurrencyKey={getStableCoinByCurrencyKey}
           ></WalletDetails>
@@ -112,7 +113,7 @@ const WalletDashboard = (props) => {
       <>
         {displayRewards ? (
           <WalletRewards
-            walletData={walletData}
+            walletData={walletDetails}
             stableCoins={stableCoins}
             getStableCoinByCurrencyKey={getStableCoinByCurrencyKey}
           ></WalletRewards>
@@ -127,14 +128,24 @@ const WalletDashboard = (props) => {
     return (
       <>
         {displayDeposits ? (
-          <WalletVaultDeposits walletData={walletData}></WalletVaultDeposits>
+          <WalletVaultDeposits walletData={walletDetails}></WalletVaultDeposits>
         ) : (
           <></>
         )}
       </>
     );
   };
-
+  if (!walletDetails || !walletDetails.isSupportedNetwork) {
+    return (
+      <>
+        <div className="col-sm-4"></div>
+        <div className="col-sm-4">
+          <IncorrectNetwork></IncorrectNetwork>
+        </div>
+        <div className="col-sm-4"></div>
+      </>
+    );
+  }
   if (!stableCoins.length) {
     return (
       <>

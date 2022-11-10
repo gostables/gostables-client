@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import USDDIcon from "./iconUSDD";
 import { formatUSD } from "../utils/currencyFormatter";
 import walletPublisher from "../publishers/wallet";
+import IncorrectNetwork from "./incorrectNetwork";
 
 const CurrencyVaultList = (props) => {
   const [tvl, setTVL] = useState(0);
@@ -52,6 +53,14 @@ const CurrencyVaultList = (props) => {
     return mySupply;
   };
 
+  if (!walletDetails || !walletDetails.isSupportedNetwork) {
+    return (
+      <>
+        <IncorrectNetwork></IncorrectNetwork>
+      </>
+    );
+  }
+
   return (
     <>
       <div class="card vault-card z-index-0 fadeIn3 fadeInBottom">
@@ -66,7 +75,6 @@ const CurrencyVaultList = (props) => {
         <div class="card-body vault-item">
           <div class="row mt-4">
             <div class="col-sm-12 col-md-4">
-              
               <USDDIcon height={32} noTitle={true}></USDDIcon>
               <div class="currency-name">
                 <b>USDD</b>
@@ -94,7 +102,6 @@ const CurrencyVaultList = (props) => {
             </div>
           </div>
         </div>
-
 
         <div class="card-body vault-item">
           <div class="row mt-4">
@@ -133,8 +140,6 @@ const CurrencyVaultList = (props) => {
           </div>
         </div>
 
-
-
         <div class="card-body vault-item">
           <div class="row mt-4">
             <div class="col-sm-12 col-md-4">
@@ -171,7 +176,6 @@ const CurrencyVaultList = (props) => {
             </div>
           </div>
         </div>
-
 
         <div class="card-body vault-item">
           <div class="row mt-4">
