@@ -19,21 +19,21 @@ const AdminFaucets = () => {
     };
   }, []);
 
-  if (!walletDetails || !walletDetails.isSupportedNetwork) {
-    return (
-      <>
-        <div className="container faucet">
-          <div className="row mt-5 d-flex justify-content-center">
-            <div className="col-sm-4"></div>
-            <div className="col-sm-4">
-              <IncorrectNetwork></IncorrectNetwork>
-            </div>
-            <div className="col-sm-4"></div>
-          </div>
-        </div>
-      </>
-    );
-  }
+  // if (!walletDetails || !walletDetails.isSupportedNetwork) {
+  //   return (
+  //     <>
+  //       <div className="container faucet">
+  //         <div className="row mt-5 d-flex justify-content-center">
+  //           <div className="col-sm-4"></div>
+  //           <div className="col-sm-4">
+  //             <IncorrectNetwork></IncorrectNetwork>
+  //           </div>
+  //           <div className="col-sm-4"></div>
+  //         </div>
+  //       </div>
+  //     </>
+  //   );
+  // }
 
   return (
     <div className="container faucet">

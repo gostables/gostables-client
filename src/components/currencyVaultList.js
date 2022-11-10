@@ -53,13 +53,13 @@ const CurrencyVaultList = (props) => {
     return mySupply;
   };
 
-  if (!walletDetails || !walletDetails.isSupportedNetwork) {
-    return (
-      <>
-        <IncorrectNetwork></IncorrectNetwork>
-      </>
-    );
-  }
+  // if (walletDetails && !walletDetails.isSupportedNetwork) {
+  //   return (
+  //     <>
+  //       <IncorrectNetwork></IncorrectNetwork>
+  //     </>
+  //   );
+  // }
 
   return (
     <>

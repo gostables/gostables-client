@@ -179,18 +179,18 @@ const SwapExchange = (props) => {
     return <></>;
   };
 
-  if (!walletDetails || !walletDetails.isSupportedNetwork) {
-    return (
-      <div class="alert alert-info mt-5 py-3 text-center" role="alert">
-        <p>goStables is currently deployed on the NILE testnet.</p>
-        <p>
-          Please switch to the NILE testnet in your wallet if you havent
-          already.
-        </p>
-        {/* <p>Mainnet coming soon!.</p> */}
-      </div>
-    );
-  }
+  // if (!walletDetails || !walletDetails.isSupportedNetwork) {
+  //   return (
+  //     <div class="alert alert-info mt-5 py-3 text-center" role="alert">
+  //       <p>goStables is currently deployed on the NILE testnet.</p>
+  //       <p>
+  //         Please switch to the NILE testnet in your wallet if you havent
+  //         already.
+  //       </p>
+  //       {/* <p>Mainnet coming soon!.</p> */}
+  //     </div>
+  //   );
+  // }
   return (
     <div className="card swap-card z-index-0 fadeIn3 fadeInBottom">
       <div className="card-header p-0 position-relative mt-n4 mx-3 z-index-2">

@@ -135,17 +135,17 @@ const WalletDashboard = (props) => {
       </>
     );
   };
-  if (!walletDetails || !walletDetails.isSupportedNetwork) {
-    return (
-      <>
-        <div className="col-sm-4"></div>
-        <div className="col-sm-4">
-          <IncorrectNetwork></IncorrectNetwork>
-        </div>
-        <div className="col-sm-4"></div>
-      </>
-    );
-  }
+  // if (!walletDetails || !walletDetails.isSupportedNetwork) {
+  //   return (
+  //     <>
+  //       <div className="col-sm-4"></div>
+  //       <div className="col-sm-4">
+  //         <IncorrectNetwork></IncorrectNetwork>
+  //       </div>
+  //       <div className="col-sm-4"></div>
+  //     </>
+  //   );
+  // }
   if (!stableCoins.length) {
     return (
       <>
