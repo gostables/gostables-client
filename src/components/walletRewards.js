@@ -1,14 +1,11 @@
-import { useEffect, useState } from "react";
-import walletPublisher from "../publishers/wallet";
-import usddImg from "../usdd.png";
 import emptyImg from "../empty.png";
 import { ThreeDots } from "react-loader-spinner";
-import { getCurrencies, getCurrency } from "../utils/currencies";
+import { getCurrency } from "../utils/currencies";
 import StableIcon from "./icon_gStable";
 import { formatM, formatUSD } from "../utils/currencyFormatter";
 
 const WalletRewards = (props) => {
-  const { walletData, stableCoins, getStableCoinByCurrencyKey } = props;
+  const { walletData, getStableCoinByCurrencyKey } = props;
 
   const claim = async (currencyKey) => {
     let currency = getCurrency(currencyKey);
@@ -26,7 +23,7 @@ const WalletRewards = (props) => {
       return (
         <>
           <div className="justify-content-center text-center empty-img">
-            <img src={emptyImg} />
+            <img src={emptyImg} alt="empty" />
             <br />
             <p className="text-muted small">
               No Pending Rewards yet.
@@ -39,27 +36,34 @@ const WalletRewards = (props) => {
     }
     return (
       <>
-        <div className="list-group"></div>
-        {walletData.vaultBalances.map((vb) => (
-          <>
-            <div className="d-flex justify-content-between w-100 py-2">
-              <p>
-                <StableIcon
-                  currencyKey={vb.currencyKey}
-                  height="24"
-                ></StableIcon>
-                <span className="small">{formatM(vb.rewards)}</span>
-              </p>
-              <button
-                type="button"
-                className="btn btn-primary px-3 "
-                onClick={() => claim(vb.currencyKey)}
-              >
-                Claim
-              </button>
-            </div>
-          </>
-        ))}
+        <ul className="list-group list-group-flush">
+          {walletData.vaultBalances.map((vb) => (
+            <>
+              <li className="list-group-item">
+                <div className="row">
+                  <div className="col-4">
+                    <StableIcon
+                      currencyKey={vb.currencyKey}
+                      height="24"
+                    ></StableIcon>
+                  </div>
+                  <div className="col">
+                    <span className="small">{formatM(vb.rewards)}</span>
+                  </div>
+                  <div className="col-md-auto">
+                    <button
+                      type="button"
+                      className="btn btn-primary btn-sm"
+                      onClick={() => claim(vb.currencyKey)}
+                    >
+                      Claim
+                    </button>
+                  </div>
+                </div>
+              </li>
+            </>
+          ))}
+        </ul>
       </>
     );
   };
@@ -80,7 +84,7 @@ const WalletRewards = (props) => {
       <>
         <div className="text-center">
           <p className="small">Total Pending Rewards (USDD)</p>
-          <h5 className="fw-bold">{formatUSD.format(total)}</h5>
+          <h5 className="fw-bold">{formatUSD(total)}</h5>
         </div>
       </>
     );

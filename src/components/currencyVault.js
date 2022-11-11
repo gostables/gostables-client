@@ -113,7 +113,7 @@ const CurrencyVault = (props) => {
             <div className="alert alert-success text-center">
               <strong>My Supply</strong>{" "}
               <div className="my-2">
-                {formatUSD.format(walletData.vaultBalance.balance)}
+                {formatUSD(walletData.vaultBalance.balance)}
               </div>
             </div>
           </>

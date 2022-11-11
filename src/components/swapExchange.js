@@ -105,7 +105,7 @@ const SwapExchange = (props) => {
         </div>
         {walletDetails ? (
           <p className="small pb-3">
-            Balance: {formatUSD.format(walletDetails.usddBalance)}
+            Balance: {formatUSD(walletDetails.usddBalance)}
           </p>
         ) : (
           <></>
@@ -276,7 +276,7 @@ const SwapExchange = (props) => {
               /*swapFeesFactor*/ true ? (
                 <div className="text-xs mt-20 d-flex justify-content-center">
                   <b>Fee ({swapFeesFactor * 100}%)</b>: ≈{" "}
-                  {formatUSD.format(stableCoinValue * swapFeesFactor)}
+                  {formatUSD(stableCoinValue * swapFeesFactor)}
                 </div>
               ) : (
                 <></>

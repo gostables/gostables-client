@@ -1,7 +1,5 @@
-import { getCurrencies, getCurrency } from "../utils/currencies";
+import { getCurrency } from "../utils/currencies";
 import CurrencyVault from "./currencyVault";
-import usddImg from "../usdd.png";
-import gttdImg from "../ttdd.png";
 import trxImg from "../trx.png";
 import btcImg from "../btc.png";
 import ethImg from "../eth.png";
@@ -74,7 +72,7 @@ const CurrencyVaultList = (props) => {
           return vb.currencyKey.localeCompare(currencyKey) == 0;
         });
         if (vaultBalances.length) {
-          mySupply = vaultBalances[0].balanceData.balance;
+          mySupply_ = vaultBalances[0].balanceData.balance;
         }
       }
       return mySupply_;
@@ -112,11 +110,11 @@ const CurrencyVaultList = (props) => {
 
             <div class="col-sm-6 col-md-3 text-center">
               <b>TVL</b>
-              <p class="small">{formatUSD.format(tvl)}</p>
+              <p class="small">{formatUSD(tvl)}</p>
             </div>
             <div class="col-sm-6 col-md-3 text-center">
               <b>My Supply</b>
-              <p class="small">{formatUSD.format(getMySupply())}</p>
+              <p class="small">{formatUSD(getMySupply())}</p>
             </div>
             <div class="col-sm-12 col-md-2 text-center">
               <button
@@ -250,7 +248,7 @@ const CurrencyVaultList = (props) => {
           <div class="modal-content">
             <div class="modal-header shadow-primary">
               <img
-                src={gttdImg}
+                src={getCurrency(currencyKey).icon}
                 alt="BTC"
                 width="32"
                 height="32"

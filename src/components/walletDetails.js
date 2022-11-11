@@ -1,12 +1,7 @@
-import { useEffect, useState } from "react";
-import walletPublisher from "../publishers/wallet";
-import usddImg from "../usdd.png";
 import { ThreeDots } from "react-loader-spinner";
-import { getCurrencies, getCurrency } from "../utils/currencies";
 import USDDIcon from "./iconUSDD";
 import { formatM, formatUSD } from "../utils/currencyFormatter";
 import StableIcon from "./icon_gStable";
-import { isFocusable } from "@testing-library/user-event/dist/utils";
 
 const WalletDetails = (props) => {
   const { walletData, stableCoins, getStableCoinByCurrencyKey } = props;
@@ -27,7 +22,7 @@ const WalletDetails = (props) => {
       <>
         <div className="text-center">
           <p className="small">Total Balance (USDD)</p>
-          <h5 className="fw-bold">{formatUSD.format(total)}</h5>
+          <h5 className="fw-bold">{formatUSD(total)}</h5>
         </div>
       </>
     );
