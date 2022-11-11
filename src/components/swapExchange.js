@@ -158,7 +158,6 @@ const SwapExchange = (props) => {
   };
 
   const swap = async () => {
-    debugger;
     let currency = getCurrency(currencyKey);
     let swapContract = await currency.swapContract();
     let usd = await usddContract();
@@ -171,7 +170,7 @@ const SwapExchange = (props) => {
       hash = await swapContract.deposit(stableCoinValue);
     } else {
       //swap currency for USD
-      hash = swapContract.withdraw(tokenValue);
+      hash = await swapContract.withdraw(tokenValue);
     }
     if (hash) setTRXHash(hash);
   };

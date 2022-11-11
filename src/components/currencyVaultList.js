@@ -23,6 +23,7 @@ const CurrencyVaultList = (props) => {
   }, []);
 
   const init = async (currencyKey) => {
+    debugger;
     let currency = getCurrency(currencyKey);
 
     let vaultContract = await currency.vaultContract();
@@ -44,8 +45,17 @@ const CurrencyVaultList = (props) => {
     };
   }, []);
 
-  const setWallet = (walletDetails) => {
+  const setWallet = async (walletDetails) => {
     setWalletDetails(walletDetails);
+
+    debugger;
+    let currency = getCurrency(currencyKey);
+    let vaultContract = await currency.vaultContract();
+    let vaultBalData = await vaultContract.balanceOf(
+      walletPublisher.walletDetails.address
+    );
+
+    setMySupply(vaultBalData);
   };
 
   useEffect(() => {
@@ -63,20 +73,16 @@ const CurrencyVaultList = (props) => {
   };
 
   const getMySupply = () => {
-    if (mySupply) {
-      return mySupply.balance;
-    } else {
-      let mySupply_ = 0;
-      if (walletDetails && walletDetails.vaultBalances) {
-        let vaultBalances = walletDetails.vaultBalances.filter((vb) => {
-          return vb.currencyKey.localeCompare(currencyKey) == 0;
-        });
-        if (vaultBalances.length) {
-          mySupply_ = vaultBalances[0].balanceData.balance;
-        }
+    let mySupply_ = 0;
+    if (walletDetails && walletDetails.vaultBalances) {
+      let vaultBalances = walletDetails.vaultBalances.filter((vb) => {
+        return vb.currencyKey.localeCompare(currencyKey) == 0;
+      });
+      if (vaultBalances.length) {
+        mySupply_ = vaultBalances[0].balanceData.balance;
       }
-      return mySupply_;
     }
+    return mySupply_;
   };
 
   // if (walletDetails && !walletDetails.isSupportedNetwork) {

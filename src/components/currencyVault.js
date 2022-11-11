@@ -124,30 +124,41 @@ const CurrencyVault = (props) => {
         {!display && new Date() < walletData.vaultBalance.lock ? (
           <></>
         ) : (
-          <div className="input-group mb-2" key={1}>
-            <div className="form-floating">
-              <input
-                type="text"
-                className="form-control"
-                id="floatingInputGroup1"
-                placeholder="Value in USDD"
-                onChange={updateUSDDValue}
-                value={usddValue}
-              />
-              <label for="floatingInputGroup1">Value in USDD</label>
+          <>
+            <div className="input-group mb-2" key={1}>
+              <div className="form-floating">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="floatingInputGroup1"
+                  placeholder="Value in USDD"
+                  onChange={updateUSDDValue}
+                  value={usddValue}
+                />
+                <label for="floatingInputGroup1">Value in USDD</label>
+              </div>
+              <span className="input-group-text">
+                <USDDIcon height={32}></USDDIcon>
+              </span>
             </div>
-            <span className="input-group-text">
-              <USDDIcon height={32}></USDDIcon>
-            </span>
-            <button
-              className="btn btn-primary vault-deposit"
-              type="button"
-              id="button-deposit"
-              onClick={callVault}
-            >
-              {display ? "Deposit" : "Redeem"}
-            </button>
-          </div>
+            {walletData ? (
+              <p className="small">
+                Balance: {formatUSD(walletData.usddBalance)}
+              </p>
+            ) : (
+              <></>
+            )}
+            <div class="d-grid gap-2">
+              <button
+                className="btn btn-primary"
+                type="button"
+                id="button-deposit"
+                onClick={callVault}
+              >
+                {display ? "Deposit" : "Withdraw"}
+              </button>
+            </div>
+          </>
         )}
 
         {/* <a className="p-1 rounded small" href="#simple-list-item-1">
@@ -155,7 +166,7 @@ const CurrencyVault = (props) => {
         </a> */}
 
         {vaultDetails.interval ? (
-          <div className="text-xs text-center mt-2">
+          <div className="text-xs text-center mt-2 pt-3">
             {walletData.vaultBalance.lock > new Date() ? (
               <>
                 <span className="lock-icon">
@@ -212,7 +223,7 @@ const CurrencyVault = (props) => {
                 href="#"
                 onClick={() => setDisplay(false)}
               >
-                Redeem
+                Withdraw
               </a>
             </li>
           </ul>

@@ -37,32 +37,36 @@ const WalletRewards = (props) => {
     return (
       <>
         <ul className="list-group list-group-flush">
-          {walletData.vaultBalances.map((vb) => (
-            <>
-              <li className="list-group-item">
-                <div className="row">
-                  <div className="col-4">
-                    <StableIcon
-                      currencyKey={vb.currencyKey}
-                      height="24"
-                    ></StableIcon>
+          {walletData.vaultBalances.map((vb) =>
+            vb.rewards > 0 ? (
+              <>
+                <li className="list-group-item">
+                  <div className="row">
+                    <div className="col-4">
+                      <StableIcon
+                        currencyKey={vb.currencyKey}
+                        height="24"
+                      ></StableIcon>
+                    </div>
+                    <div className="col">
+                      <span className="small">{formatM(vb.rewards)}</span>
+                    </div>
+                    <div className="col-md-auto">
+                      <button
+                        type="button"
+                        className="btn btn-danger btn-sm"
+                        onClick={() => claim(vb.currencyKey)}
+                      >
+                        Claim
+                      </button>
+                    </div>
                   </div>
-                  <div className="col">
-                    <span className="small">{formatM(vb.rewards)}</span>
-                  </div>
-                  <div className="col-md-auto">
-                    <button
-                      type="button"
-                      className="btn btn-primary btn-sm"
-                      onClick={() => claim(vb.currencyKey)}
-                    >
-                      Claim
-                    </button>
-                  </div>
-                </div>
-              </li>
-            </>
-          ))}
+                </li>
+              </>
+            ) : (
+              <></>
+            )
+          )}
         </ul>
       </>
     );
