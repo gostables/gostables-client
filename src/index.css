@@ -116,7 +116,7 @@ li.nav-item {
   margin-top: 0px;
 }
 
-.vault-card .card-header{  margin-top: 20px!important;}
+/* .vault-card .card-header{  margin-top: 20px!important;} */
 
 .wallet-card, .dash-card, .vault-card, .swap-card {
   padding-bottom: 40px;
