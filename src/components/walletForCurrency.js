@@ -142,7 +142,7 @@ const WalletForCurrency = (props) => {
       return vb.balanceData.balance > 0;
     });
     if (!deposits.length) {
-      return emptyVaultJSX("Start earning Rewards with", "Vault Deposits");
+      return emptyVaultJSX("Start Earning Rewards with", "Vault Deposits");
     }
     return (
       <>
