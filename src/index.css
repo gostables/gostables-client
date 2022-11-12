@@ -120,8 +120,8 @@ li.nav-item {
 
 .wallet-card, .dash-card, .vault-card, .swap-card {
   padding-bottom: 40px;
-  /*background-color: transparent!important;*/
-  background: linear-gradient(180deg, #01948d 213px, #e6fbea 0%)!important;
+  background-color: transparent!important;
+/*  background: linear-gradient(180deg, #01948d 213px, #e6fbea 0%)!important;*/
   /*border: none!important;*/
 }
 
@@ -214,4 +214,14 @@ li.nav-item {
     color: #fff;
     border-radius: 12px 12px 0 0;*/
 }
+
+.dash-card button.w-100 {margin-top: 10px;}
+
+.dash-card ul {
+    border-bottom: 1px solid #eee;
+}
+
+.dash-card .list-group-flush {
+    padding-bottom: 25px;
+  }
 
