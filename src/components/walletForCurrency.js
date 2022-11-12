@@ -63,7 +63,7 @@ const WalletForCurrency = (props) => {
   const rewardsJSX = () => {
     let rewards = walletDetails.vaultBalances.filter((vb) => vb.rewards > 0);
     if (!rewards.length) {
-      return emptyVaultJSX("No Pending Rewards", "Rewards");
+      return emptyVaultJSX("No Pending Rewards yet", "Rewards", "d-none");
     }
     return (
       <>
@@ -84,6 +84,7 @@ const WalletForCurrency = (props) => {
                       <span className="small text-right">{formatM(vb.rewards)}</span>
                     </div>
                   </div>
+                  <div className="text-center">
                   <button
                     type="button"
                     className="btn btn-danger btn-sm w-100"
@@ -91,6 +92,7 @@ const WalletForCurrency = (props) => {
                   >
                     Claim
                   </button>
+                  </div>
                 </li>
               </>
             ) : (
@@ -102,7 +104,7 @@ const WalletForCurrency = (props) => {
     );
   };
 
-  const emptyVaultJSX = (title, type) => {
+  const emptyVaultJSX = (title, type, hide) => {
     return (
       <>
         <h6 className="mt-3">{type}</h6>
@@ -116,9 +118,17 @@ const WalletForCurrency = (props) => {
           />
           <br />
           <p className="text-muted small">
-            {title}
-            <br />
-            Start earning with <a href="/vault">gStable Vaults</a>
+            {title}<br/>
+            <span className={hide}>
+              <a href="/vault">                  
+                <button
+                    type="button"
+                    className="btn btn-primary btn-sm mt-2"
+                  >
+                    gStable Vaults
+                </button>
+              </a>
+            </span>
           </p>
         </div>
         </li>
@@ -132,7 +142,7 @@ const WalletForCurrency = (props) => {
       return vb.balanceData.balance > 0;
     });
     if (!deposits.length) {
-      return emptyVaultJSX("No Vault Deposits yet", "Vault Deposits");
+      return emptyVaultJSX("Start earning Rewards with", "Vault Deposits");
     }
     return (
       <>

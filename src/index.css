@@ -215,10 +215,17 @@ li.nav-item {
     border-radius: 12px 12px 0 0;*/
 }
 
-.dash-card button.w-100 {margin-top: 10px;}
+.dash-card button.w-100 {
+  margin-top: 20px;
+  height: 3rem;
+}
 
 .dash-card ul {
     border-bottom: 1px solid #eee;
+}
+
+.list-group span.px-3 {
+    font-weight: 500;
 }
 
 .dash-card .list-group-flush {
