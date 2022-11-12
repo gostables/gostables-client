@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import { usddContract } from "../contracts/usdContract";
@@ -121,14 +122,14 @@ const WalletForCurrency = (props) => {
           <p className="text-muted small">
             {title}<br/>
             <span className={hide}>
-              <a href="/vault">                  
+              <NavLink to="/vault">                  
                 <button
                     type="button"
                     className="btn btn-primary btn-sm mt-2"
                   >
                     gStable Vaults
                 </button>
-              </a>
+              </NavLink>
             </span>
           </p>
         </div>
@@ -152,7 +153,7 @@ const WalletForCurrency = (props) => {
           {walletDetails.vaultBalances.map((vb) =>
             vb.balanceData.balance > 0 ? (
               <>
-              <a href="/vault">
+              <NavLink to="/vault">
                 <li class="list-group-item d-flex justify-content-between lh-sm border-0">
                   <div>
                     <div class="my-0">{formatUSD(vb.balanceData.balance)}</div>
@@ -166,7 +167,7 @@ const WalletForCurrency = (props) => {
                     </span>
                   </div>
                 </li>
-                </a>
+                </NavLink>
               </>
             ) : (
               <></>
