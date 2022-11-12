@@ -3,6 +3,9 @@ import { getCurrencies } from "../utils/currencies";
 class CurrencyPublisher {
   currencyKey = getCurrencies()[0].key;
   observers = [];
+  getCurrencyKey = () => {
+    return this.currencyKey;
+  };
   setCurrency = (currencyKey_) => {
     console.log("updatedCurrency", currencyKey_);
     this.currencyKey = currencyKey_;

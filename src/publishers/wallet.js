@@ -1,6 +1,7 @@
 import { usddContract } from "../contracts/usdContract";
-import { getCurrencies } from "../utils/currencies";
+import { getCurrencies, getCurrency } from "../utils/currencies";
 import getWalletDetails from "../utils/tronWeb";
+import currencyPublisher from "./currency";
 
 class WalletPublisher {
   observers = [];
@@ -8,13 +9,20 @@ class WalletPublisher {
   usdd = null;
   usdj = null;
   timer = null;
+  currencykey = null;
   constructor() {
     this.init();
+    this.currencykey = currencyPublisher.getCurrencyKey();
+    currencyPublisher.attach(this.updateCurrency);
   }
+  updateCurrency = (currencyKey_) => {
+    this.currencykey = currencyKey_;
+  };
   get_gStableBalances = async (currencies) => {
     let gStableBalances = [];
-    for (let index = 0; index < currencies.length; index += 1) {
-      const currency = currencies[index];
+    if (this.currencykey) {
+      console.log(`getting gStable data for ${this.currencyKey}`);
+      let currency = getCurrency(this.currencykey);
       let gStableContract = await currency.gStableContract();
       let gStableBal = await gStableContract.balanceOf(
         this.walletDetails.address
@@ -24,12 +32,14 @@ class WalletPublisher {
         balance: gStableBal,
       });
     }
+
     return gStableBalances;
   };
   getVaultBalances = async (currencies) => {
     let vaultBalances = [];
-    for (let index = 0; index < currencies.length; index += 1) {
-      const currency = currencies[index];
+    if (this.currencykey) {
+      console.log(`getting vault data for ${this.currencyKey}`);
+      let currency = getCurrency(this.currencykey);
       let vaultContract = await currency.vaultContract();
       let vaultBalData = await vaultContract.balanceOf(
         this.walletDetails.address
@@ -61,8 +71,12 @@ class WalletPublisher {
       try {
         // Continuous polling as per https://github.com/ibnzUK/Tron-Wallet-React-Integration/blob/main/src/App.js
         this.walletDetails = await getWalletDetails();
+        console.log(this.walletDetails);
       } catch (error) {
         console.error(error);
+      }
+      if (!this.usdj) {
+        this.usdd = await usddContract();
       }
       let usddBal = await this.getUSDDBalance();
 
@@ -83,10 +97,14 @@ class WalletPublisher {
     }
   };
   init = async () => {
-    this.walletDetails = await getWalletDetails();
-    console.log(this.walletDetails);
+    try {
+      this.walletDetails = await getWalletDetails();
+      console.log(this.walletDetails);
 
-    this.usdd = await usddContract();
+      this.usdd = await usddContract();
+    } catch (error) {
+      console.error(error);
+    }
 
     this.timer = setInterval(() => this.getData(), 3 * 1000);
   };

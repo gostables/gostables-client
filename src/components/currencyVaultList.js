@@ -23,7 +23,6 @@ const CurrencyVaultList = (props) => {
   }, []);
 
   const init = async (currencyKey) => {
-    debugger;
     let currency = getCurrency(currencyKey);
 
     let vaultContract = await currency.vaultContract();
@@ -47,15 +46,6 @@ const CurrencyVaultList = (props) => {
 
   const setWallet = async (walletDetails) => {
     setWalletDetails(walletDetails);
-
-    debugger;
-    let currency = getCurrency(currencyKey);
-    let vaultContract = await currency.vaultContract();
-    let vaultBalData = await vaultContract.balanceOf(
-      walletPublisher.walletDetails.address
-    );
-
-    setMySupply(vaultBalData);
   };
 
   useEffect(() => {
@@ -68,7 +58,6 @@ const CurrencyVaultList = (props) => {
   const updateCurrency = async (currKey) => {
     console.log("updating currency : ", currKey);
     setCurrencyKey(currKey);
-    debugger;
     init(currKey);
   };
 

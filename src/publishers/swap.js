@@ -47,6 +47,12 @@ class SwapPublisher {
     }
     // Continuous polling as per https://github.com/ibnzUK/Tron-Wallet-React-Integration/blob/main/src/App.js
     this.timer = setInterval(async () => {
+      if (this.observers.length < 1) {
+        console.log(
+          `no observers for swap ${this.currency.key} no notification`
+        );
+        return;
+      }
       console.log("swap Publisher updating : ", this.currency.key);
       let swapContract = await this.currency.swapContract();
       try {

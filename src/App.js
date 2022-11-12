@@ -29,7 +29,7 @@ const App = () => {
           path="/wallet"
           // @ts-ignore
           exact
-          element={<WalletPage />}
+          element={<WalletPage currencyKey={selectedCurrency} />}
         />
 
         <Route

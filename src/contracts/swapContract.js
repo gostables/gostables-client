@@ -170,7 +170,6 @@ class SwapContract extends SmartContractBase {
   clearAccumulatedSwapFees = async (vaultAddress) => {
     this.check();
     if (!vaultAddress) throw new Error(`Vault Address : ${vaultAddress}`);
-    debugger;
     try {
       await this.contract.transferRewards(vaultAddress).send({
         feeLimit: 100_000_000,

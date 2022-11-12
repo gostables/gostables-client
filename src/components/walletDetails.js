@@ -4,7 +4,7 @@ import { formatM, formatUSD } from "../utils/currencyFormatter";
 import StableIcon from "./icon_gStable";
 
 const WalletDetails = (props) => {
-  const { walletData, stableCoins, getStableCoinByCurrencyKey } = props;
+  const { walletData, getStableCoinByCurrencyKey } = props;
 
   const portfolioJSX = () => {
     if (!walletData || !walletData.isSupportedNetwork) {
@@ -16,7 +16,11 @@ const WalletDetails = (props) => {
         walletData.gStableBalances[index].currencyKey
       ).conversionRatio;
       let bal = parseFloat(walletData.gStableBalances[index].balance);
-      total += bal / cr;
+      if (cr != 0) {
+        total += bal / cr;
+      } else {
+        total += bal;
+      }
     }
     return (
       <>
@@ -45,7 +49,7 @@ const WalletDetails = (props) => {
                 </div>
                 <div className="small">{formatM(walletData.usddBalance)}</div>
               </li>
-              {stableCoins.map((stableCoin) => {
+              {walletData.gStableBalances.map((stableCoin) => {
                 let balances = walletData.gStableBalances.filter((gsb) => {
                   return (
                     gsb.currencyKey.localeCompare(stableCoin.currencyKey) == 0

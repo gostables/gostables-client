@@ -81,7 +81,6 @@ const CurrencyVault = (props) => {
     let usd = await usddContract();
     if (vaultContract) {
       try {
-        debugger;
         let currency = getCurrency(currencyKey);
         await usd.approve(currency.vaultAddress, usddValue);
         console.log("approved");

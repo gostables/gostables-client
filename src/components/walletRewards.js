@@ -10,7 +10,6 @@ const WalletRewards = (props) => {
   const claim = async (currencyKey) => {
     let currency = getCurrency(currencyKey);
     let vaultContract = await currency.vaultContract();
-    debugger;
     await vaultContract.claimPendingRewards(walletData.address);
   };
 
@@ -81,8 +80,14 @@ const WalletRewards = (props) => {
       let cr = getStableCoinByCurrencyKey(
         walletData.gStableBalances[index].currencyKey
       ).conversionRatio;
+      getCurrency();
       let bal = parseFloat(walletData.vaultBalances[index].rewards);
-      total += bal / cr;
+      debugger;
+      if (!cr || cr != 0) {
+        total += bal / cr;
+      } else {
+        total += bal;
+      }
     }
     return (
       <>

@@ -17,42 +17,66 @@ const WalletDashboard = (props) => {
     network: "",
     usddBalance: "",
     vaultBalances: [],
+    gStableBalances: [],
   });
 
-  const [stableCoins, setStableCoins] = useState([]);
+  // const [stableCoins, setStableCoins] = useState([]);
 
   useEffect(() => {
-    walletPublisher.getUSDDBalance();
-    walletPublisher.attach(setWalletDetails);
+    walletPublisher.attach(updateWalletDetails);
     return () => {
-      walletPublisher.detach(setWalletDetails);
+      walletPublisher.detach(updateWalletDetails);
     };
   }, []);
 
-  useEffect(() => {
-    getBalances();
-    return () => {
-      console.log("unmounting WalletDashboard balances");
+  const updateWalletDetails = async (walletDetails_) => {
+    // let balances = await getBalances(walletDetails_);
+    let walletDetailsNew = {
+      status: walletDetails_.status,
+      isSupportedNetwork: walletDetails_.isSupportedNetwork,
+      address: walletDetails_.address,
+      network: walletDetails_.network,
+      usddBalance: walletDetails_.usddBalance,
+      vaultBalances: walletDetails_.vaultBalances,
+      gStableBalances: walletDetails_.gStableBalances,
     };
-  }, []);
-
-  const getBalances = async () => {
-    let usddBalance = await walletPublisher.getUSDDBalance();
-    let vaultBalances = await walletPublisher.getVaultBalances();
-    setWalletDetails({ ...walletDetails, usddBalance, vaultBalances });
+    console.log(walletDetailsNew);
+    setWalletDetails(walletDetailsNew);
   };
 
-  useEffect(() => {
-    init();
-    return () => {
-      console.log("unmounting WalletDashboard");
-    };
-  }, []);
-  const init = async () => {
+  const getVaultBalances = async (currencies, walletDetails_) => {
+    let vaultBalances = [];
+    try {
+      if (walletDetails_.address) {
+        for (let index = 0; index < currencies.length; index += 1) {
+          const currency = currencies[index];
+          let vaultContract = await currency.vaultContract();
+          let vaultBalData = await vaultContract.balanceOf(
+            walletDetails_.address
+          );
+          let vaultRewards = await vaultContract.getPendingRewards(
+            walletDetails_.address
+          );
+          vaultBalances.push({
+            currencyKey: currency.key,
+            balanceData: vaultBalData,
+            rewards: vaultRewards,
+          });
+        }
+      }
+    } catch (error) {
+      console.error(error);
+    }
+
+    return vaultBalances;
+  };
+
+  const getStableBalances = async (currencies, walletDetails_) => {
+    let stableCoins = [];
     try {
       //gStable Data
-      let stableCoins = [];
-      getCurrencies().map(async (currency) => {
+      for (let index = 0; index < currencies.length; index += 1) {
+        const currency = currencies[index];
         let gStableContract = await currency.gStableContract();
         let { name: gStableCoinName, symbol: gStableCoinSymbol } =
           await gStableContract.getNameSymbol();
@@ -65,15 +89,30 @@ const WalletDashboard = (props) => {
           currencyKey: currency.key,
           conversionRatio,
         });
-      });
-      setStableCoins(stableCoins);
+      }
     } catch (error) {
       console.error();
     }
+    return stableCoins;
+  };
+
+  const getBalances = async (walletDetails_) => {
+    let usddBalance = await walletPublisher.getUSDDBalance();
+    let vaultBalances = await getVaultBalances(getCurrencies(), walletDetails_);
+    let gStableBalances = await getStableBalances(
+      getCurrencies(),
+      walletDetails_
+    );
+    setWalletDetails({
+      ...walletDetails,
+      usddBalance,
+      vaultBalances,
+      gStableBalances,
+    });
   };
 
   const getStableCoinByCurrencyKey = (currencyKey) => {
-    let scArray = stableCoins.filter((sc) => {
+    let scArray = walletDetails.gStableBalances.filter((sc) => {
       return sc.currencyKey.localeCompare(currencyKey) == 0;
     });
     if (!scArray.length) throw new Error(`uh oh ${currencyKey}`);
@@ -98,7 +137,6 @@ const WalletDashboard = (props) => {
         {displayDetails ? (
           <WalletDetails
             walletData={walletDetails}
-            stableCoins={stableCoins}
             getStableCoinByCurrencyKey={getStableCoinByCurrencyKey}
           ></WalletDetails>
         ) : (
@@ -114,7 +152,6 @@ const WalletDashboard = (props) => {
         {displayRewards ? (
           <WalletRewards
             walletData={walletDetails}
-            stableCoins={stableCoins}
             getStableCoinByCurrencyKey={getStableCoinByCurrencyKey}
           ></WalletRewards>
         ) : (
@@ -146,7 +183,7 @@ const WalletDashboard = (props) => {
   //     </>
   //   );
   // }
-  if (!stableCoins.length) {
+  if (!walletDetails.gStableBalances.length) {
     return (
       <>
         <div className="mt-5 w-100 d-flex justify-content-center">

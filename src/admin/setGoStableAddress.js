@@ -15,7 +15,6 @@ const SetGoStableAddress = (props) => {
     setAddress("");
     try {
       console.log(`setAddress : ${props.type} ${address}`);
-      debugger;
       if (address) {
         switch (props.type) {
           case MARKET:

@@ -131,7 +131,9 @@ const SwapExchange = (props) => {
         (gsb) => gsb.currencyKey.localeCompare(currencyKey) == 0
       );
       if (gsbList) {
-        balJSX = <>Balance: {formatM(gsbList[0].balance)}</>;
+        balJSX = (
+          <>Balance: {gsbList.length ? formatM(gsbList[0].balance) : ""}</>
+        );
       }
     }
     return (
