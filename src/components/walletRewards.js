@@ -50,16 +50,14 @@ const WalletRewards = (props) => {
                     <div className="col">
                       <span className="small">{formatM(vb.rewards)}</span>
                     </div>
-                    <div className="col-md-auto">
-                      <button
-                        type="button"
-                        className="btn btn-danger btn-sm"
-                        onClick={() => claim(vb.currencyKey)}
-                      >
-                        Claim
-                      </button>
-                    </div>
                   </div>
+                  <button
+                    type="button"
+                    className="btn btn-danger btn-sm"
+                    onClick={() => claim(vb.currencyKey)}
+                  >
+                    Claim
+                  </button>
                 </li>
               </>
             ) : (
