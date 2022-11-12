@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import emptyImg from "../empty.png";
 import { ThreeDots } from "react-loader-spinner";
 import { getCurrency } from "../utils/currencies";
@@ -27,7 +28,7 @@ const WalletRewards = (props) => {
             <p className="text-muted small">
               No Pending Rewards yet.
               <br />
-              Start earning with <a href="/vault">gStable Vaults</a>
+              Start earning with <NavLink to="/vault">gStable Vaults</NavLink>
             </p>
           </div>
         </>
