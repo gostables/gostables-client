@@ -9,6 +9,7 @@ import CurrencyVaultPage from "./components/currencyVaultPage";
 import currencyPublisher from "./publishers/currency";
 import { useEffect, useState } from "react";
 import { getCurrencies } from "./utils/currencies";
+import WalletDashboard from "./components/wallet/wdb";
 const App = () => {
   const [selectedCurrency, setSelectedCurrency] = useState(
     getCurrencies()[0].key
@@ -25,6 +26,12 @@ const App = () => {
     <>
       <Navbar></Navbar>
       <Routes>
+        <Route
+          path="/wdb"
+          // @ts-ignore
+          exact
+          element={<WalletDashboard currencyKey={selectedCurrency} />}
+        />
         <Route
           path="/wallet"
           // @ts-ignore

@@ -21,7 +21,7 @@ class WalletPublisher {
   get_gStableBalances = async (currencies) => {
     let gStableBalances = [];
     if (this.currencykey) {
-      console.log(`getting gStable data for ${this.currencyKey}`);
+      // console.log(`getting gStable data for ${this.currencyKey}`);
       let currency = getCurrency(this.currencykey);
       let gStableContract = await currency.gStableContract();
       let gStableBal = await gStableContract.balanceOf(
@@ -38,7 +38,7 @@ class WalletPublisher {
   getVaultBalances = async (currencies) => {
     let vaultBalances = [];
     if (this.currencykey) {
-      console.log(`getting vault data for ${this.currencyKey}`);
+      // console.log(`getting vault data for ${this.currencyKey}`);
       let currency = getCurrency(this.currencykey);
       let vaultContract = await currency.vaultContract();
       let vaultBalData = await vaultContract.balanceOf(
@@ -71,7 +71,7 @@ class WalletPublisher {
       try {
         // Continuous polling as per https://github.com/ibnzUK/Tron-Wallet-React-Integration/blob/main/src/App.js
         this.walletDetails = await getWalletDetails();
-        console.log(this.walletDetails);
+        // console.log(this.walletDetails);
       } catch (error) {
         console.error(error);
       }

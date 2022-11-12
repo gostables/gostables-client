@@ -11,7 +11,7 @@ import awgdImg from "../gawg.png";
 import dopImg from "../gDOP.png";
 import bsdImg from "../gbsd.png";
 import kydImg from "../gKYD.png";
-// import cupImg from "../gCUP.png";
+import cupImg from "../gcup.png";
 import htgImg from "../gHTG.png";
 import eurImg from "../gEUR.png";
 
@@ -166,7 +166,7 @@ const CurrencyList = {
     "CUP",
     "gCUP",
     "Cuban Peso",
-    eurImg,
+    cupImg,
     "TAPaFRa6n2BT1Mx6CFPob2kzW6pTyV85me" /*swapAddress */,
     "TQq9o4PahyoLociVzCnBMRRDdPZrNNkW1f" /*swapMarketAddress*/,
     "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU" /*swapStableAddress*/,
