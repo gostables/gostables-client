@@ -7,6 +7,7 @@ import { formatM, formatUSD } from "../utils/currencyFormatter";
 import USDDIcon from "./iconUSDD";
 import StableIcon from "./icon_gStable";
 import emptyImg from "../empty.png";
+import LockIcon from "../svg/vaultLock";
 import { getCurrency } from "../utils/currencies";
 
 const WalletForCurrency = (props) => {
@@ -151,11 +152,12 @@ const WalletForCurrency = (props) => {
           {walletDetails.vaultBalances.map((vb) =>
             vb.balanceData.balance > 0 ? (
               <>
+              <a href="/vault">
                 <li class="list-group-item d-flex justify-content-between lh-sm border-0">
                   <div>
                     <div class="my-0">{formatUSD(vb.balanceData.balance)}</div>
                     <div class="small text-muted  py-2">
-                      till {vb.balanceData.lock.toLocaleString()}
+                      <LockIcon></LockIcon> till {vb.balanceData.lock.toLocaleString()}
                     </div>
                   </div>
                   <div>
@@ -164,6 +166,7 @@ const WalletForCurrency = (props) => {
                     </span>
                   </div>
                 </li>
+                </a>
               </>
             ) : (
               <></>

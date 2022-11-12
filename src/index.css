@@ -231,4 +231,11 @@ li.nav-item {
 .dash-card .list-group-flush {
     padding-bottom: 25px;
   }
+.dash-card .list-group a {
+    text-decoration: none!important;
+  }
+
+.dash-card .list-group li:hover {
+    background-color:#e6fbea;
+  }
 
