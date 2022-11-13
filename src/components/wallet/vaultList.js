@@ -19,14 +19,28 @@ const VaultList = (props) => {
 
   const [walletAddress, setWalletAddress] = useState("");
   useEffect(() => {
-    if (window.tronWeb && window.tronWeb.ready) {
-      console.log(window.tronWeb.defaultAddress.base58);
-      setWalletAddress(window.tronWeb.defaultAddress.base58);
-    }
+    // if (window.tronWeb && window.tronWeb.ready) {
+    //   console.log(window.tronWeb.defaultAddress.base58);
+    //   setWalletAddress(window.tronWeb.defaultAddress.base58);
+    // }
+    updateWalletAddress();
     return () => {
       console.log("unmounting VaultList");
     };
   }, [window.tronWeb.defaultAddress.base58]);
+
+  const [attempt, setAttempt] = useState(0);
+  const updateWalletAddress = () => {
+    if (window.tronWeb && window.tronWeb.ready) {
+      console.log(window.tronWeb.defaultAddress.base58);
+      setWalletAddress(window.tronWeb.defaultAddress.base58);
+    } else {
+      if (attempt < 10) {
+        setTimeout(() => updateWalletAddress, 3 * 1000);
+        setAttempt(attempt + 1);
+      }
+    }
+  };
 
   const updateTotal = (balanceData) => {
     // console.log(balanceData);
