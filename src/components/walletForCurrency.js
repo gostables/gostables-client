@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import { usddContract } from "../contracts/usdContract";
@@ -7,6 +8,7 @@ import { formatM, formatUSD } from "../utils/currencyFormatter";
 import USDDIcon from "./iconUSDD";
 import StableIcon from "./icon_gStable";
 import emptyImg from "../empty.png";
+import LockIcon from "../svg/vaultLock";
 import { getCurrency } from "../utils/currencies";
 
 const WalletForCurrency = (props) => {
@@ -63,7 +65,7 @@ const WalletForCurrency = (props) => {
   const rewardsJSX = () => {
     let rewards = walletDetails.vaultBalances.filter((vb) => vb.rewards > 0);
     if (!rewards.length) {
-      return emptyVaultJSX("No Pending Rewards", "Rewards");
+      return emptyVaultJSX("No Pending Rewards yet", "Rewards", "d-none");
     }
     return (
       <>
@@ -84,6 +86,7 @@ const WalletForCurrency = (props) => {
                       <span className="small text-right">{formatM(vb.rewards)}</span>
                     </div>
                   </div>
+                  <div className="text-center">
                   <button
                     type="button"
                     className="btn btn-danger btn-sm w-100"
@@ -91,6 +94,7 @@ const WalletForCurrency = (props) => {
                   >
                     Claim
                   </button>
+                  </div>
                 </li>
               </>
             ) : (
@@ -102,7 +106,7 @@ const WalletForCurrency = (props) => {
     );
   };
 
-  const emptyVaultJSX = (title, type) => {
+  const emptyVaultJSX = (title, type, hide) => {
     return (
       <>
         <h6 className="mt-3">{type}</h6>
@@ -116,9 +120,17 @@ const WalletForCurrency = (props) => {
           />
           <br />
           <p className="text-muted small">
-            {title}
-            <br />
-            Start earning with <a href="/vault">gStable Vaults</a>
+            {title}<br/>
+            <span className={hide}>
+              <NavLink to="/vault">                  
+                <button
+                    type="button"
+                    className="btn btn-primary btn-sm mt-2"
+                  >
+                    gStable Vaults
+                </button>
+              </NavLink>
+            </span>
           </p>
         </div>
         </li>
@@ -132,7 +144,7 @@ const WalletForCurrency = (props) => {
       return vb.balanceData.balance > 0;
     });
     if (!deposits.length) {
-      return emptyVaultJSX("No Vault Deposits yet", "Vault Deposits");
+      return emptyVaultJSX("Start Earning Rewards with", "Vault Deposits");
     }
     return (
       <>
@@ -141,11 +153,12 @@ const WalletForCurrency = (props) => {
           {walletDetails.vaultBalances.map((vb) =>
             vb.balanceData.balance > 0 ? (
               <>
+              <NavLink to="/vault">
                 <li class="list-group-item d-flex justify-content-between lh-sm border-0">
                   <div>
                     <div class="my-0">{formatUSD(vb.balanceData.balance)}</div>
                     <div class="small text-muted  py-2">
-                      till {vb.balanceData.lock.toLocaleString()}
+                      <LockIcon></LockIcon> till {vb.balanceData.lock.toLocaleString()}
                     </div>
                   </div>
                   <div>
@@ -154,6 +167,7 @@ const WalletForCurrency = (props) => {
                     </span>
                   </div>
                 </li>
+                </NavLink>
               </>
             ) : (
               <></>
