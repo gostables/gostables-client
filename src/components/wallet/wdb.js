@@ -4,45 +4,26 @@ import VaultList from "./vaultList";
 import WalletBalances from "./walletBalances";
 
 const WalletDashboard = (props) => {
-  const [balancesCompleted, setBalancesCompleted] = useState(false);
+  const [key, setKey] = useState(0);
   useEffect(() => {
-    setTimeout(displayVaults, 20 * 1000);
+    let timer = setInterval(() => {
+      setKey(key + 1);
+    }, 60 * 1000);
 
     return () => {
-      console.log("unmounting wdb");
+      clearInterval(timer);
     };
   }, []);
 
-  const displayVaults = () => {
-    setBalancesCompleted(true);
-  };
-
   return (
     <div className="container">
-      <div className="row mt-3"></div>
+      <div className="row"></div>
       <div className="row mt-3">
         <div className="col-sm-6">
-          <WalletBalances {...props}></WalletBalances>
+          <WalletBalances {...props} key={key + "wb"}></WalletBalances>
         </div>
         <div className="col-sm-6">
-          {balancesCompleted ? (
-            <VaultList {...props}></VaultList>
-          ) : (
-            <>
-              <div className="mt-2 w-100 d-flex justify-content-center">
-                <ThreeDots
-                  height="64"
-                  width="64"
-                  radius="9"
-                  color="#fff"
-                  ariaLabel="three-dots-loading"
-                  wrapperStyle={{}}
-                  wrapperClassName=""
-                  visible={true}
-                />
-              </div>
-            </>
-          )}
+          <VaultList {...props} key={key + "vl"}></VaultList>
         </div>
       </div>
     </div>

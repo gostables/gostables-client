@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { ThreeDots } from "react-loader-spinner";
 import { getCurrencies } from "../../utils/currencies";
 import { formatUSD } from "../../utils/currencyFormatter";
 import VaultData from "./vaultData";
@@ -28,7 +29,7 @@ const VaultList = (props) => {
   }, [window.tronWeb.defaultAddress.base58]);
 
   const updateTotal = (balanceData) => {
-    console.log(parseFloat(balanceData.balance.balance));
+    // console.log(balanceData);
     switch (balanceData.currencyKey) {
       case "TTDD":
         setTtd(parseFloat(balanceData.balance.balance));
@@ -72,6 +73,10 @@ const VaultList = (props) => {
   const getTotal = () => {
     let total =
       ttdd + xcdd + bbdd + jmdd + awgd + dop + bsd + kyd + cup + htg + eur;
+    if (isNaN(total)) {
+      console.error("total", total);
+      // return 0;
+    }
     return total;
   };
   return (
@@ -79,20 +84,41 @@ const VaultList = (props) => {
       <div className="card-header portfolio-bal p-0 position-relative mt-n4 mx-3 z-index-2">
         <div className="bg-gradient-info shadow-info border-radius-lg py-3 pe-1">
           <div className="text-center">
-            <p className="small">Total Balance (USDD)</p>
+            <p className="small">Total Vault Deposits(USDD)</p>
             <h5 className="fw-bold">
-              {!isNaN(getTotal()) ? formatUSD(getTotal()) : "-"}
+              {isNaN(getTotal()) ? (
+                <>
+                  <div className="w-100 d-flex justify-content-center">
+                    <ThreeDots
+                      height="24"
+                      width="32"
+                      radius="9"
+                      color="#fff"
+                      ariaLabel="three-dots-loading"
+                      wrapperStyle={{}}
+                      wrapperClassName=""
+                      visible={true}
+                    />
+                  </div>
+                </>
+              ) : (
+                formatUSD(getTotal())
+              )}
             </h5>
+            <div className="fst-italic" style={{ fontSize: "75%" }}>
+              * This will automatically refresh every 60 seconds{" "}
+            </div>
           </div>
         </div>
       </div>
       <ul class="list-group list-group-flush">
-        {getCurrencies().map((curr) => (
+        {getCurrencies().map((curr, index) => (
           <VaultData
             currency={curr}
             updateTotal={updateTotal}
             walletAddress={walletAddress}
             key={curr.key + walletAddress}
+            index={index}
           ></VaultData>
         ))}
       </ul>

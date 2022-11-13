@@ -67,6 +67,9 @@ class gStableContract extends SmartContractBase {
   };
   //SET end
   balanceOf = async (hodlerAddress) => {
+    if (!hodlerAddress) {
+      console.error(`hodlerAddress is ${hodlerAddress}`);
+    }
     this.check();
     const balHex = await this.contract.balanceOf(hodlerAddress).call();
     const bal = this.web3.utils.fromWei(String(balHex), "ether");

@@ -3,56 +3,71 @@ import walletPublisher from "../../publishers/wallet";
 import { formatM, formatUSD } from "../../utils/currencyFormatter";
 
 const CurrencyBalance = (props) => {
-  const { currency, updateTotal } = props;
+  const { currency, updateTotal, index } = props;
   const [balance, setBalance] = useState("");
   const [conversionRatio, setConversionRatio] = useState("");
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
-    read();
-
+    setTimeout(() => {
+      read();
+    }, index * 1000);
     return () => {
       console.log(`unmounting CurrencyBalance ${currency.key}`);
     };
   }, []);
   const read = async () => {
-    let gStableContract = await currency.gStableContract();
-    let gStableBal = "";
-    if (walletPublisher.walletDetails) {
-      gStableBal = await gStableContract.balanceOf(
-        walletPublisher.walletDetails.address
-      );
-      setBalance(gStableBal);
-    }
+    try {
+      let gStableContract = await currency.gStableContract();
+      let gStableBal = "";
+      if (walletPublisher.walletDetails) {
+        gStableBal = await gStableContract.balanceOf(
+          walletPublisher.walletDetails.address
+        );
+        setBalance(gStableBal);
+      }
 
-    let swapContract = await currency.swapContract();
-    let conversionRatio = await swapContract.getConversion();
-    setConversionRatio(conversionRatio);
-    if (gStableBal && conversionRatio) {
-      updateTotal({
-        balance: gStableBal / conversionRatio,
-        currencyKey: currency.key,
-      });
+      let swapContract = await currency.swapContract();
+      let conversionRatio = await swapContract.getConversion();
+      setConversionRatio(conversionRatio);
+      if (gStableBal && conversionRatio) {
+        updateTotal({
+          balance: gStableBal / conversionRatio,
+          currencyKey: currency.key,
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      if (attempt < 10) {
+        setTimeout(() => {
+          read();
+        }, index * 1000);
+        setAttempt(attempt + 1);
+      }
     }
   };
 
   return (
     <li class="list-group-item">
-      <div>
-        <img src={currency.icon} height="24"></img>
-        <span className="px-3">
+      <div className="d-flex justify-content-between">
+        <span>
+          <img src={currency.icon} height="24"></img>
+          <span className="px-1">{currency.text}</span>
+        </span>
+        <span className="">
           <span className="px-1">{currency.label}</span>
           {formatM(balance)}
         </span>
       </div>
       <div className="d-flex justify-content-between small text-muted">
-        {conversionRatio ? (
-          <span>
-            Exchange Rate : 1$ ≈ {conversionRatio}
-            <span className="px-1">{currency.label}</span>
-          </span>
-        ) : (
+        {/* {conversionRatio ? ( */}
+        <span>
+          Exchange Rate : 1$ ≈ {conversionRatio}
+          <span className="px-1">{currency.label}</span>
+        </span>
+        {/* ) : (
           ""
-        )}
+        )} */}
         {conversionRatio ? formatUSD(balance / conversionRatio) : ""}
       </div>
     </li>
