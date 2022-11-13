@@ -188,7 +188,7 @@ const SwapExchange = (props) => {
           class="alert alert-primary alert-dismissible fade show mt-3"
           role="alert"
         >
-          <strong>
+          <div className="strong" style={{ fontSize: "95%" }}>
             Your{" "}
             <a
               href={`https://nile.tronscan.org/#/transaction/${trxHash}`}
@@ -198,11 +198,11 @@ const SwapExchange = (props) => {
               Transaction
             </a>{" "}
             is being processed!
-          </strong>
+          </div>
 
           <button
             type="button"
-            class="btn-close"
+            class="btn-close btn-close-white btn-sm"
             aria-label="Close"
             onClick={clearHash}
           ></button>
