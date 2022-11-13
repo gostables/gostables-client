@@ -39,6 +39,7 @@ const VaultData = (props) => {
         setTimeout(() => {
           read();
         }, index * 1000);
+        console.log(`${currency.key} Vault Attempt : ${attempt + 1}`);
         setAttempt(attempt + 1);
       }
     }
@@ -57,7 +58,9 @@ const VaultData = (props) => {
           <span className="px-1">{currency.text}</span>
         </span>
 
-        <span> {balance ? formatUSD(balance.balance) : ""}</span>
+        <span className="font-monospace">
+          {balance ? formatUSD(balance.balance) : ""}
+        </span>
       </div>
 
       {/* {rewards ? ( */}

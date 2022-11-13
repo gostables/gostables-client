@@ -42,6 +42,7 @@ const CurrencyBalance = (props) => {
         setTimeout(() => {
           read();
         }, index * 1000);
+        console.log(`${currency.key} Balance Attempt : ${attempt + 1}`);
         setAttempt(attempt + 1);
       }
     }
@@ -54,9 +55,9 @@ const CurrencyBalance = (props) => {
           <img src={currency.icon} height="24"></img>
           <span className="px-1">{currency.text}</span>
         </span>
-        <span className="">
-          <span className="px-1">{currency.label}</span>
+        <span className="font-monospace">
           {formatM(balance)}
+          <span className="px-1">{currency.label}</span>
         </span>
       </div>
       <div className="d-flex justify-content-between small text-muted">
