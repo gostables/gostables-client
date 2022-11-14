@@ -32,12 +32,12 @@ const App = () => {
           exact
           element={<WalletDashboard currencyKey={selectedCurrency} />}
         />
-        // <Route
-        //   path="/wallet"
-        //   // @ts-ignore
-        //   exact
-        //   element={<WalletPage currencyKey={selectedCurrency} />}
-        // />
+        <Route
+          path="/wdb"
+          // @ts-ignore
+          exact
+          element={<WalletPage currencyKey={selectedCurrency} />}
+        />
 
         <Route
           path="/admin"
