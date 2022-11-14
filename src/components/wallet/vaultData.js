@@ -63,7 +63,7 @@ const VaultData = (props) => {
         </span>
 
         <span className="font-monospace">
-          {balance ? formatUSD(balance.balance) : ""}
+          {balance ? formatUSD(balance.balance) : "No Deposits yet"}
           <USDDIcon noTitle={true}></USDDIcon>
         </span>
 
