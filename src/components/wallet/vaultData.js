@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import walletPublisher from "../../publishers/wallet";
 import { formatM, formatUSD } from "../../utils/currencyFormatter";
+import USDDIcon from "../iconUSDD";
 
 const VaultData = (props) => {
   const { currency, updateTotal, walletAddress, index } = props;
@@ -63,23 +64,29 @@ const VaultData = (props) => {
 
         <span className="font-monospace">
           {balance ? formatUSD(balance.balance) : ""}
+          <USDDIcon noTitle={true}></USDDIcon>
         </span>
+
       </div>
 
       {/* {rewards ? ( */}
-      <div className="d-flex justify-content-end small text-muted">
+      <div className="d-flex justify-content-right small text-muted">
         {rewards > 0 ? (
-          <button
+        <>
+         <span classsName="mx-2">Rewards : {formatUSD(rewards)}</span>
+         <button
             className="btn btn-danger btn-sm mx-3"
             style={{ fontSize: "70%" }}
             onClick={() => claim(currency.key)}
           >
             Claim
           </button>
+        </>
         ) : (
           <></>
         )}
-        <span>Rewards : {formatUSD(rewards)}</span>
+        
+
       </div>
       {/* ) : (
         ""

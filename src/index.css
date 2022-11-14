@@ -239,3 +239,7 @@ li.nav-item {
     background-color:#e6fbea;
   }
 
+.font-monospace img{
+      margin-left: 5px;
+    margin-top: -3px;
+}
