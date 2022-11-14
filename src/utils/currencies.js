@@ -173,17 +173,17 @@ const CurrencyList = {
     "TNsZegdPzUWKbBQ52o7ruF5gGe5NqyALCQ" /*gStableAddress*/,
     "TNH55PkTJcB9f8T4HCqaSKE5p5Qx8Ugjh3" /*vaultAddress */
   ),
-  HTG: new Currency(
-    "HTG",
-    "gHTG",
-    "Haitian Gourde",
-    htgImg,
-    "TXZ9jNtBExXsq7RRLiACVKGtTcUGWNDjJH" /*swapAddress */,
-    "TQq9o4PahyoLociVzCnBMRRDdPZrNNkW1f" /*swapMarketAddress*/,
-    "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU" /*swapStableAddress*/,
-    "TMuABgZr5rStDa639CKaxEoNc1sVEgEoKF" /*gStableAddress*/,
-    "TRmsA2ovjuqDVM3g7E4TEm4GCgtpenj6Ey" /*vaultAddress */
-  ),
+  // HTG: new Currency(
+  //   "HTG",
+  //   "gHTG",
+  //   "Haitian Gourde",
+  //   htgImg,
+  //   "TXZ9jNtBExXsq7RRLiACVKGtTcUGWNDjJH" /*swapAddress */,
+  //   "TQq9o4PahyoLociVzCnBMRRDdPZrNNkW1f" /*swapMarketAddress*/,
+  //   "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU" /*swapStableAddress*/,
+  //   "TMuABgZr5rStDa639CKaxEoNc1sVEgEoKF" /*gStableAddress*/,
+  //   "TRmsA2ovjuqDVM3g7E4TEm4GCgtpenj6Ey" /*vaultAddress */
+  // ),
   EUR: new Currency(
     "EUR",
     "gEUR",
