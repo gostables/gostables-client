@@ -99,7 +99,7 @@ const CurrencyList = {
   XCD: new Currency(
     "XCD",
     "gXCD",
-    "East Caribbean Dollar",
+    "Eastern Caribbean Dollar",
     xcddImg,
     "TJCfkDjutgARxZyh5NQ39yY8GBqWmWYjtJ" /*swapAddress */,
     "TQq9o4PahyoLociVzCnBMRRDdPZrNNkW1f" /*swapMarketAddress*/,
@@ -173,27 +173,16 @@ const CurrencyList = {
     "TNsZegdPzUWKbBQ52o7ruF5gGe5NqyALCQ" /*gStableAddress*/,
     "TNH55PkTJcB9f8T4HCqaSKE5p5Qx8Ugjh3" /*vaultAddress */
   ),
-  // HTG: new Currency(
-  //   "HTG",
-  //   "gHTG",
-  //   "Haitian Gourde",
-  //   htgImg,
-  //   "TXZ9jNtBExXsq7RRLiACVKGtTcUGWNDjJH" /*swapAddress */,
-  //   "TQq9o4PahyoLociVzCnBMRRDdPZrNNkW1f" /*swapMarketAddress*/,
-  //   "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU" /*swapStableAddress*/,
-  //   "TMuABgZr5rStDa639CKaxEoNc1sVEgEoKF" /*gStableAddress*/,
-  //   "TRmsA2ovjuqDVM3g7E4TEm4GCgtpenj6Ey" /*vaultAddress */
-  // ),
-  EUR: new Currency(
-    "EUR",
-    "gEUR",
-    "Euro",
-    eurImg,
-    "TLzWvtcfuJvQmVs2K21bypnGq63KDGzRr3" /*swapAddress */,
+  HTG: new Currency(
+    "HTG",
+    "gHTG",
+    "Haitian Gourde",
+    htgImg,
+    "TXZ9jNtBExXsq7RRLiACVKGtTcUGWNDjJH" /*swapAddress */,
     "TQq9o4PahyoLociVzCnBMRRDdPZrNNkW1f" /*swapMarketAddress*/,
     "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU" /*swapStableAddress*/,
-    "TBWqK2pQXxRxmei95Xo6hA35YNzkdGuynR" /*gStableAddress*/,
-    "THto1DfPgubEYybMxRsgzoMTZFoAvketCp" /*vaultAddress */
+    "TMuABgZr5rStDa639CKaxEoNc1sVEgEoKF" /*gStableAddress*/,
+    "TRmsA2ovjuqDVM3g7E4TEm4GCgtpenj6Ey" /*vaultAddress */
   ),
   DOP: new Currency(
     "DOP",
@@ -206,6 +195,18 @@ const CurrencyList = {
     "TQkp7SKM6UEYNJmQQfC7YeYYUdsnkq9Xb5" /*gStableAddress*/,
     "TUxGrkSicXdDhMssg1MXqnZ8rKNfS9bcN1" /*vaultAddress */
   ),
+  EUR: new Currency(
+    "EUR",
+    "gEUR",
+    "Euro",
+    eurImg,
+    "TLzWvtcfuJvQmVs2K21bypnGq63KDGzRr3" /*swapAddress */,
+    "TQq9o4PahyoLociVzCnBMRRDdPZrNNkW1f" /*swapMarketAddress*/,
+    "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU" /*swapStableAddress*/,
+    "TBWqK2pQXxRxmei95Xo6hA35YNzkdGuynR" /*gStableAddress*/,
+    "THto1DfPgubEYybMxRsgzoMTZFoAvketCp" /*vaultAddress */
+  ),
+
 };
 
 export const getCurrencies = () => {
