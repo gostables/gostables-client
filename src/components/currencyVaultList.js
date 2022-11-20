@@ -3,6 +3,7 @@ import CurrencyVault from "./currencyVault";
 import trxImg from "../trx.png";
 import btcImg from "../btc.png";
 import ethImg from "../eth.png";
+import bchImg from "../bch.png";
 import { useEffect, useState } from "react";
 import USDDIcon from "./iconUSDD";
 import { formatUSD } from "../utils/currencyFormatter";
@@ -161,6 +162,45 @@ const CurrencyVaultList = (props) => {
           </div>
         </div>
 
+
+        <div class="card-body vault-item">
+          <div class="row mt-4">
+            <div class="col-sm-12 col-md-4">
+              <img
+                src={ethImg}
+                alt="gStable"
+                width="32"
+                height="32"
+                class="rounded-circle flex-shrink-0 vault-img"
+              />
+              <div class="currency-name">
+                <b>ETH</b>
+                <p class="small">Ethereum</p>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3 text-center">
+              <b>TVL</b>
+              <p class="small">--</p>
+            </div>
+            <div class="col-sm-6 col-md-3 text-center">
+              <b>My Supply</b>
+              <p class="small">--</p>
+            </div>
+            <div class="col-sm-12 col-md-2 text-center">
+              <button
+                type="button"
+                class="btn btn-secondary disabled"
+                data-bs-toggle="modal"
+                data-bs-target="#"
+              >
+                Inactive
+              </button>
+            </div>
+          </div>
+        </div>
+
+
         <div class="card-body vault-item">
           <div class="row mt-4">
             <div class="col-sm-12 col-md-4">
@@ -202,15 +242,15 @@ const CurrencyVaultList = (props) => {
           <div class="row mt-4">
             <div class="col-sm-12 col-md-4">
               <img
-                src={ethImg}
+                src={bchImg}
                 alt="gStable"
                 width="32"
                 height="32"
                 class="rounded-circle flex-shrink-0 vault-img"
               />
               <div class="currency-name">
-                <b>ETH</b>
-                <p class="small">Ethereum</p>
+                <b>BCH</b>
+                <p class="small">Bitcoin Cash</p>
               </div>
             </div>
 
