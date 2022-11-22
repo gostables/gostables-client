@@ -163,6 +163,17 @@ const CurrencyList = {
     "TRpvxootqXTB5omn919BGFEiiAqBjGPqzt" /*gStableAddress*/,
     "TX7NBRRe3HHmVBfJfbAGny33pPa8vLxj5f" /*vaultAddress */
   ),
+  DOP: new Currency(
+    "DOP",
+    "gDOP",
+    "Dominican Peso",
+    dopImg,
+    "TGamR9tdqeNmmU9EWkxRooPndTYjUCTbcc" /*swapAddress */,
+    "TQq9o4PahyoLociVzCnBMRRDdPZrNNkW1f" /*swapMarketAddress*/,
+    "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU" /*swapStableAddress*/,
+    "TQkp7SKM6UEYNJmQQfC7YeYYUdsnkq9Xb5" /*gStableAddress*/,
+    "TUxGrkSicXdDhMssg1MXqnZ8rKNfS9bcN1" /*vaultAddress */
+  ),
   CUP: new Currency(
     "CUP",
     "gCUP",
@@ -184,17 +195,6 @@ const CurrencyList = {
     "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU" /*swapStableAddress*/,
     "TMuABgZr5rStDa639CKaxEoNc1sVEgEoKF" /*gStableAddress*/,
     "TRmsA2ovjuqDVM3g7E4TEm4GCgtpenj6Ey" /*vaultAddress */
-  ),
-  DOP: new Currency(
-    "DOP",
-    "gDOP",
-    "Dominican Peso",
-    dopImg,
-    "TGamR9tdqeNmmU9EWkxRooPndTYjUCTbcc" /*swapAddress */,
-    "TQq9o4PahyoLociVzCnBMRRDdPZrNNkW1f" /*swapMarketAddress*/,
-    "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU" /*swapStableAddress*/,
-    "TQkp7SKM6UEYNJmQQfC7YeYYUdsnkq9Xb5" /*gStableAddress*/,
-    "TUxGrkSicXdDhMssg1MXqnZ8rKNfS9bcN1" /*vaultAddress */
   ),
   EUR: new Currency(
     "EUR",
