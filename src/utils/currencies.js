@@ -14,6 +14,7 @@ import kydImg from "../gKYD.png";
 import cupImg from "../gcup.png";
 import htgImg from "../gHTG.png";
 import eurImg from "../gEUR.png";
+import gbpImg from "../gGBP.png";
 
 class Currency {
   key = null;
@@ -205,6 +206,17 @@ const CurrencyList = {
     "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU" /*swapStableAddress*/,
     "TBWqK2pQXxRxmei95Xo6hA35YNzkdGuynR" /*gStableAddress*/,
     "THto1DfPgubEYybMxRsgzoMTZFoAvketCp" /*vaultAddress */
+  ),
+  GBP: new Currency(
+    "GBP",
+    "gGBP",
+    "British Pound",
+    gbpImg,
+    "TWZJrHJPiou4vTK4wUC9VFVuEatFi5m2kA" /*swapAddress */,
+    "TQq9o4PahyoLociVzCnBMRRDdPZrNNkW1f" /*swapMarketAddress*/,
+    "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU" /*swapStableAddress*/,
+    "TJBhh6JPtBoDWPQqdRXzR27SEJooBvfJ7r" /*gStableAddress*/,
+    "THEqDCTFEXtr9rdAtSVKbiHzhZLbnaCgTK" /*vaultAddress */
   ),
 
 };
