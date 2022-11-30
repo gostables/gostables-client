@@ -22,7 +22,7 @@ const getCurrenciesForDropDown = () => {
 
 const Navbar = () => {
   return (
-    <div className="container justify-content-center">
+    <div className="container justify-content-center py-3">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
           <a class="navbar-brand" href="/">

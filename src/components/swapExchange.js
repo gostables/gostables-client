@@ -223,7 +223,9 @@ const SwapExchange = (props) => {
     return <NetworkNotSupported></NetworkNotSupported>;
   }
   return (
-    <div className="card swap-card z-index-0 fadeIn3 fadeInBottom">
+    <>
+    <div className="col"></div>
+    <div className="card swap-card z-index-0 fadeIn3 fadeInBottom col-md-6 offset-md-3">
       <div className="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
         <div className="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
           <h4 className="text-white font-weight-bolder text-center mt-2 mb-0">
@@ -284,6 +286,7 @@ const SwapExchange = (props) => {
           </div>
           {trxHashAlertJSX()}
         </div>
+
       ) : (
         <>
           <div className="mt-2 w-100 d-flex justify-content-center">
@@ -301,6 +304,8 @@ const SwapExchange = (props) => {
         </>
       )}
     </div>
+
+    </>
   );
 };
 export default SwapExchange;

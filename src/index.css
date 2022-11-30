@@ -8,15 +8,14 @@ body {
 }
 
 .bg {
-    background: linear-gradient(180deg, #01948d 300px, #e6fbea 0%)!important;
-  /*background-color: #01948d !important;*/
+/*    background: linear-gradient(180deg, #01948d 300px, #e6fbea 0%)!important;*/
+  background-color: #01948d !important;
 }
 
 .navbar a {
     color: #fff!important;
 }
 
-.container.justify-content-center{margin-top: 20px;}
 
 .text-left{float: left;}
 .text-right{float: right;}
@@ -84,7 +83,7 @@ li.nav-item {
     color: #fff!important;
     border-radius: 12px!important;
     box-shadow: 0px 0px 3px #074643;
-    width: 220px;
+/*    width: 220px;*/
 }
 
 .coming-soon{padding: 50px;}
