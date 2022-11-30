@@ -27,13 +27,13 @@ const App = () => {
       <Navbar></Navbar>
       <Routes>
         <Route
-          path="/wdb"
+          path="/wallet"
           // @ts-ignore
           exact
           element={<WalletDashboard currencyKey={selectedCurrency} />}
         />
         <Route
-          path="/wallet"
+          path="/wdb"
           // @ts-ignore
           exact
           element={<WalletPage currencyKey={selectedCurrency} />}

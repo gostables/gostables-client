@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import walletPublisher from "../../publishers/wallet";
 import { formatM, formatUSD } from "../../utils/currencyFormatter";
+import USDDIcon from "../iconUSDD";
 
 const VaultData = (props) => {
   const { currency, updateTotal, walletAddress, index } = props;
@@ -58,28 +59,40 @@ const VaultData = (props) => {
       <div className="d-flex justify-content-between">
         <span className="">
           <img src={currency.icon} height="24"></img>
-          <span className="px-1">{currency.text}</span>
+          <span className="px-1">{currency.label} Vault</span>
         </span>
 
         <span className="font-monospace">
-          {balance ? formatUSD(balance.balance) : ""}
+          {balance ? formatUSD(balance.balance) : "No Deposits yet"}
+          <USDDIcon noTitle={true}></USDDIcon>
         </span>
+
       </div>
 
       {/* {rewards ? ( */}
-      <div className="d-flex justify-content-end small text-muted">
+      <div className="d-flex justify-content-right small text-muted">
         {rewards > 0 ? (
-          <button
-            className="btn btn-danger btn-sm mx-3"
-            style={{ fontSize: "70%" }}
+        <>
+         <span className="mx-2">Rewards : 
+         <span className="mx-1"><img src={currency.icon} height="16"></img></span>
+         {formatM(rewards)}</span>
+
+
+         <button
+            className="btn btn-danger btn-sm mx-2"
+            style={{ fontSize: "70%" },{ marginTop: "-5px" }}
             onClick={() => claim(currency.key)}
           >
             Claim
           </button>
+        </>
         ) : (
-          <></>
+          <>
+            <span classsName="mx-2">- No Rewards yet -</span>
+          </>
         )}
-        <span>Rewards : {formatUSD(rewards)}</span>
+        
+
       </div>
       {/* ) : (
         ""

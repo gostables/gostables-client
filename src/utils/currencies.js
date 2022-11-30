@@ -14,6 +14,7 @@ import kydImg from "../gKYD.png";
 import cupImg from "../gcup.png";
 import htgImg from "../gHTG.png";
 import eurImg from "../gEUR.png";
+import gbpImg from "../gGBP.png";
 
 class Currency {
   key = null;
@@ -99,7 +100,7 @@ const CurrencyList = {
   XCD: new Currency(
     "XCD",
     "gXCD",
-    "East Caribbean Dollar",
+    "Eastern Caribbean Dollar",
     xcddImg,
     "TJCfkDjutgARxZyh5NQ39yY8GBqWmWYjtJ" /*swapAddress */,
     "TQq9o4PahyoLociVzCnBMRRDdPZrNNkW1f" /*swapMarketAddress*/,
@@ -162,6 +163,17 @@ const CurrencyList = {
     "TRpvxootqXTB5omn919BGFEiiAqBjGPqzt" /*gStableAddress*/,
     "TX7NBRRe3HHmVBfJfbAGny33pPa8vLxj5f" /*vaultAddress */
   ),
+  DOP: new Currency(
+    "DOP",
+    "gDOP",
+    "Dominican Peso",
+    dopImg,
+    "TGamR9tdqeNmmU9EWkxRooPndTYjUCTbcc" /*swapAddress */,
+    "TQq9o4PahyoLociVzCnBMRRDdPZrNNkW1f" /*swapMarketAddress*/,
+    "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU" /*swapStableAddress*/,
+    "TQkp7SKM6UEYNJmQQfC7YeYYUdsnkq9Xb5" /*gStableAddress*/,
+    "TUxGrkSicXdDhMssg1MXqnZ8rKNfS9bcN1" /*vaultAddress */
+  ),
   CUP: new Currency(
     "CUP",
     "gCUP",
@@ -195,17 +207,18 @@ const CurrencyList = {
     "TBWqK2pQXxRxmei95Xo6hA35YNzkdGuynR" /*gStableAddress*/,
     "THto1DfPgubEYybMxRsgzoMTZFoAvketCp" /*vaultAddress */
   ),
-  DOP: new Currency(
-    "DOP",
-    "gDOP",
-    "Dominican Peso",
-    dopImg,
-    "TGamR9tdqeNmmU9EWkxRooPndTYjUCTbcc" /*swapAddress */,
+  GBP: new Currency(
+    "GBP",
+    "gGBP",
+    "British Pound",
+    gbpImg,
+    "TWZJrHJPiou4vTK4wUC9VFVuEatFi5m2kA" /*swapAddress */,
     "TQq9o4PahyoLociVzCnBMRRDdPZrNNkW1f" /*swapMarketAddress*/,
     "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU" /*swapStableAddress*/,
-    "TQkp7SKM6UEYNJmQQfC7YeYYUdsnkq9Xb5" /*gStableAddress*/,
-    "TUxGrkSicXdDhMssg1MXqnZ8rKNfS9bcN1" /*vaultAddress */
+    "TJBhh6JPtBoDWPQqdRXzR27SEJooBvfJ7r" /*gStableAddress*/,
+    "THEqDCTFEXtr9rdAtSVKbiHzhZLbnaCgTK" /*vaultAddress */
   ),
+
 };
 
 export const getCurrencies = () => {

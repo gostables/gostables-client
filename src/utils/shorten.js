@@ -1,4 +1,4 @@
-const getMaskedAddress = (accountNumber, start = 2, end = 32) => {
+const getMaskedAddress = (accountNumber, start = 3, end = 30) => {
   if (accountNumber) {
     return accountNumber.replace(accountNumber.substring(start, end), "****");
   }
