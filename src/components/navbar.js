@@ -40,7 +40,7 @@ const Navbar = () => {
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <div class="currency-select w-25">
+            <div class="currency-select">
               <SelectCurrency
                 setSelectedCoin={(val) =>
                   currencyPublisher.setCurrency(val.value)

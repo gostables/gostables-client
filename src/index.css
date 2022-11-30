@@ -39,6 +39,7 @@ body {
 .currency-select{
   margin-left: 20px;
   margin-right: 40px;
+  width:277px!important;
 }
 
 li.nav-item {
