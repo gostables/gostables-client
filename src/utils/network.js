@@ -8,7 +8,24 @@ export const getNetworkName = (nwUrl) => {
   return "UNKNOWN NETWORK";
 };
 
-export const isSupportedNetwork = (nwUrl) => {
-  if (nwUrl.includes("nileex")) return true; //https://api.nileex.io/
+export const isSupportedNetwork = (nw) => {
+  for (let i = 0; i < supportedNetworks.length; i++) {
+    if (
+      supportedNetworks[i].toLocaleLowerCase().includes(nw.toLocaleLowerCase())
+    ) {
+      return true;
+    }
+  }
+  return false;
+};
+
+export const supportedNetworks = ["https://api.nileex.io/"];
+
+export const isCurrentNetworkSupported = () => {
+  try {
+    return isSupportedNetwork(window.tronWeb.solidityNode.host);
+  } catch (e) {
+    console.error(e);
+  }
   return false;
 };

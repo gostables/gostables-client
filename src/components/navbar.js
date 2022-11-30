@@ -9,6 +9,7 @@ import WalletIcon from "../svg/wallet";
 import { getCurrencies } from "../utils/currencies";
 import USDDIcon from "./iconUSDD";
 import WalletConnect from "./walletConnect";
+import ConnectWallet from "./connectWallet";
 
 const getCurrenciesForDropDown = () => {
   let currList = getCurrencies();
@@ -80,7 +81,8 @@ const Navbar = () => {
               </NavLink>
             </div>
             <div class="">
-              <WalletConnect></WalletConnect>
+              {/* <WalletConnect></WalletConnect> */}
+              <ConnectWallet></ConnectWallet>
             </div>
           </div>
         </div>

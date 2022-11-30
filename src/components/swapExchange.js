@@ -8,6 +8,9 @@ import { getSwapPublisherByCurrencyKey } from "../publishers/publishers";
 import StableIcon from "./icon_gStable";
 import { formatM, formatUSD } from "../utils/currencyFormatter";
 import currencyPublisher from "../publishers/currency";
+import { isCurrentNetworkSupported } from "../utils/network";
+import networkPublisher from "../publishers/network";
+import NetworkNotSupported from "./networkNotSupported";
 
 const SwapExchange = (props) => {
   const [direction, setDirection] = useState(true);
@@ -62,14 +65,6 @@ const SwapExchange = (props) => {
     getSwapPublisherByCurrencyKey(currencyKey).attach(setSwapDetails);
   };
 
-  // useEffect(() => {
-  //   getSwapPublisherByCurrencyKey(currencyKey).attach(setSwapDetails);
-  //   return () => {
-  //     getSwapPublisherByCurrencyKey(currencyKey).detach(setSwapDetails);
-  //     console.log("unmounting Swap Exchange swapPublisher");
-  //   };
-  // }, [currencyKey]);
-
   const setSwapDetails = async (swapDetails) => {
     setConversionRatio(swapDetails.conversionRatio);
     setSwapFeesFactor(swapDetails.swapFeesFactor);
@@ -83,6 +78,18 @@ const SwapExchange = (props) => {
       (e.target.value - e.target.value * swapFeesFactor) * conversionRatio
     );
   };
+  // added to support network changes
+  const [currentNetworkSupported, setIsCurrentNetworkSupported] =
+    useState(false);
+
+  useEffect(() => {
+    setIsCurrentNetworkSupported(isCurrentNetworkSupported());
+    networkPublisher.attach(setIsCurrentNetworkSupported);
+    return () => {
+      console.log("unmounting Swap Exchange");
+    };
+  }, []);
+  // to support network changes related code ends
 
   const stableCoinJSX = () => {
     return (
@@ -212,18 +219,9 @@ const SwapExchange = (props) => {
     return <></>;
   };
 
-  // if (!walletDetails || !walletDetails.isSupportedNetwork) {
-  //   return (
-  //     <div class="alert alert-info mt-5 py-3 text-center" role="alert">
-  //       <p>goStables is currently deployed on the NILE testnet.</p>
-  //       <p>
-  //         Please switch to the NILE testnet in your wallet if you havent
-  //         already.
-  //       </p>
-  //       {/* <p>Mainnet coming soon!.</p> */}
-  //     </div>
-  //   );
-  // }
+  if (!currentNetworkSupported) {
+    return <NetworkNotSupported></NetworkNotSupported>;
+  }
   return (
     <div className="card swap-card z-index-0 fadeIn3 fadeInBottom">
       <div className="card-header p-0 position-relative mt-n4 mx-3 z-index-2">

@@ -9,6 +9,9 @@ import { formatUSD } from "../utils/currencyFormatter";
 import walletPublisher from "../publishers/wallet";
 import IncorrectNetwork from "./incorrectNetwork";
 import currencyPublisher from "../publishers/currency";
+import { isCurrentNetworkSupported } from "../utils/network";
+import networkPublisher from "../publishers/network";
+import NetworkNotSupported from "./networkNotSupported";
 
 const CurrencyVaultList = (props) => {
   const [tvl, setTVL] = useState(0);
@@ -74,13 +77,22 @@ const CurrencyVaultList = (props) => {
     return mySupply_;
   };
 
-  // if (walletDetails && !walletDetails.isSupportedNetwork) {
-  //   return (
-  //     <>
-  //       <IncorrectNetwork></IncorrectNetwork>
-  //     </>
-  //   );
-  // }
+  // added to support network changes
+  const [currentNetworkSupported, setIsCurrentNetworkSupported] =
+    useState(false);
+
+  useEffect(() => {
+    setIsCurrentNetworkSupported(isCurrentNetworkSupported());
+    networkPublisher.attach(setIsCurrentNetworkSupported);
+    return () => {
+      console.log("unmounting Swap Exchange");
+    };
+  }, []);
+  // to support network changes related code ends
+
+  if (!currentNetworkSupported) {
+    return <NetworkNotSupported></NetworkNotSupported>;
+  }
 
   return (
     <>

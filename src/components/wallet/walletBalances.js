@@ -35,7 +35,7 @@ const WalletBalances = (props) => {
       setWalletAddress(window.tronWeb.defaultAddress.base58);
     } else {
       if (attempt < 10) {
-        setTimeout(() => updateWalletAddress, 3 * 1000);
+        setTimeout(() => updateWalletAddress, 5 * 1000);
         setAttempt(attempt + 1);
       }
     }
