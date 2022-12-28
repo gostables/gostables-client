@@ -287,7 +287,7 @@ const CurrencyVaultList = (props) => {
           </div>
         </div>
 
-        <div class="coming-soon text-center">More Vaults coming soon...</div>
+        <div class="coming-soon text-white text-center">More Vaults coming soon...</div>
       </div>
 
       <div class="modal vault-modal fade" id="v1modal" tabindex="-1">
