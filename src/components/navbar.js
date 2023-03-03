@@ -48,11 +48,11 @@ const Navbar = () => {
               ></SelectCurrency>
             </div>
             <ul className="navbar-nav me-auto mb-lg-0">
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <NavLink to="/faucets" className="nav-link">
                   <DollarIcon></DollarIcon> Faucet
                 </NavLink>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <NavLink to="/swap" className="nav-link">
                   <span className="px-2">
