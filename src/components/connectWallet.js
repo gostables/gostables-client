@@ -62,8 +62,8 @@ const ConnectWallet = () => {
 
   if (loginToTronlinkRequired) {
     return (
-        <button class="btn btn-primary web3-connect web3-dark content d-flex text-center" onClick={connect}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-power" viewBox="0 0 16 16">
+        <button className="btn btn-primary web3-connect web3-dark content d-flex text-center" onClick={connect}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-power" viewBox="0 0 16 16">
           <path d="M7.5 1v7h1V1h-1z"/>
           <path d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z"/>
         </svg>
@@ -74,12 +74,12 @@ const ConnectWallet = () => {
 
   if (address) {
     return (
-        <button class="btn btn-primary web3-connect d-flex text-center">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-power" viewBox="0 0 16 16">
+        <button className="btn btn-primary web3-connect d-flex text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-power" viewBox="0 0 16 16">
           <path d="M7.5 1v7h1V1h-1z"/>
           <path d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z"/>
         </svg>
-          <div class="text-warning px-3">
+          <div className="text-warning px-3">
             <div className="small my-0">{getMaskedAddress(address)} | &nbsp;
             <span className="small" style={{ fontSize: ".6rem" }}>
               {getNetworkName(network)}
@@ -93,8 +93,8 @@ const ConnectWallet = () => {
 
   if (connectRequired) {
     return (
-        <button class="btn btn-primary web3-connect web3-dark content d-flex text-center" onClick={connect}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-power" viewBox="0 0 16 16">
+        <button className="btn btn-primary web3-connect web3-dark content d-flex text-center" onClick={connect}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-power" viewBox="0 0 16 16">
           <path d="M7.5 1v7h1V1h-1z"/>
           <path d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z"/>
         </svg>

@@ -1,18 +1,18 @@
 // import { useState } from "react";
-// import { ttdd } from "../contracts/gStableContract ";
-// import { getCurrency } from "../utils/currencies";
+// import ClientsContract from "../contracts/clientsContract";
 
-// const AddClientAddressTogStable = (props) => {
+// const AddClientAddress = (props) => {
 //   const [address, setAddress] = useState("");
 
 //   const add = async () => {
-//     let currency = getCurrency(props.currencyKey);
-//     let gStableContract = await currency.gStableContract();
+//     let contract_ = new ClientsContract(props.address);
+//     let contract = await contract_.init();
+
 //     setAddress("");
 //     try {
 //       console.log(`setClient : ${address}`);
 //       if (address) {
-//         await gStableContract.setClient(address);
+//         await contract.setClient(address);
 //       }
 //     } catch (error) {
 //       console.error(error);
@@ -55,4 +55,4 @@
 //   );
 // };
 
-// export default AddClientAddressTogStable;
+// export default AddClientAddress;

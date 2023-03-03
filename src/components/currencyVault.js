@@ -14,8 +14,6 @@ const CurrencyVault = (props) => {
   const [usddValue, setUSDDValue] = useState();
 
   const [vaultDetails, setVaultDetails] = useState({
-    status: false,
-    address: "",
     interval: "",
   });
   const [vaultContract, setVaultContract] = useState({});
@@ -27,7 +25,6 @@ const CurrencyVault = (props) => {
   }, []);
 
   const [walletData, setWalletData] = useState({
-    status: 1,
     isSupportedNetwork: false,
     usddBalance: "",
     gStableBalance: "",
@@ -51,7 +48,6 @@ const CurrencyVault = (props) => {
       : { balance: "", lock: new Date() };
 
     setWalletData({
-      status: walletDetails.status,
       isSupportedNetwork: walletDetails.isSupportedNetwork,
       usddBalance: walletDetails.usddBalance,
       gStableBalance: walletDetails.gStableBalance,
@@ -64,7 +60,7 @@ const CurrencyVault = (props) => {
       let currency = getCurrency(currencyKey);
       let vaultContract = await currency.vaultContract();
 
-      let vaultDetails = await vaultContract.getDetails();
+      let vaultDetails = await vaultContract.getDetails(currency.id);
 
       setVaultDetails(vaultDetails);
       setVaultContract(vaultContract);
@@ -82,19 +78,19 @@ const CurrencyVault = (props) => {
     if (vaultContract) {
       try {
         let currency = getCurrency(currencyKey);
-        await usd.approve(currency.vaultAddress, usddValue);
+        await usd.approve(vaultContract.address, usddValue);
         console.log("approved");
-        vaultContract.deposit(usddValue);
+        vaultContract.deposit(currency.id, usddValue);
       } catch (error) {
         console.error(error);
       }
     }
   };
   const withdraw = async () => {
-    let usd = await usddContract();
     if (vaultContract) {
       try {
-        vaultContract.withdraw(usddValue);
+        let currency = getCurrency(currencyKey);
+        vaultContract.withdraw(currency.id, usddValue);
       } catch (error) {
         console.error(error);
       }
@@ -134,7 +130,7 @@ const CurrencyVault = (props) => {
                   onChange={updateUSDDValue}
                   value={usddValue}
                 />
-                <label for="floatingInputGroup1">Value in USDD</label>
+                <label htmlFor="floatingInputGroup1">Value in USDD</label>
               </div>
               <span className="input-group-text">
                 <USDDIcon height={32}></USDDIcon>
@@ -147,7 +143,7 @@ const CurrencyVault = (props) => {
             ) : (
               <></>
             )}
-            <div class="d-grid gap-2">
+            <div className="d-grid gap-2">
               <button
                 className="btn btn-primary"
                 type="button"
@@ -159,11 +155,6 @@ const CurrencyVault = (props) => {
             </div>
           </>
         )}
-
-        {/* <a className="p-1 rounded small" href="#simple-list-item-1">
-          Set Max
-        </a> */}
-
         {vaultDetails.interval ? (
           <div className="text-xs text-center mt-2 pt-3">
             {walletData.vaultBalance.lock > new Date() ? (
@@ -173,12 +164,12 @@ const CurrencyVault = (props) => {
                 </span>
                 <br />
                 <br />
-                <span class="small">
+                <span className="small">
                   Your deposit will be locked for the next{" "}
                   {vaultDetails.interval} hrs.
                 </span>
                 <br />
-                <span class="text-danger">
+                <span className="text-danger">
                   Unlock Time: {walletData.vaultBalance.lock.toLocaleString()}
                 </span>
               </>
@@ -189,7 +180,7 @@ const CurrencyVault = (props) => {
                 </span>
                 <br />
                 <br />
-                <span class="text-success">Unlocked</span>
+                <span className="text-success">Unlocked</span>
               </>
             )}
           </div>
@@ -203,7 +194,7 @@ const CurrencyVault = (props) => {
   const active = "active";
 
   return (
-    <div class="">
+    <div className="">
       {walletData.isSupportedNetwork ? (
         <div className="card-body">
           <ul className="nav justify-content-center">

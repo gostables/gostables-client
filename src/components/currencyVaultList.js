@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 import USDDIcon from "./iconUSDD";
 import { formatUSD } from "../utils/currencyFormatter";
 import walletPublisher from "../publishers/wallet";
-import IncorrectNetwork from "./incorrectNetwork";
 import currencyPublisher from "../publishers/currency";
 import { isCurrentNetworkSupported } from "../utils/network";
 import networkPublisher from "../publishers/network";
@@ -19,27 +18,33 @@ const CurrencyVaultList = (props) => {
   const [walletDetails, setWalletDetails] = useState();
   const [mySupply, setMySupply] = useState(null);
   const [currencyKey, setCurrencyKey] = useState(props.currencyKey);
+
   useEffect(() => {
-    init(currencyKey);
+    init();
+    let timer = setInterval(() => getData(currencyKey), 3 * 1000); 
     return () => {
+      clearInterval(timer)
       console.log("Unmounting VaultList");
     };
-  }, []);
+  }, [currencyKey]);
 
-  const init = async (currencyKey) => {
+  const init = async () => {
+    await getData();
+  };
+
+  const getData = async () => {
     let currency = getCurrency(currencyKey);
 
     let vaultContract = await currency.vaultContract();
 
-    let tvl = await vaultContract.getTVL();
-
-    let vaultBalData = await vaultContract.balanceOf(
-      walletPublisher.walletDetails.address
-    );
-
-    setTVL(tvl);
-    setMySupply(vaultBalData);
+    if(vaultContract){
+      let tvl = await vaultContract.getTVL(currency.id);
+      let vaultBalData = await vaultContract.balanceOf(currency.id, walletPublisher.walletDetails.address);
+      setTVL(tvl);
+      setMySupply(vaultBalData.balance);
+    }
   };
+
 
   useEffect(() => {
     walletPublisher.attach(setWallet);
@@ -62,7 +67,8 @@ const CurrencyVaultList = (props) => {
   const updateCurrency = async (currKey) => {
     console.log("updating currency : ", currKey);
     setCurrencyKey(currKey);
-    init(currKey);
+    console.log(currencyKey);
+    // init();
   };
 
   const getMySupply = () => {
@@ -97,37 +103,37 @@ const CurrencyVaultList = (props) => {
 
   return (
     <>
-      <div class="card vault-card z-index-0 fadeIn3 fadeInBottom">
-        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-          <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-            <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">
+      <div className="card vault-card z-index-0 fadeIn3 fadeInBottom">
+        <div className="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+          <div className="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
+            <h4 className="text-white font-weight-bolder text-center mt-2 mb-0">
               Vaults
             </h4>
           </div>
         </div>
 
-        <div class="card-body vault-item">
-          <div class="row mt-4">
-            <div class="col-sm-12 col-md-4">
+        <div className="card-body vault-item">
+          <div className="row mt-4">
+            <div className="col-sm-12 col-md-4">
               <USDDIcon height={32} noTitle={true}></USDDIcon>
-              <div class="currency-name">
+              <div className="currency-name">
                 <b>USDD</b>
-                <p class="small">Decentralized USD</p>
+                <p className="small">Decentralized USD</p>
               </div>
             </div>
 
-            <div class="col-sm-6 col-md-3 text-center">
+            <div className="col-sm-6 col-md-3 text-center">
               <b>TVL</b>
-              <p class="small">{formatUSD(tvl)}</p>
+              <p className="small">{formatUSD(tvl)}</p>
             </div>
-            <div class="col-sm-6 col-md-3 text-center">
+            <div className="col-sm-6 col-md-3 text-center">
               <b>My Supply</b>
-              <p class="small">{formatUSD(getMySupply())}</p>
+              <p className="small">{formatUSD(getMySupply())}</p>
             </div>
-            <div class="col-sm-12 col-md-2 text-center">
+            <div className="col-sm-12 col-md-2 text-center">
               <button
                 type="button"
-                class="btn btn-primary"
+                className="btn btn-primary"
                 data-bs-toggle="modal"
                 data-bs-target="#v1modal"
               >
@@ -137,34 +143,34 @@ const CurrencyVaultList = (props) => {
           </div>
         </div>
 
-        <div class="card-body vault-item">
-          <div class="row mt-4">
-            <div class="col-sm-12 col-md-4">
+        <div className="card-body vault-item">
+          <div className="row mt-4">
+            <div className="col-sm-12 col-md-4">
               <img
                 src={trxImg}
                 alt="gStable"
                 width="32"
                 height="32"
-                class="rounded-circle flex-shrink-0 vault-img"
+                className="rounded-circle flex-shrink-0 vault-img"
               />
-              <div class="currency-name">
+              <div className="currency-name">
                 <b>TRX</b>
-                <p class="small">Tron</p>
+                <p className="small">Tron</p>
               </div>
             </div>
 
-            <div class="col-sm-6 col-md-3 text-center">
+            <div className="col-sm-6 col-md-3 text-center">
               <b>TVL</b>
-              <p class="small">--</p>
+              <p className="small">--</p>
             </div>
-            <div class="col-sm-6 col-md-3 text-center">
+            <div className="col-sm-6 col-md-3 text-center">
               <b>My Supply</b>
-              <p class="small">--</p>
+              <p className="small">--</p>
             </div>
-            <div class="col-sm-12 col-md-2 text-center">
+            <div className="col-sm-12 col-md-2 text-center">
               <button
                 type="button"
-                class="btn btn-secondary disabled"
+                className="btn btn-secondary disabled"
                 data-bs-toggle="modal"
                 data-bs-target="#"
               >
@@ -175,34 +181,34 @@ const CurrencyVaultList = (props) => {
         </div>
 
 
-        <div class="card-body vault-item">
-          <div class="row mt-4">
-            <div class="col-sm-12 col-md-4">
+        <div className="card-body vault-item">
+          <div className="row mt-4">
+            <div className="col-sm-12 col-md-4">
               <img
                 src={ethImg}
                 alt="gStable"
                 width="32"
                 height="32"
-                class="rounded-circle flex-shrink-0 vault-img"
+                className="rounded-circle flex-shrink-0 vault-img"
               />
-              <div class="currency-name">
+              <div className="currency-name">
                 <b>ETH</b>
-                <p class="small">Ethereum</p>
+                <p className="small">Ethereum</p>
               </div>
             </div>
 
-            <div class="col-sm-6 col-md-3 text-center">
+            <div className="col-sm-6 col-md-3 text-center">
               <b>TVL</b>
-              <p class="small">--</p>
+              <p className="small">--</p>
             </div>
-            <div class="col-sm-6 col-md-3 text-center">
+            <div className="col-sm-6 col-md-3 text-center">
               <b>My Supply</b>
-              <p class="small">--</p>
+              <p className="small">--</p>
             </div>
-            <div class="col-sm-12 col-md-2 text-center">
+            <div className="col-sm-12 col-md-2 text-center">
               <button
                 type="button"
-                class="btn btn-secondary disabled"
+                className="btn btn-secondary disabled"
                 data-bs-toggle="modal"
                 data-bs-target="#"
               >
@@ -213,34 +219,34 @@ const CurrencyVaultList = (props) => {
         </div>
 
 
-        <div class="card-body vault-item">
-          <div class="row mt-4">
-            <div class="col-sm-12 col-md-4">
+        <div className="card-body vault-item">
+          <div className="row mt-4">
+            <div className="col-sm-12 col-md-4">
               <img
                 src={btcImg}
                 alt="gStable"
                 width="32"
                 height="32"
-                class="rounded-circle flex-shrink-0 vault-img"
+                className="rounded-circle flex-shrink-0 vault-img"
               />
-              <div class="currency-name">
+              <div className="currency-name">
                 <b>BTC</b>
-                <p class="small">Bitcoin</p>
+                <p className="small">Bitcoin</p>
               </div>
             </div>
 
-            <div class="col-sm-6 col-md-3 text-center">
+            <div className="col-sm-6 col-md-3 text-center">
               <b>TVL</b>
-              <p class="small">--</p>
+              <p className="small">--</p>
             </div>
-            <div class="col-sm-6 col-md-3 text-center">
+            <div className="col-sm-6 col-md-3 text-center">
               <b>My Supply</b>
-              <p class="small">--</p>
+              <p className="small">--</p>
             </div>
-            <div class="col-sm-12 col-md-2 text-center">
+            <div className="col-sm-12 col-md-2 text-center">
               <button
                 type="button"
-                class="btn btn-secondary disabled"
+                className="btn btn-secondary disabled"
                 data-bs-toggle="modal"
                 data-bs-target="#"
               >
@@ -250,34 +256,34 @@ const CurrencyVaultList = (props) => {
           </div>
         </div>
 
-        <div class="card-body vault-item">
-          <div class="row mt-4">
-            <div class="col-sm-12 col-md-4">
+        <div className="card-body vault-item">
+          <div className="row mt-4">
+            <div className="col-sm-12 col-md-4">
               <img
                 src={bchImg}
                 alt="gStable"
                 width="32"
                 height="32"
-                class="rounded-circle flex-shrink-0 vault-img"
+                className="rounded-circle flex-shrink-0 vault-img"
               />
-              <div class="currency-name">
+              <div className="currency-name">
                 <b>BCH</b>
-                <p class="small">Bitcoin Cash</p>
+                <p className="small">Bitcoin Cash</p>
               </div>
             </div>
 
-            <div class="col-sm-6 col-md-3 text-center">
+            <div className="col-sm-6 col-md-3 text-center">
               <b>TVL</b>
-              <p class="small">--</p>
+              <p className="small">--</p>
             </div>
-            <div class="col-sm-6 col-md-3 text-center">
+            <div className="col-sm-6 col-md-3 text-center">
               <b>My Supply</b>
-              <p class="small">--</p>
+              <p className="small">--</p>
             </div>
-            <div class="col-sm-12 col-md-2 text-center">
+            <div className="col-sm-12 col-md-2 text-center">
               <button
                 type="button"
-                class="btn btn-secondary disabled"
+                className="btn btn-secondary disabled"
                 data-bs-toggle="modal"
                 data-bs-target="#"
               >
@@ -287,35 +293,35 @@ const CurrencyVaultList = (props) => {
           </div>
         </div>
 
-        <div class="coming-soon text-white text-center">More Vaults coming soon...</div>
+        <div className="coming-soon text-white text-center">More Vaults coming soon...</div>
       </div>
 
-      <div class="modal vault-modal fade" id="v1modal" tabindex="-1">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header shadow-primary">
+      <div className="modal vault-modal fade" id="v1modal" tabIndex="-1">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header shadow-primary">
               <img
                 src={getCurrency(currencyKey).icon}
                 alt="BTC"
                 width="32"
                 height="32"
-                class="rounded-circle flex-shrink-0 vault-img"
+                className="rounded-circle flex-shrink-0 vault-img"
               />
-              <div class="currency-name">
-                <h1 class="modal-title fs-5 font-weight-bolder mt-2 mb-0">
+              <div className="currency-name">
+                <h1 className="modal-title fs-5 font-weight-bolder mt-2 mb-0">
                   {getCurrency(currencyKey).label} Vault
                 </h1>
                 <div>
-                  <p class="small">{getCurrency(currencyKey).text}</p>
+                  <p className="small">{getCurrency(currencyKey).text}</p>
                 </div>
               </div>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
               ></button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               <CurrencyVault
                 currencyKey={currencyKey}
                 key={currencyKey}

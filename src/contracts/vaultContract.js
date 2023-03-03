@@ -17,86 +17,86 @@ class VaultContract extends SmartContractBase {
     return null;
   };
 
-  getDetails = async () => {
+  getDetails = async (currencyId) => {
     //getMarketAddress
     //getStableCoinAddress
     // getInterval
     //getAllocatedRewards
-    let stableCoinAddress = await this.getStableCoinAddress();
-    let marketAddress = await this.getMarketAddress();
-    let interval = await this.getInterval();
-    let allocatedRewards = await this.getAllocatedRewards();
+    // let stableCoinAddress = await this.getStableCoinAddress();
+    // let marketAddress = await this.getMarketAddress();
+    let interval = await this.getInterval(currencyId);
+    // let allocatedRewards = await this.getAllocatedRewards();
     let details = {
-      status: this.contract ? true : false,
-      address: this.address,
+      // status: this.contract ? true : false,
+      // address: this.address,
       interval,
-      allocatedRewards,
-      stableCoinAddress,
-      marketAddress,
+      // allocatedRewards,
+      // stableCoinAddress,
+      // marketAddress,
     };
     return details;
   };
   // GET
-  getTVL = async () => {
+  getTVL = async (currencyId) => {
     this.check();
-    let c = await this.contract.totalValue().call();
+    let c = await this.contract.gStableTotalValueMap(currencyId).call();
     return this.web3.utils.fromWei(String(c), "ether");
   };
-  getInterval = async () => {
+  getInterval = async (currencyId) => {
     this.check();
-    let c = await this.contract.interval().call();
+    let c = await this.contract.gStableIntervalMap(currencyId).call();
     return String(c);
   };
-  getStableCoinAddress = async () => {
-    this.check();
-    let c = await this.contract.getStableCoinAddress().call();
-    return String(c);
-  };
-  getMarketAddress = async () => {
-    this.check();
-    let c = await this.contract.getMarketAddress().call();
-    return String(c);
-  };
-  getAllocatedRewards = async () => {
-    this.check();
-    let c = await this.contract.allocatedRewards().call();
-    return this.web3.utils.fromWei(String(c), "ether");
-  };
+  // getStableCoinAddress = async () => {
+  //   this.check();
+  //   let c = await this.contract.getStableCoinAddress().call();
+  //   return String(c);
+  // };
+  // getMarketAddress = async () => {
+  //   this.check();
+  //   let c = await this.contract.getMarketAddress().call();
+  //   return String(c);
+  // };
+  // getAllocatedRewards = async () => {
+  //   this.check();
+  //   let c = await this.contract.allocatedRewards().call();
+  //   return this.web3.utils.fromWei(String(c), "ether");
+  // };
   // GET end
   //SET
-  setInterval = async (interval) => {
-    this.check();
-    if (!interval) throw new Error(`interval : ${interval}`);
+  // setInterval = async (interval) => {
+  //   this.check();
+  //   if (!interval) throw new Error(`interval : ${interval}`);
 
-    await this.contract.setLockInterval(interval).send({
-      feeLimit: 100_000_000,
-      callValue: 0,
-      shouldPollResponse: false,
-    });
-  };
-  setStableCoin = async (address) => {
-    this.check();
-    if (!address) throw new Error(`Address : ${address}`);
+  //   await this.contract.setLockInterval(interval).send({
+  //     feeLimit: 100_000_000,
+  //     callValue: 0,
+  //     shouldPollResponse: false,
+  //   });
+  // };
+  // setStableCoin = async (address) => {
+  //   this.check();
+  //   if (!address) throw new Error(`Address : ${address}`);
 
-    await this.contract.setStableCoin(address).send({
-      feeLimit: 100_000_000,
-      callValue: 0,
-      shouldPollResponse: false,
-    });
-  };
-  setMarket = async (address) => {
-    this.check();
-    if (!address) throw new Error(`Address : ${address}`);
+  //   await this.contract.setStableCoin(address).send({
+  //     feeLimit: 100_000_000,
+  //     callValue: 0,
+  //     shouldPollResponse: false,
+  //   });
+  // };
+  // setMarket = async (address) => {
+  //   this.check();
+  //   if (!address) throw new Error(`Address : ${address}`);
 
-    await this.contract.setMarket(address).send({
-      feeLimit: 100_000_000,
-      callValue: 0,
-      shouldPollResponse: false,
-    });
-  };
+  //   await this.contract.setMarket(address).send({
+  //     feeLimit: 100_000_000,
+  //     callValue: 0,
+  //     shouldPollResponse: false,
+  //   });
+  // };
   //SET end
 
-  deposit = async (_val) => {
+  deposit = async (currencyId, _val) => {
     this.check();
     if (!_val) throw new Error(`Number : ${_val}`);
 
@@ -105,7 +105,7 @@ class VaultContract extends SmartContractBase {
     try {
       await this.contract
         .deposit(
-          // _val,
+          currencyId,
           this.web3.utils.toWei(String(_val), "ether")
         )
         .send({
@@ -118,7 +118,7 @@ class VaultContract extends SmartContractBase {
     }
   };
 
-  withdraw = async (_val) => {
+  withdraw = async (currencyId, _val) => {
     this.check();
     if (!_val) throw new Error(`Number : ${_val}`);
 
@@ -126,7 +126,7 @@ class VaultContract extends SmartContractBase {
 
     try {
       await this.contract
-        .withdraw(this.web3.utils.toWei(String(_val), "ether"))
+        .withdraw(currencyId, this.web3.utils.toWei(String(_val), "ether"))
         .send({
           feeLimit: 100_000_000,
           callValue: 0,
@@ -137,24 +137,24 @@ class VaultContract extends SmartContractBase {
     }
   };
 
-  setRewards = async (_val) => {
-    this.check();
-    if (!_val) throw new Error(`Number : ${_val}`);
+  // setRewards = async (_val) => {
+  //   this.check();
+  //   if (!_val) throw new Error(`Number : ${_val}`);
 
-    console.log("setRewards", this.web3.utils.toWei(String(_val), "ether"));
-    try {
-      await this.contract
-        .setRewards(this.web3.utils.toWei(String(_val), "ether"))
-        // .setRewards(_val)
-        .send({
-          feeLimit: 100_000_000,
-          callValue: 0,
-          shouldPollResponse: false,
-        });
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  //   console.log("setRewards", this.web3.utils.toWei(String(_val), "ether"));
+  //   try {
+  //     await this.contract
+  //       .setRewards(this.web3.utils.toWei(String(_val), "ether"))
+  //       // .setRewards(_val)
+  //       .send({
+  //         feeLimit: 100_000_000,
+  //         callValue: 0,
+  //         shouldPollResponse: false,
+  //       });
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   // distributeRewards = async () => {
   //   this.check();
@@ -170,28 +170,28 @@ class VaultContract extends SmartContractBase {
   //   }
   // };
 
-  balanceOf = async (hodlerAddress) => {
+  balanceOf = async (currencyId, hodlerAddress) => {
     this.check();
     const [balHex, lockHex] = await this.contract
-      .getBalance(hodlerAddress)
+      .getBalance(currencyId, hodlerAddress)
       .call();
     const balance = this.web3.utils.fromWei(String(balHex), "ether");
     let lock = new Date(lockHex * 1000);
     return { balance, lock };
   };
 
-  getPendingRewards = async (hodlerAddress) => {
+  getPendingRewards = async (currencyId, hodlerAddress) => {
     this.check();
-    const balHex = await this.contract.getPendingRewards(hodlerAddress).call();
+    const balHex = await this.contract.getPendingRewards(currencyId, hodlerAddress).call();
     const rewards = this.web3.utils.fromWei(String(balHex), "ether");
     return rewards;
   };
 
-  claimPendingRewards = async (hodlerAddress) => {
+  claimPendingRewards = async (currencyId, hodlerAddress) => {
     this.check();
-    const balHex = await this.contract.getPendingRewards(hodlerAddress).call();
+    const balHex = await this.contract.getPendingRewards(currencyId, hodlerAddress).call();
     // const rewards = this.web3.utils.fromWei(String(balHex), "ether");
-    await this.contract.claimRewards(balHex).send({
+    await this.contract.claimRewards(currencyId, balHex).send({
       feeLimit: 100_000_000,
       callValue: 0,
       shouldPollResponse: false,

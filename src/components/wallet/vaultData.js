@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import walletPublisher from "../../publishers/wallet";
 import { formatM, formatUSD } from "../../utils/currencyFormatter";
 import USDDIcon from "../iconUSDD";
 
@@ -23,8 +22,8 @@ const VaultData = (props) => {
       let vaultContract = await currency.vaultContract();
       let vaultBalance = "";
       if (walletAddress) {
-        vaultBalance = await vaultContract.balanceOf(walletAddress);
-        let vaultRewards = await vaultContract.getPendingRewards(walletAddress);
+        vaultBalance = await vaultContract.balanceOf(currency.id, walletAddress);
+        let vaultRewards = await vaultContract.getPendingRewards(currency.id,walletAddress);
         setBalance(vaultBalance);
         setRewards(vaultRewards);
       }
@@ -55,7 +54,7 @@ const VaultData = (props) => {
   };
 
   return (
-    <li class="list-group-item">
+    <li className="list-group-item">
       <div className="d-flex justify-content-between">
         <span className="">
           <img src={currency.icon} height="24"></img>

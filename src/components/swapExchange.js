@@ -20,7 +20,7 @@ const SwapExchange = (props) => {
   const [tokenValue, setTokenValue] = useState(0);
 
   const [conversionRatio, setConversionRatio] = useState();
-  const [swapFeesFactor, setSwapFeesFactor] = useState();
+  const [swapFeesFactor, setSwapFeesFactor] = useState(0);
   const [trxHash, setTRXHash] = useState(null);
 
   const [currencyKey, setCurrencyKey] = useState(props.currencyKey);
@@ -45,24 +45,25 @@ const SwapExchange = (props) => {
 
   const init = async () => {
     console.log("initializing with currencyKey : ", currencyKey);
-    let swapContract = await getCurrency(currencyKey).swapContract();
-    let conversionRatio = await swapContract.getConversion();
-    let swapFeesFactor = await swapContract.getSwapFeesFactor();
+    let currency = getCurrency(currencyKey);
+    let swapContract = await currency.swapContract();
+    let conversionRatio = await swapContract.getConversion(currency.id);
+    let swapFeesFactor = await swapContract.getSwapFeesFactor(currency.id);
     setSwapDetails({ conversionRatio, swapFeesFactor });
+    getSwapPublisherByCurrencyKey(currencyKey).attach(setSwapDetails);
   };
 
   useEffect(() => {
     currencyPublisher.attach(updateCurrency);
     return () => {
       currencyPublisher.detach(updateCurrency);
-      getSwapPublisherByCurrencyKey(currencyKey).detach(setSwapDetails);
     };
   }, []);
 
   const updateCurrency = (currKey) => {
     console.log("updating currency : ", currKey);
     setCurrencyKey(currKey);
-    getSwapPublisherByCurrencyKey(currencyKey).attach(setSwapDetails);
+    getSwapPublisherByCurrencyKey(currKey).attach(setSwapDetails);
   };
 
   const setSwapDetails = async (swapDetails) => {
@@ -84,11 +85,17 @@ const SwapExchange = (props) => {
 
   useEffect(() => {
     setIsCurrentNetworkSupported(isCurrentNetworkSupported());
-    networkPublisher.attach(setIsCurrentNetworkSupported);
+    networkPublisher.attach(handleCurrentNetworkSupported);
     return () => {
       console.log("unmounting Swap Exchange");
     };
   }, []);
+  let handleCurrentNetworkSupported = async(supported) => {
+    setIsCurrentNetworkSupported(supported);
+    if(supported){
+      await init();
+    }
+  }
   // to support network changes related code ends
 
   const stableCoinJSX = () => {
@@ -104,7 +111,7 @@ const SwapExchange = (props) => {
               value={stableCoinValue}
               onChange={updateStableCoinValue}
             />
-            <label for="floatingInputGroup1">Value in USDD</label>
+            <label htmlFor="floatingInputGroup1">Value in USDD</label>
           </div>
           <span className="input-group-text">
             <USDDIcon height={32}></USDDIcon>
@@ -155,7 +162,7 @@ const SwapExchange = (props) => {
               value={tokenValue}
               onChange={updateTokenValue}
             />
-            <label for="floatingInputGroup2">Value in gStable</label>
+            <label htmlFor="floatingInputGroup2">Value in gStable</label>
           </div>
           <span className="input-group-text">
             <StableIcon height={32} currencyKey={currencyKey}></StableIcon>
@@ -174,12 +181,12 @@ const SwapExchange = (props) => {
     let hash = null;
     if (direction) {
       //swap USD for currency
-      await usd.approve(currency.swapAddress, stableCoinValue);
+      await usd.approve(swapContract.address, stableCoinValue);
       console.log("approved");
-      hash = await swapContract.deposit(stableCoinValue);
+      hash = await swapContract.deposit(currency.id, stableCoinValue);
     } else {
       //swap currency for USD
-      hash = await swapContract.withdraw(tokenValue);
+      hash = await swapContract.withdraw(currency.id, tokenValue);
     }
     if (hash) setTRXHash(hash);
   };
@@ -192,14 +199,14 @@ const SwapExchange = (props) => {
     if (trxHash) {
       return (
         <div
-          class="alert alert-primary alert-dismissible fade show mt-3"
+          className="alert alert-primary alert-dismissible fade show mt-3"
           role="alert"
         >
           <div className="strong" style={{ fontSize: "95%" }}>
             Your{" "}
             <a
               href={`https://nile.tronscan.org/#/transaction/${trxHash}`}
-              class="alert-link"
+              className="alert-link"
               target="_blank"
             >
               Transaction
@@ -209,7 +216,7 @@ const SwapExchange = (props) => {
 
           <button
             type="button"
-            class="btn-close btn-close-white btn-sm"
+            className="btn-close btn-close-white btn-sm"
             aria-label="Close"
             onClick={clearHash}
           ></button>
@@ -232,8 +239,7 @@ const SwapExchange = (props) => {
             Swap
           </h4>
 
-          {walletDetails && walletDetails.isSupportedNetwork /*&&
-          conversionRatio*/ ? (
+          {walletDetails && walletDetails.isSupportedNetwork ? (
             <div className="h6 text-white font-weight-bolder text-center mt-2 mb-0">
               Exchange Rate : 1 USDD ≈ {conversionRatio}{" "}
               {getCurrency(currencyKey).label}
@@ -273,16 +279,11 @@ const SwapExchange = (props) => {
             >
               Swap
             </button>
-            {
-              /*swapFeesFactor*/ true ? (
-                <div className="text-xs mt-20 d-flex justify-content-center">
+            <div className="text-xs mt-20 d-flex justify-content-center">
                   <b>Fee ({swapFeesFactor * 100}%)</b>: ≈{" "}
                   {formatUSD(stableCoinValue * swapFeesFactor)}
-                </div>
-              ) : (
-                <></>
-              )
-            }
+            </div>
+            
           </div>
           {trxHashAlertJSX()}
         </div>

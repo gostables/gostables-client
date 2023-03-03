@@ -41,10 +41,10 @@ class WalletPublisher {
       // console.log(`getting vault data for ${this.currencyKey}`);
       let currency = getCurrency(this.currencykey);
       let vaultContract = await currency.vaultContract();
-      let vaultBalData = await vaultContract.balanceOf(
+      let vaultBalData = await vaultContract.balanceOf( currency.id,
         this.walletDetails.address
       );
-      let vaultRewards = await vaultContract.getPendingRewards(
+      let vaultRewards = await vaultContract.getPendingRewards( currency.id,
         this.walletDetails.address
       );
       vaultBalances.push({
@@ -70,8 +70,11 @@ class WalletPublisher {
     {
       try {
         // Continuous polling as per https://github.com/ibnzUK/Tron-Wallet-React-Integration/blob/main/src/App.js
-        this.walletDetails = await getWalletDetails();
-        // console.log(this.walletDetails);
+        let walletDetails_ = await getWalletDetails();
+        if(walletDetails_.status == 1){
+          this.walletDetails = walletDetails_;
+          // console.log(this.walletDetails);
+        }
       } catch (error) {
         console.error(error);
       }

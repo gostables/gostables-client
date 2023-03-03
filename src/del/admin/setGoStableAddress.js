@@ -1,18 +1,35 @@
 // import { useState } from "react";
-// import { ttdd } from "../contracts/gStableContract ";
-// import { getCurrency } from "../utils/currencies";
+// import GoStableBaseContract from "../contracts/goStableBaseContract";
 
-// const AddClientAddressTogStable = (props) => {
+// export const MARKET = 1;
+// export const G_STABLE = 2;
+// export const STABLE = 3;
+
+// const SetGoStableAddress = (props) => {
 //   const [address, setAddress] = useState("");
 
-//   const add = async () => {
-//     let currency = getCurrency(props.currencyKey);
-//     let gStableContract = await currency.gStableContract();
+//   const set = async () => {
+//     let contract_ = new GoStableBaseContract(props.address);
+//     let contract = await contract_.init();
+
 //     setAddress("");
 //     try {
-//       console.log(`setClient : ${address}`);
+//       console.log(`setAddress : ${props.type} ${address}`);
 //       if (address) {
-//         await gStableContract.setClient(address);
+//         switch (props.type) {
+//           case MARKET:
+//             await contract.setMarket(address);
+//             break;
+//           case G_STABLE:
+//             await contract.setgStable(address);
+//             break;
+//           case STABLE:
+//             await contract.setStableCoin(address);
+//             break;
+
+//           default:
+//             break;
+//         }
 //       }
 //     } catch (error) {
 //       console.error(error);
@@ -23,10 +40,11 @@
 //       setAddress(e.target.value);
 //     }
 //   };
+
 //   return (
 //     <>
-//       <div className="row">
-//         <div className="col py-3">Whitelist New Address </div>
+//       <div className="row  py-2 my-2">
+//         <div className="col">Set New Address </div>
 //       </div>
 //       <form className="row g-3 d-flex justify-content-between">
 //         <div className="col-sm-7">
@@ -44,9 +62,9 @@
 //             <button
 //               type="button"
 //               className="btn btn-primary"
-//               onClick={() => add()}
+//               onClick={() => set()}
 //             >
-//               Add
+//               Set
 //             </button>
 //           </div>
 //         </div>
@@ -55,4 +73,4 @@
 //   );
 // };
 
-// export default AddClientAddressTogStable;
+// export default SetGoStableAddress;

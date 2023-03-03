@@ -1,10 +1,8 @@
 import "./App.css";
 import { Route, Routes } from "react-router";
 import Navbar from "./components/navbar";
-import AdminFaucets from "./admin/faucets";
+import AdminFaucets from "./components/faucets";
 import SwapPage from "./components/swapPage";
-import WalletPage from "./components/walletPage";
-import AdminPage from "./admin/adminPage";
 import CurrencyVaultPage from "./components/currencyVaultPage";
 import currencyPublisher from "./publishers/currency";
 import { useEffect, useState } from "react";
@@ -31,19 +29,6 @@ const App = () => {
           // @ts-ignore
           exact
           element={<WalletDashboard currencyKey={selectedCurrency} />}
-        />
-        <Route
-          path="/wdb"
-          // @ts-ignore
-          exact
-          element={<WalletPage currencyKey={selectedCurrency} />}
-        />
-
-        <Route
-          path="/admin"
-          // @ts-ignore
-          exact
-          element={<AdminPage currencyKey={selectedCurrency} />}
         />
         <Route
           path="/vault"

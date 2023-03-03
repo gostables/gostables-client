@@ -28,7 +28,7 @@ const CurrencyBalance = (props) => {
       }
 
       let swapContract = await currency.swapContract();
-      let conversionRatio = await swapContract.getConversion();
+      let conversionRatio = await swapContract.getConversion(currency.id);
       setConversionRatio(conversionRatio);
       if (gStableBal && conversionRatio) {
         updateTotal({
@@ -49,7 +49,7 @@ const CurrencyBalance = (props) => {
   };
 
   return (
-    <li class="list-group-item">
+    <li className="list-group-item">
       <div className="d-flex justify-content-between">
         <span>
           <img src={currency.icon} height="24"></img>

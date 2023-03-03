@@ -19,10 +19,6 @@ const VaultList = (props) => {
 
   const [walletAddress, setWalletAddress] = useState("");
   useEffect(() => {
-    // if (window.tronWeb && window.tronWeb.ready) {
-    //   console.log(window.tronWeb.defaultAddress.base58);
-    //   setWalletAddress(window.tronWeb.defaultAddress.base58);
-    // }
     updateWalletAddress();
     return () => {
       console.log("unmounting VaultList");
@@ -43,7 +39,6 @@ const VaultList = (props) => {
   };
 
   const updateTotal = (balanceData) => {
-    // console.log(balanceData);
     switch (balanceData.currencyKey) {
       case "TTDD":
         setTtd(parseFloat(balanceData.balance.balance));
@@ -125,7 +120,7 @@ const VaultList = (props) => {
           </div>
         </div>
       </div>
-      <ul class="list-group list-group-flush">
+      <ul className="list-group list-group-flush">
         {getCurrencies().map((curr, index) => (
           <VaultData
             currency={curr}
