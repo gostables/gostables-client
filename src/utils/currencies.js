@@ -66,7 +66,7 @@ const CurrencyList = {
     "gTTD",
     "Trinidad & Tobago Dollar",
     ttddImg,
-    "TJp1ypHrEf78KTHJJWR9EeK46dYyvZwcvb" /*gStableAddress*/,
+    "TK95YwrjoB1Ui7jwjAPfjHiw2HuSm7ebS4" /*gStableAddress*/,
   ),
   XCD: new Currency(
     2,
@@ -74,7 +74,7 @@ const CurrencyList = {
     "gXCD",
     "Eastern Caribbean Dollar",
     xcddImg,
-    "TXpBBZFqEkwa8pYsJdS6nz9Uucuao2WBbq" /*gStableAddress*/,
+    "TXTirC6WWYs7csuqUQuiQvKzrkSgZgU7x3" /*gStableAddress*/,
   ),
   // BBD: new Currency(
   //   3,

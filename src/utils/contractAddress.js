@@ -1,5 +1,5 @@
-const SwapUSDDContractAddress = "TNKFmjzaYS3GiiWeYE5wEBZg58dqvXRCac";
-const VaultUSDDContractAddress = "TA8pbSL7dCz5FC31K5JsJb7aT9dfiRq8TY";
+const SwapUSDDContractAddress = "TQny4yNYvTmSvJqZNUgEzKtKW6gCzhym6x";
+const VaultUSDDContractAddress = "TSYeLYe2GJJZ9Nhf8aWSmsKJRzTkvA6DJW";
 const MarketContractAddress = "TQq9o4PahyoLociVzCnBMRRDdPZrNNkW1f";
 
 export {SwapUSDDContractAddress, VaultUSDDContractAddress, MarketContractAddress}
