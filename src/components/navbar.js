@@ -62,6 +62,14 @@ const Navbar = () => {
                 </NavLink>
               </li>
               <li className="nav-item">
+                <NavLink to="/swapGStables" className="nav-link">
+                  <span className="px-2">
+                    <SwapIcon></SwapIcon>
+                  </span>
+                  Swap gStables
+                </NavLink>
+              </li>
+              <li className="nav-item">
                 <NavLink to="/vault" className="nav-link">
                   <span className="px-2">
                     <VaultIcon></VaultIcon>

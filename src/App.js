@@ -44,10 +44,18 @@ const App = () => {
         />
 
         <Route
+          path="/swapGStables"
+          // @ts-ignore
+          element={
+            <SwapPage currencyKey={selectedCurrency} key={selectedCurrency} gStables={true} />
+          }
+        />
+
+        <Route
           path="*"
           // @ts-ignore
           element={
-            <SwapPage currencyKey={selectedCurrency} key={selectedCurrency} />
+            <SwapPage currencyKey={selectedCurrency} key={selectedCurrency} gStables={false} />
           }
         />
       </Routes>
