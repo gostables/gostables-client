@@ -47,7 +47,7 @@ const VaultData = (props) => {
 
   const claim = async (currencyKey) => {
     let vaultContract = await currency.vaultContract();
-    await vaultContract.claimPendingRewards(walletAddress);
+    await vaultContract.claimPendingRewards(currency.id, walletAddress);
     setTimeout(() => {
       read();
     }, index * 1000);
