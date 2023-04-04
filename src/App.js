@@ -42,15 +42,6 @@ const App = () => {
           exact
           element={<AdminFaucets />}
         />
-
-        <Route
-          path="/swapGStables"
-          // @ts-ignore
-          element={
-            <SwapPage currencyKey={selectedCurrency} key={selectedCurrency} gStables={true} />
-          }
-        />
-
         <Route
           path="*"
           // @ts-ignore
