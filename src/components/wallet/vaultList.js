@@ -40,7 +40,7 @@ const VaultList = (props) => {
 
   const updateTotal = (balanceData) => {
     switch (balanceData.currencyKey) {
-      case "TTDD":
+      case "TTD":
         setTtd(parseFloat(balanceData.balance.balance));
         break;
       case "XCD":

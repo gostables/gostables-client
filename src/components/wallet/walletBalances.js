@@ -39,7 +39,7 @@ const WalletBalances = (props) => {
 
   const updateTotal = (balanceData) => {
     switch (balanceData.currencyKey) {
-      case "TTDD": {
+      case "TTD": {
         setTtd(balanceData.balance);
         break;
       }
