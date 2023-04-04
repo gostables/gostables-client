@@ -33,7 +33,8 @@ class SwapPublisher {
           throw new Error("Currency not set in SwapPublisher")
         }
         let gStableManagerContract_ = await gStableManagerContract();
-        this.swapDetails.conversionRatio = await gStableManagerContract_.getConversion(this.currency.id);
+        let cr = await gStableManagerContract_.getConversion(currencyId);
+        this.swapDetails.conversionRatio = String(cr) / 10000;
         console.log(
           "swap Publisher conversionRatio updating : ",
           this.currency.key,
