@@ -4,7 +4,6 @@ class MarketContract extends SmartContractBase {
   currency = null;
   constructor(swapMarketAddress) {
     super(swapMarketAddress);
-    // this.currency = _currency;
   }
   init = async () => {
     try {
