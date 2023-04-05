@@ -60,13 +60,13 @@ class Currency {
 }
 
 const CurrencyList = {
-  TTDD: new Currency(
+  TTD: new Currency(
     1,
-    "TTDD",
+    "TTD",
     "gTTD",
     "Trinidad & Tobago Dollar",
     ttddImg,
-    "TK95YwrjoB1Ui7jwjAPfjHiw2HuSm7ebS4" /*gStableAddress*/,
+    "TEhTXahLuKVgnBX1yWVmLaykLGeEZ8yq9K" /*gStableAddress*/,
   ),
   XCD: new Currency(
     2,
@@ -74,7 +74,7 @@ const CurrencyList = {
     "gXCD",
     "Eastern Caribbean Dollar",
     xcddImg,
-    "TXTirC6WWYs7csuqUQuiQvKzrkSgZgU7x3" /*gStableAddress*/,
+    "TMqjGVksF4RLN67YugsUbbNHiZejzsSWq6" /*gStableAddress*/,
   ),
   // BBD: new Currency(
   //   3,
