@@ -167,12 +167,11 @@ const CurrencyVault = (props) => {
                 <br />
                 <br />
                 <span className="small">
-                  Your deposit will be locked for the next{" "}
-                  {vaultTimer} hours.
+                  New deposits are locked for {" "}{vaultTimer} hours.
                 </span>
                 <br />
                 <span className="text-danger">
-                  Unlock Time: {walletData.vaultBalance.lock.toLocaleString()}
+                  Your Unlock Time: {walletData.vaultBalance.lock.toLocaleString()}
                 </span>
               </>
             ) : (

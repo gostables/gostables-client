@@ -245,3 +245,5 @@ li.nav-item {
 }
 
 .m-3{margin: 3px!important;}
+
+.bi-arrow-down-up:hover{cursor: pointer;}
