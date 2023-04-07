@@ -59,7 +59,7 @@ class GoStableBaseContract extends SmartContractBase {
     if (!address) throw new Error(`address : ${address}`);
 
     await this.contract.setMarket(address).send({
-      feeLimit: 100_000_000,
+      feeLimit: 200_000_000,
       callValue: 0,
       shouldPollResponse: false,
     });
@@ -69,7 +69,7 @@ class GoStableBaseContract extends SmartContractBase {
     if (!address) throw new Error(`address : ${address}`);
 
     await this.contract.setStableCoin(address).send({
-      feeLimit: 100_000_000,
+      feeLimit: 200_000_000,
       callValue: 0,
       shouldPollResponse: false,
     });
@@ -79,7 +79,7 @@ class GoStableBaseContract extends SmartContractBase {
     if (!address) throw new Error(`address : ${address}`);
 
     await this.contract.setgStable(address).send({
-      feeLimit: 100_000_000,
+      feeLimit: 200_000_000,
       callValue: 0,
       shouldPollResponse: false,
     });
@@ -98,7 +98,7 @@ class GoStableBaseContract extends SmartContractBase {
           this.web3.utils.toWei(String(_val), "ether")
         )
         .send({
-          feeLimit: 100_000_000,
+          feeLimit: 200_000_000,
           callValue: 0,
           shouldPollResponse: false,
         });
@@ -122,7 +122,7 @@ class GoStableBaseContract extends SmartContractBase {
           this.web3.utils.toWei(String(_val), "ether")
         )
         .send({
-          feeLimit: 100_000_000,
+          feeLimit: 200_000_000,
           callValue: 0,
           shouldPollResponse: false,
         });

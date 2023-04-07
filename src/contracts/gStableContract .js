@@ -50,7 +50,7 @@ class gStableContract extends SmartContractBase {
     if (!address) throw new Error(`address : ${address}`);
 
     await this.contract.setClient(address).send({
-      feeLimit: 100_000_000,
+      feeLimit: 200_000_000,
       callValue: 0,
       shouldPollResponse: false,
     });
@@ -60,7 +60,7 @@ class gStableContract extends SmartContractBase {
     if (!index) throw new Error(`index : ${index}`);
 
     await this.contract.removeClient(index).send({
-      feeLimit: 100_000_000,
+      feeLimit: 200_000_000,
       callValue: 0,
       shouldPollResponse: false,
     });

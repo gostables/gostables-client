@@ -27,7 +27,7 @@ class SwapGStableContract extends SmartContractBase {
           toId
         )
         .send({
-          feeLimit: 100_000_000,
+          feeLimit: 200_000_000,
           callValue: 0,
           shouldPollResponse: false,
         });

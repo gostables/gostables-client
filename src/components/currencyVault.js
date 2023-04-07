@@ -24,6 +24,8 @@ const CurrencyVault = (props) => {
     };
   }, []);
 
+  const vaultTimer = vaultDetails.interval / 1440 * 24;
+
   const [walletData, setWalletData] = useState({
     isSupportedNetwork: false,
     usddBalance: "",
@@ -166,7 +168,7 @@ const CurrencyVault = (props) => {
                 <br />
                 <span className="small">
                   Your deposit will be locked for the next{" "}
-                  {vaultDetails.interval} hrs.
+                  {vaultTimer} hours.
                 </span>
                 <br />
                 <span className="text-danger">

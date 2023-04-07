@@ -66,7 +66,8 @@ const CurrencyList = {
     "gTTD",
     "Trinidad & Tobago Dollar",
     ttddImg,
-    "TEhTXahLuKVgnBX1yWVmLaykLGeEZ8yq9K" /*gStableAddress*/,
+    // "TEhTXahLuKVgnBX1yWVmLaykLGeEZ8yq9K" /*gStableAddress nile*/,
+    "TTyTrwsnsi5Fr6YjhPsqc3cbTLqPALTe4U" /*gStableAddress mainnet*/,
   ),
   XCD: new Currency(
     2,
@@ -74,7 +75,8 @@ const CurrencyList = {
     "gXCD",
     "Eastern Caribbean Dollar",
     xcddImg,
-    "TMqjGVksF4RLN67YugsUbbNHiZejzsSWq6" /*gStableAddress*/,
+    // "TMqjGVksF4RLN67YugsUbbNHiZejzsSWq6" /*gStableAddress nile*/,
+    "TBovdWbXNQEhERaRTB7MdY2h1Ykchji1Xw" /*gStableAddress mainnet*/,
   ),
   BBD: new Currency(
     3,
@@ -82,7 +84,8 @@ const CurrencyList = {
     "gBBD",
     "Barbadian Dollar",
     bbddImg,
-    "TNpqgkKcaKa7vZH5GC4nxSL6FMjMfdCRSn" /*gStableAddress*/,
+  //   // "TNpqgkKcaKa7vZH5GC4nxSL6FMjMfdCRSn" /*gStableAddress nile*/,
+    "TGsz1q1ryn5DLZngM2xxek3jN1X53qW7vZ" /*gStableAddress mainnet*/,
   ),
   JMD: new Currency(
     4,
@@ -90,7 +93,8 @@ const CurrencyList = {
     "gJMD",
     "Jamaican Dollar",
     jmddImg,
-    "TBeTCPQFXjgVk1xKpFw5b24MsgCkvLdBnk" /*gStableAddress*/,
+  //   // "TBeTCPQFXjgVk1xKpFw5b24MsgCkvLdBnk" /*gStableAddress nile*/,
+    "TPoyDSNF7F2h5ZTRh25ypXvtn5hJfjaZ2K" /*gStableAddress mainnet*/,
   ),
   // AWG: new Currency(
   //   5,
@@ -98,11 +102,8 @@ const CurrencyList = {
   //   "gAWG",
   //   "Aruban Florin",
   //   awgdImg,
-  //   "TQKJkghADgVpb5KgRYu5MXAdZg2SgqW3iU" /*swapAddress */,
-  //   "TQq9o4PahyoLociVzCnBMRRDdPZrNNkW1f" /*swapMarketAddress*/,
-  //   "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU" /*swapStableAddress*/,
-  //   "TP7RNcfoSkmTSA5ZSdKeXfUnBb1KoU51VY" /*gStableAddress*/,
-  //   "TAVcMmTrqq7HcLSoqXHNyzwKJgcpRivSD1" /*vaultAddress */
+  //   "---" /*gStableAddress nile*/,
+  //   "---" /*gStableAddress mainnet*/,
   // ),
   // BSD: new Currency(
   //   6,
@@ -110,11 +111,8 @@ const CurrencyList = {
   //   "gBSD",
   //   "Bahamian Dollar",
   //   bsdImg,
-  //   "TQKJkghADgVpb5KgRYu5MXAdZg2SgqW3iU" /*swapAddress */,
-  //   "TQq9o4PahyoLociVzCnBMRRDdPZrNNkW1f" /*swapMarketAddress*/,
-  //   "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU" /*swapStableAddress*/,
-  //   "TRN9LBmG1N3Vue1eidkn1s3bBFyAAabyC9" /*gStableAddress*/,
-  //   "TLmCeSuLSMY8Zmac7Q9K9jzC2A5ap3TKVY" /*vaultAddress */
+  //   "---" /*gStableAddress nile*/,
+  //   "---" /*gStableAddress mainnet*/,
   // ),
   // KYD: new Currency(
   //   7,
@@ -122,11 +120,8 @@ const CurrencyList = {
   //   "gKYD",
   //   "Cayman Islands Dollar",
   //   kydImg,
-  //   "TQKJkghADgVpb5KgRYu5MXAdZg2SgqW3iU" /*swapAddress */,
-  //   "TQq9o4PahyoLociVzCnBMRRDdPZrNNkW1f" /*swapMarketAddress*/,
-  //   "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU" /*swapStableAddress*/,
-  //   "TRpvxootqXTB5omn919BGFEiiAqBjGPqzt" /*gStableAddress*/,
-  //   "TX7NBRRe3HHmVBfJfbAGny33pPa8vLxj5f" /*vaultAddress */
+  //   "---" /*gStableAddress nile*/,
+  //   "---" /*gStableAddress mainnet*/,
   // ),
   // DOP: new Currency(
   //   8,
@@ -134,11 +129,8 @@ const CurrencyList = {
   //   "gDOP",
   //   "Dominican Peso",
   //   dopImg,
-  //   "TQKJkghADgVpb5KgRYu5MXAdZg2SgqW3iU" /*swapAddress */,
-  //   "TQq9o4PahyoLociVzCnBMRRDdPZrNNkW1f" /*swapMarketAddress*/,
-  //   "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU" /*swapStableAddress*/,
-  //   "TQkp7SKM6UEYNJmQQfC7YeYYUdsnkq9Xb5" /*gStableAddress*/,
-  //   "TUxGrkSicXdDhMssg1MXqnZ8rKNfS9bcN1" /*vaultAddress */
+  //   "---" /*gStableAddress nile*/,
+  //   "---" /*gStableAddress mainnet*/,
   // ),
   // CUP: new Currency(
   //   9,
@@ -146,11 +138,8 @@ const CurrencyList = {
   //   "gCUP",
   //   "Cuban Peso",
   //   cupImg,
-  //   "TQKJkghADgVpb5KgRYu5MXAdZg2SgqW3iU" /*swapAddress */,
-  //   "TQq9o4PahyoLociVzCnBMRRDdPZrNNkW1f" /*swapMarketAddress*/,
-  //   "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU" /*swapStableAddress*/,
-  //   "TNsZegdPzUWKbBQ52o7ruF5gGe5NqyALCQ" /*gStableAddress*/,
-  //   "TNH55PkTJcB9f8T4HCqaSKE5p5Qx8Ugjh3" /*vaultAddress */
+  //   "---" /*gStableAddress nile*/,
+  //   "---" /*gStableAddress mainnet*/,
   // ),
   // HTG: new Currency(
   //   10,
@@ -158,11 +147,8 @@ const CurrencyList = {
   //   "gHTG",
   //   "Haitian Gourde",
   //   htgImg,
-  //   "TQKJkghADgVpb5KgRYu5MXAdZg2SgqW3iU" /*swapAddress */,
-  //   "TQq9o4PahyoLociVzCnBMRRDdPZrNNkW1f" /*swapMarketAddress*/,
-  //   "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU" /*swapStableAddress*/,
-  //   "TMuABgZr5rStDa639CKaxEoNc1sVEgEoKF" /*gStableAddress*/,
-  //   "TRmsA2ovjuqDVM3g7E4TEm4GCgtpenj6Ey" /*vaultAddress */
+  //   "---" /*gStableAddress nile*/,
+  //   "---" /*gStableAddress mainnet*/,
   // ),
   // EUR: new Currency(
   //   11,
@@ -170,11 +156,8 @@ const CurrencyList = {
   //   "gEUR",
   //   "Euro",
   //   eurImg,
-  //   "TQKJkghADgVpb5KgRYu5MXAdZg2SgqW3iU" /*swapAddress */,
-  //   "TQq9o4PahyoLociVzCnBMRRDdPZrNNkW1f" /*swapMarketAddress*/,
-  //   "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU" /*swapStableAddress*/,
-  //   "TBWqK2pQXxRxmei95Xo6hA35YNzkdGuynR" /*gStableAddress*/,
-  //   "THto1DfPgubEYybMxRsgzoMTZFoAvketCp" /*vaultAddress */
+  //   "---" /*gStableAddress nile*/,
+  //   "---" /*gStableAddress mainnet*/,
   // ),
   // GBP: new Currency(
   //   12,
@@ -182,11 +165,8 @@ const CurrencyList = {
   //   "gGBP",
   //   "British Pound",
   //   gbpImg,
-  //   "TQKJkghADgVpb5KgRYu5MXAdZg2SgqW3iU" /*swapAddress */,
-  //   "TQq9o4PahyoLociVzCnBMRRDdPZrNNkW1f" /*swapMarketAddress*/,
-  //   "THJ6CYd8TyNzHFrdLTYQ1iAAZDrf5sEsZU" /*swapStableAddress*/,
-  //   "TJBhh6JPtBoDWPQqdRXzR27SEJooBvfJ7r" /*gStableAddress*/,
-  //   "THEqDCTFEXtr9rdAtSVKbiHzhZLbnaCgTK" /*vaultAddress */
+  //   "---" /*gStableAddress nile*/,
+  //   "---" /*gStableAddress mainnet*/,
   // ),
 
 };

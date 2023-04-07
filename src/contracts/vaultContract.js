@@ -49,7 +49,7 @@ class VaultContract extends SmartContractBase {
           this.web3.utils.toWei(String(_val), "ether")
         )
         .send({
-          feeLimit: 100_000_000,
+          feeLimit: 200_000_000,
           callValue: 0,
           shouldPollResponse: false,
         });
@@ -68,7 +68,7 @@ class VaultContract extends SmartContractBase {
       await this.contract
         .withdraw(currencyId, this.web3.utils.toWei(String(_val), "ether"))
         .send({
-          feeLimit: 100_000_000,
+          feeLimit: 200_000_000,
           callValue: 0,
           shouldPollResponse: false,
         });
@@ -99,7 +99,7 @@ class VaultContract extends SmartContractBase {
     const balHex = await this.contract.getPendingRewards(currencyId, hodlerAddress).call();
     // const rewards = this.web3.utils.fromWei(String(balHex), "ether");
     await this.contract.claimRewards(currencyId, balHex).send({
-      feeLimit: 100_000_000,
+      feeLimit: 200_000_000,
       callValue: 0,
       shouldPollResponse: false,
     });

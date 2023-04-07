@@ -30,7 +30,7 @@ class USDContract {
     if (!num) throw new Error(`Number : ${num}`);
 
     await this.contract.mint(this.web3.utils.toWei(String(num), "ether")).send({
-      feeLimit: 100_000_000,
+      feeLimit: 200_000_000,
       callValue: 0,
       shouldPollResponse: false,
     });
@@ -58,7 +58,7 @@ class USDContract {
     await this.contract
       .approve(spender, this.web3.utils.toWei(String(amount), "ether"))
       .send({
-        feeLimit: 100_000_000,
+        feeLimit: 200_000_000,
         callValue: 0,
         shouldPollResponse: false,
       });
