@@ -102,7 +102,7 @@ const CurrencyList = {
   //   "gAWG",
   //   "Aruban Florin",
   //   awgdImg,
-  //   "---" /*gStableAddress nile*/,
+  //   "TQT5dFRmWCR2mJNpSrypVUfq4Rar4WSe8Y" /*gStableAddress nile*/,
   //   "---" /*gStableAddress mainnet*/,
   // ),
   // BSD: new Currency(
@@ -111,7 +111,7 @@ const CurrencyList = {
   //   "gBSD",
   //   "Bahamian Dollar",
   //   bsdImg,
-  //   "---" /*gStableAddress nile*/,
+  //   "TTQTdMtxiastmhKU8CkgWomYzwhBEfnNuX" /*gStableAddress nile*/,
   //   "---" /*gStableAddress mainnet*/,
   // ),
   // KYD: new Currency(
@@ -120,7 +120,7 @@ const CurrencyList = {
   //   "gKYD",
   //   "Cayman Islands Dollar",
   //   kydImg,
-  //   "---" /*gStableAddress nile*/,
+  //   "TTWSqDo9g5K86G5xQVLhBEzWwgy8tgURHQ" /*gStableAddress nile*/,
   //   "---" /*gStableAddress mainnet*/,
   // ),
   // DOP: new Currency(
@@ -129,7 +129,7 @@ const CurrencyList = {
   //   "gDOP",
   //   "Dominican Peso",
   //   dopImg,
-  //   "---" /*gStableAddress nile*/,
+  //   "TUpoXcrgPMMzvvzGdbtWwzcdU39D27ab8w" /*gStableAddress nile*/,
   //   "---" /*gStableAddress mainnet*/,
   // ),
   // CUP: new Currency(
@@ -138,7 +138,7 @@ const CurrencyList = {
   //   "gCUP",
   //   "Cuban Peso",
   //   cupImg,
-  //   "---" /*gStableAddress nile*/,
+  //   "TUMPPfnX5jnKvJbh8CtDAeUKTUXSv9Bhkx" /*gStableAddress nile*/,
   //   "---" /*gStableAddress mainnet*/,
   // ),
   // HTG: new Currency(
@@ -147,7 +147,7 @@ const CurrencyList = {
   //   "gHTG",
   //   "Haitian Gourde",
   //   htgImg,
-  //   "---" /*gStableAddress nile*/,
+  //   "THyUafLhw1w4bJzSvH2BDGA4ph5iRaqeyV" /*gStableAddress nile*/,
   //   "---" /*gStableAddress mainnet*/,
   // ),
   // EUR: new Currency(
@@ -156,7 +156,7 @@ const CurrencyList = {
   //   "gEUR",
   //   "Euro",
   //   eurImg,
-  //   "---" /*gStableAddress nile*/,
+  //   "TNLtM7F696Qjcc7Lj5krBqCAoXNzS2enQH" /*gStableAddress nile*/,
   //   "---" /*gStableAddress mainnet*/,
   // ),
   // GBP: new Currency(
@@ -165,7 +165,7 @@ const CurrencyList = {
   //   "gGBP",
   //   "British Pound",
   //   gbpImg,
-  //   "---" /*gStableAddress nile*/,
+  //   "TVnCkaJUjrek5H2xcVq9azLMVBLiyUAnvx" /*gStableAddress nile*/,
   //   "---" /*gStableAddress mainnet*/,
   // ),
 
