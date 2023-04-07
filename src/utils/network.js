@@ -19,7 +19,7 @@ export const isSupportedNetwork = (nw) => {
   return false;
 };
 
-export const supportedNetworks = ["https://api.nileex.io/", "https://api.trongrid.io/"];
+export const supportedNetworks = ["https://api.trongrid.io/"];
 
 export const isCurrentNetworkSupported = () => {
   try {
