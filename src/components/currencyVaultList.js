@@ -94,9 +94,9 @@ const CurrencyVaultList = (props) => {
   }, []);
   // to support network changes related code ends
 
-  if (!currentNetworkSupported) {
-    return <NetworkNotSupported></NetworkNotSupported>;
-  }
+  //if (!currentNetworkSupported) {
+    //return <NetworkNotSupported></NetworkNotSupported>;
+  //}
 
   return (
     <>

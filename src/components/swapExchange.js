@@ -10,7 +10,7 @@ import { formatM, formatUSD } from "../utils/currencyFormatter";
 import currencyPublisher from "../publishers/currency";
 import { isCurrentNetworkSupported } from "../utils/network";
 import networkPublisher from "../publishers/network";
-import NetworkNotSupported from "./networkNotSupported";
+// import NetworkNotSupported from "./networkNotSupported";
 
 const SwapExchange = (props) => {
   const [direction, setDirection] = useState(true);
@@ -226,9 +226,9 @@ const SwapExchange = (props) => {
     return <></>;
   };
 
-  if (!currentNetworkSupported) {
-    return <NetworkNotSupported></NetworkNotSupported>;
-  }
+  /// if (!currentNetworkSupported) {
+  //   return <NetworkNotSupported></NetworkNotSupported>;
+  // }
   return (
     <>
     <div className="col"></div>
