@@ -205,7 +205,7 @@ const SwapExchange = (props) => {
           <div className="strong" style={{ fontSize: "95%" }}>
             Your{" "}
             <a
-              href={`https://nile.tronscan.org/#/transaction/${trxHash}`}
+              href={`https://tronscan.org/#/transaction/${trxHash}`}
               className="alert-link"
               target="_blank"
             >
