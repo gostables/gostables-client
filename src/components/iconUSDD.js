@@ -1,4 +1,4 @@
-import usddImg from "../usdd.png";
+import usddImg from "../img/usdd.png";
 
 const USDDIcon = ({ height = 16, noTitle = false }) => {
   return (

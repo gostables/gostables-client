@@ -4,18 +4,18 @@ import VaultUSDDFactory from "./vaultUSDDFactory";
 import MarketFactory from "./marketFactory";
 
 
-import ttddImg from "../ttdd.png";
-import xcddImg from "../gxcd.png";
-import bbddImg from "../gbbd.png";
-import jmddImg from "../gjmd.png";
-import awgdImg from "../gawg.png";
-import dopImg from "../gDOP.png";
-import bsdImg from "../gbsd.png";
-import kydImg from "../gKYD.png";
-import cupImg from "../gcup.png";
-import htgImg from "../gHTG.png";
-import eurImg from "../gEUR.png";
-import gbpImg from "../gGBP.png";
+import ttddImg from "../img/ttdd.png";
+import xcddImg from "../img/gxcd.png";
+import bbddImg from "../img/gbbd.png";
+import jmddImg from "../img/gjmd.png";
+import awgdImg from "../img/gawg.png";
+import dopImg from "../img/gDOP.png";
+import bsdImg from "../img/gbsd.png";
+import kydImg from "../img/gKYD.png";
+import cupImg from "../img/gcup.png";
+import htgImg from "../img/gHTG.png";
+import eurImg from "../img/gEUR.png";
+import gbpImg from "../img/gGBP.png";
 
 class Currency {
   id = 0;
