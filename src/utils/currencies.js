@@ -60,31 +60,28 @@ class Currency {
 }
 
 const CurrencyList = {
-  // TTD: new Currency(
-  //   1,
-  //   "TTD",
-  //   "gTTD",
-  //   "Trinidad & Tobago Dollar",
-  //   ttddImg,
-  //   // "TEhTXahLuKVgnBX1yWVmLaykLGeEZ8yq9K" /*gStableAddress nile*/,
-  //   "TTyTrwsnsi5Fr6YjhPsqc3cbTLqPALTe4U" /*gStableAddress mainnet*/,
-  // ),
-  // XCD: new Currency(
-  //   2,
-  //   "XCD",
-  //   "gXCD",
-  //   "Eastern Caribbean Dollar",
-  //   xcddImg,
-  //   // "TMqjGVksF4RLN67YugsUbbNHiZejzsSWq6" /*gStableAddress nile*/,
-  //   "TBovdWbXNQEhERaRTB7MdY2h1Ykchji1Xw" /*gStableAddress mainnet*/,
-  // ),
+  TTD: new Currency(
+    1,
+    "TTD",
+    "gTTD",
+    "Trinidad & Tobago Dollar",
+    ttddImg,
+    "TLEfS9LbpyTmsSgsSEJzNzT9w33P1wzQ69" /*gStableAddress mainnet*/,
+  ),
+  XCD: new Currency(
+    2,
+    "XCD",
+    "gXCD",
+    "Eastern Caribbean Dollar",
+    xcddImg,
+    "TUid6kcrJ9Jg8S5nQKNA2ppVd8wGP4bpqT" /*gStableAddress mainnet*/,
+  ),
   // BBD: new Currency(
   //   3,
   //   "BBD",
   //   "gBBD",
   //   "Barbadian Dollar",
   //   bbddImg,
-  // //   // "TNpqgkKcaKa7vZH5GC4nxSL6FMjMfdCRSn" /*gStableAddress nile*/,
   //   "TGsz1q1ryn5DLZngM2xxek3jN1X53qW7vZ" /*gStableAddress mainnet*/,
   // ),
   // JMD: new Currency(
@@ -93,7 +90,6 @@ const CurrencyList = {
   //   "gJMD",
   //   "Jamaican Dollar",
   //   jmddImg,
-  // //   // "TBeTCPQFXjgVk1xKpFw5b24MsgCkvLdBnk" /*gStableAddress nile*/,
   //   "TPoyDSNF7F2h5ZTRh25ypXvtn5hJfjaZ2K" /*gStableAddress mainnet*/,
   // ),
   // AWG: new Currency(
@@ -102,7 +98,6 @@ const CurrencyList = {
   //   "gAWG",
   //   "Aruban Florin",
   //   awgdImg,
-  //   // "TQT5dFRmWCR2mJNpSrypVUfq4Rar4WSe8Y" /*gStableAddress nile*/,
   //   "TJ1wyr39g79qStW8GhCkexz3DHXs4DcBCq" /*gStableAddress mainnet*/,
   // ),
   // BSD: new Currency(
@@ -111,7 +106,6 @@ const CurrencyList = {
   //   "gBSD",
   //   "Bahamian Dollar",
   //   bsdImg,
-  //   // "TTQTdMtxiastmhKU8CkgWomYzwhBEfnNuX" /*gStableAddress nile*/,
   //   "THo47joX34Ms3TAFNdpnovno6a7JsP4x9A" /*gStableAddress mainnet*/,
   // ),
   // KYD: new Currency(
@@ -120,7 +114,6 @@ const CurrencyList = {
   //   "gKYD",
   //   "Cayman Islands Dollar",
   //   kydImg,
-  //   // "TTWSqDo9g5K86G5xQVLhBEzWwgy8tgURHQ" /*gStableAddress nile*/,
   //   "TVP6k4U37d2W9r86fVKV4N4fTgiCJVLMfg" /*gStableAddress mainnet*/,
   // ),
   // DOP: new Currency(
@@ -129,7 +122,6 @@ const CurrencyList = {
   //   "gDOP",
   //   "Dominican Peso",
   //   dopImg,
-  //   // "TUpoXcrgPMMzvvzGdbtWwzcdU39D27ab8w" /*gStableAddress nile*/,
   //   "TAa3RAnMh2ppJdczHsVrdRcvD9bELXS5Pj" /*gStableAddress mainnet*/,
   // ),
   // CUP: new Currency(
@@ -138,7 +130,6 @@ const CurrencyList = {
   //   "gCUP",
   //   "Cuban Peso",
   //   cupImg,
-  //   // "TUMPPfnX5jnKvJbh8CtDAeUKTUXSv9Bhkx" /*gStableAddress nile*/,
   //   "TTmfn4Bpkr3wn3nWJEvotWAwpFK32CXZjQ" /*gStableAddress mainnet*/,
   // ),
   // HTG: new Currency(
@@ -147,7 +138,6 @@ const CurrencyList = {
   //   "gHTG",
   //   "Haitian Gourde",
   //   htgImg,
-  //   // "THyUafLhw1w4bJzSvH2BDGA4ph5iRaqeyV" /*gStableAddress nile*/,
   //   "TEANt8Qu1GWvDdGt2NhJyANk1HacZyJRHy" /*gStableAddress mainnet*/,
   // ),
   // EUR: new Currency(
@@ -156,7 +146,6 @@ const CurrencyList = {
   //   "gEUR",
   //   "Euro",
   //   eurImg,
-  //   // "TNLtM7F696Qjcc7Lj5krBqCAoXNzS2enQH" /*gStableAddress nile*/,
   //   "TM1E5cCVYziLpLqRt1tjJDHdQP27AWYCjc" /*gStableAddress mainnet*/,
   // ),
   // GBP: new Currency(
@@ -165,7 +154,6 @@ const CurrencyList = {
   //   "gGBP",
   //   "British Pound",
   //   gbpImg,
-  //   // "TVnCkaJUjrek5H2xcVq9azLMVBLiyUAnvx" /*gStableAddress nile*/,
   //   "TXSGoiEfkA8uovrrXqNUZiZ6RwbjC8o15q" /*gStableAddress mainnet*/,
   // ),
 
